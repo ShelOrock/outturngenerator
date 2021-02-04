@@ -1,0 +1,11 @@
+#node modules
+node_modules/*
+
+#bundled code
+bundle.js
+bundle.js.map
+
+.DS_Store
+.vscode
+.idea
+.npmrc
