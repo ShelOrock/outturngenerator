@@ -1,7 +1,12 @@
 import * as React from 'react';
-const { useEffect } = React;
+const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import {
+  DragDropContext,
+  Droppable,
+  Draggable
+} from 'react-beautiful-dnd';
 import { useTypedSelector } from '../../utils';
 
 import CaskListItem from './CaskListItem';
@@ -51,17 +56,33 @@ export default () => {
   const { outturnId } = useParams<ParamTypes>();
   const { activeOutturn, activeCask, isLoading, markedCasks } = useTypedSelector(state => state);
   const { casks, name } = activeOutturn;
+  const [ localCaskOrder, setLocalCaskOrder ] = useState(casks)
 
   useEffect(() => {
-    dispatch(getActiveOutturn(outturnId))
-    dispatch(resetMarkedCasks());
-  }, []);
+    if(!casks) {
+      dispatch(getActiveOutturn(outturnId))
+      dispatch(resetMarkedCasks());
+    }
+
+    setLocalCaskOrder(casks)
+  }, [casks]);
 
   const handleAllCasksOnCheck: InputOnChangeType = () => {
     if(markedCasks.length === casks.length) dispatch(unmarkAllCasks());
     else dispatch(markAllCasks([...casks.map(cask => cask.id)]));
   }
 
+  const onDragEnd = result => {
+    if(!result.destination) return;
+    if(result.destination.index === result.source.index) return;
+
+    const caskOrderCopy = [ ...localCaskOrder ]
+    const [removed] = caskOrderCopy.splice(result.source.index - 1, 1)
+    caskOrderCopy.splice(result.destination.index - 1, 0, removed)
+    console.log({caskOrderCopy})
+    setLocalCaskOrder([...caskOrderCopy]);
+  }
+  console.log({ localCaskOrder });
   const handleDeleteManyCasks: ButtonOnClickType = () => dispatch(setModal(deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)));
 
   return (
@@ -80,11 +101,20 @@ export default () => {
                 />
                 <SmallButton variant='secondary' disabled={ !!isLoading || !markedCasks.length } onClick={ handleDeleteManyCasks }>X</SmallButton>
               </Row>
-            { 
-              casks && casks.length
-              ? casks.map((cask, idx) => <CaskListItem key={ idx } cask={ cask } />)
-              : null
-            }
+              <DragDropContext onDragEnd={ onDragEnd }>
+                <Droppable droppableId='list'>
+                  { provided => (
+                    <div ref={ provided.innerRef } { ...provided.droppableProps }>
+                    { 
+                      localCaskOrder 
+                      ? localCaskOrder.map(cask => <CaskListItem cask={ cask } key={ cask.id }/>)
+                      : null
+                    }
+                    { provided.placeholder }
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
               <AddCaskButton onClick={ () => dispatch(setModal(createCaskModalProps(activeOutturn.id))) }>
                 <Subheader textAlign='center'>ADD A CASK</Subheader>
               </AddCaskButton>

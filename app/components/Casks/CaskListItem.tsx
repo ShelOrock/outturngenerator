@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
+import { Draggable } from 'react-beautiful-dnd';
 import { useTypedSelector, assignColorPill } from '../../utils';
 
 import * as StyledComponents from '../styledcomponents/index';
@@ -27,7 +28,7 @@ import { deleteCaskModalProps } from '../../modalProps'
 
 import { CaskListItem, InputOnChangeType, ButtonOnClickType } from '../../types/index';
 
-export default ({ cask }: CaskListItem) => {
+export default ({ cask }: any) => {
 
   const dispatch = useDispatch();
 
@@ -56,29 +57,38 @@ export default ({ cask }: CaskListItem) => {
   }
 
   return (
-    <CaskListItemDiv flavourProfile= { assignColorPill(flavourProfile )}>
-      <Row alignItems='center'>
-        <Row alignItems='center' justifyContent='center'>
-          <Column>
-            <input
-              type='checkbox'
-              name={ id }
-              checked={ markedCasks.includes(id) }
-              onChange={ handleOnCheck }
-            />
-            <CaskListItemFlavourPill flavourProfile={ assignColorPill(flavourProfile) }/>
-          </Column>
-        </Row>
-        <Row justifyContent='space-between' width='100%'>
-          <CaskListItemButton flavourProfile={ assignColorPill(flavourProfile) } onClick={ () => dispatch(getActiveCask(id)) }>
-            <Column>
-              <Subheader textAlign='left'>{ caskNumber ? `Cask No. ${ caskNumber }` : 'Untitled Cask' }</Subheader>
-              <Body>{ name }</Body>
-            </Column>
-          </CaskListItemButton>
-          <SmallButton variant='secondary' disabled={ !!isLoading } onClick={ handleDeleteCask }>X</SmallButton>
-        </Row>
-      </Row>
-    </CaskListItemDiv>
+    <Draggable draggableId={ cask.id } index={ cask.caskPosition }>
+      { provided => (
+        <CaskListItemDiv
+          flavourProfile= { assignColorPill(flavourProfile )}
+          ref={ provided.innerRef }
+          { ...provided.draggableProps }
+          { ...provided.dragHandleProps }
+        >
+          <Row alignItems='center'>
+            <Row alignItems='center' justifyContent='center'>
+              <Column>
+                <input
+                  type='checkbox'
+                  name={ id }
+                  checked={ markedCasks.includes(id) }
+                  onChange={ handleOnCheck }
+                />
+                <CaskListItemFlavourPill flavourProfile={ assignColorPill(flavourProfile) }/>
+              </Column>
+            </Row>
+            <Row justifyContent='space-between' width='100%'>
+              <CaskListItemButton flavourProfile={ assignColorPill(flavourProfile) } onClick={ () => dispatch(getActiveCask(id)) }>
+                <Column>
+                  <Subheader textAlign='left'>{ caskNumber ? `Cask No. ${ caskNumber }` : 'Untitled Cask' }</Subheader>
+                  <Body>{ name }</Body>
+                </Column>
+              </CaskListItemButton>
+              <SmallButton variant='secondary' disabled={ !!isLoading } onClick={ handleDeleteCask }>X</SmallButton>
+            </Row>
+          </Row>
+        </CaskListItemDiv>
+      )}
+    </Draggable>
   )
 }
