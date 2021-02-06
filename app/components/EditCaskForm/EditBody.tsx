@@ -46,8 +46,7 @@ export default () => {
           [action.name]: action.value
         };
     
-      default:
-        return state;
+      default: return state;
     }
   };
 

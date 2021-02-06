@@ -1,6 +1,6 @@
 import { LocalReducerActionType } from "../Interfaces/form";
 
-export interface LocalReducerActionTyps {
+export interface LocalReducerActionTypes {
   name: string;
   value: string;
 }

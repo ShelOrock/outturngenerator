@@ -2,11 +2,7 @@ import * as React from 'react';
 const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable
-} from 'react-beautiful-dnd';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTypedSelector } from '../../utils';
 
 import CaskListItem from './CaskListItem';
@@ -33,13 +29,16 @@ const {
   markCaskActions: {
     markAllCasks,
     unmarkAllCasks,
-    resetMarkedCasks
+    resetMarkedCasks,
   },
   modalActions: { setModal }
 } = actions;
 
 import * as thunks from '../../redux/thunks';
-const { activeOutturnThunks: { getActiveOutturn }} = thunks;
+const {
+  activeOutturnThunks: { getActiveOutturn },
+  casksThunks: { editCask }
+} = thunks;
 
 import { createCaskModalProps, deleteManyCasksModalProps } from '../../modalProps';
 
@@ -56,16 +55,16 @@ export default () => {
   const { outturnId } = useParams<ParamTypes>();
   const { activeOutturn, activeCask, isLoading, markedCasks } = useTypedSelector(state => state);
   const { casks, name } = activeOutturn;
-  const [ localCaskOrder, setLocalCaskOrder ] = useState(casks)
+  const [ localCaskOrder, setLocalCaskOrder ] = useState([])
 
   useEffect(() => {
-    if(!casks) {
-      dispatch(getActiveOutturn(outturnId))
-      dispatch(resetMarkedCasks());
-    }
+    dispatch(getActiveOutturn(outturnId))
+    dispatch(resetMarkedCasks());
+  }, []);
 
-    setLocalCaskOrder(casks)
-  }, [casks]);
+  useEffect(() => {
+    setLocalCaskOrder(casks ? casks.map(cask => cask) : []);
+  }, [casks])
 
   const handleAllCasksOnCheck: InputOnChangeType = () => {
     if(markedCasks.length === casks.length) dispatch(unmarkAllCasks());
@@ -76,13 +75,22 @@ export default () => {
     if(!result.destination) return;
     if(result.destination.index === result.source.index) return;
 
-    const caskOrderCopy = [ ...localCaskOrder ]
-    const [removed] = caskOrderCopy.splice(result.source.index - 1, 1)
-    caskOrderCopy.splice(result.destination.index - 1, 0, removed)
-    console.log({caskOrderCopy})
-    setLocalCaskOrder([...caskOrderCopy]);
+    const reorderCasks = (list, startIndex, endIndex) => {
+      const element = list[startIndex];
+      list.splice(startIndex, 1);
+      list.splice(endIndex, 0, element);
+
+      return list;
+    }
+
+    const reorderedCasks = reorderCasks(localCaskOrder, result.source.index, result.destination.index);
+    setLocalCaskOrder(reorderedCasks);
   }
-  console.log({ localCaskOrder });
+
+  const handleEditCasks: ButtonOnClickType = () => {
+    casks.forEach(cask => dispatch(editCask(cask.id, cask)))
+  }
+  
   const handleDeleteManyCasks: ButtonOnClickType = () => dispatch(setModal(deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)));
 
   return (
@@ -107,7 +115,7 @@ export default () => {
                     <div ref={ provided.innerRef } { ...provided.droppableProps }>
                     { 
                       localCaskOrder 
-                      ? localCaskOrder.map(cask => <CaskListItem cask={ cask } key={ cask.id }/>)
+                      ? localCaskOrder.map((cask, idx) => <CaskListItem cask={ {...cask, caskPosition: idx } } key={ cask.id }/>)
                       : null
                     }
                     { provided.placeholder }
@@ -123,6 +131,7 @@ export default () => {
           </Column>
         </CaskListDiv>
         <ActiveCask />
+        <Button onClick={ handleEditCasks }>Save</Button>
       </BodyDiv>
     </div>
   )
