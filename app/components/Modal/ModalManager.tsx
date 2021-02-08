@@ -1,13 +1,12 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import * as StyledComponents from '../styledcomponents/index';
+import ButtonManager from '../Button/ButtonManager';
 const { 
   StyledType: { Header, Subheader },
   StyledDiv: { Column, Row },
-  StyledButton: { Button },
   StyledForm: {
     InputModule,
     InputLabel,
@@ -16,19 +15,12 @@ const {
   StyledModal: { ModalContainer }
 } = StyledComponents;
 
-import * as actions from '../../redux/actions';
-const { modalActions: { setModal } } = actions;
-
 export default () => {
-
-  const dispatch = useDispatch();
 
   const { modal } = useTypedSelector(state => state);
   const [ localModalState, setLocalModalState ] = useState({ ...modal.stateShape })
 
-  useEffect(() => setLocalModalState({ ...modal.stateShape}), [modal])
-
-  const localModalButton = modal.buttonModule;
+  useEffect(() => setLocalModalState({ ...modal.stateShape }), [modal])
 
   return (
     <div>
@@ -42,7 +34,8 @@ export default () => {
               && modal.inputModules.length
               && localModalState
               && Object.keys(localModalState)
-              && localModalButton
+              && modal.confirmButton
+              && modal.confirmButton
               ? (
                 modal.inputModules.map(({ inputText, label }, idx) => {
                   let stateKey = Object.keys(localModalState)[idx]
@@ -65,8 +58,8 @@ export default () => {
               ) : null
             }
             <Row>
-              <Button variant={ localModalButton.type === 'CREATE' ? 'primary' : 'secondary' } onClick={ () => dispatch(localModalButton.buttonOnClickFunction(...localModalButton.arguments, localModalState)) }>{ modal.buttonModule.buttonText }</Button>
-              <Button variant={ localModalButton.type === 'CREATE' ? 'secondary' : 'primary' } onClick={ () => dispatch(setModal({})) }>Cancel</Button>
+              <ButtonManager props={ modal.confirmButton } />
+              <ButtonManager props={ modal.cancelButton } />
             </Row>
           </ModalContainer>
         ): null

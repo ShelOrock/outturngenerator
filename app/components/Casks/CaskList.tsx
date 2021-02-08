@@ -1,27 +1,15 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { useTypedSelector } from '../../utils';
 
 import CaskListItem from './CaskListItem';
-import ActiveCask from './ActiveCask';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Header, Subheader },
-  StyledDiv: {
-    BodyDiv,
-    Column,
-    Row
-  },
-  StyledLink: { LinkButton },
+  StyledDiv: { Row },
   StyledButton: { Button, SmallButton },
-  StyledCask: {
-    CaskList,
-    CaskListDiv,
-    AddCaskButton,
-  },
+  StyledCask: { CaskList, AddCaskButton },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -35,30 +23,21 @@ const {
 } = actions;
 
 import * as thunks from '../../redux/thunks';
-const {
-  activeOutturnThunks: { getActiveOutturn },
-  casksThunks: { editCask }
-} = thunks;
+const { casksThunks: { editCask } } = thunks;
 
-import { createCaskModalProps, deleteManyCasksModalProps } from '../../modalProps';
+import { deleteManyCasksModalProps } from '../../modalProps';
 
-import {
-  InputOnChangeType,
-  ButtonOnClickType,
-  ParamTypes
-} from '../../types/index';
+import { InputOnChangeType, ButtonOnClickType } from '../../types/index';
 
 export default () => {
 
   const dispatch = useDispatch();
 
-  const { outturnId } = useParams<ParamTypes>();
   const { activeOutturn, activeCask, isLoading, markedCasks } = useTypedSelector(state => state);
-  const { casks, name } = activeOutturn;
+  const { casks } = activeOutturn;
   const [ localCaskOrder, setLocalCaskOrder ] = useState([])
 
   useEffect(() => {
-    dispatch(getActiveOutturn(outturnId))
     dispatch(resetMarkedCasks());
   }, []);
 
@@ -87,52 +66,37 @@ export default () => {
     setLocalCaskOrder(reorderedCasks);
   }
 
-  const handleEditCasks: ButtonOnClickType = () => {
-    casks.forEach(cask => dispatch(editCask(cask.id, cask)))
-  }
+  const handleEditCasks: ButtonOnClickType = () => localCaskOrder.forEach((cask, idx) => dispatch(editCask(cask.id, { ...cask, caskPosition: idx })));
   
   const handleDeleteManyCasks: ButtonOnClickType = () => dispatch(setModal(deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)));
 
   return (
-    <div>
-    <LinkButton to={ '/' }>Back</LinkButton>
-    <Header>{ name }</Header>
-      <BodyDiv>
-        <CaskListDiv>
-          <Column>
-            <CaskList>
-              <Row>
-                <input
-                  type='checkbox'
-                  checked={ casks && casks.length && casks.length === markedCasks.length }
-                  onChange={ handleAllCasksOnCheck }
-                />
-                <SmallButton variant='secondary' disabled={ !!isLoading || !markedCasks.length } onClick={ handleDeleteManyCasks }>X</SmallButton>
-              </Row>
-              <DragDropContext onDragEnd={ onDragEnd }>
-                <Droppable droppableId='list'>
-                  { provided => (
-                    <div ref={ provided.innerRef } { ...provided.droppableProps }>
-                    { 
-                      localCaskOrder 
-                      ? localCaskOrder.map((cask, idx) => <CaskListItem cask={ {...cask, caskPosition: idx } } key={ cask.id }/>)
-                      : null
-                    }
-                    { provided.placeholder }
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
-              <AddCaskButton onClick={ () => dispatch(setModal(createCaskModalProps(activeOutturn.id))) }>
-                <Subheader textAlign='center'>ADD A CASK</Subheader>
-              </AddCaskButton>
-              <Button>Generate Outturn</Button>
-            </CaskList>
-          </Column>
-        </CaskListDiv>
-        <ActiveCask />
-        <Button onClick={ handleEditCasks }>Save</Button>
-      </BodyDiv>
-    </div>
+
+  <CaskList>
+    <Row>
+      <input
+        type='checkbox'
+        checked={ casks && casks.length && casks.length === markedCasks.length }
+        onChange={ handleAllCasksOnCheck }
+      />
+      <SmallButton variant='secondary' disabled={ !!isLoading || !markedCasks.length } onClick={ handleDeleteManyCasks }>X</SmallButton>
+    </Row>
+    <DragDropContext onDragEnd={ onDragEnd }>
+      <Droppable droppableId='list'>
+        { provided => (
+          <div ref={ provided.innerRef } { ...provided.droppableProps }>
+          { 
+            localCaskOrder 
+            ? localCaskOrder.map((cask, idx) => <CaskListItem cask={ {...cask, caskPosition: idx } } key={ cask.id }/>)
+            : null
+          }
+          { provided.placeholder }
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+    <Button>Generate Outturn</Button>
+    
+  </CaskList>
   )
 }

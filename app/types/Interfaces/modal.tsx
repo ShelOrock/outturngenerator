@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { AppThunk } from '../index';
+import { ActionTypes } from '../index';
 
 export interface ModalInputModule {
   inputText: string;
@@ -17,22 +18,23 @@ export interface CreateOutturnModalState {
   description: string;
 }
 
-export type ModalFunctionOnClickType = (...args: any) => AppThunk;
+export type ModalFunctionOnClickType = (...args: any) => AppThunk | ActionTypes;
 
 export type ModalInputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement>) => void;
 
 export interface ModalButton {
-  type: 'CREATE' | 'DELETE',
-  buttonText: string;
+  type?: 'CREATE' | 'DELETE',
+  text: string;
   arguments: any[];
-  buttonOnClickFunction: ModalFunctionOnClickType;
+  onClickFunction: ModalFunctionOnClickType;
 }
 
 export interface Modal<stateShapeTypes = CreateCaskModalState | CreateOutturnModalState> {
   modalHeader?: string;
   stateShape?: stateShapeTypes;
   inputModules?: ModalInputModule[];
-  buttonModule?: ModalButton;
+  confirmButton?: ModalButton;
+  cancelButton?: ModalButton;
 }
 
 export type ModalFunctionType = (...args: any) => Modal

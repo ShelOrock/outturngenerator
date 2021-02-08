@@ -13,7 +13,7 @@ export const markOutturn: ActionFunctionType<String> = outturnId => ({
 
 export const unmarkOutturn: ActionFunctionType<String> = outturnId => ({
   type: UNMARK_OUTTURN,
-  outturnId
+  payload: outturnId
 });
 
 export const resetMarkedOutturns: ActionFunctionType = () => ({ type: RESET_MARKED_OUTTURNS });

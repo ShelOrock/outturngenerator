@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { useTypedSelector, assignColorPill } from '../../utils';
 
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Subheader, Body },
@@ -16,17 +17,15 @@ const {
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
-const {
-  markCaskActions: { markCask, unmarkCask },
-  modalActions: { setModal }
-} = actions
+const { markCaskActions: { markCask, unmarkCask } } = actions
 
 import * as thunks from '../../redux/thunks';
 const { activeCaskThunks: { getActiveCask } } = thunks
 
-import { deleteCaskModalProps } from '../../modalProps'
+import { deleteCaskButton } from '../../buttonProps'
+import { deleteCaskModal } from '../../modalProps';
 
-import { CaskListItem, InputOnChangeType, ButtonOnClickType } from '../../types/index';
+import { InputOnChangeType } from '../../types/index';
 
 export default ({ cask }: any) => {
 
@@ -49,11 +48,6 @@ export default ({ cask }: any) => {
   const handleOnCheck: InputOnChangeType = e => {
     if(markedCasks.includes(e.target.name)) dispatch(unmarkCask(e.target.name))
     else dispatch(markCask(e.target.name))
-  }
-
-  const handleDeleteCask: ButtonOnClickType = e => {
-    e.preventDefault();
-    dispatch(setModal(deleteCaskModalProps(cask, activeCask.id, activeOutturn.id)));
   }
 
   return (
@@ -84,7 +78,7 @@ export default ({ cask }: any) => {
                   <Body>{ name }</Body>
                 </Column>
               </CaskListItemButton>
-              <SmallButton variant='secondary' disabled={ !!isLoading } onClick={ handleDeleteCask }>X</SmallButton>
+              <ButtonManager props={ deleteCaskButton(deleteCaskModal(cask, activeOutturn.id), 'X') } />
             </Row>
           </Row>
         </CaskListItemDiv>

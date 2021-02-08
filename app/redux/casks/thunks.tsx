@@ -12,8 +12,8 @@ const {
 import * as thunks from '../thunks';
 const {
   activeOutturnThunks: { getActiveOutturn },
-  activeCaskThunks: { getActiveCask }
 } = thunks;
+import { getActiveCask } from '../activeCask/thunks'
 
 import { ThunkFunctionType } from '../../types/index';
 
@@ -77,6 +77,7 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
 };
 
 export const editCask: ThunkFunctionType = (caskId, cask) => {
+  console.log({cask}, {position: cask.caskPosition})
   return dispatch => {
     dispatch(setLoading(true));
     axios

@@ -1,17 +1,23 @@
-import {
-  addOutturn,
-  deleteManyOutturns,
-  deleteOutturn
-} from './redux/outturns/thunks';
-import {
-  addNewCask,
-  deleteCask,
-  deleteManyCasks,
-} from './redux/casks/thunks';
+import * as actions from './redux/actions';
+const { modalActions: { setModal } } = actions;
+
+import * as thunks from './redux/thunks';
+const {
+  outturnsThunks: {
+    addOutturn,
+    deleteManyOutturns,
+    deleteOutturn,
+  },
+  casksThunks: {
+    addNewCask,
+    deleteCask,
+    deleteManyCasks
+  }
+} = thunks
 
 import { ModalFunctionType, Cask, Outturn } from './types/index';
 
-export const createCaskModalProps: ModalFunctionType = (activeOutturnId: string) => ({
+export const createCaskModal: ModalFunctionType = (activeOutturnId: string) => ({
   stateShape: {
     name: '',
     caskNumber: '',
@@ -26,11 +32,16 @@ export const createCaskModalProps: ModalFunctionType = (activeOutturnId: string)
       label: 'Number',
     },
   ],
-  buttonModule: {
+  confirmButton: {
     type: 'CREATE',
-    buttonText: 'Create cask',
+    text: 'Create cask',
     arguments: [ activeOutturnId ],
-    buttonOnClickFunction: addNewCask,
+    onClickFunction: addNewCask,
+  },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
   }
 });
 
@@ -49,52 +60,77 @@ export const createOutturnModalProps: ModalFunctionType = () => ({
       label: 'description',
     }
   ],
-  buttonModule: {
+  confirmButton: {
     type: 'CREATE',
-    buttonText: 'Create outturn',
+    text: 'Create outturn',
     arguments: [],
-    buttonOnClickFunction: addOutturn,
+    onClickFunction: addOutturn,
+  },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
   }
 });
 
-export const deleteCaskModalProps: ModalFunctionType = (cask: Cask, activeOutturnId: string) => ({
+export const deleteCaskModal: ModalFunctionType = (cask: Cask, activeOutturnId: string) => ({
   modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
-  buttonModule: {
+  confirmButton: {
     type: 'DELETE',
-    buttonText: `Delete Cask no. ${ cask.caskNumber }`,
-    arguments: [ cask.id, cask.id, activeOutturnId ],
-    buttonOnClickFunction: deleteCask
+    text: `Delete Cask no. ${ cask.caskNumber }`,
+    arguments: [ cask.id, activeOutturnId ],
+    onClickFunction: deleteCask
   },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
+  }
 })
 
 
 export const deleteManyCasksModalProps: ModalFunctionType = (markedCasks: string[], activeCaskId: string, activeOutturnId: string) => ({
   modalHeader: 'Are you sure you want to delete these casks?',
-  buttonModule: {
+  confirmButton: {
     type: 'DELETE',
-    buttonText: 'Delete Casks',
+    text: 'Delete Casks',
     arguments: [ markedCasks, activeCaskId, activeOutturnId ],
-    buttonOnClickFunction: deleteManyCasks,
+    onClickFunction: deleteManyCasks,
+  },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
   }
 });
 
 
 export const deleteOutturnModalProps: ModalFunctionType = (outturn: Outturn, activeOutturnId: string) => ({
   modalHeader: `Are you sure you want to delete ${ outturn.name }`,
-  buttonModule: {
+  confirmButton: {
     type: 'DELETE',
-    buttonText: 'Delete',
+    text: 'Delete',
     arguments: [ outturn.id, activeOutturnId ],
-    buttonOnClickFunction: deleteOutturn,
+    onClickFunction: deleteOutturn,
+  },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
   }
 });
 
 export const deleteManyOutturnsModalProps: ModalFunctionType = (markedOutturns: string[]) => ({
   modalHeader: 'Are you sure you want to delete these outturns?',
-  buttonModule: {
+  confirmButton: {
     type: 'DELETE',
-    buttonText: 'Delete outturns',
+    text: 'Delete outturns',
     arguments: [ markedOutturns ],
-    buttonOnClickFunction: deleteManyOutturns,
+    onClickFunction: deleteManyOutturns,
+  },
+  cancelButton: {
+    text: 'Cancel',
+    arguments: [ {} ],
+    onClickFunction: setModal
   }
 });

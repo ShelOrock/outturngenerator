@@ -7,11 +7,11 @@ const {
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header },
   StyledDiv: { MainDiv, Row },
-  StyledButton: { Button },
   StyledLink: { LinkButton },
   StyledForm: {
     InputModule,
@@ -23,6 +23,8 @@ const {
 
 import * as thunks from '../../redux/thunks'
 const { casksThunks: { editCask } } = thunks
+
+import { saveCaskButton } from '../../buttonProps';
 
 import {
   InputOnChangeType,
@@ -122,7 +124,7 @@ export default () => {
           <InputLabel>Tasting Note</InputLabel>
           <TextArea name='description' value={ description } onChange={ handleOnChange } />
         </InputModule>
-      <Button disabled={ !!isLoading || !isEdited} onClick={ handleSaveForm }>Save</Button>
+      <ButtonManager props={ saveCaskButton(activeCask.id, localState) } />
       <LinkButton to={ `/edit/${ activeCask.id }/step1` }>Back</LinkButton>
       <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>
     </MainDiv>

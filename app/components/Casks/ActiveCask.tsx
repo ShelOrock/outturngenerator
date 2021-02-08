@@ -26,7 +26,8 @@ const {
 
 export default () => {
 
-  const activeCask = useTypedSelector(state => state.activeCask);
+  const activeCask = useTypedSelector(state => state.activeCask)
+
   const {
     caskNumber,
     name,
