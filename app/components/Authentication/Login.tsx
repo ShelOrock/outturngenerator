@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import * as StyledComponents from '../styledcomponents/index';
+import ButtonManager from '../Button/ButtonManager';
 const {
   StyledForm: {
     FormContainer,
@@ -12,11 +13,12 @@ const {
     InputLabel,
     InputField
   },
-  StyledButton: { Button }
 } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogin } } = thunks;
+
+import { createButton } from '../../buttonProps';
 
 import { InputOnChangeType } from '../../types/index';
 
@@ -66,7 +68,7 @@ export default () => {
         />
       </InputModule>
 
-      <Button variant='primary' onClick={ () => dispatch(attemptUserLogin({ usernameOrEmail, password })) }>Login</Button>
+      <ButtonManager props={ createButton(attemptUserLogin, 'Login', { usernameOrEmail, password }) } />
     </FormContainer>
   )
 }

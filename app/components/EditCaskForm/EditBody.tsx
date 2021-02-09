@@ -4,7 +4,6 @@ const {
   useState,
   useReducer,
 } = React;
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import ButtonManager from '../Button/ButtonManager';
@@ -21,22 +20,16 @@ const {
   }
 } = StyledComponents
 
-import * as thunks from '../../redux/thunks'
-const { casksThunks: { editCask } } = thunks
+import * as thunks from '../../redux/thunks';
+const { casksThunks: { editCask } } = thunks;
 
-import { saveCaskButton } from '../../buttonProps';
+import { createButton } from '../../buttonProps';
 
-import {
-  InputOnChangeType,
-  ButtonOnClickType,
-  LocalReducerFunctionType,
-} from '../../types/index';
+import { InputOnChangeType, LocalReducerFunctionType } from '../../types/index';
 
 export default () => {
 
-  const dispatch = useDispatch();
-
-  const { activeCask, isLoading } = useTypedSelector(state => state); 
+  const { activeCask } = useTypedSelector(state => state); 
   const [ isEdited, setIsEdited ] = useState(false);
 
   const initialState = { ...activeCask };
@@ -66,11 +59,6 @@ export default () => {
   useEffect(() => checkLocalStateEdit(activeCask, localState), [activeCask, localState]);
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value })
-
-  const handleSaveForm: ButtonOnClickType = e => {
-    e.preventDefault();
-    dispatch(editCask(activeCask.id, localState));
-  }
 
   const checkLocalStateEdit = (previousState: typeof localState, currentState: typeof localState): void => {
     setIsEdited(false);
@@ -124,7 +112,7 @@ export default () => {
           <InputLabel>Tasting Note</InputLabel>
           <TextArea name='description' value={ description } onChange={ handleOnChange } />
         </InputModule>
-      <ButtonManager props={ saveCaskButton(activeCask.id, localState) } />
+      <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
       <LinkButton to={ `/edit/${ activeCask.id }/step1` }>Back</LinkButton>
       <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>
     </MainDiv>

@@ -18,8 +18,8 @@ const {
 import * as thunks from '../../redux/thunks';
 const { activeOutturnThunks: { getActiveOutturn } } = thunks;
 
+import { createModalButton } from '../../buttonProps';
 import { createCaskModal } from '../../modalProps';
-import { addCaskButton } from '../../buttonProps';
 
 import { ParamTypes } from '../../types/index';
 
@@ -45,7 +45,7 @@ export default () => {
           </Column>
         </CaskListDiv>
         <ActiveCask />
-        <ButtonManager props={ addCaskButton(createCaskModal(activeOutturn.id), 'Add a cask') } />
+        <ButtonManager props={ createModalButton('Add a cask', createCaskModal(activeOutturn.id)) } />
         <Subheader textAlign='center'>ADD A CASK</Subheader>
       </BodyDiv>
 

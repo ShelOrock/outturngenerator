@@ -2,14 +2,14 @@ import * as React from 'react';
 const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { useTypedSelector } from '../../utils';
+import { useTypedSelector, generateOutturn } from '../../utils';
 
 import CaskListItem from './CaskListItem';
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledDiv: { Row },
-  StyledButton: { Button, SmallButton },
-  StyledCask: { CaskList, AddCaskButton },
+  StyledCask: { CaskList },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -19,12 +19,12 @@ const {
     unmarkAllCasks,
     resetMarkedCasks,
   },
-  modalActions: { setModal }
 } = actions;
 
 import * as thunks from '../../redux/thunks';
 const { casksThunks: { editCask } } = thunks;
 
+import { createButton, createModalButton } from '../../buttonProps';
 import { deleteManyCasksModalProps } from '../../modalProps';
 
 import { InputOnChangeType, ButtonOnClickType } from '../../types/index';
@@ -33,7 +33,7 @@ export default () => {
 
   const dispatch = useDispatch();
 
-  const { activeOutturn, activeCask, isLoading, markedCasks } = useTypedSelector(state => state);
+  const { activeOutturn, activeCask, markedCasks } = useTypedSelector(state => state);
   const { casks } = activeOutturn;
   const [ localCaskOrder, setLocalCaskOrder ] = useState([])
 
@@ -68,10 +68,7 @@ export default () => {
 
   const handleEditCasks: ButtonOnClickType = () => localCaskOrder.forEach((cask, idx) => dispatch(editCask(cask.id, { ...cask, caskPosition: idx })));
   
-  const handleDeleteManyCasks: ButtonOnClickType = () => dispatch(setModal(deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)));
-
   return (
-
   <CaskList>
     <Row>
       <input
@@ -79,7 +76,7 @@ export default () => {
         checked={ casks && casks.length && casks.length === markedCasks.length }
         onChange={ handleAllCasksOnCheck }
       />
-      <SmallButton variant='secondary' disabled={ !!isLoading || !markedCasks.length } onClick={ handleDeleteManyCasks }>X</SmallButton>
+      <ButtonManager props={ createModalButton('X', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)) } />
     </Row>
     <DragDropContext onDragEnd={ onDragEnd }>
       <Droppable droppableId='list'>
@@ -95,7 +92,7 @@ export default () => {
         )}
       </Droppable>
     </DragDropContext>
-    <Button>Generate Outturn</Button>
+    <ButtonManager props={ createButton(generateOutturn(activeOutturn), 'Generate Outturn') } />
     
   </CaskList>
   )

@@ -30,6 +30,7 @@ router.get('/:caskId', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body);
   Cask.create({ ...req.body })
   .then(createdCask => {
     res

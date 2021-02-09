@@ -4,14 +4,13 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import OutturnCard from './OutturnCard';
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledOutturn: { AllOutturnsContainer, OutturnCardContainer },
+  StyledOutturn: { AllOutturnsContainer },
   StyledButton: {
     ButtonContainer,
     Button,
-    SmallButton,
-    ButtonDiv,
   }
 } = StyledComponents;
 
@@ -23,6 +22,7 @@ const {
 } = actions;
 
 import { deleteManyOutturnsModalProps, createOutturnModalProps } from '../../modalProps';
+import { createModalButton } from '../../buttonProps';
 
 import { Outturn } from '../..//types/index'
 
@@ -40,11 +40,9 @@ export default () => {
 
   return (
     <div>
-      <SmallButton variant='secondary' disabled={ !!isLoading || !markedOutturns.length } onClick={ () => dispatch(setModal(deleteManyOutturnsModalProps(markedOutturns))) }>X</SmallButton>
+      <ButtonManager props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
       <AllOutturnsContainer>
-        <OutturnCardContainer onClick={ () => dispatch(setModal(createOutturnModalProps())) }>
-          <ButtonDiv>+</ButtonDiv>
-        </OutturnCardContainer>
+        <ButtonManager props={ createModalButton('+', createOutturnModalProps()) } />
         {
           allOutturns.length
           ? (allOutturns.slice(0, showMore) as Outturn[]).map((outturn, idx) => <OutturnCard key={ idx } outturn= { outturn } />)

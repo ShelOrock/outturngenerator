@@ -35,7 +35,7 @@ export default () => {
               && localModalState
               && Object.keys(localModalState)
               && modal.confirmButton
-              && modal.confirmButton
+              && modal.cancelButton
               ? (
                 modal.inputModules.map(({ inputText, label }, idx) => {
                   let stateKey = Object.keys(localModalState)[idx]
@@ -58,7 +58,7 @@ export default () => {
               ) : null
             }
             <Row>
-              <ButtonManager props={ modal.confirmButton } />
+              <ButtonManager props={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] } }/>
               <ButtonManager props={ modal.cancelButton } />
             </Row>
           </ModalContainer>

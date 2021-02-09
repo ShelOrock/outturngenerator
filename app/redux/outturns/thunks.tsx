@@ -25,6 +25,7 @@ export const getOutturns: ThunkFunctionType = () => {
 };
 
 export const addOutturn: ThunkFunctionType = outturnName => {
+  console.log(outturnName)
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -39,6 +40,7 @@ export const addOutturn: ThunkFunctionType = outturnName => {
 };
 
 export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId) => {
+  console.log(outturnId)
   return dispatch => {
     dispatch(setLoading(true));
     axios

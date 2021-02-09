@@ -63,7 +63,7 @@ export const createOutturnModalProps: ModalFunctionType = () => ({
   confirmButton: {
     type: 'CREATE',
     text: 'Create outturn',
-    arguments: [],
+    arguments: [ ],
     onClickFunction: addOutturn,
   },
   cancelButton: {
@@ -73,12 +73,12 @@ export const createOutturnModalProps: ModalFunctionType = () => ({
   }
 });
 
-export const deleteCaskModal: ModalFunctionType = (cask: Cask, activeOutturnId: string) => ({
+export const deleteCaskModal: ModalFunctionType = (activeCask: Cask, cask: Cask, activeOutturnId: string) => ({
   modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
   confirmButton: {
     type: 'DELETE',
     text: `Delete Cask no. ${ cask.caskNumber }`,
-    arguments: [ cask.id, activeOutturnId ],
+    arguments: [ activeCask.id, cask.id, activeOutturnId ],
     onClickFunction: deleteCask
   },
   cancelButton: {

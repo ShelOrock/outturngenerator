@@ -8,7 +8,6 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Subheader, Body },
   StyledDiv: { Row, Column },
-  StyledButton: { SmallButton },
   StyledCask: {
     CaskListItemDiv,
     CaskListItemButton,
@@ -22,7 +21,7 @@ const { markCaskActions: { markCask, unmarkCask } } = actions
 import * as thunks from '../../redux/thunks';
 const { activeCaskThunks: { getActiveCask } } = thunks
 
-import { deleteCaskButton } from '../../buttonProps'
+import { createModalButton } from '../../buttonProps'
 import { deleteCaskModal } from '../../modalProps';
 
 import { InputOnChangeType } from '../../types/index';
@@ -78,7 +77,7 @@ export default ({ cask }: any) => {
                   <Body>{ name }</Body>
                 </Column>
               </CaskListItemButton>
-              <ButtonManager props={ deleteCaskButton(deleteCaskModal(cask, activeOutturn.id), 'X') } />
+              <ButtonManager props={ createModalButton('X', deleteCaskModal(activeCask, cask, activeOutturn.id)) } />
             </Row>
           </Row>
         </CaskListItemDiv>

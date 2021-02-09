@@ -55,7 +55,7 @@ export const assignColorPill = (string: string): string => {
   };
 };
 
-export const generateOutturn = (outturn: Outturn, caskList: Cask[]): string => {
+export const generateOutturn = (outturn: Outturn): string => {
   return (
     `<html></html>`
   );

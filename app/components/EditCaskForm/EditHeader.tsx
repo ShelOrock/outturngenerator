@@ -4,15 +4,14 @@ const {
   useState,
   useReducer
 } = React;
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header },
   StyledDiv: { MainDiv, Row },
   StyledLink: { LinkButton },
-  StyledButton: { Button },
   StyledForm: {
     InputModule,
     InputLabel,
@@ -20,20 +19,16 @@ const {
   }
 } = StyledComponents
 
-import * as thunks from '../../redux/thunks'
+import * as thunks from '../../redux/thunks';
 const { casksThunks: { editCask } } = thunks;
 
-import {
-  InputOnChangeType,
-  ButtonOnClickType,
-  LocalReducerFunctionType
-} from '../../types/index';
+import { createButton } from '../../buttonProps';
+
+import { InputOnChangeType, LocalReducerFunctionType } from '../../types/index';
 
 export default () => {
 
-  const dispatch = useDispatch();
-
-  const { activeCask, isLoading } = useTypedSelector(state => state); 
+  const { activeCask } = useTypedSelector(state => state); 
   const [ isEdited, setIsEdited ] = useState(false);
 
   const initialState = { ...activeCask };
@@ -59,12 +54,6 @@ export default () => {
   useEffect(() => checkLocalStateEdit(activeCask, localState), [activeCask, localState])
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
-
-  const handleSaveForm: ButtonOnClickType = e => {
-    e.preventDefault();
-    dispatch(editCask(activeCask.id, localState))
-    setIsEdited(false);
-  }
 
   const checkLocalStateEdit = (previousState: typeof localState, currentState: typeof localState): void => {
     setIsEdited(false);
@@ -95,7 +84,7 @@ export default () => {
             <InputField type='text' name='price' value={ price } onChange={ handleOnChange } />
           </InputModule>
         </Row>
-      <Button disabled={ !!isLoading || !isEdited } onClick={ handleSaveForm }>Save</Button>
+      <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
       <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>
     </MainDiv>
   )

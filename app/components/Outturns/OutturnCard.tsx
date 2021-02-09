@@ -2,10 +2,10 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { truncateText, useTypedSelector } from '../../utils';
 
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header, Body },
-  StyledButton: { SmallButton },
   StyledOutturn: {
     OutturnCardContainer,
     OutturnCardImage,
@@ -16,19 +16,17 @@ const {
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
-const {
-  markOutturnActions: { markOutturn, unmarkOutturn },
-  modalActions: { setModal }
-} = actions;
+const { markOutturnActions: { markOutturn, unmarkOutturn } } = actions;
 
-import { deleteOutturnModalProps } from '../../modalProps'
+import { deleteOutturnModalProps } from '../../modalProps';
+import { createModalButton } from '../../buttonProps';
 
 import { OutturnCard, InputOnChangeType } from '../../types/index';
 
 export default ({ outturn }: OutturnCard) => {
 
   const dispatch = useDispatch();
-  const { isLoading, markedOutturns, activeOutturn } = useTypedSelector(state => state);
+  const { markedOutturns, activeOutturn } = useTypedSelector(state => state);
   const { id, name, description } = outturn
 
   const handleOnCheck: InputOnChangeType = e => {
@@ -45,7 +43,7 @@ export default ({ outturn }: OutturnCard) => {
           checked={ markedOutturns.includes(id) }
           onChange={ handleOnCheck }
         />
-        <SmallButton variant='secondary' disabled={ !!isLoading } onClick={ () => dispatch(setModal(deleteOutturnModalProps(outturn, activeOutturn.id))) }>X</SmallButton>
+        <ButtonManager props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
       </Row>
       <LinkDiv to={ `/outturn/${ id }`}>
       <OutturnCardImage>
