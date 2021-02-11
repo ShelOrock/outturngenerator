@@ -3,6 +3,7 @@ import * as StyledDiv from './Div';
 import * as StyledLink from './Link';
 import * as StyledForm from './Form';
 import * as StyledButton from './Button';
+import * as StyledCard from './Card';
 import * as StyledCask from './Cask';
 import * as StyledOutturn from './Outturn';
 import * as StyledModal from './Modal';
@@ -15,6 +16,7 @@ export {
   StyledLink,
   StyledForm,
   StyledButton,
+  StyledCard,
   StyledCask,
   StyledOutturn,
   StyledModal,

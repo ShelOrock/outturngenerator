@@ -1,5 +1,5 @@
 import { Outturn, Outturns } from './outturn';
-import { Cask } from './cask';
+import { Cask, Casks } from './cask';
 import { User } from './user';
 import { UserCredentials } from './authentication';
 import { InputOnChangeType, ButtonOnClickType } from './form';
@@ -11,6 +11,7 @@ export {
   Outturn,
   Outturns,
   Cask,
+  Casks,
   User,
   UserCredentials,
   InputOnChangeType,

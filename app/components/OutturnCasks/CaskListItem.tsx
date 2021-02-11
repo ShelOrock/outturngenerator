@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { Draggable } from 'react-beautiful-dnd';
 import { useTypedSelector, assignColorPill } from '../../utils';
 
 import ButtonManager from '../Button/ButtonManager';
@@ -26,12 +25,11 @@ import { deleteCaskModal } from '../../modalProps';
 
 import { InputOnChangeType } from '../../types/index';
 
-export default ({ cask }: any) => {
+export default (props: any) => {
 
   const dispatch = useDispatch();
 
   const {
-    isLoading,
     markedCasks,
     activeOutturn,
     activeCask
@@ -42,22 +40,16 @@ export default ({ cask }: any) => {
     name,
     caskNumber,
     flavourProfile
-  } = cask;
+  } = props.cask;
 
   const handleOnCheck: InputOnChangeType = e => {
     if(markedCasks.includes(e.target.name)) dispatch(unmarkCask(e.target.name))
     else dispatch(markCask(e.target.name))
   }
-
+  
   return (
-    <Draggable draggableId={ cask.id } index={ cask.caskPosition }>
-      { provided => (
-        <CaskListItemDiv
-          flavourProfile= { assignColorPill(flavourProfile )}
-          ref={ provided.innerRef }
-          { ...provided.draggableProps }
-          { ...provided.dragHandleProps }
-        >
+
+        <CaskListItemDiv flavourProfile= { assignColorPill(flavourProfile ) } ref={ props.innerRef }>
           <Row alignItems='center'>
             <Row alignItems='center' justifyContent='center'>
               <Column>
@@ -77,11 +69,9 @@ export default ({ cask }: any) => {
                   <Body>{ name }</Body>
                 </Column>
               </CaskListItemButton>
-              <ButtonManager props={ createModalButton('X', deleteCaskModal(activeCask, cask, activeOutturn.id)) } />
+              <ButtonManager props={ createModalButton('X', deleteCaskModal(activeCask, props.cask, activeOutturn.id)) } />
             </Row>
           </Row>
         </CaskListItemDiv>
-      )}
-    </Draggable>
   )
 }

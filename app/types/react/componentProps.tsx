@@ -1,11 +1,11 @@
 import { Outturn, Cask } from '../index';
 
 export interface OutturnCard {
-  key: number;
+  key: string;
   outturn: Outturn;
 };
 
 export interface CaskListItem {
-  key: number;
+  key: string;
   cask: Cask;
 }

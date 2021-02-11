@@ -7,6 +7,7 @@ import OutturnCard from './OutturnCard';
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
+  StyledCard: { Card },
   StyledOutturn: { AllOutturnsContainer },
   StyledButton: {
     ButtonContainer,
@@ -23,8 +24,7 @@ const {
 
 import { deleteManyOutturnsModalProps, createOutturnModalProps } from '../../modalProps';
 import { createModalButton } from '../../buttonProps';
-
-import { Outturn } from '../..//types/index'
+import { CardContainer } from '../styledcomponents/Card';
 
 export default () => {
 
@@ -42,10 +42,14 @@ export default () => {
     <div>
       <ButtonManager props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
       <AllOutturnsContainer>
-        <ButtonManager props={ createModalButton('+', createOutturnModalProps()) } />
+        <CardContainer>
+          <Card>
+            <ButtonManager props={ createModalButton('+', createOutturnModalProps()) } />
+          </Card>
+        </CardContainer>
         {
           allOutturns.length
-          ? (allOutturns.slice(0, showMore) as Outturn[]).map((outturn, idx) => <OutturnCard key={ idx } outturn= { outturn } />)
+          ? (allOutturns.slice(0, showMore)).map(outturn => <OutturnCard key={ outturn.id } outturn= { outturn } />)
           : null
         }
       </AllOutturnsContainer>

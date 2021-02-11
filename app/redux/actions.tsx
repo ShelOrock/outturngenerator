@@ -1,7 +1,7 @@
 import * as storeActions from './store/actions';
 import * as outturnsActions from './outturns/actions';
 import * as activeOutturnActions from './activeOutturn/actions';
-import * as casksActions from './casks/actions';
+import * as casksActions from './allCasks/actions';
 import * as activeCaskActions from './activeCask/actions';
 import * as markOutturnActions from './markedOutturns/actions';
 import * as markCaskActions from './markedCasks/actions';

@@ -1,7 +1,7 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useTypedSelector, generateOutturn } from '../../utils';
 
 import CaskListItem from './CaskListItem';
@@ -21,13 +21,10 @@ const {
   },
 } = actions;
 
-import * as thunks from '../../redux/thunks';
-const { casksThunks: { editCask } } = thunks;
-
 import { createButton, createModalButton } from '../../buttonProps';
 import { deleteManyCasksModalProps } from '../../modalProps';
 
-import { InputOnChangeType, ButtonOnClickType } from '../../types/index';
+import { InputOnChangeType } from '../../types/index';
 
 export default () => {
 
@@ -65,8 +62,6 @@ export default () => {
     const reorderedCasks = reorderCasks(localCaskOrder, result.source.index, result.destination.index);
     setLocalCaskOrder(reorderedCasks);
   }
-
-  const handleEditCasks: ButtonOnClickType = () => localCaskOrder.forEach((cask, idx) => dispatch(editCask(cask.id, { ...cask, caskPosition: idx })));
   
   return (
   <CaskList>
@@ -84,8 +79,32 @@ export default () => {
           <div ref={ provided.innerRef } { ...provided.droppableProps }>
           { 
             localCaskOrder 
-            ? localCaskOrder.map((cask, idx) => <CaskListItem cask={ {...cask, caskPosition: idx } } key={ cask.id }/>)
-            : null
+            ? localCaskOrder.map((cask, idx) => {
+              return (
+              <Draggable key={ cask.id } draggableId={ cask.id } index={ cask.caskPosition }>
+                { provided => (
+                  <div
+                    ref={ provided.innerRef }
+                    { ...provided.draggableProps }
+                    { ...provided.dragHandleProps }
+                  >
+                    <CaskListItem cask={ {...cask, caskPosition: idx } }
+/>
+                  </div>
+
+                )}
+              </Draggable>
+              )
+            })
+            : <Draggable>
+              { provided => (
+                  <div
+                    ref={ provided.innerRef }
+                    { ...provided.draggableProps }
+                    { ...provided.dragHandleProps }
+                  />
+                )}
+            </Draggable>
           }
           { provided.placeholder }
           </div>

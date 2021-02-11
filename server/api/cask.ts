@@ -8,7 +8,32 @@ import { Cask } from '../db/index';
 
 const router: express.Router = express.Router();
 
-router.get('/:caskId', (req: Request, res: Response, next: NextFunction) => {
+router.get('/', (_req: Request, res: Response, next: NextFunction): void => {
+  Cask.findAll({
+    order: [
+      [ 'caskNumber', 'ASC' ]
+    ]
+  })
+  .then(casksOrNull => {
+    if(!casksOrNull) {
+      res
+        .status(404)
+        .send()
+    } else {
+      res
+        .status(200)
+        .send(casksOrNull)
+    };
+  })
+  .catch(e => {
+    res
+      .status(500)
+      .send();
+    next(e);
+  })
+});
+
+router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void => {
   Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {

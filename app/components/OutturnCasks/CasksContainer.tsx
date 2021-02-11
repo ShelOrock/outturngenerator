@@ -9,7 +9,7 @@ import ActiveCask from './ActiveCask';
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Header, Subheader },
+  StyledType: { Header },
   StyledDiv: { BodyDiv, Column },
   StyledLink: { LinkButton },
   StyledCask: { CaskListDiv },
@@ -46,7 +46,6 @@ export default () => {
         </CaskListDiv>
         <ActiveCask />
         <ButtonManager props={ createModalButton('Add a cask', createCaskModal(activeOutturn.id)) } />
-        <Subheader textAlign='center'>ADD A CASK</Subheader>
       </BodyDiv>
 
     </div>

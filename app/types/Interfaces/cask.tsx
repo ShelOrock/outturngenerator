@@ -17,3 +17,5 @@ export interface Cask {
   image?: number[];
   outturnId?: string | number;
 }
+
+export type Casks = Cask[];

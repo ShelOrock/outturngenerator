@@ -1,23 +1,29 @@
 import axios from 'axios';
 
-import * as actions from '../actions';
-const { 
-  activeCaskActions: { setActiveCask },
-  markCaskActions: { unmarkCask, resetMarkedCasks },
-  modalActions: { resetModal },
-  toastActions: { addToast },
-  loadingActions: { setLoading }
-} = actions
+import { setCasks } from './actions';
+import { setActiveCask } from '../activeCask/actions';
+import { unmarkCask, resetMarkedCasks } from '../markedCasks/actions';
+import { resetModal } from '../modal/actions';
+import { addToast } from '../toast/actions';
+import { setLoading } from '../loading/actions';
 
-import * as thunks from '../thunks';
-const {
-  activeOutturnThunks: { getActiveOutturn },
-} = thunks;
+import { getActiveOutturn } from '../activeOutturn/thunks'
 import { getActiveCask } from '../activeCask/thunks'
 
 import { ThunkFunctionType } from '../../types/index';
 
 const API_URL = '/api/cask/'
+
+export const getCasks: ThunkFunctionType = () => {
+  return dispatch => {
+    dispatch(setLoading(true));
+    axios
+      .get(`${ API_URL }`)
+      .then(res => dispatch(setCasks(res.data)))
+      .catch(e => console.error(e))
+      .finally(() => setLoading(false));
+  };
+};
 
 export const addNewCask: ThunkFunctionType = (outturnId, cask) => {
   return dispatch => {
@@ -30,8 +36,9 @@ export const addNewCask: ThunkFunctionType = (outturnId, cask) => {
           status: 'SUCCESS',
           message: res.data.message
         }))
-        dispatch(resetModal())
-        dispatch(getActiveCask(res.data.createdCask.id))
+        dispatch(resetModal());
+        dispatch(getCasks());
+        dispatch(getActiveCask(res.data.createdCask.id));
         dispatch(getActiveOutturn(outturnId));
       })
       .catch(e => console.error(e))
@@ -48,6 +55,7 @@ export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId) =
         if (activeCaskId === caskId) dispatch(setActiveCask({}));
         dispatch(unmarkCask(caskId))
         dispatch(resetModal());
+        dispatch(getCasks());
         dispatch(getActiveOutturn(outturnId));
       })
       .catch(e => console.error(e))
@@ -69,6 +77,7 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
         if (markedCasks.includes(activeCaskId)) dispatch(setActiveCask({}));
         dispatch(resetMarkedCasks());
         dispatch(resetModal());
+        dispatch(getCasks());
         dispatch(getActiveOutturn(outturnId));
       })
       .catch(e => console.error(e))
@@ -82,7 +91,10 @@ export const editCask: ThunkFunctionType = (caskId, cask) => {
     dispatch(setLoading(true));
     axios
       .put(`${ API_URL }${ caskId }`, { ...cask })
-      .then(() => dispatch(getActiveCask(caskId)))
+      .then(() => {
+        dispatch(getCasks());
+        dispatch(getActiveCask(caskId));
+      })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };

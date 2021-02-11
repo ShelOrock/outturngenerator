@@ -6,10 +6,11 @@ import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header, Body },
-  StyledOutturn: {
-    OutturnCardContainer,
-    OutturnCardImage,
-    OutturnCardText
+  StyledCard: {
+    CardContainer,
+    Card,
+    CardImage,
+    CardText
   },
   StyledDiv: { Row },
   StyledLink: { LinkDiv }
@@ -35,7 +36,8 @@ export default ({ outturn }: OutturnCard) => {
   }
 
   return (
-    <OutturnCardContainer>
+    <CardContainer>
+      <Card>
       <Row>
         <input
           type='checkbox'
@@ -43,17 +45,18 @@ export default ({ outturn }: OutturnCard) => {
           checked={ markedOutturns.includes(id) }
           onChange={ handleOnCheck }
         />
-        <ButtonManager props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
+          <ButtonManager props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
       </Row>
       <LinkDiv to={ `/outturn/${ id }`}>
-      <OutturnCardImage>
-        Insert image here.
-      </OutturnCardImage>
-      <OutturnCardText>
-        <Header textAlign='left' color='white'>{ name }</Header>
-        <Body>{ description ? truncateText(description) : null }</Body>
-      </OutturnCardText>
+        <CardImage>
+          Insert image here.
+        </CardImage>
+        <CardText>
+          <Header textAlign='left' color='white'>{ name }</Header>
+          <Body>{ description ? truncateText(description) : null }</Body>
+        </CardText>
       </LinkDiv>
-    </OutturnCardContainer>
+        </Card>
+    </CardContainer>
   )
 };
