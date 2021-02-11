@@ -74,7 +74,6 @@ router.post('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.put('/:caskId', (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
   Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {

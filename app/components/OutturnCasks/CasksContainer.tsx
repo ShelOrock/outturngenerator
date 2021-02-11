@@ -15,6 +15,9 @@ const {
   StyledCask: { CaskListDiv },
 } = StyledComponents;
 
+import * as actions from '../../redux/actions';
+const { markCaskActions: { resetMarkedCasks } } = actions;
+
 import * as thunks from '../../redux/thunks';
 const { activeOutturnThunks: { getActiveOutturn } } = thunks;
 
@@ -32,6 +35,7 @@ export default () => {
 
   useEffect(() => {
     dispatch(getActiveOutturn(outturnId))
+    dispatch(resetMarkedCasks())
   }, []);
 
   return (

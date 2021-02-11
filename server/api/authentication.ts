@@ -13,7 +13,6 @@ import { User } from '../db/index';
 const router: express.Router = express.Router();
 
 router.post('/login', (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body)
   const { usernameOrEmail, password } = req.body;
   User.findOne({
     where: Sequelize.or(
@@ -70,7 +69,6 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
-    console.log(req.body)
   User.findByPk(req.body.userId)
   .then(userOrNull => {
     if(!userOrNull) {
@@ -79,15 +77,10 @@ router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
         .send('User not found')
     } else {
       userOrNull.update({ loggedIn: false })
-      .then(() => {
-        res
-          .status(201)
-          .send('User logged out')
-      })
       .then(() => User.create({ sessionId: req.session.id }))
       .then(user => {
         res
-          .status(200)
+          .status(201)
           .send(user);
       });
     };

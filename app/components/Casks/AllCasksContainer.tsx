@@ -1,21 +1,30 @@
 import * as React from 'react';
-const { useState } = React;
+const { useEffect, useState } = React;
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
+import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
-
 const {
-  StyledDiv: { BodyDiv },
+  StyledDiv: { BodyDiv, Column },
   StyledButton: { Button },
   StyledCask: { CaskListDiv },
 } = StyledComponents;
 
+import * as actions from '../../redux/actions';
+const { markCaskActions: { resetMarkedCasks } } = actions;
+
 export default () => {
 
+  const dispatch = useDispatch();
   const [ showMore, setShowMore ] = useState(12);
   const { allCasks, isLoading } = useTypedSelector(state => state);
+
+  useEffect(() => {
+    dispatch(resetMarkedCasks());
+  }, [])
 
   return (
     <div>
@@ -32,7 +41,10 @@ export default () => {
           : null
           }
         </CaskListDiv>
-      <ActiveCask />
+      <Column>
+        <ActiveCask />
+        <AssociatedOutturn />
+      </Column>
       </BodyDiv>
     </div>
   )
