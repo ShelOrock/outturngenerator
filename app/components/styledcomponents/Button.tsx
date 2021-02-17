@@ -47,14 +47,6 @@ export const Button = styled.button<ButtonProps>`
   border: none;
   border-radius: 3px;
   cursor: pointer;
-  transition: all 0.3s ease 0s;
-  box-shadow: 0 8px 15px #D5D5D5;
-
-  }
-  &:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 15px 20px #21A0A066;
-  }
   &:focus {
     outline: none;
   }

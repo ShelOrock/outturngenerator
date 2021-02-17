@@ -16,6 +16,7 @@ import {
 import {
   OutturnCard,
   CaskListItem,
+  ButtonProps,
   LocalReducerFunctionType,
   ParamTypes
 } from './react/index';
@@ -39,6 +40,7 @@ export {
   UserCredentials,
   OutturnCard,
   CaskListItem,
+  ButtonProps,
   LocalReducerFunctionType,
   InputOnChangeType,
   ButtonOnClickType,

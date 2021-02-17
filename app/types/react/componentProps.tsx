@@ -9,3 +9,8 @@ export interface CaskListItem {
   key: string;
   cask: Cask;
 }
+
+export interface ButtonProps {
+  disabled?: boolean;
+  props: any;
+}

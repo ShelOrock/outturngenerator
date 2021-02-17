@@ -5,11 +5,13 @@ import { useTypedSelector } from '../../utils';
 import * as StyledComponents from '../styledcomponents/index';
 const { StyledButton: { Button } } = StyledComponents;
 
-export default ({ props }) => {
+import { ButtonProps } from '../../types/index';
+
+export default ({ disabled, props }: ButtonProps) => {
   const dispatch = useDispatch();
   const { isLoading } = useTypedSelector(state => state)
-
   return (
-    <Button disabled={ !!isLoading } onClick={ () => dispatch(props.onClickFunction(...props.arguments)) }>{ props.text }</Button>
+
+    <Button disabled={ disabled || !!isLoading } onClick={ () => dispatch(props.onClickFunction(...props.arguments)) }>{ props.text }</Button>
   )
 }

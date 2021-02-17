@@ -40,7 +40,7 @@ export default () => {
 
   return (
     <div>
-      <ButtonManager props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
+      <ButtonManager disabled={ !markedOutturns.length } props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
       <AllOutturnsContainer>
         <CardContainer>
           <Card>

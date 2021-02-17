@@ -2,8 +2,9 @@ import * as React from 'react';
 const { useState, useEffect } = React;
 import { useTypedSelector } from '../../utils';
 
-import * as StyledComponents from '../styledcomponents/index';
+import CaskSearch from '../CaskSearch/CaskSearch';
 import ButtonManager from '../Button/ButtonManager';
+import * as StyledComponents from '../styledcomponents/index';
 const { 
   StyledType: { Header, Subheader },
   StyledDiv: { Column, Row },
@@ -64,6 +65,7 @@ export default () => {
           </ModalContainer>
         ): null
       }
+      <CaskSearch />
     </div>
   );
 };
