@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ButtonProps {
   variant?: string;
@@ -38,35 +38,29 @@ export const ButtonContainer = styled.div`
   align-items: center;
 `
 
-export const Button = styled.button<ButtonProps>`
-  background: ${ props => props.disabled ? '#DDD' : convertButtonVariantToColor(props.variant).background };
-  color: ${ props => props.disabled ? '#21A0A0' : convertButtonVariantToColor(props.variant).color };
-  padding: 1rem 2rem;
-  margin: 2rem;
+export const AllButtonStyles = css<ButtonProps>`
   text-align: center;
   border: none;
   border-radius: 3px;
   cursor: pointer;
+
+
   &:focus {
     outline: none;
-  }
+  };
+`;
+
+
+export const Button = styled.button<ButtonProps>`
+  ${ AllButtonStyles }
+  padding: 1rem 2rem;
+  margin: 2rem;
 `;
 
 export const SmallButton = styled.button<ButtonProps>`
+  ${ AllButtonStyles }
   padding: 0.5rem;
   margin: 1rem;
-  background: ${ props => props.disabled ? '#DDD' : convertButtonVariantToColor(props.variant).background };
-  color: ${ props => props.disabled ? '#21A0A0' : convertButtonVariantToColor(props.variant).color };
-  text-align: center;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.3s ease 0s;
-  box-shadow: 0 8px 15px #D5D5D5;
-
-  &:focus {
-    outline: none;
-  }
 `;
 
 export const ButtonDiv = styled.div`

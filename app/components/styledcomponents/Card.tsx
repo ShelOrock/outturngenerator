@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 
-
 export const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,8 +9,6 @@ export const CardContainer = styled.div`
   margin: 2rem;
   box-shadow: 0px 8px 15px #D5D5D5;
   transition: all 0.3s ease 0s;
-
-
 
   &:hover {
     transform: translateY(-7px);

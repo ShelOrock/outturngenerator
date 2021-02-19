@@ -1,38 +1,37 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface TextPropTypes {
   textAlign?: string;
   color?: string;
 } 
 
-export const Header = styled.h1<TextPropTypes>`
-  font-weight: bold;
-  font-size: 1.5rem;
-  padding: 0rem 1rem;
-  margin: 0;
-  text-align: ${ props => props.textAlign  || 'center' };
-  color: ${ props => props.color || 'black' };
-`
-
-export const Subheader = styled.h2<TextPropTypes>`
-  font-weight: bold;
-  font-size: 1rem;
+export const AllTypeStyles = css<TextPropTypes>`
   padding: 0 1rem;
   margin: 0;
-  text-align: ${ props => props.textAlign  || 'center' };
-  color: ${ props => props.color || 'black' };
-`
+  text-align: ${ ({ textAlign }) => textAlign || 'left' };
+  color: ${ ({ theme: { colors } }) => colors.black };
+`;
+
+export const Header = styled.h1`
+  ${ AllTypeStyles }
+  font-weight: bold;
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.large };
+`;
+
+export const Subheader = styled.h2`
+  ${ AllTypeStyles }
+  font-weight: bold;
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
+`;
 
 export const Subtitle = styled.p`
-  font-size: 1rem;
-  color: #999;
-  padding: 0 1rem;
-  margin: 0;
+  ${ AllTypeStyles }
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
+  color: ${ ( { theme: { colors } }) => colors.gray };
 `
 
 export const Body = styled.p`
-  font-size: 1rem;
-  padding: 0 1rem;
-  margin: 0;
+  ${ AllTypeStyles }
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
   font-weight: bold;
 `
