@@ -1,3 +1,4 @@
+import { GlobalStyle } from './GlobalStyle';
 import * as StyledType from './Type';
 import * as StyledDiv from './Div';
 import * as StyledLink from './Link';
@@ -11,6 +12,7 @@ import * as StyledToast from './Toast';
 import * as StyledNavigation from './Navigation';
 
 export {
+  GlobalStyle,
   StyledType,
   StyledDiv,
   StyledLink,

@@ -18,8 +18,7 @@ const {
   },
   StyledType: {
     Header,
-    Subheader,
-    Subtitle,
+    SmallListItemHeader,
     Body
   }
 } = StyledComponents;
@@ -56,49 +55,49 @@ export default () => {
               <Column>
                 <ActiveCaskHeader>
                   <Header textAlign='left'>CASK NO. { caskNumber ? caskNumber.toUpperCase() : null }</Header>
-                  <Subheader textAlign='left'>{ name ? name.toUpperCase() : null }</Subheader>
+                  <SmallListItemHeader textAlign='left'>{ name ? name.toUpperCase() : null }</SmallListItemHeader>
                   <Header textAlign='left'>{ price ? `$${ price }` : null }</Header>
                   <FlavourStrip flavourProfile={ assignColorPill(flavourProfile) }>
-                    <Subheader color='white' textAlign='left'>{ flavourProfile ? flavourProfile.toUpperCase() : null }</Subheader>
+                    <SmallListItemHeader color='white' textAlign='left'>{ flavourProfile ? flavourProfile.toUpperCase() : null }</SmallListItemHeader>
                   </FlavourStrip>
                 </ActiveCaskHeader>
                 <List>
                   <Row justifyContent='space-between'>
                     <ListItem>
-                      <Subtitle>Age:</Subtitle>
+                      <SmallListItemHeader>Age:</SmallListItemHeader>
                       <Body>{ age } years</Body>
                     </ListItem>
                     <ListItem>
-                      <Subtitle>Date distilled:</Subtitle>
+                      <SmallListItemHeader>Date distilled:</SmallListItemHeader>
                       <Body>{ date }</Body>
                     </ListItem>
                   </Row>
                   <ListItem>
-                    <Subtitle>Region:</Subtitle>
+                    <SmallListItemHeader>Region:</SmallListItemHeader>
                     <Body>{ region }</Body>
                   </ListItem>
                   <ListItem>
-                    <Subtitle>Cask type:</Subtitle>
+                    <SmallListItemHeader>Cask type:</SmallListItemHeader>
                     <Body>{ caskType }</Body>
                   </ListItem>
                   { grapeVariety ? (
                     <ListItem>
-                      <Subtitle>Grape variety:</Subtitle>
+                      <SmallListItemHeader>Grape variety:</SmallListItemHeader>
                       <Body>{ grapeVariety }</Body>
                     </ListItem>
                   ) : null }
                   <Row justifyContent='space-between'>
                     <ListItem>
-                      <Subtitle>Outturn:</Subtitle>
+                      <SmallListItemHeader>Outturn:</SmallListItemHeader>
                       <Body>{ bottleOutturn }</Body>
                     </ListItem>
                     <ListItem>
-                      <Subtitle>Allocation:</Subtitle>
+                      <SmallListItemHeader>Allocation:</SmallListItemHeader>
                       <Body>{ allocation }</Body>
                     </ListItem>
                   </Row>
                   <ListItem>
-                    <Subtitle>Tasting Note:</Subtitle>
+                    <SmallListItemHeader>Tasting Note:</SmallListItemHeader>
                     <Body>{ description }</Body>
                   </ListItem>
                 </List>

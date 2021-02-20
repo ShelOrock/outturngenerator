@@ -10,10 +10,10 @@ const {
     CardContainer,
     Card,
     CardImage,
-    CardText
   },
   StyledDiv: { Row },
-  StyledLink: { LinkDiv }
+  StyledLink: { LinkDiv },
+  StyledForm: { Checkbox }
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -38,25 +38,26 @@ export default ({ outturn }: OutturnCard) => {
   return (
     <CardContainer>
       <Card>
-      <Row>
-        <input
-          type='checkbox'
-          name={ id }
-          checked={ markedOutturns.includes(id) }
-          onChange={ handleOnCheck }
-        />
-          <ButtonManager props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
-      </Row>
-      <LinkDiv to={ `/outturn/${ id }`}>
-        <CardImage>
-          Insert image here.
-        </CardImage>
-        <CardText>
-          <Header textAlign='left' color='white'>{ name }</Header>
+        <Row justifyContent='space-between' alignItems='center'>
+          <Checkbox
+            type='checkbox'
+            name={ id }
+            checked={ markedOutturns.includes(id) }
+            onChange={ handleOnCheck }
+          />
+          <ButtonManager
+            size='small'
+            variant='secondary'
+            props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
+        </Row>
+        <LinkDiv to={ `/outturn/${ id }`}>
+          <Header>{ name }</Header>
           <Body>{ description ? truncateText(description) : null }</Body>
-        </CardText>
-      </LinkDiv>
-        </Card>
+          <CardImage>
+            Insert image here.
+          </CardImage>
+        </LinkDiv>
+      </Card>
     </CardContainer>
   )
 };

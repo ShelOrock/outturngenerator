@@ -3,16 +3,18 @@ const { useState, useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
+import PageHeader from '../PageHeader/PageHeader';
+import SubNavigation from '../Navigation/SubNavigation';
 import OutturnCard from './OutturnCard';
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledCard: { Card },
   StyledOutturn: { AllOutturnsContainer },
   StyledButton: {
     ButtonContainer,
     Button,
-  }
+  },
+  StyledDiv: { Row, Column },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -24,12 +26,11 @@ const {
 
 import { deleteManyOutturnsModalProps, createOutturnModalProps } from '../../modalProps';
 import { createModalButton } from '../../buttonProps';
-import { CardContainer } from '../styledcomponents/Card';
 
 export default () => {
 
   const dispatch = useDispatch();
-  const [ showMore, setShowMore ] = useState(5);
+  const [ showMore, setShowMore ] = useState(6);
   const { allOutturns, markedOutturns, isLoading } = useTypedSelector(state => state);
 
   useEffect(() => {
@@ -40,13 +41,23 @@ export default () => {
 
   return (
     <div>
-      <ButtonManager disabled={ !markedOutturns.length } props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
+      <Column>
+        <SubNavigation link={null} destination='x'/>
+        <Row justifyContent='space-between'>
+          <Row alignItems='center'>
+            <PageHeader pageTitle='All Projects' />
+            <ButtonManager
+              variant='primary'
+              props={ createModalButton('+ New Project', createOutturnModalProps()) }
+            />
+          </Row>
+          <ButtonManager
+            variant='secondary'
+            disabled={ !markedOutturns.length }
+            props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
+        </Row>
+      </Column>
       <AllOutturnsContainer>
-        <CardContainer>
-          <Card>
-            <ButtonManager props={ createModalButton('+', createOutturnModalProps()) } />
-          </Card>
-        </CardContainer>
         {
           allOutturns.length
           ? (allOutturns.slice(0, showMore)).map(outturn => <OutturnCard key={ outturn.id } outturn= { outturn } />)
@@ -56,7 +67,7 @@ export default () => {
       <ButtonContainer>
         {
           showMore < allOutturns.length
-          ? <Button variant='secondary' disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }>Show More</Button>
+          ? <Button size='default' variant='secondary' disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }>Show More</Button>
           : null
         }
       </ButtonContainer>

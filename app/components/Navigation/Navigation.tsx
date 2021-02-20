@@ -21,7 +21,7 @@ export default () => {
     <NavBar>
       <Row justifyContent='space-between'>
         <Row>
-          <NavLink to='/'>Home</NavLink>
+          <NavLink to='/'>Projects</NavLink>
           <NavLink to='/casks'>Casks</NavLink>
         </Row>
         {

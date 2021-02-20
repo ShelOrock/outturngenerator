@@ -10,6 +10,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledDiv: { Row },
   StyledCask: { CaskList },
+  StyledForm: { Checkbox }
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -21,8 +22,7 @@ const {
   },
 } = actions;
 
-import { createButton, createModalButton } from '../../buttonProps';
-import { deleteManyCasksModalProps } from '../../modalProps';
+import { createButton } from '../../buttonProps';
 
 import { InputOnChangeType } from '../../types/index';
 
@@ -30,7 +30,7 @@ export default () => {
 
   const dispatch = useDispatch();
 
-  const { activeOutturn, activeCask, markedCasks } = useTypedSelector(state => state);
+  const { activeOutturn, markedCasks } = useTypedSelector(state => state);
   const { casks } = activeOutturn;
   const [ localCaskOrder, setLocalCaskOrder ] = useState([])
 
@@ -66,12 +66,11 @@ export default () => {
   return (
   <CaskList>
     <Row>
-      <input
+      <Checkbox
         type='checkbox'
         checked={ casks && casks.length && casks.length === markedCasks.length }
         onChange={ handleAllCasksOnCheck }
       />
-      <ButtonManager props={ createModalButton('X', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)) } />
     </Row>
     <DragDropContext onDragEnd={ onDragEnd }>
       <Droppable droppableId='list'>
@@ -111,7 +110,10 @@ export default () => {
         )}
       </Droppable>
     </DragDropContext>
-    <ButtonManager props={ createButton(generateOutturn(activeOutturn), 'Generate Outturn') } />
+    <ButtonManager
+      variant='primary'
+      props={ createButton(generateOutturn(activeOutturn), 'Generate Outturn') }
+    />
     
   </CaskList>
   )

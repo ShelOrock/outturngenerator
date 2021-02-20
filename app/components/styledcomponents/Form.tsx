@@ -40,3 +40,7 @@ export const TextArea = styled.textarea`
   height: 4rem;
   resize: none;
 `
+
+export const Checkbox = styled.input`
+  margin: 1rem;
+`

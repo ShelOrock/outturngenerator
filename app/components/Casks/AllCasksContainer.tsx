@@ -3,6 +3,7 @@ const { useEffect, useState } = React;
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
+import PageHeader from '../PageHeader/PageHeader';
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
 import AssociatedOutturn from './AssociatedOutturn';
@@ -28,6 +29,7 @@ export default () => {
 
   return (
     <div>
+      <PageHeader pageTitle='All Casks' />
       <BodyDiv>
         <CaskListDiv>
           {

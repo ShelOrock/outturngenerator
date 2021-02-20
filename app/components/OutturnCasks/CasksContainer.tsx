@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { useTypedSelector } from '../../utils';
 
+import PageHeader from '../PageHeader/PageHeader';
+import SubNavigation from '../Navigation/SubNavigation';
 import CaskList from './CaskList'
 import ActiveCask from './ActiveCask';
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Header },
-  StyledDiv: { BodyDiv, Column },
-  StyledLink: { LinkButton },
+  StyledDiv: { BodyDiv, Row, Column },
   StyledCask: { CaskListDiv },
 } = StyledComponents;
 
@@ -22,7 +22,7 @@ import * as thunks from '../../redux/thunks';
 const { activeOutturnThunks: { getActiveOutturn } } = thunks;
 
 import { createModalButton } from '../../buttonProps';
-import { createCaskModal } from '../../modalProps';
+import { createCaskModal, deleteManyCasksModalProps } from '../../modalProps';
 
 import { ParamTypes } from '../../types/index';
 
@@ -31,7 +31,7 @@ export default () => {
   const dispatch = useDispatch();
 
   const { outturnId } = useParams<ParamTypes>();
-  const { activeOutturn } = useTypedSelector(state => state);
+  const { activeOutturn, activeCask, markedCasks } = useTypedSelector(state => state);
 
   useEffect(() => {
     dispatch(getActiveOutturn(outturnId))
@@ -40,8 +40,22 @@ export default () => {
 
   return (
     <div>
-    <LinkButton to={ '/' }>Back</LinkButton>
-    <Header>{ activeOutturn.name }</Header>
+      <Column>
+        <SubNavigation link={ '/' } destination='Back' />
+        <Row justifyContent='space-between'>
+          <Row alignItems='center'>
+            <PageHeader pageTitle={ activeOutturn.name }/>
+            <ButtonManager
+              props={ createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) }
+            />
+          </Row>
+          <ButtonManager
+            variant='secondary'
+            disabled={ !markedCasks.length }
+            props={ createModalButton('X', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)) }
+          />
+        </Row>
+      </Column>
       <BodyDiv>
         <CaskListDiv>
           <Column>
@@ -49,9 +63,7 @@ export default () => {
           </Column>
         </CaskListDiv>
         <ActiveCask />
-        <ButtonManager props={ createModalButton('Add a cask', createCaskModal(activeOutturn.id)) } />
       </BodyDiv>
-
     </div>
   )
 }

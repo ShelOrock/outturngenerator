@@ -11,7 +11,8 @@ const {
     CaskListItemDiv,
     CaskListItemButton,
     CaskListItemFlavourPill
-  }
+  },
+  StyledForm: { Checkbox }
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -50,28 +51,30 @@ export default (props: any) => {
   return (
 
         <CaskListItemDiv flavourProfile= { assignColorPill(flavourProfile ) } ref={ props.innerRef }>
-          <Row alignItems='center'>
-            <Row alignItems='center' justifyContent='center'>
-              <Column>
-                <input
-                  type='checkbox'
-                  name={ id }
-                  checked={ markedCasks.includes(id) }
-                  onChange={ handleOnCheck }
-                />
-                <CaskListItemFlavourPill flavourProfile={ assignColorPill(flavourProfile) }/>
-              </Column>
+          <Column>
+            <Row alignItems='center' justifyContent='space-between'>
+              <Checkbox
+                type='checkbox'
+                name={ id }
+                checked={ markedCasks.includes(id) }
+                onChange={ handleOnCheck }
+              />
+              <ButtonManager
+                size='small'
+                variant='secondary'
+                props={ createModalButton('X', deleteCaskModal(activeCask, props.cask, activeOutturn.id)) }
+              />
             </Row>
-            <Row justifyContent='space-between' width='100%'>
+            <Row>
+              <CaskListItemFlavourPill flavourProfile={ assignColorPill(flavourProfile) }/>
               <CaskListItemButton flavourProfile={ assignColorPill(flavourProfile) } onClick={ () => dispatch(getActiveCask(id)) }>
                 <Column>
-                  <Subheader textAlign='left'>{ caskNumber ? `Cask No. ${ caskNumber }` : 'Untitled Cask' }</Subheader>
+                  <Subheader>{ caskNumber ? `Cask No. ${ caskNumber }` : 'Untitled Cask' }</Subheader>
                   <Body>{ name }</Body>
                 </Column>
               </CaskListItemButton>
-              <ButtonManager props={ createModalButton('X', deleteCaskModal(activeCask, props.cask, activeOutturn.id)) } />
             </Row>
-          </Row>
+          </Column>
         </CaskListItemDiv>
   )
 }

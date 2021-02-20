@@ -1,19 +1,14 @@
 import React from 'react';
 import { ThemeProvider, DefaultTheme } from 'styled-components';
 import 'styled-components';
+import { white } from 'chalk';
 
 const theme = {
   colors: {
     body: 'white',
     black: 'black',
-    white: 'white',
     gray: '#999',
-    button: {
-      text: '#000',
-      background: '#21A0A0'
-    },
     primary: '#21A0A0',
-    disabled: '#DDD',
     flavourProfiles: {
       ['Young & spritely']: '#DFAED1',
       ['Sweet, fruity & mellow']: '#BD72AC',
@@ -31,9 +26,40 @@ const theme = {
   },
   font: 'Roboto',
   fontSizes: {
+    title: '1.8em',
+    large: '1.5em',
+    medium: '1.2em',    
     small: '1em',
-    medium: '1.5em',
-    large: '2em',
+  },
+  buttons: {
+    colors: {
+      primary: {
+        background: '#21A0A0',
+        text: 'white'
+      },
+      secondary: {
+        background: 'white',
+        text: '#21A0A0'
+      },
+      disabled: {
+        background: '#DDD',
+        text: '#999'
+        },
+      default: {
+        background: '#21A0A0',
+        text: 'white'
+        }
+    },
+    size: {
+      default: {
+        padding: '1rem',
+        margin: '2rem'
+      },
+      small: {
+        padding: '1rem',
+        margin: '0rem'
+      }
+    }
   }
 };
 

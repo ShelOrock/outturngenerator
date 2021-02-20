@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components';
 
 interface ButtonProps {
+  size?: string;
   variant?: string;
-  disable?: boolean;
+  disabled?: boolean;
 };
 
 interface ButtonVariantColorProps {
@@ -37,30 +38,27 @@ export const ButtonContainer = styled.div`
   justify-content: center;
   align-items: center;
 `
-
 export const AllButtonStyles = css<ButtonProps>`
   text-align: center;
   border: none;
   border-radius: 3px;
   cursor: pointer;
-
+  padding: ${ ({ size, theme: { buttons } }) => buttons.size[size].padding };
+  margin: ${ ({ size, theme: { buttons } }) => buttons.size[size].margin };
+  background: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].background };
+  color: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].text };
 
   &:focus {
     outline: none;
   };
 `;
 
-
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button`
   ${ AllButtonStyles }
-  padding: 1rem 2rem;
-  margin: 2rem;
 `;
 
-export const SmallButton = styled.button<ButtonProps>`
+export const SmallButton = styled.button`
   ${ AllButtonStyles }
-  padding: 0.5rem;
-  margin: 1rem;
 `;
 
 export const ButtonDiv = styled.div`

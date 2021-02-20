@@ -6,7 +6,7 @@ import CaskSearch from '../CaskSearch/CaskSearch';
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const { 
-  StyledType: { Header, Subheader },
+  StyledType: { Header, Body },
   StyledDiv: { Column, Row },
   StyledForm: {
     InputModule,
@@ -43,7 +43,7 @@ export default () => {
                   return (
                     <div key={ idx }>
                       <Column alignItems='center'>
-                        <Subheader>{ inputText }</Subheader>
+                        <Body>{ inputText }</Body>
                         <InputModule>
                           <InputLabel>{ label }</InputLabel>
                           <InputField

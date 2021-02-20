@@ -11,6 +11,8 @@ export interface CaskListItem {
 }
 
 export interface ButtonProps {
+  size?: string;
+  variant?: string;
   disabled?: boolean;
   props: any;
 }

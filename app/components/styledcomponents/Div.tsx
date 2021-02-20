@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface DivProps {
   alignItems?: string;
@@ -17,16 +17,18 @@ export const MainDiv = styled.div`
   margin: 4rem 0 0;
 `;
 
-export const Row = styled.div<DivProps>`
+const RowsAndColumns = css<DivProps>`
   display: flex;
-  justify-content: ${ props => props.justifyContent };
-  align-items: ${ props => props.alignItems };
+  justify-content: ${ ({ justifyContent }) => justifyContent };
+  align-items: ${ ({ alignItems }) => alignItems };
+`;
+
+export const Row = styled.div`
+  ${ RowsAndColumns }
   width: ${ props => props.width || 'auto' };
 `;
 
-export const Column = styled.div<DivProps>`
-  display: flex;
+export const Column = styled.div`
+  ${ RowsAndColumns }
   flex-direction: column;
-  justify-content: ${ props => props.justifyContent };
-  align-items: ${ props => props.alignItems }
 `;

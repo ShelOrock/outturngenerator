@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store/index';
 import Root from './components/Root';
 import Theme from './theme';
-import { GlobalStyle } from './components/styledcomponents/GlobalStyles';
+import { GlobalStyle } from './components/styledcomponents/index';
 
 render(
   <Provider store={ store }>
