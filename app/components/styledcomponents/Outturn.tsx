@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const AllOutturnsContainer = styled.div`
-  width: 100%;
+  width: calc(100% - 2rem);
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

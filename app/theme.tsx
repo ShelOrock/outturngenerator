@@ -53,7 +53,7 @@ const theme = {
     size: {
       default: {
         padding: '1rem',
-        margin: '2rem'
+        margin: '1rem'
       },
       small: {
         padding: '1rem',

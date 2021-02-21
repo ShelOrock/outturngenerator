@@ -6,6 +6,7 @@ export const NavBar = styled.div`
   padding: 2rem;
   margin: 0;
   box-shadow: 0px 8px 15px #D5D5D5;
+  width: 100%;
 `
 
 export const NavLink = styled(Link)`
@@ -13,4 +14,10 @@ export const NavLink = styled(Link)`
   text-decoration:none;
   font-weight:bold;
   margin: 0 2rem;
+`
+
+export const LinkButton = styled(Link)`
+  margin: 1rem 2rem;
+  text-decoration: none;
+  color: inherit;
 `

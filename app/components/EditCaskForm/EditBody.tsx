@@ -11,7 +11,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header },
   StyledDiv: { MainDiv, Row },
-  StyledLink: { LinkButton },
+  StyledNavigation: { LinkButton },
   StyledForm: {
     InputModule,
     InputLabel,

@@ -4,18 +4,22 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../PageHeader/PageHeader';
+import ButtonManager from '../Button/ButtonManager';
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
 import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { BodyDiv, Column },
+  StyledDiv: { BodyDiv, Row, Column },
   StyledButton: { Button },
   StyledCask: { CaskListDiv },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
 const { markCaskActions: { resetMarkedCasks } } = actions;
+
+import { createCaskModal } from '../../modalProps';
+import { createModalButton } from '../../buttonProps';
 
 export default () => {
 
@@ -29,7 +33,10 @@ export default () => {
 
   return (
     <div>
-      <PageHeader pageTitle='All Casks' />
+        <PageHeader
+          pageTitle='All Casks'
+          addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal()) } }
+        />
       <BodyDiv>
         <CaskListDiv>
           {
@@ -39,7 +46,11 @@ export default () => {
           }
           {
             showMore < allCasks.length
-          ? <Button variant='secondary' disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }>Show More</Button>
+          ? <Button
+              size='default'
+              variant='secondary'
+              disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }
+            >Show More</Button>
           : null
           }
         </CaskListDiv>

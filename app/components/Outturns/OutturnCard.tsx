@@ -8,7 +8,6 @@ const {
   StyledType: { Header, Body },
   StyledCard: {
     CardContainer,
-    Card,
     CardImage,
   },
   StyledDiv: { Row },
@@ -37,7 +36,6 @@ export default ({ outturn }: OutturnCard) => {
 
   return (
     <CardContainer>
-      <Card>
         <Row justifyContent='space-between' alignItems='center'>
           <Checkbox
             type='checkbox'
@@ -57,7 +55,6 @@ export default ({ outturn }: OutturnCard) => {
             Insert image here.
           </CardImage>
         </LinkDiv>
-      </Card>
     </CardContainer>
   )
 };

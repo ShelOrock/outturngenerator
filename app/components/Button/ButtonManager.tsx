@@ -12,6 +12,7 @@ export default ({ size, variant, disabled, props }: ButtonProps) => {
   const { isLoading } = useTypedSelector(state => state)
 
   return (
+    props ?
     <Button
       size={ size || 'default' }
       disabled={ disabled || !!isLoading || false }
@@ -20,5 +21,6 @@ export default ({ size, variant, disabled, props }: ButtonProps) => {
     >
       { props.text }
     </Button>
+    : null
   )
 }

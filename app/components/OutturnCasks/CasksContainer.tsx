@@ -41,20 +41,16 @@ export default () => {
   return (
     <div>
       <Column>
-        <SubNavigation link={ '/' } destination='Back' />
-        <Row justifyContent='space-between'>
-          <Row alignItems='center'>
-            <PageHeader pageTitle={ activeOutturn.name }/>
-            <ButtonManager
-              props={ createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) }
-            />
-          </Row>
-          <ButtonManager
-            variant='secondary'
-            disabled={ !markedCasks.length }
-            props={ createModalButton('X', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id)) }
+        <SubNavigation link={ '/' } destination='< Back' />
+          <PageHeader
+            pageTitle={ activeOutturn.name }
+            addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) } }
+            deleteButtonProps={ {
+              variant: 'secondary',
+              disabled: !markedCasks.length,
+              onClickProps: createModalButton('X', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id))
+            } }
           />
-        </Row>
       </Column>
       <BodyDiv>
         <CaskListDiv>

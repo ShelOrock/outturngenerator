@@ -15,7 +15,7 @@ export const AllTypeStyles = css<TextPropTypes>`
 export const PageTitle = styled.h1`
   ${ AllTypeStyles }
   font-weight: bold;
-  margin: 2rem;
+  margin: 1rem;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.title };
 `
 

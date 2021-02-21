@@ -43,19 +43,15 @@ export default () => {
     <div>
       <Column>
         <SubNavigation link={null} destination='x'/>
-        <Row justifyContent='space-between'>
-          <Row alignItems='center'>
-            <PageHeader pageTitle='All Projects' />
-            <ButtonManager
-              variant='primary'
-              props={ createModalButton('+ New Project', createOutturnModalProps()) }
-            />
-          </Row>
-          <ButtonManager
-            variant='secondary'
-            disabled={ !markedOutturns.length }
-            props={ createModalButton('X', deleteManyOutturnsModalProps(markedOutturns)) } />
-        </Row>
+          <PageHeader
+            pageTitle='All Projects'
+            addButtonProps={ { onClickProps: createModalButton('+ New Project', createOutturnModalProps()) } }
+            deleteButtonProps={ {
+              variant: 'secondary',
+              disabled: !markedOutturns.length,
+              onClickProps: createModalButton('X', deleteManyOutturnsModalProps(markedOutturns))
+            } }
+          />
       </Column>
       <AllOutturnsContainer>
         {

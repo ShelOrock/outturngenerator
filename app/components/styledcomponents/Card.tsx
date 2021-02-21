@@ -14,10 +14,6 @@ export const CardContainer = styled.div`
   }
 `
 
-export const Card = styled.div`
-  width: 100%;
-`;
-
 export const CardImage = styled.div`
   width: 100%;
   padding: 1rem 1rem;

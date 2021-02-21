@@ -10,7 +10,7 @@ const {
     ListItem,
     ImageContainer,
   },
-  StyledLink: { LinkButton },
+  StyledNavigation: { LinkButton },
   StyledDiv: {
     MainDiv,
     Row,

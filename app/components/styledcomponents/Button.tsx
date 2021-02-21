@@ -6,33 +6,6 @@ interface ButtonProps {
   disabled?: boolean;
 };
 
-interface ButtonVariantColorProps {
-  background?: string;
-  color?: string;
-};
-
-const convertButtonVariantToColor = (variant: string): ButtonVariantColorProps => {
-  switch(variant) {
-    case 'primary': 
-      return {
-        background: '#21A0A0',
-        color: 'white'
-      };
-
-    case 'secondary':
-      return {
-        background: 'white',
-        color: '#21A0A0'
-      };
-
-    default:
-      return {
-        background: '#21A0A0',
-        color: 'white'
-      };
-  };
-};
-
 export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
