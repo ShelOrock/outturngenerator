@@ -55,8 +55,10 @@ export const assignColorPill = (string: string): string => {
   };
 };
 
-export const generateOutturn = (outturn: Outturn): string => {
-  return (
-    `<html></html>`
-  );
-};
+export const capitalizeString = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const convertFromCamelCaseToSentenceCase = (str: string): string => str.replace(/([A-Z])/g, " $1");
+
+export const generateOutturn = (outturn: Outturn): string => (
+  `<html></html>`
+);

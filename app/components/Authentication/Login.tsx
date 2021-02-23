@@ -1,7 +1,6 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import * as StyledComponents from '../styledcomponents/index';
@@ -32,7 +31,6 @@ export default () => {
 
   const { user } = useTypedSelector(state => state);
 
-  const dispatch = useDispatch();
   const history = useHistory();
   
   useEffect(() => {

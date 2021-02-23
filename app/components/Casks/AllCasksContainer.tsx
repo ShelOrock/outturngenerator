@@ -37,27 +37,27 @@ export default () => {
           pageTitle='All Casks'
           addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal()) } }
         />
-      <BodyDiv>
-        <CaskListDiv>
-          {
-            allCasks.length
-          ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } />)
-          : null
-          }
-          {
-            showMore < allCasks.length
-          ? <Button
-              size='default'
-              variant='secondary'
-              disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }
-            >Show More</Button>
-          : null
-          }
-        </CaskListDiv>
-      <Column>
-        <ActiveCask />
-        <AssociatedOutturn />
-      </Column>
+        <BodyDiv>
+          <CaskListDiv>
+            {
+              allCasks.length
+            ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } />)
+            : null
+            }
+            {
+              showMore < allCasks.length
+            ? <Button
+                size='default'
+                variant='secondary'
+                disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }
+              >Show More</Button>
+            : null
+            }
+          </CaskListDiv>
+        <Column>
+          <ActiveCask />
+          <AssociatedOutturn />
+        </Column>
       </BodyDiv>
     </div>
   )

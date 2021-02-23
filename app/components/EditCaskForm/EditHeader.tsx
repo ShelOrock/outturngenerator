@@ -6,32 +6,40 @@ const {
 } = React;
 import { useTypedSelector } from '../../utils';
 
+import SubNavigation from '../Navigation/SubNavigation';
+import PageHeader from '../PageHeader/PageHeader'
 import ButtonManager from '../Button/ButtonManager';
+import InputManager from '../Form/InputManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Header },
   StyledDiv: { MainDiv, Row },
   StyledNavigation: { LinkButton },
-  StyledForm: {
-    InputModule,
-    InputLabel,
-    InputField,
-  }
 } = StyledComponents
 
 import * as thunks from '../../redux/thunks';
 const { casksThunks: { editCask } } = thunks;
 
+import { editCaskInputProps } from '../../inputProps';
 import { createButton } from '../../buttonProps';
 
 import { InputOnChangeType, LocalReducerFunctionType } from '../../types/index';
 
 export default () => {
 
-  const { activeCask } = useTypedSelector(state => state); 
-  const [ isEdited, setIsEdited ] = useState(false);
+  const { activeCask, activeOutturn } = useTypedSelector(state => state); 
+  const {
+    id,
+    name,
+    caskNumber,
+    price
+  } = activeCask
+  const [ , setIsEdited ] = useState(false);
 
-  const initialState = { ...activeCask };
+  const initialState = {
+    name,
+    caskNumber,
+    price
+  };
   const reducer: LocalReducerFunctionType<typeof initialState> = (state, action) => {
     switch (action.name) {
       case `${ action.name }`:
@@ -45,13 +53,8 @@ export default () => {
   };
 
   const [ localState, dispatchLocally ] = useReducer(reducer, initialState)
-  const {
-    name,
-    caskNumber,
-    price,
-  } = localState;
 
-  useEffect(() => checkLocalStateEdit(activeCask, localState), [activeCask, localState])
+  useEffect(() => checkLocalStateEdit(initialState, localState), [activeCask, localState])
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
 
@@ -66,26 +69,18 @@ export default () => {
   }
 
   return (
-    <MainDiv>
-      <Header>Editing Cask { activeCask.caskNumber } { activeCask.name }</Header>
-      <Row>
-        <InputModule>
-            <InputLabel>Number</InputLabel>
-            <InputField type='text' name='caskNumber' value={ caskNumber } onChange={ handleOnChange } />
-          </InputModule>
-
-          <InputModule>
-            <InputLabel>Name</InputLabel>
-            <InputField type='text' name='name' value={ name } onChange={ handleOnChange } />
-          </InputModule>
-
-          <InputModule>
-            <InputLabel>Price</InputLabel>
-            <InputField type='text' name='price' value={ price } onChange={ handleOnChange } />
-          </InputModule>
+    <div>
+      <Row justifyContent='space-between'>
+        <SubNavigation link={ `/outturn/${ activeOutturn.id }` } destination='< Return to Cask List' />
+        <LinkButton to={ `/edit/${ id }/step2` }>{ 'Next >' }</LinkButton>
+      </Row>
+      <PageHeader pageTitle={ `Editing Cask no. ${ caskNumber } ${ name }`}/>
+      <MainDiv>
+        <Row>
+          { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
         </Row>
-      <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
-      <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>
-    </MainDiv>
+        <ButtonManager props={ createButton(editCask, 'Save', id, localState) } />
+      </MainDiv>
+    </div>
   )
 }

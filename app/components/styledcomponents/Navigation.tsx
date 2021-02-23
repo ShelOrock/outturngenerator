@@ -17,6 +17,7 @@ export const NavLink = styled(Link)`
 `
 
 export const LinkButton = styled(Link)`
+  display: block;
   margin: 1rem 2rem;
   text-decoration: none;
   color: inherit;

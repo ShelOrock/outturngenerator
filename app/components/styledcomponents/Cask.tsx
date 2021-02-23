@@ -36,19 +36,6 @@ export const CaskListItemButton = styled.div<CaskListItemFlavourPropTypes>`
   }
 `;
 
-export const AddCaskButton = styled.div`
-  box-shadow: 0px 4px 4px #D5D5D5;
-  width: 25vw;
-  padding: 1rem 0;
-  background: white;
-  transition: all 0.3s ease 0s;
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 0px 4px 4px #21A0A0;
-  }
-`;
-
 export const CaskListItemFlavourPill = styled.div<CaskListItemFlavourPropTypes>`
   background: ${ props => props.flavourProfile };
   width: 20px;
