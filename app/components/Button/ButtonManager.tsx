@@ -8,6 +8,7 @@ const { StyledButton: { Button } } = StyledComponents;
 import { ButtonProps } from '../../types/index';
 
 export default ({ size, variant, disabled, props }: ButtonProps) => {
+
   const dispatch = useDispatch();
   const { isLoading } = useTypedSelector(state => state)
 

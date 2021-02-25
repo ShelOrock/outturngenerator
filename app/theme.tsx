@@ -5,7 +5,7 @@ import { white } from 'chalk';
 
 const theme = {
   colors: {
-    body: 'white',
+    body: '#FAFAFF',
     black: 'black',
     gray: '#999',
     primary: '#21A0A0',
@@ -35,19 +35,28 @@ const theme = {
     colors: {
       primary: {
         background: '#21A0A0',
-        text: 'white'
+        text: 'white',
+        border: 'none',
       },
       secondary: {
         background: 'white',
-        text: '#21A0A0'
+        text: '#21A0A0',
+        border: '1px solid #21A0A0'
+      },
+      tertiary: {
+        background: 'white',
+        text: '#21A0A0',
+        border: 'none',
       },
       disabled: {
         background: '#DDD',
-        text: '#999'
+        text: '#999',
+        border: 'none'
         },
       default: {
         background: '#21A0A0',
-        text: 'white'
+        text: 'white',
+        border: 'none'
         }
     },
     size: {

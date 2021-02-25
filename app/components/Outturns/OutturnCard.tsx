@@ -45,7 +45,7 @@ export default ({ outturn }: OutturnCard) => {
           />
           <ButtonManager
             size='small'
-            variant='secondary'
+            variant='tertiary'
             props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
         </Row>
         <LinkDiv to={ `/outturn/${ id }`}>

@@ -6,7 +6,6 @@ import { useTypedSelector } from '../../utils';
 import PageHeader from '../PageHeader/PageHeader';
 import SubNavigation from '../Navigation/SubNavigation';
 import OutturnCard from './OutturnCard';
-import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledOutturn: { AllOutturnsContainer },
@@ -14,7 +13,7 @@ const {
     ButtonContainer,
     Button,
   },
-  StyledDiv: { Row, Column },
+  StyledDiv: { Column },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -42,14 +41,14 @@ export default () => {
   return (
     <div>
       <Column>
-        <SubNavigation link={null} destination='x'/>
+        <SubNavigation link={'/'} destination=''/>
           <PageHeader
             pageTitle='All Projects'
             addButtonProps={ { onClickProps: createModalButton('+ New Project', createOutturnModalProps()) } }
             deleteButtonProps={ {
-              variant: 'secondary',
+              variant: 'tertiary',
               disabled: !markedOutturns.length,
-              onClickProps: createModalButton('X', deleteManyOutturnsModalProps(markedOutturns))
+              onClickProps: createModalButton('X Delete Marked Outturns', deleteManyOutturnsModalProps(markedOutturns))
             } }
           />
       </Column>

@@ -14,6 +14,7 @@ export default ({ pageTitle, addButtonProps = {}, deleteButtonProps = {} }: any)
       { Object.keys(addButtonProps).length
       ? <ButtonManager 
             size={ addButtonProps.size }
+            disabled={ addButtonProps.disabled }
             variant={ addButtonProps.variant }
             props={ addButtonProps.onClickProps }
           />
@@ -23,6 +24,7 @@ export default ({ pageTitle, addButtonProps = {}, deleteButtonProps = {} }: any)
     { Object.keys(deleteButtonProps).length
     ? <ButtonManager
         size={ deleteButtonProps.size }
+        disabled={ deleteButtonProps.disabled }
         variant={ deleteButtonProps.variant }
         props={ deleteButtonProps.onClickProps }
         />

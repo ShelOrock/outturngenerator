@@ -12,7 +12,6 @@ import ButtonManager from '../Button/ButtonManager';
 import InputManager from '../Form/InputManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Header },
   StyledDiv: { MainDiv, Row },
   StyledNavigation: { LinkButton },
 } = StyledComponents
@@ -88,10 +87,7 @@ export default () => {
       </Row>
       <PageHeader pageTitle={ `Editing Cask no. ${ activeCask.caskNumber } ${ activeCask.name }`}/>
       <MainDiv>
-       <Header>Editing Cask { activeCask.caskNumber } { activeCask.name }</Header>
-        <Row>
-          { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
-        </Row>
+        { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
         <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
         <LinkButton to={ `/edit/${ activeCask.id }/step1` }>Back</LinkButton>
         <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>

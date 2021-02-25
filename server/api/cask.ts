@@ -8,10 +8,35 @@ import { Cask } from '../db/index';
 
 const router: express.Router = express.Router();
 
-router.get('/', (_req: Request, res: Response, next: NextFunction): void => {
+router.get('/', (req: Request, res: Response, next: NextFunction): void => {
+  let sortByProperty;
+  let sortMethod;
+  switch(req.query.sort_by) {
+    case 'ascending':
+      sortByProperty = 'caskNumber',
+      sortMethod = 'ASC'
+      break;
+    case 'descending': 
+      sortByProperty = 'caskNumber',
+      sortMethod = 'DESC'
+      break;
+    case 'newest': 
+      sortByProperty = 'updatedAt',
+      sortMethod = 'DESC'
+      break;
+    case 'oldest': 
+      sortByProperty = 'updatedAt',
+      sortMethod = 'ASC'
+      break;
+    default: 
+      sortByProperty = 'caskNumber',
+      sortMethod = 'ASC'
+      break;
+  }
+  
   Cask.findAll({
-    order: [
-      [ 'caskNumber', 'ASC' ]
+    order: [ 
+      [ sortByProperty, sortMethod ]
     ]
   })
   .then(casksOrNull => {
@@ -55,7 +80,6 @@ router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void =
 });
 
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
   Cask.create({ ...req.body })
   .then(createdCask => {
     res

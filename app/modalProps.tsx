@@ -18,20 +18,11 @@ const {
 import { ModalFunctionType, Cask, Outturn } from './types/index';
 
 export const createCaskModal: ModalFunctionType = (activeOutturnId: string) => ({
+  modalHeader: `Creating a new cask`,
   stateShape: {
     name: '',
     caskNumber: '',
   },
-  inputModules: [
-    {
-      inputText: 'Name this cask',
-      label: 'Name',
-    },
-    {
-      inputText: 'Number this cask',
-      label: 'Number',
-    },
-  ],
   confirmButton: {
     type: 'CREATE',
     text: 'Create cask',
@@ -46,20 +37,11 @@ export const createCaskModal: ModalFunctionType = (activeOutturnId: string) => (
 });
 
 export const createOutturnModalProps: ModalFunctionType = () => ({
+  modalHeader: `Creating a new outturn`,
   stateShape: {
     name: '',
     description: ''
   },
-  inputModules: [
-    {
-      inputText: 'Name this Outturn',
-      label: 'name',
-    },
-    {
-      inputText: 'Body text',
-      label: 'description',
-    }
-  ],
   confirmButton: {
     type: 'CREATE',
     text: 'Create outturn',

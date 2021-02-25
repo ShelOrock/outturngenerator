@@ -4,7 +4,7 @@ export const ModalContainer = styled.div`
   position: fixed;
   width: 50%;
   z-index: 500;
-  background: white;
+  background: ${ ({ theme }) => theme.colors.body };
   border: 1px solid #ddd;
   box-shadow: 1px 1px 1px black;
   padding: 1rem;

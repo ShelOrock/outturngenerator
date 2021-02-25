@@ -16,6 +16,6 @@ export interface LocalReducerActionType {
   value: string;
 }
 
-export type InputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+export type InputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
 
 export type ButtonOnClickType = (e: React.MouseEvent<HTMLButtonElement>) => void;

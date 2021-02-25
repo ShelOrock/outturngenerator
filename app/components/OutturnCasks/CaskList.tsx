@@ -87,8 +87,7 @@ export default () => {
                     { ...provided.draggableProps }
                     { ...provided.dragHandleProps }
                   >
-                    <CaskListItem cask={ {...cask, caskPosition: idx } }
-/>
+                    <CaskListItem cask={ {...cask, caskPosition: idx } } />
                   </div>
 
                 )}

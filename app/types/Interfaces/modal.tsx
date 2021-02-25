@@ -3,11 +3,6 @@ import * as React from 'react';
 import { AppThunk } from '../index';
 import { ActionTypes } from '../index';
 
-export interface ModalInputModule {
-  inputText: string;
-  label: string;
-}
-
 export interface CreateCaskModalState {
   name: string;
   caskNumber: string;
@@ -32,7 +27,6 @@ export interface ModalButton {
 export interface Modal<stateShapeTypes = CreateCaskModalState | CreateOutturnModalState> {
   modalHeader?: string;
   stateShape?: stateShapeTypes;
-  inputModules?: ModalInputModule[];
   confirmButton?: ModalButton;
   cancelButton?: ModalButton;
 }

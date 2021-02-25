@@ -13,9 +13,9 @@ export const ButtonContainer = styled.div`
 `
 export const AllButtonStyles = css<ButtonProps>`
   text-align: center;
-  border: none;
-  border-radius: 3px;
   cursor: pointer;
+  border: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].border};
+  border-radius: 3px;
   padding: ${ ({ size, theme: { buttons } }) => buttons.size[size].padding };
   margin: ${ ({ size, theme: { buttons } }) => buttons.size[size].margin };
   background: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].background };

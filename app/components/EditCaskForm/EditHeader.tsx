@@ -33,7 +33,7 @@ export default () => {
     caskNumber,
     price
   } = activeCask
-  const [ , setIsEdited ] = useState(false);
+  const [ isEdited, setIsEdited ] = useState(false);
 
   const initialState = {
     name,
@@ -76,10 +76,8 @@ export default () => {
       </Row>
       <PageHeader pageTitle={ `Editing Cask no. ${ caskNumber } ${ name }`}/>
       <MainDiv>
-        <Row>
-          { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
-        </Row>
-        <ButtonManager props={ createButton(editCask, 'Save', id, localState) } />
+        { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
+        <ButtonManager disabled={ !isEdited } props={ createButton(editCask, 'Save', id, localState) } />
       </MainDiv>
     </div>
   )

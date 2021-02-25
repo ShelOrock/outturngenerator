@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const CardContainer = styled.div`
+  background-color: white;
   display: flex;
   flex-direction: column;
   width: calc(100% / 4 - 2rem);

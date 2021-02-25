@@ -4,17 +4,15 @@ import { useTypedSelector } from '../../utils';
 
 import CaskSearch from '../CaskSearch/CaskSearch';
 import ButtonManager from '../Button/ButtonManager';
+import InputManager from '../Form/InputManager';
 import * as StyledComponents from '../styledcomponents/index';
 const { 
-  StyledType: { Header, Body },
+  StyledType: { Header, Subheader },
   StyledDiv: { Column, Row },
-  StyledForm: {
-    InputModule,
-    InputLabel,
-    InputField
-  },
   StyledModal: { ModalContainer }
 } = StyledComponents;
+
+import { editCaskInputProps } from '../../inputProps';
 
 export default () => {
 
@@ -22,6 +20,8 @@ export default () => {
   const [ localModalState, setLocalModalState ] = useState({ ...modal.stateShape })
 
   useEffect(() => setLocalModalState({ ...modal.stateShape }), [modal])
+
+  const handleOnChange = ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value })
 
   return (
     <div>
@@ -31,36 +31,16 @@ export default () => {
           <ModalContainer>
             { modal.modalHeader ? <Header>{ modal.modalHeader }</Header> : null }
             {
-              modal.inputModules
-              && modal.inputModules.length
-              && localModalState
+              localModalState
               && Object.keys(localModalState)
               && modal.confirmButton
               && modal.cancelButton
-              ? (
-                modal.inputModules.map(({ inputText, label }, idx) => {
-                  let stateKey = Object.keys(localModalState)[idx]
-                  return (
-                    <div key={ idx }>
-                      <Column alignItems='center'>
-                        <Body>{ inputText }</Body>
-                        <InputModule>
-                          <InputLabel>{ label }</InputLabel>
-                          <InputField
-                            type='text'
-                            name={ stateKey }
-                            value={ localModalState[stateKey] || '' }
-                            onChange={ ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value }) }/>
-                        </InputModule>
-                      </Column>
-                    </div>
-                  );
-                })
-              ) : null
+              ? editCaskInputProps(handleOnChange, localModalState).map((input, idx) => <InputManager key={ idx } props= { input } />)
+              : null
             }
-            <Row>
-              <ButtonManager props={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] } }/>
-              <ButtonManager props={ modal.cancelButton } />
+            <Row justifyContent='space-evenly'>
+              <ButtonManager variant='primary' props={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] } }/>
+              <ButtonManager variant='secondary' props={ modal.cancelButton } />
             </Row>
           </ModalContainer>
         ): null

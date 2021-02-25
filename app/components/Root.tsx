@@ -14,7 +14,6 @@ import ModalManager from './Modal/ModalManager';
 import Toast from './Toast/Toast';
 
 import * as thunks from '../redux/thunks';
-import SubNavigation from './Navigation/SubNavigation';
 const {
   outturnsThunks: { getOutturns },
   casksThunks: { getCasks },

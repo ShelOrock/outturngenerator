@@ -11,10 +11,6 @@ export const CaskList = styled.div`
   margin: 0 0 0 2rem;
 `
 
-export const CaskListDiv = styled.div`
-  margin: 0 6rem 0 0;
-`
-
 export const CaskListItemDiv = styled.div<CaskListItemFlavourPropTypes>`
   box-shadow: 0px 8px 15px #D5D5D5;
   width: 25vw;
@@ -38,8 +34,7 @@ export const CaskListItemButton = styled.div<CaskListItemFlavourPropTypes>`
 
 export const CaskListItemFlavourPill = styled.div<CaskListItemFlavourPropTypes>`
   background: ${ props => props.flavourProfile };
-  width: 20px;
-  padding: 35px 0;
+  padding: 35px 10px;
 `
 
 export const ActiveCaskHeader = styled.div<FlavourStrip>`
@@ -53,18 +48,6 @@ export const FlavourStrip = styled.div<FlavourStrip>`
   padding: 0.5rem 0rem;
   color: white;
   margin: 1rem 0 0;
-`
-
-export const List = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  margin: 1rem 0.5rem 1rem 0;
-  padding: 0;
-`
-
-export const ListItem = styled.li`
-  margin: 0.5rem 0;
 `
 
 export const ImageContainer = styled.div`
