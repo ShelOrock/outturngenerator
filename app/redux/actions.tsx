@@ -21,6 +21,6 @@ export {
   userActions,
   modalActions,
   toastActions,
-  loadingActions
+  loadingActions,
 }
 

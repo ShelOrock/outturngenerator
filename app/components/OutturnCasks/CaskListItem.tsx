@@ -62,7 +62,7 @@ export default (props: any) => {
               <ButtonManager
                 size='small'
                 variant='tertiary'
-                props={ createModalButton('X', deleteCaskModal(activeCask, props.cask, activeOutturn.id)) }
+                props={ createModalButton('X', deleteCaskModal(activeCask, props.cask, activeOutturn.id, props.sortMethod)) }
               />
             </Row>
             <Row>

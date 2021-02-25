@@ -21,22 +21,24 @@ const { markCaskActions: { resetMarkedCasks } } = actions;
 import * as thunks from '../../redux/thunks';
 const { casksThunks: { getCasks } } = thunks;
 
-import { createCaskModal, deleteManyCasksModalProps } from '../../modalProps';
+import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
 import { createModalButton } from '../../buttonProps';
-import { InputOnChangeType } from '../../types';
 
 export default () => {
 
   const dispatch = useDispatch();
+  const [ sort, setSort ] = useState('ascending');
   const [ showMore, setShowMore ] = useState(12);
-  const [ selected, setSelected ] = useState('ascending');
-  const { allCasks, activeCask, markedCasks, isLoading } = useTypedSelector(state => state);
+  const {
+    allCasks,
+    activeCask,
+    markedCasks,
+    isLoading,
+  } = useTypedSelector(state => state);
   
   useEffect(() => { dispatch(resetMarkedCasks()) }, [])
 
-  useEffect(() => { dispatch(getCasks(selected)) }, [selected])
-
-  const handleDropDownSelect: InputOnChangeType = e => setSelected(e.target.value);
+  useEffect(() => { dispatch(getCasks(sort)) }, [sort]);
 
   return (
     <div>
@@ -45,14 +47,14 @@ export default () => {
         pageTitle='All Casks'
         addButtonProps={ {
           variant: 'primary',
-          onClickProps: createModalButton('+ Add a cask', createCaskModal()) 
+          onClickProps: createModalButton('+ Add a cask', createCaskModal(null, sort)) 
         } }
         deleteButtonProps={ {
           variant: 'secondary',
-          onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModalProps(markedCasks, activeCask))
+          onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
         } }
       />
-      <select id='sortBy' name='sortBy' value={ selected } onChange={ e => handleDropDownSelect(e) }>
+      <select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
         <option value='ascending'>Ascending</option>
         <option value='descending'>Descending</option>
         <option value='newest'>Newest</option>
@@ -62,7 +64,7 @@ export default () => {
         <CaskList>
           {
             allCasks.length
-          ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } />)
+          ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } sortMethod={ sort }/>)
           : null
           }
           {

@@ -25,45 +25,46 @@ export const getCasks: ThunkFunctionType = sortBy => {
   };
 };
 
-export const addNewCask: ThunkFunctionType = (outturnId, cask) => {
+export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, cask) => {
+  console.log(sortBy)
   return dispatch => {
     dispatch(setLoading(true));
     axios
       .post(`${ API_URL }`, { outturnId: outturnId, ...cask })
       .then(res => {
+        if(outturnId) dispatch(getActiveOutturn(outturnId));
         dispatch(addToast({
           id: 0,
           status: 'SUCCESS',
           message: res.data.message
         }))
         dispatch(resetModal());
-        dispatch(getCasks());
+        dispatch(getCasks(sortBy));
         dispatch(getActiveCask(res.data.createdCask.id));
-        if(outturnId) dispatch(getActiveOutturn(outturnId));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId) => {
+export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sortBy) => {
   return dispatch => {
     dispatch(setLoading(true))
     axios
       .delete(`${ API_URL }${ caskId }`)
       .then(() => {
-        if (activeCaskId === caskId) dispatch(setActiveCask({}));
+        if(activeCaskId === caskId) dispatch(setActiveCask({}));
+        if(outturnId) dispatch(getActiveOutturn(outturnId));
         dispatch(unmarkCask(caskId))
         dispatch(resetModal());
-        dispatch(getCasks());
-        dispatch(getActiveOutturn(outturnId));
+        dispatch(getCasks(sortBy));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId) => {
+export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId, sortBy) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -77,7 +78,7 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
         if (markedCasks.includes(activeCaskId)) dispatch(setActiveCask({}));
         dispatch(resetMarkedCasks());
         dispatch(resetModal());
-        dispatch(getCasks());
+        dispatch(getCasks(sortBy));
         dispatch(resetActiveCask())
         if (outturnId) dispatch(getActiveOutturn(outturnId));
       })

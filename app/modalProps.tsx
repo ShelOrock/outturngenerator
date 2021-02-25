@@ -17,7 +17,7 @@ const {
 
 import { ModalFunctionType, Cask, Outturn } from './types/index';
 
-export const createCaskModal: ModalFunctionType = (activeOutturnId: string) => ({
+export const createCaskModal: ModalFunctionType = (activeOutturnId: string, sortMethod: string) => ({
   modalHeader: `Creating a new cask`,
   stateShape: {
     name: '',
@@ -26,7 +26,7 @@ export const createCaskModal: ModalFunctionType = (activeOutturnId: string) => (
   confirmButton: {
     type: 'CREATE',
     text: 'Create cask',
-    arguments: [ activeOutturnId ],
+    arguments: [ activeOutturnId, sortMethod ],
     onClickFunction: addNewCask,
   },
   cancelButton: {
@@ -55,12 +55,12 @@ export const createOutturnModalProps: ModalFunctionType = () => ({
   }
 });
 
-export const deleteCaskModal: ModalFunctionType = (activeCask: Cask, cask: Cask, activeOutturnId: string) => ({
+export const deleteCaskModal: ModalFunctionType = (activeCask: Cask, cask: Cask, activeOutturnId: string, sortMethod: string) => ({
   modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
   confirmButton: {
     type: 'DELETE',
     text: `Delete Cask no. ${ cask.caskNumber }`,
-    arguments: [ activeCask.id, cask.id, activeOutturnId ],
+    arguments: [ activeCask.id, cask.id, activeOutturnId, sortMethod ],
     onClickFunction: deleteCask
   },
   cancelButton: {
@@ -71,12 +71,12 @@ export const deleteCaskModal: ModalFunctionType = (activeCask: Cask, cask: Cask,
 })
 
 
-export const deleteManyCasksModalProps: ModalFunctionType = (markedCasks: string[], activeCaskId: string, activeOutturnId: string) => ({
+export const deleteManyCasksModal: ModalFunctionType = (markedCasks: string[], activeCaskId: string, activeOutturnId: string, sortMethod: string) => ({
   modalHeader: 'Are you sure you want to delete these casks?',
   confirmButton: {
     type: 'DELETE',
     text: 'Delete Casks',
-    arguments: [ markedCasks, activeCaskId, activeOutturnId ],
+    arguments: [ markedCasks, activeCaskId, activeOutturnId, sortMethod ],
     onClickFunction: deleteManyCasks,
   },
   cancelButton: {

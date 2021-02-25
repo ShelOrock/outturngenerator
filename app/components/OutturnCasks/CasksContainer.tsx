@@ -20,7 +20,7 @@ import * as thunks from '../../redux/thunks';
 const { activeOutturnThunks: { getActiveOutturn } } = thunks;
 
 import { createModalButton } from '../../buttonProps';
-import { createCaskModal, deleteManyCasksModalProps } from '../../modalProps';
+import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
 
 import { ParamTypes } from '../../types/index';
 
@@ -46,7 +46,7 @@ export default () => {
             deleteButtonProps={ {
               variant: 'tertiary',
               disabled: !markedCasks.length,
-              onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModalProps(markedCasks, activeCask.id, activeOutturn.id))
+              onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
             } }
           />
       </Column>
