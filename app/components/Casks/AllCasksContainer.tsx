@@ -12,6 +12,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledDiv: { BodyDiv, Column },
   StyledButton: { Button },
+  StyledForm: { Select },
   StyledCask: { CaskList },
 } = StyledComponents;
 
@@ -54,12 +55,12 @@ export default () => {
           onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
         } }
       />
-      <select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
+      <Select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
         <option value='ascending'>Ascending</option>
         <option value='descending'>Descending</option>
         <option value='newest'>Newest</option>
         <option value='oldest'>Oldest</option>
-      </select>
+      </Select>
       <BodyDiv>
         <CaskList>
           {

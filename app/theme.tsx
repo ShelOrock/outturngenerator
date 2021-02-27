@@ -8,6 +8,7 @@ const theme = {
     body: '#FAFAFF',
     black: 'black',
     gray: '#999',
+    lightgray: '#DDD',
     primary: '#21A0A0',
     flavourProfiles: {
       ['Young & spritely']: '#DFAED1',

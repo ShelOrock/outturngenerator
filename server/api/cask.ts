@@ -123,6 +123,37 @@ router.put('/:caskId', (req: Request, res: Response, next: NextFunction) => {
   })
 })
 
+router.post('/edit-many', (req: Request, res: Response, next: NextFunction) => {
+  const reorderedCaskIds = req.body.casks.map(cask => cask.id);
+  Cask.findAll({
+    where: {
+      id: [ ...reorderedCaskIds ]
+    }
+  })
+  .then(casksOrNull => {
+    if(!casksOrNull) {
+      res
+        .status(404)
+        .send()
+    } else {
+      casksOrNull.forEach(cask => {
+        cask.update({ caskPosition: reorderedCaskIds.indexOf(cask.id) })
+      })
+    }
+  })
+  .then(() => {
+    res
+      .status(201)
+      .send()
+  })
+  .catch(e => {
+    res
+      .status(500)
+      .send();
+    next(e);
+  })
+})
+
 router.delete('/:caskId', (req: Request, res: Response, next: NextFunction) => {
   Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {

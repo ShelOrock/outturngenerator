@@ -7,7 +7,13 @@ const {
   StyledDiv: { Row }
 } = StyledComponents;
 
-export default ({ pageTitle, addButtonProps = {}, deleteButtonProps = {} }: any) =>(
+export default ({
+  pageTitle,
+  addButtonProps = {},
+  sortProps = {},
+  filterProps = {},
+  deleteButtonProps = {}
+}: any) => (
   <Row justifyContent='space-between'>
     <Row alignItems='center'>
       <PageTitle>{ pageTitle }</PageTitle>
@@ -21,6 +27,7 @@ export default ({ pageTitle, addButtonProps = {}, deleteButtonProps = {} }: any)
       : null
       }
     </Row>
+
     { Object.keys(deleteButtonProps).length
     ? <ButtonManager
         size={ deleteButtonProps.size }

@@ -17,4 +17,5 @@ export const FlavourPill = styled.div<FlavourPillPropTypes>`
 
 export const SmallFlavourPill = styled.div`
   ${ FlavourPillStyles }
+  
 `;

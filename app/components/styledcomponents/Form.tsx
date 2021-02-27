@@ -44,3 +44,17 @@ export const TextArea = styled.textarea`
 export const Checkbox = styled.input`
   margin: 1rem;
 `
+
+export const Select = styled.select`
+  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
+  color: ${ ({ theme: { colors } }) => colors.primary };
+  border: none;
+  padding: 1rem;
+`;
+
+export const Option = styled.option`
+  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
+  color: ${ ({ theme: { colors } }) => colors.primary };
+  padding: 1rem;
+  border: 1px solid black;
+`

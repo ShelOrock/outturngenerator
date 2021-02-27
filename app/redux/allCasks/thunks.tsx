@@ -26,7 +26,6 @@ export const getCasks: ThunkFunctionType = sortBy => {
 };
 
 export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, cask) => {
-  console.log(sortBy)
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -42,6 +41,32 @@ export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, cask) =
         dispatch(getCasks(sortBy));
         dispatch(getActiveCask(res.data.createdCask.id));
       })
+      .catch(e => console.error(e))
+      .finally(() => dispatch(setLoading(false)));
+  };
+};
+
+export const editCask: ThunkFunctionType = (caskId, cask) => {
+  return dispatch => {
+    dispatch(setLoading(true));
+    axios
+      .put(`${ API_URL }${ caskId }`, { ...cask })
+      .then(() => {
+        dispatch(getCasks());
+        dispatch(getActiveCask(caskId));
+      })
+      .catch(e => console.error(e))
+      .finally(() => dispatch(setLoading(false)));
+  };
+};
+
+export const editManyCasks: ThunkFunctionType = (outturnId, casks) => {
+  console.log({casks})
+  return dispatch => {
+    dispatch(setLoading(true));
+    axios
+      .post(`${ API_URL }edit-many`, { casks })
+      .then(() => dispatch(getActiveOutturn(outturnId)))
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
@@ -85,19 +110,4 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   }
-};
-
-export const editCask: ThunkFunctionType = (caskId, cask) => {
-  console.log({cask}, {position: cask.caskPosition})
-  return dispatch => {
-    dispatch(setLoading(true));
-    axios
-      .put(`${ API_URL }${ caskId }`, { ...cask })
-      .then(() => {
-        dispatch(getCasks());
-        dispatch(getActiveCask(caskId));
-      })
-      .catch(e => console.error(e))
-      .finally(() => dispatch(setLoading(false)));
-  };
 };

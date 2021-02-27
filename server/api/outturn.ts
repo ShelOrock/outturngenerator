@@ -40,7 +40,7 @@ router.get('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
         model: Cask,
       }],
       order: [
-        [ Cask, 'updatedAt', 'ASC' ],
+        [ Cask, 'caskPosition', 'ASC' ],
       ]
     })
   .then(outturnOrNull => {
