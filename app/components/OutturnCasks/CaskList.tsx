@@ -5,9 +5,11 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useTypedSelector, generateOutturn } from "../../utils";
 
 import CaskListItem from "./CaskListItem";
+import ActiveCask from './ActiveCask';
 import ButtonManager from "../Button/ButtonManager";
 import * as StyledComponents from "../styledcomponents/index";
 const {
+  StyledDiv: { Column, Row },
   StyledCask: { CaskList },
   StyledForm: { Checkbox },
 } = StyledComponents;
@@ -31,15 +33,12 @@ export default () => {
 
   const { activeOutturn, markedCasks } = useTypedSelector((state) => state);
   const { casks } = activeOutturn;
-  const [localCaskOrder, setLocalCaskOrder] = useState(casks);
+  const [ localCaskOrder, setLocalCaskOrder ] = useState(casks);
+  const [ isEdited, setIsEdited ] = useState(false);
 
-  useEffect(() => {
-    dispatch(resetMarkedCasks());
-  }, []);
-
-  useEffect(() => setLocalCaskOrder(casks ? casks.map((cask) => cask) : []), [
-    casks,
-  ]);
+  useEffect(() => { dispatch(resetMarkedCasks()) }, []);
+  useEffect(() => setLocalCaskOrder(casks ? casks.map((cask) => cask) : []), [casks]);
+  useEffect(() => checkLocalStateHasChanged(casks, localCaskOrder), [casks, localCaskOrder])
 
   const handleAllCasksOnCheck: InputOnChangeType = () => {
     if (markedCasks.length === casks.length) dispatch(unmarkAllCasks());
@@ -51,11 +50,11 @@ export default () => {
     if (result.destination.index === result.source.index) return;
 
     const reorderCasks = (list, startIndex, endIndex) => {
+      let listCopy = [...list]
       const element = list[startIndex];
-      list.splice(startIndex, 1);
-      list.splice(endIndex, 0, element);
-
-      return list;
+      listCopy.splice(startIndex, 1);
+      listCopy.splice(endIndex, 0, element);
+      return listCopy;
     };
 
     const reorderedCasks = reorderCasks(
@@ -64,39 +63,54 @@ export default () => {
       result.destination.index
     );
 
-    console.log({reorderedCasks})
     setLocalCaskOrder(reorderedCasks);
   };
 
-  useEffect(() => console.log({ localCaskOrder }), [localCaskOrder]);
+  const checkLocalStateHasChanged = (previousCaskOrder, currentCaskOrder) => {
+    setIsEdited(false);
+
+    if(currentCaskOrder) {
+      currentCaskOrder.forEach((item, idx) => {
+        if(previousCaskOrder[idx] !== currentCaskOrder[idx]) setIsEdited(true);
+      })
+    }
+  }
 
   return (
-    <CaskList>
-      <Checkbox
-        type="checkbox"
-        checked={casks && casks.length && casks.length === markedCasks.length}
-        onChange={handleAllCasksOnCheck}
-      />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="list">
-          {provided => (
-            <div ref={provided.innerRef} {...provided.droppableProps}>
-              {localCaskOrder
-                ? localCaskOrder.map((cask, idx) => <CaskListItem key={cask.id} index={idx} cask={cask} />)
-                : null}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-      <ButtonManager
-        variant="primary"
-        props={ createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder) }
-      />
-      <ButtonManager
-        variant="primary"
-        props={ createButton(generateOutturn(activeOutturn), "Generate Outturn") }
-      />
-    </CaskList>
+    <Column justifyContent='center'>
+      <Row alignItems='center'>
+        <Checkbox
+          type="checkbox"
+          checked={casks && casks.length && casks.length === markedCasks.length}
+          onChange={handleAllCasksOnCheck}
+        />
+        <ButtonManager
+          variant="primary"
+          disabled={ !isEdited }
+          props={ createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder) }
+        />
+      </Row>
+      <Row>
+        <CaskList>
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="list">
+              {provided => (
+                <div ref={provided.innerRef} {...provided.droppableProps}>
+                  {localCaskOrder
+                    ? localCaskOrder.map((cask, idx) => <CaskListItem key={cask.id} index={idx} cask={cask} />)
+                    : null}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
+          <ButtonManager
+            variant="primary"
+            props={ createButton(generateOutturn(activeOutturn), "Generate Outturn") }
+          />
+        </CaskList>
+        <ActiveCask />
+      </Row>
+    </Column>
   );
 };

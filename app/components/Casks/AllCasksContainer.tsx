@@ -10,7 +10,7 @@ import ActiveCask from '../OutturnCasks/ActiveCask';
 import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { BodyDiv, Column },
+  StyledDiv: { Column, Row },
   StyledButton: { Button },
   StyledForm: { Select },
   StyledCask: { CaskList },
@@ -61,7 +61,6 @@ export default () => {
         <option value='newest'>Newest</option>
         <option value='oldest'>Oldest</option>
       </Select>
-      <BodyDiv>
         <CaskList>
           {
             allCasks.length
@@ -82,7 +81,6 @@ export default () => {
         <ActiveCask />
         <AssociatedOutturn />
       </Column>
-    </BodyDiv>
   </div>
   )
 }

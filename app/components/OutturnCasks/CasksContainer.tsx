@@ -7,10 +7,9 @@ import { useTypedSelector } from '../../utils';
 import PageHeader from '../PageHeader/PageHeader';
 import SubNavigation from '../Navigation/SubNavigation';
 import CaskList from './CaskList'
-import ActiveCask from './ActiveCask';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { BodyDiv, Column },
+  StyledDiv: { Column, Row },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -37,23 +36,21 @@ export default () => {
   }, []);
 
   return (
-    <div>
+    <Column>
       <Column>
         <SubNavigation link={ '/' } destination='< Back' />
-          <PageHeader
-            pageTitle={ activeOutturn.name }
-            addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) } }
-            deleteButtonProps={ {
-              variant: 'tertiary',
-              disabled: !markedCasks.length,
-              onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
-            } }
-          />
+        <PageHeader
+          pageTitle={ activeOutturn.name }
+          addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) } }
+          deleteButtonProps={ {
+            variant: 'tertiary',
+            disabled: !markedCasks.length,
+            onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
+          } }
+        />
       </Column>
-      <BodyDiv>
-        <CaskList />
-        <ActiveCask />
-      </BodyDiv>
-    </div>
+      <CaskList />
+    </Column>
+
   )
 }

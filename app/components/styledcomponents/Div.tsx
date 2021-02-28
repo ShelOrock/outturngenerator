@@ -6,15 +6,9 @@ interface DivProps {
   width?: string;
 }
 
-export const BodyDiv = styled.div`
-  display: flex;
-`
-
 export const MainDiv = styled.div`
-  display: block;
   box-shadow: 0px 8px 15px #D5D5D5;
   background: white;
-  margin: 4rem 6rem 0;
 `;
 
 const RowsAndColumns = css<DivProps>`

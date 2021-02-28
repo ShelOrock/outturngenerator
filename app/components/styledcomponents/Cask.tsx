@@ -7,8 +7,7 @@ interface CaskListItemFlavourPropTypes {
 interface FlavourStrip extends CaskListItemFlavourPropTypes {};
 
 export const CaskList = styled.div`
-  width: 20vw;
-  margin: 0 0 0 2rem;
+  margin: 0 2rem;
 `
 
 export const CaskListItemDiv = styled.div<CaskListItemFlavourPropTypes>`

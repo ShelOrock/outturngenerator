@@ -27,14 +27,12 @@ import { deleteCaskModal } from "../../modalProps";
 
 import { InputOnChangeType } from "../../types/index";
 
-export default (props: any) => {
+export default ({ cask, index, innerRef, sortMethod }: any) => {
   const dispatch = useDispatch();
 
   const { markedCasks, activeOutturn, activeCask } = useTypedSelector(
     (state) => state
   );
-
-  const { id, name, caskNumber, flavourProfile } = props.cask;
 
   const handleOnCheck: InputOnChangeType = (e) => {
     if (markedCasks.includes(e.target.name))
@@ -43,7 +41,7 @@ export default (props: any) => {
   };
 
   return (
-    <Draggable draggableId={props.cask.id} index={props.index}>
+    <Draggable draggableId={ cask.id } index={ index }>
       {(provided) => (
         <div
           ref={provided.innerRef}
@@ -51,15 +49,15 @@ export default (props: any) => {
           {...provided.dragHandleProps}
         >
           <CaskListItemDiv
-            flavourProfile={assignColorPill(flavourProfile)}
-            ref={props.innerRef}
+            flavourProfile={assignColorPill(cask.flavourProfile)}
+            ref={innerRef}
           >
             <Column>
               <Row alignItems="center" justifyContent="space-between">
                 <Checkbox
                   type="checkbox"
-                  name={id}
-                  checked={markedCasks.includes(id)}
+                  name={cask.id}
+                  checked={markedCasks.includes(cask.id)}
                   onChange={handleOnCheck}
                 />
                 <ButtonManager
@@ -69,26 +67,26 @@ export default (props: any) => {
                     "X",
                     deleteCaskModal(
                       activeCask,
-                      props.cask,
+                      cask,
                       activeOutturn.id,
-                      props.sortMethod
+                      sortMethod
                     )
                   )}
                 />
               </Row>
               <Row>
                 <CaskListItemFlavourPill
-                  flavourProfile={assignColorPill(flavourProfile)}
+                  flavourProfile={assignColorPill(cask.flavourProfile)}
                 />
                 <CaskListItemButton
-                  flavourProfile={assignColorPill(flavourProfile)}
-                  onClick={() => dispatch(getActiveCask(id))}
+                  flavourProfile={assignColorPill(cask.flavourProfile)}
+                  onClick={() => dispatch(getActiveCask(cask.id))}
                 >
                   <Column>
                     <Subheader>
-                      {caskNumber ? `Cask No. ${caskNumber}` : "Untitled Cask"}
+                      {cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask"}
                     </Subheader>
-                    <Body>{name}</Body>
+                    <Body>{cask.name}</Body>
                   </Column>
                 </CaskListItemButton>
               </Row>
