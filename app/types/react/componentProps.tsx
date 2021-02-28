@@ -3,6 +3,7 @@ import { Outturn, Cask } from '../index';
 export interface OutturnCard {
   key: string;
   outturn: Outturn;
+  sortMethod: string;
 };
 
 export interface CaskListItem {

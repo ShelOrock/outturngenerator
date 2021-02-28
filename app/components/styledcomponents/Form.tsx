@@ -46,10 +46,13 @@ export const Checkbox = styled.input`
 `
 
 export const Select = styled.select`
+  width: 125px;
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };
   color: ${ ({ theme: { colors } }) => colors.primary };
   border: none;
+  border-radius: 3px;
   padding: 1rem;
+  margin: 0 2rem;
 `;
 
 export const Option = styled.option`

@@ -4,12 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { useTypedSelector } from '../../utils';
 
-import PageHeader from '../PageHeader/PageHeader';
-import SubNavigation from '../Navigation/SubNavigation';
+import PageHeader from '../Header/PageHeader';
 import CaskList from './CaskList'
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { Column, Row },
+  StyledDiv: { Column },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -37,18 +36,23 @@ export default () => {
 
   return (
     <Column>
-      <Column>
-        <SubNavigation link={ '/' } destination='< Back' />
         <PageHeader
-          pageTitle={ activeOutturn.name }
-          addButtonProps={ { onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id)) } }
-          deleteButtonProps={ {
-            variant: 'tertiary',
-            disabled: !markedCasks.length,
-            onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
+          subNavigationProps={ {
+            link: '/',
+            destination: '< Back'
+          } }
+          toolbarProps={ {
+            pageTitle: activeOutturn.name,
+            addButtonProps: {
+              onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id))
+            },
+            deleteButtonProps: {
+              variant: 'tertiary',
+              disabled: !markedCasks.length,
+              onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
+            }
           } }
         />
-      </Column>
       <CaskList />
     </Column>
 

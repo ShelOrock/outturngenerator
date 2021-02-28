@@ -23,7 +23,7 @@ import { createModalButton } from '../../buttonProps';
 
 import { OutturnCard, InputOnChangeType } from '../../types/index';
 
-export default ({ outturn }: OutturnCard) => {
+export default ({ outturn, sortMethod }: OutturnCard) => {
 
   const dispatch = useDispatch();
   const { markedOutturns, activeOutturn } = useTypedSelector(state => state);
@@ -46,7 +46,7 @@ export default ({ outturn }: OutturnCard) => {
           <ButtonManager
             size='small'
             variant='tertiary'
-            props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id)) } />
+            props={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id, sortMethod)) } />
         </Row>
         <LinkDiv to={ `/outturn/${ id }`}>
           <Header>{ name }</Header>

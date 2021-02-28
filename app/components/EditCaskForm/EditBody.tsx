@@ -6,8 +6,7 @@ const {
 } = React;
 import { useTypedSelector } from '../../utils';
 
-import SubNavigation from '../Navigation/SubNavigation';
-import PageHeader from '../PageHeader/PageHeader';
+import PageHeader from '../Header/PageHeader';
 import ButtonManager from '../Button/ButtonManager';
 import InputManager from '../Form/InputManager';
 import * as StyledComponents from '../styledcomponents/index';
@@ -78,19 +77,22 @@ export default () => {
 
   return (
     <div>
-      <Row justifyContent='space-between'>
-        <SubNavigation link={ `/outturn/${ activeOutturn.id }` } destination='< Return to Cask List' />
-        <Row justifyContent='space-evenly'>
+      <PageHeader 
+        subNavigationProps={ {
+          link: `/outturn/${ activeOutturn.id }`,
+          destination: '< Return to Cask List'
+        } }
+        toolbarProps={ {
+          pageTitle: `Editing Cask no. ${ activeCask.caskNumber } ${ activeCask.name }`
+        } }
+      />
+      <MainDiv>
+        { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
+        <Row>
+          <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
           <LinkButton to={ `/edit/${ id }/step1` }>{ '< Back' }</LinkButton>
           <LinkButton to={ `/outturn/${ activeOutturn.id }` }>{ 'Finish and Return to Cask List>' }</LinkButton>
         </Row>
-      </Row>
-      <PageHeader pageTitle={ `Editing Cask no. ${ activeCask.caskNumber } ${ activeCask.name }`}/>
-      <MainDiv>
-        { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
-        <ButtonManager props={ createButton(editCask, 'Save', activeCask.id, localState) } />
-        <LinkButton to={ `/edit/${ activeCask.id }/step1` }>Back</LinkButton>
-        <LinkButton to={ `/edit/${ activeCask.id }/step2` }>Next</LinkButton>
       </MainDiv>
     </div>
   )

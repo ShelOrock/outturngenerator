@@ -36,7 +36,7 @@ export const createCaskModal: ModalFunctionType = (activeOutturnId: string, sort
   }
 });
 
-export const createOutturnModalProps: ModalFunctionType = () => ({
+export const createOutturnModalProps: ModalFunctionType = (sortMethod: string) => ({
   modalHeader: `Creating a new outturn`,
   stateShape: {
     name: '',
@@ -45,7 +45,7 @@ export const createOutturnModalProps: ModalFunctionType = () => ({
   confirmButton: {
     type: 'CREATE',
     text: 'Create outturn',
-    arguments: [ ],
+    arguments: [ sortMethod ],
     onClickFunction: addOutturn,
   },
   cancelButton: {
@@ -87,12 +87,12 @@ export const deleteManyCasksModal: ModalFunctionType = (markedCasks: string[], a
 });
 
 
-export const deleteOutturnModalProps: ModalFunctionType = (outturn: Outturn, activeOutturnId: string) => ({
+export const deleteOutturnModalProps: ModalFunctionType = (outturn: Outturn, activeOutturnId: string, sortMethod: string) => ({
   modalHeader: `Are you sure you want to delete ${ outturn.name }`,
   confirmButton: {
     type: 'DELETE',
     text: 'Delete',
-    arguments: [ outturn.id, activeOutturnId ],
+    arguments: [ outturn.id, activeOutturnId, sortMethod ],
     onClickFunction: deleteOutturn,
   },
   cancelButton: {
@@ -102,12 +102,12 @@ export const deleteOutturnModalProps: ModalFunctionType = (outturn: Outturn, act
   }
 });
 
-export const deleteManyOutturnsModalProps: ModalFunctionType = (markedOutturns: string[]) => ({
+export const deleteManyOutturnsModalProps: ModalFunctionType = (markedOutturns: string[], sortMethod) => ({
   modalHeader: 'Are you sure you want to delete these outturns?',
   confirmButton: {
     type: 'DELETE',
     text: 'Delete outturns',
-    arguments: [ markedOutturns ],
+    arguments: [ markedOutturns, sortMethod ],
     onClickFunction: deleteManyOutturns,
   },
   cancelButton: {

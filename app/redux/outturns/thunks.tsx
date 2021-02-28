@@ -13,18 +13,18 @@ import { ThunkFunctionType } from '../../types/index';
 
 const API_URL = '/api/outturn/';
 
-export const getOutturns: ThunkFunctionType = () => {
+export const getOutturns: ThunkFunctionType = sortBy => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .get(`${ API_URL }`)
+      .get(`${ API_URL }?sort_by=${ sortBy }`)
       .then(res => dispatch(setOutturns(res.data)))
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const addOutturn: ThunkFunctionType = outturnName => {
+export const addOutturn: ThunkFunctionType = (outturnName, sortBy) => {
   console.log(outturnName)
   return dispatch => {
     dispatch(setLoading(true));
@@ -32,14 +32,14 @@ export const addOutturn: ThunkFunctionType = outturnName => {
       .post(`${ API_URL }`, outturnName)
       .then(() => {
         dispatch(resetModal());
-        dispatch(getOutturns());
+        dispatch(getOutturns(sortBy));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)))
   };
 };
 
-export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId) => {
+export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId, sortBy) => {
   console.log(outturnId)
   return dispatch => {
     dispatch(setLoading(true));
@@ -49,14 +49,14 @@ export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId) => 
         if(activeOutturnId === outturnId) dispatch(setActiveOutturn({}));
         dispatch(unmarkOutturn(outturnId));
         dispatch(resetModal());
-        dispatch(getOutturns());
+        dispatch(getOutturns(sortBy));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)))
   };
 };
 
-export const deleteManyOutturns: ThunkFunctionType = (markedOutturns, activeOutturnId) => {
+export const deleteManyOutturns: ThunkFunctionType = (markedOutturns, activeOutturnId, sortBy) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -65,7 +65,7 @@ export const deleteManyOutturns: ThunkFunctionType = (markedOutturns, activeOutt
         if(markedOutturns.includes(activeOutturnId)) dispatch(setActiveOutturn({}));
         dispatch(resetMarkedOutturns());
         dispatch(resetModal());
-        dispatch(getOutturns());
+        dispatch(getOutturns(sortBy));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)))

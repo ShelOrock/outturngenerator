@@ -12,6 +12,7 @@ const {
   StyledDiv: { Column, Row },
   StyledCask: { CaskList },
   StyledForm: { Checkbox },
+  StyledButton: { Button }
 } = StyledComponents;
 
 import * as actions from "../../redux/actions";
@@ -89,6 +90,12 @@ export default () => {
           disabled={ !isEdited }
           props={ createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder) }
         />
+        <Button
+          size='default'
+          variant='secondary'
+          disabled={ !isEdited }
+          onClick={ () => setLocalCaskOrder(casks) }
+        >Cancel</Button>
       </Row>
       <Row>
         <CaskList>

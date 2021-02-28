@@ -8,10 +8,26 @@ import { Outturn, Cask } from '../db/index';
 
 const router: express.Router = express.Router();
 
-router.get('/', (_req: Request, res: Response, next: NextFunction) => {
+router.get('/', (req: Request, res: Response, next: NextFunction) => {
+  let sortByProperty;
+  let sortMethod;
+  switch(req.query.sort_by) {
+    case 'newest': 
+      sortByProperty = 'updatedAt',
+      sortMethod = 'DESC'
+      break;
+    case 'oldest': 
+      sortByProperty = 'updatedAt',
+      sortMethod = 'ASC'
+      break;
+    default: 
+      sortByProperty = 'updatedAt',
+      sortMethod = 'DESC'
+      break;
+  }
   Outturn.findAll({
     order: [
-      ['updatedAt', 'DESC']
+      [ sortByProperty, sortMethod ]
     ]
   })
   .then(outturnsOrNull => {

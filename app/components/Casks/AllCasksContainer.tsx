@@ -3,8 +3,7 @@ const { useEffect, useState } = React;
 import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
-import SubNavigation from '../Navigation/SubNavigation';
-import PageHeader from '../PageHeader/PageHeader';
+import PageHeader from '../Header/PageHeader';
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
 import AssociatedOutturn from './AssociatedOutturn';
@@ -43,16 +42,17 @@ export default () => {
 
   return (
     <div>
-      <SubNavigation link={'/'} destination=''/>
       <PageHeader
-        pageTitle='All Casks'
-        addButtonProps={ {
-          variant: 'primary',
-          onClickProps: createModalButton('+ Add a cask', createCaskModal(null, sort)) 
-        } }
-        deleteButtonProps={ {
-          variant: 'secondary',
-          onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
+        toolbarProps={ { 
+          pageTitle: 'All Casks',
+          addButtonProps: {
+            variant: 'primary',
+            onClickProps: createModalButton('+ Add a cask', createCaskModal(null, sort)) 
+          },
+          deleteButtonProps: {
+            variant: 'secondary',
+            onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
+          }
         } }
       />
       <Select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
