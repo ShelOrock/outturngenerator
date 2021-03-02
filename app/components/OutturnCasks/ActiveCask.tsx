@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useTypedSelector, assignColorPill } from '../../utils';
+import { useTypedSelector } from '../../utils';
 
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -59,7 +59,7 @@ export default () => {
                   <Header textAlign='left'>CASK NO. { caskNumber ? caskNumber.toUpperCase() : null }</Header>
                   <SmallListItemHeader textAlign='left'>{ name ? name.toUpperCase() : null }</SmallListItemHeader>
                   <Header textAlign='left'>{ price ? `$${ price }` : null }</Header>
-                  <FlavourStrip flavourProfile={ assignColorPill(flavourProfile) }>
+                  <FlavourStrip flavourProfile={ flavourProfile }>
                     <SmallListItemHeader color='white' textAlign='left'>{ flavourProfile ? flavourProfile.toUpperCase() : null }</SmallListItemHeader>
                   </FlavourStrip>
                 </ActiveCaskHeader>

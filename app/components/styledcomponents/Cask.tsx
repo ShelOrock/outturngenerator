@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
-interface CaskListItemFlavourPropTypes {
+interface FlavourPillPropTypes {
   flavourProfile?: string;
 }
 
-interface FlavourStrip extends CaskListItemFlavourPropTypes {};
-
-export const CaskList = styled.div`
+export const List = styled.div`
   margin: 0 2rem;
 `
 
-export const CaskListItemDiv = styled.div<CaskListItemFlavourPropTypes>`
+export const ListItem = styled.div<FlavourPillPropTypes>`
   box-shadow: 0px 8px 15px #D5D5D5;
   width: 25vw;
   background: white;
@@ -18,11 +16,11 @@ export const CaskListItemDiv = styled.div<CaskListItemFlavourPropTypes>`
   transition: all 0.3s ease 0s;
 
   &:hover {
-  box-shadow: 0px 4px 4px ${ props => `${ props.flavourProfile }` };
+    box-shadow: 0px 4px 4px ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default};
   }
 `;
 
-export const CaskListItemButton = styled.div<CaskListItemFlavourPropTypes>`
+export const CaskListItemButton = styled.div`
   transition: all 0.3s ease 0s;
   cursor: pointer;
 
@@ -31,19 +29,18 @@ export const CaskListItemButton = styled.div<CaskListItemFlavourPropTypes>`
   }
 `;
 
-export const CaskListItemFlavourPill = styled.div<CaskListItemFlavourPropTypes>`
-  background: ${ props => props.flavourProfile };
+export const FlavourPill = styled.div<FlavourPillPropTypes>`
+  background: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default };
   padding: 35px 10px;
 `
 
-export const ActiveCaskHeader = styled.div<FlavourStrip>`
-  background ${ props => props.flavourProfile };
+export const ActiveCaskHeader = styled.div`
   width: 300px;
   padding: 1rem 0;
 `
 
-export const FlavourStrip = styled.div<FlavourStrip>`
-  background: ${ props => props.flavourProfile };
+export const FlavourStrip = styled.div<FlavourPillPropTypes>`
+  background: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default};
   padding: 0.5rem 0rem;
   color: white;
   margin: 1rem 0 0;

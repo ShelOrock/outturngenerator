@@ -47,12 +47,18 @@ export const Checkbox = styled.input`
 
 export const Select = styled.select`
   width: 125px;
-  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
+  background-color: ${ ({ theme: { colors } }) => colors.white };
   color: ${ ({ theme: { colors } }) => colors.primary };
   border: none;
   border-radius: 3px;
   padding: 1rem;
   margin: 0 2rem;
+
+  &:focus {
+    border: 1px solid ${ ({ theme: { colors } }) => colors.primary };
+    outline: none;
+  }
+
 `;
 
 export const Option = styled.option`

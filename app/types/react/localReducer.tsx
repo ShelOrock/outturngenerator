@@ -1,8 +1,7 @@
-import { LocalReducerActionType } from "../Interfaces/form";
-
 export interface LocalReducerActionTypes {
-  name: string;
+  name?: string;
+  type?: string;
   value: string;
 }
       
-export type LocalReducerFunctionType<State> = (state: State, action: LocalReducerActionType) => State
+export type LocalReducerFunctionType<State> = (state: State, action: LocalReducerActionTypes) => State

@@ -14,18 +14,19 @@ import { ThunkFunctionType } from '../../types/index';
 
 const API_URL = '/api/cask/'
 
-export const getCasks: ThunkFunctionType = sortBy => {
+export const getCasks: ThunkFunctionType = (sortBy, filterBy) => {
+  console.log({ sortBy, filterBy})
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .get(`${ API_URL }?sort_by=${ sortBy }`)
+      .get(`${ API_URL }?sort_by=${ sortBy }&filter_by=${ filterBy }`)
       .then(res => dispatch(setCasks(res.data)))
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, cask) => {
+export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, filterBy, cask) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -38,7 +39,7 @@ export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, cask) =
           message: res.data.message
         }))
         dispatch(resetModal());
-        dispatch(getCasks(sortBy));
+        dispatch(getCasks(sortBy, filterBy));
         dispatch(getActiveCask(res.data.createdCask.id));
       })
       .catch(e => console.error(e))
@@ -72,7 +73,7 @@ export const editManyCasks: ThunkFunctionType = (outturnId, casks) => {
   };
 };
 
-export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sortBy) => {
+export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sortBy, filterBy) => {
   return dispatch => {
     dispatch(setLoading(true))
     axios
@@ -82,14 +83,14 @@ export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = 
         if(outturnId) dispatch(getActiveOutturn(outturnId));
         dispatch(unmarkCask(caskId))
         dispatch(resetModal());
-        dispatch(getCasks(sortBy));
+        dispatch(getCasks(sortBy, filterBy));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId, sortBy) => {
+export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId, sortBy, filterBy) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -103,7 +104,7 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
         if (markedCasks.includes(activeCaskId)) dispatch(setActiveCask({}));
         dispatch(resetMarkedCasks());
         dispatch(resetModal());
-        dispatch(getCasks(sortBy));
+        dispatch(getCasks(sortBy, filterBy));
         dispatch(resetActiveCask())
         if (outturnId) dispatch(getActiveOutturn(outturnId));
       })

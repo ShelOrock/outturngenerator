@@ -6,6 +6,8 @@ import express, {
 
 import { Cask } from '../db/index';
 
+import { Op } from 'sequelize';
+
 const router: express.Router = express.Router();
 
 router.get('/', (req: Request, res: Response, next: NextFunction): void => {
@@ -33,8 +35,13 @@ router.get('/', (req: Request, res: Response, next: NextFunction): void => {
       sortMethod = 'ASC'
       break;
   }
-  
+console.log(req.query)
   Cask.findAll({
+    where: {
+      flavourProfile: {
+        [Op.or]: req.query.filter_by || []
+      }
+    },
     order: [ 
       [ sortByProperty, sortMethod ]
     ]

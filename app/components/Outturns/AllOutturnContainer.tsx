@@ -10,10 +10,7 @@ const {
   StyledOutturn: { AllOutturnsContainer },
   StyledDiv: { Column },
   StyledForm: { Select },
-  StyledButton: {
-    ButtonContainer,
-    Button,
-  },
+  StyledButton: { Button },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -30,6 +27,7 @@ const {
 
 import { deleteManyOutturnsModalProps, createOutturnModalProps } from '../../modalProps';
 import { createModalButton } from '../../buttonProps';
+import { Col } from 'sequelize/types/lib/utils';
 
 export default () => {
 
@@ -71,6 +69,7 @@ export default () => {
           <option value='oldest'>Oldest</option>
         </Select>
       </Column>
+      <Column alignItems='center'>
       <AllOutturnsContainer>
         {
           allOutturns.length
@@ -78,13 +77,13 @@ export default () => {
           : null
         }
       </AllOutturnsContainer>
-      <ButtonContainer>
         {
           showMore < allOutturns.length
           ? <Button size='default' variant='secondary' disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }>Show More</Button>
           : null
         }
-      </ButtonContainer>
+        </Column>
+
     </div>
   );
 };

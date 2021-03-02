@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useTypedSelector, generateOutturn } from "../../utils";
 
-import CaskListItem from "./CaskListItem";
+import CaskListItemContainer from "./CaskListItemContainer";
 import ActiveCask from './ActiveCask';
 import ButtonManager from "../Button/ButtonManager";
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledDiv: { Column, Row },
-  StyledCask: { CaskList },
+  StyledCask: { List },
   StyledForm: { Checkbox },
   StyledButton: { Button }
 } = StyledComponents;
@@ -98,13 +98,13 @@ export default () => {
         >Cancel</Button>
       </Row>
       <Row>
-        <CaskList>
+        <List>
           <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="list">
               {provided => (
                 <div ref={provided.innerRef} {...provided.droppableProps}>
                   {localCaskOrder
-                    ? localCaskOrder.map((cask, idx) => <CaskListItem key={cask.id} index={idx} cask={cask} />)
+                    ? localCaskOrder.map((cask, idx) => <CaskListItemContainer key={cask.id} index={idx} cask={cask} />)
                     : null}
                   {provided.placeholder}
                 </div>
@@ -115,7 +115,7 @@ export default () => {
             variant="primary"
             props={ createButton(generateOutturn(activeOutturn), "Generate Outturn") }
           />
-        </CaskList>
+        </List>
         <ActiveCask />
       </Row>
     </Column>

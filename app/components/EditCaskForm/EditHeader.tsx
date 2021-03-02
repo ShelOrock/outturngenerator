@@ -40,7 +40,7 @@ export default () => {
     caskNumber,
     price
   };
-  const reducer: LocalReducerFunctionType<typeof initialState> = (state, action) => {
+  const reducer: LocalReducerFunctionType<typeof initialState> = (state = initialState, action) => {
     switch (action.name) {
       case `${ action.name }`:
         return {

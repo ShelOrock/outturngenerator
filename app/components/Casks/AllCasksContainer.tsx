@@ -4,15 +4,16 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../Header/PageHeader';
+import FilterMenuToggle from '../FilterMenu/FilterMenuToggle'
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
 import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { Column, Row },
+  StyledDiv: { Column },
   StyledButton: { Button },
   StyledForm: { Select },
-  StyledCask: { CaskList },
+  StyledCask: { List },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -43,6 +44,10 @@ export default () => {
   return (
     <div>
       <PageHeader
+        subNavigationProps={ {
+          link: '/',
+          destination: ''
+        } }
         toolbarProps={ { 
           pageTitle: 'All Casks',
           addButtonProps: {
@@ -51,6 +56,7 @@ export default () => {
           },
           deleteButtonProps: {
             variant: 'secondary',
+            disabled: !markedCasks.length,
             onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
           }
         } }
@@ -61,7 +67,8 @@ export default () => {
         <option value='newest'>Newest</option>
         <option value='oldest'>Oldest</option>
       </Select>
-        <CaskList>
+      <FilterMenuToggle sortMethod={ sort }/>
+        <List>
           {
             allCasks.length
           ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } sortMethod={ sort }/>)
@@ -76,7 +83,7 @@ export default () => {
             >Show More</Button>
           : null
           }
-        </CaskList>
+        </List>
       <Column>
         <ActiveCask />
         <AssociatedOutturn />

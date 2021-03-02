@@ -1,14 +1,14 @@
 import React from 'react';
-import { ThemeProvider, DefaultTheme } from 'styled-components';
+import { ThemeProvider } from 'styled-components';
 import 'styled-components';
-import { white } from 'chalk';
 
 const theme = {
   colors: {
-    body: '#FAFAFF',
     black: 'black',
+    white: 'white',
     gray: '#999',
     lightgray: '#DDD',
+    body: '#FAFAFF',
     primary: '#21A0A0',
     flavourProfiles: {
       ['Young & spritely']: '#DFAED1',
@@ -20,9 +20,10 @@ const theme = {
       ['Light & delicate']: '#99D4DF',
       ['Juicy, oak & vanilla']: '#679ABC',
       ['Oily & coastal']: '#2E5C74',
-      ['Light peated']: '#C5DEAC',
+      ['Lightly peated']: '#C5DEAC',
       ['Peated']: '#81AC6D',
       ['Heavily peated']: '#5B7C4E',
+      default: '#202448',
     }
   },
   font: 'Roboto',

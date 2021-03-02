@@ -47,7 +47,7 @@ export default () => {
     allocation,
     description
   };
-  const reducer: LocalReducerFunctionType<typeof initialState> = (state, action) => {
+  const reducer: LocalReducerFunctionType<typeof initialState> = (state = initialState, action) => {
     switch (action.name) {
       case `${ action.name }`:
         return {

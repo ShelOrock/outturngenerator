@@ -4,8 +4,6 @@ export const AllOutturnsContainer = styled.div`
   width: calc(100% - 3rem);
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
 
-  margin: 0 8% 0;
 `
