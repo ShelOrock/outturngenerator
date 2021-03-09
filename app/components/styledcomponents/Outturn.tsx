@@ -5,5 +5,4 @@ export const AllOutturnsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
 `

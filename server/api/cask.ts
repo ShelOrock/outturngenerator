@@ -10,7 +10,7 @@ import { Op } from 'sequelize';
 
 const router: express.Router = express.Router();
 
-router.get('/', (req: Request, res: Response, next: NextFunction): void => {
+router.post('/get-casks', (req: Request, res: Response, next: NextFunction): void => {
   let sortByProperty;
   let sortMethod;
   switch(req.query.sort_by) {
@@ -35,11 +35,11 @@ router.get('/', (req: Request, res: Response, next: NextFunction): void => {
       sortMethod = 'ASC'
       break;
   }
-console.log(req.query)
+
   Cask.findAll({
     where: {
       flavourProfile: {
-        [Op.or]: req.query.filter_by || []
+        [Op.or]: req.body.filters || []
       }
     },
     order: [ 
@@ -86,7 +86,7 @@ router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void =
   });
 });
 
-router.post('/', (req: Request, res: Response, next: NextFunction) => {
+router.post('/create-new-cask', (req: Request, res: Response, next: NextFunction) => {
   Cask.create({ ...req.body })
   .then(createdCask => {
     res

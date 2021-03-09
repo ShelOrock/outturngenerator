@@ -27,7 +27,7 @@ export default () => {
   useEffect(() => {
     dispatch(getUser(document.cookie.replace(/sessionId=/, '')));
     dispatch(getOutturns());
-    dispatch(getCasks());
+    dispatch(getCasks('ascending', []));
   }, []);
 
   return (

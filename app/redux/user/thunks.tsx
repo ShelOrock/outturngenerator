@@ -9,13 +9,13 @@ const {
 
 import { ThunkFunctionType } from '../../types/index';
 
-const API_URL = '/api/user/'
+const API_URL = '/api/user'
 
 export const getUser: ThunkFunctionType = userId => {
   return dispatch => {
     dispatch(setLoading(true))
     return axios
-      .get(`${ API_URL }${ userId }`)
+      .get(`${ API_URL }/${ userId }`)
       .then(res => dispatch(setUser(res.data)))
       .catch(e => dispatch(addToast({
         id: 0,

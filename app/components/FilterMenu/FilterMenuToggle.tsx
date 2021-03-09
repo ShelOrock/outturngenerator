@@ -16,7 +16,7 @@ export default ({ sortMethod }: any) => {
         size='default'
         variant='default'
         onClick={ () => setIsOpen(!isOpen) }
-      />
+      >{ isOpen ? 'Collapse Filters' : 'Show Filters' }</Button>
       {
         isOpen
         ? <FilterMenu sortMethod={ sortMethod }/>

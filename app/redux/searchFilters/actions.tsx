@@ -6,12 +6,12 @@ import {
 
 import { ActionFunctionType } from '../../types/index';
 
-export const addFilter: ActionFunctionType<String> = payload => ({
+export const addFilter: ActionFunctionType<string> = payload => ({
   type: ADD_FILTER,
   payload
 });
 
-export const removeFilter: ActionFunctionType<String> = payload => ({
+export const removeFilter: ActionFunctionType<string> = payload => ({
   type: REMOVE_FILTER,
   payload
 });

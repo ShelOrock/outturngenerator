@@ -13,7 +13,6 @@ const {
   searchFilterActions: {
     addFilter,
     removeFilter,
-    resetFilters
   }
 } = actions;
 
@@ -71,5 +70,4 @@ const flavourProfiles = [
   'Lightly peated',
   'Peated',
   'Heavily peated',
-  'Other'
 ]

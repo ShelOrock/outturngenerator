@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 interface DivProps {
   alignItems?: string;
   justifyContent?: string;
+  flexWrap?: string;
   width?: string;
 }
 
@@ -15,6 +16,7 @@ const RowsAndColumns = css<DivProps>`
   display: flex;
   justify-content: ${ ({ justifyContent }) => justifyContent };
   align-items: ${ ({ alignItems }) => alignItems };
+  flex-wrap: ${ ({ flexWrap }) => flexWrap || 'nowrap' };
 `;
 
 export const Row = styled.div`

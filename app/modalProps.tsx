@@ -17,7 +17,7 @@ const {
 
 import { ModalFunctionType, Cask, Outturn } from './types/index';
 
-export const createCaskModal: ModalFunctionType = (activeOutturnId: string, sortMethod: string) => ({
+export const createCaskModal: ModalFunctionType = (activeOutturnId: string, sortMethod: string, filterMethod: string[]) => ({
   modalHeader: `Creating a new cask`,
   stateShape: {
     name: '',
@@ -26,7 +26,7 @@ export const createCaskModal: ModalFunctionType = (activeOutturnId: string, sort
   confirmButton: {
     type: 'CREATE',
     text: 'Create cask',
-    arguments: [ activeOutturnId, sortMethod ],
+    arguments: [ activeOutturnId, sortMethod, filterMethod ],
     onClickFunction: addNewCask,
   },
   cancelButton: {

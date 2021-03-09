@@ -11,13 +11,13 @@ const {
 
 import { ThunkFunctionType } from '../../types/index';
 
-const API_URL = '/api/outturn/';
+const API_URL = '/api/outturn';
 
 export const getOutturns: ThunkFunctionType = sortBy => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .get(`${ API_URL }?sort_by=${ sortBy }`)
+      .get(`${ API_URL }/?sort_by=${ sortBy }`)
       .then(res => dispatch(setOutturns(res.data)))
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
@@ -44,7 +44,7 @@ export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId, sor
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .delete(`${ API_URL }${ outturnId }`)
+      .delete(`${ API_URL }/${ outturnId }`)
       .then(() => {
         if(activeOutturnId === outturnId) dispatch(setActiveOutturn({}));
         dispatch(unmarkOutturn(outturnId));
@@ -60,7 +60,7 @@ export const deleteManyOutturns: ThunkFunctionType = (markedOutturns, activeOutt
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .post(`${ API_URL }delete-many`, { markedOutturns })
+      .post(`${ API_URL }/delete-many`, { markedOutturns })
       .then(() => {
         if(markedOutturns.includes(activeOutturnId)) dispatch(setActiveOutturn({}));
         dispatch(resetMarkedOutturns());

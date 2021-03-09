@@ -71,7 +71,7 @@ export default () => {
     setIsEdited(false);
 
     if(currentCaskOrder) {
-      currentCaskOrder.forEach((item, idx) => {
+      currentCaskOrder.forEach((_item, idx) => {
         if(previousCaskOrder[idx] !== currentCaskOrder[idx]) setIsEdited(true);
       })
     }
