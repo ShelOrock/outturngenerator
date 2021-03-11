@@ -1,5 +1,5 @@
 export interface ActionTypes<PayloadType = {}> {
-  type: Symbol;
+  type: symbol;
   payload?: PayloadType;
 }
 

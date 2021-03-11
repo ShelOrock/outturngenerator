@@ -1,4 +1,4 @@
-export const ADD_FILTER = Symbol('ADD_FILTER');
+export const SET_FILTERS = Symbol('SET_FILTERS');
 
 export const REMOVE_FILTER = Symbol('REMOVE_FILTER');
 

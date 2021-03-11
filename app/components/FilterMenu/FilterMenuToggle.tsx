@@ -7,7 +7,7 @@ const {
   StyledButton: { Button }
 } = StyledComponents;
 
-export default ({ sortMethod }: any) => {
+export default () => {
   const [ isOpen, setIsOpen ] = useState(false);
 
   return (
@@ -19,7 +19,7 @@ export default ({ sortMethod }: any) => {
       >{ isOpen ? 'Collapse Filters' : 'Show Filters' }</Button>
       {
         isOpen
-        ? <FilterMenu sortMethod={ sortMethod }/>
+        ? <FilterMenu />
         : null
       }
     </div>

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils'
+const { useEffect, useReducer } = React;
+import { useTypedSelector } from '../../utils';
 
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index'
@@ -11,28 +11,36 @@ const {
 import * as actions from '../../redux/actions';
 const {
   searchFilterActions: {
-    addFilter,
-    removeFilter,
+    setFilters,
   }
 } = actions;
 
-import * as thunks from '../../redux/thunks';
-const { 
-  casksThunks: { getCasks }
-} = thunks;
-
 import { createButton } from '../../buttonProps';
 
-import { InputOnChangeType } from '../../types';
+import { InputOnChangeType, LocalReducerFunctionType } from '../../types';
 
-export default ({ sortMethod }: any) => {
+export default () => {
   
-  const dispatch = useDispatch();
+
   const { searchFilters } = useTypedSelector(state => state);
 
+  const initialState = [];
+  const reducer: LocalReducerFunctionType<typeof initialState> = (state = initialState, action) => {
+    switch(action.type) {
+      case 'ADD_FILTER': return [ ...state, action.value ]
+      case 'REMOVE_FILTER': return state.filter(_filter => _filter !== action.value)
+      case 'UPDATE_FILTERS': return [ ...action.value ]
+      default: return [];
+    }
+  }
+
+  const [ localFilters, dispatchLocally ] = useReducer(reducer, initialState)
+
+  useEffect(() => dispatchLocally({ type: 'UPDATE_FILTERS', value: searchFilters }), [searchFilters])
+
   const handleOnCheck: InputOnChangeType = ({ target: { name } }) => {
-    if(searchFilters.includes(name)) dispatch(removeFilter(name))
-    else dispatch(addFilter(name))
+    if(localFilters.includes(name)) dispatchLocally({ type: 'REMOVE_FILTER', value: name })
+    else dispatchLocally({ type: 'ADD_FILTER', value: name })
   }
 
   return (
@@ -43,7 +51,7 @@ export default ({ sortMethod }: any) => {
                 <Checkbox
                   type='checkbox'
                   name={ flavour }
-                  checked={ searchFilters.includes(flavour) }
+                  checked={ localFilters.includes(flavour) }
                   onChange={ handleOnCheck }
                 />
                 <label>{ flavour }</label>
@@ -51,7 +59,7 @@ export default ({ sortMethod }: any) => {
              ) )}
         </ul>
         <ButtonManager 
-          props={ createButton(getCasks, 'Filter', sortMethod, searchFilters) }
+          props={ createButton(setFilters, 'Apply Filters', localFilters) }
         />
     </div>
     )

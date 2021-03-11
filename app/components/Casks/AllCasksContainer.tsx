@@ -42,9 +42,12 @@ export default () => {
     searchFilters,
   } = useTypedSelector(state => state);
   
-  useEffect(() => { dispatch(resetMarkedCasks()) }, [])
+  useEffect(() => { 
+    dispatch(resetMarkedCasks())
+    dispatch(resetFilters())
+  }, [])
 
-  useEffect(() => { dispatch(getCasks(sort, searchFilters)) }, [sort]);
+  useEffect(() => { dispatch(getCasks(sort, searchFilters)) }, [sort, searchFilters]);
 
   return (
     <div>
@@ -92,7 +95,7 @@ export default () => {
         />
         </Row>
       </Row>
-      <FilterMenuToggle sortMethod={ sort }/>
+      <FilterMenuToggle />
         <List>
           {
             allCasks.length
