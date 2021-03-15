@@ -21,7 +21,7 @@ const RowsAndColumns = css<DivProps>`
 
 export const Row = styled.div`
   ${ RowsAndColumns }
-  width: ${ props => props.width || 'auto' };
+  width: ${ ({ width }) => width || 'auto' };
 `;
 
 export const Column = styled.div`

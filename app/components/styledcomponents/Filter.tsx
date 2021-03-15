@@ -1,0 +1,32 @@
+import styled from 'styled-components';
+
+interface FlavourPillPropTypes {
+  flavourProfile?: string;
+}
+
+export const FilterContainer = styled.div`
+  position: absolute;
+  width: 50vw;
+  z-index: 10;
+  right: 1rem;
+  background-color: ${ ({ theme: { colors } }) => colors.white };
+  box-shadow: 0px 8px 15px #D5D5D5;
+`;
+
+export const FilterList = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 0.5rem;
+`
+
+export const FilterListItem = styled.li<FlavourPillPropTypes>`
+  list-style-type: none;
+  background-color: ${ ({ flavourProfile, theme: { colors }}) => colors.flavourProfiles[flavourProfile]};
+  margin: 0.5rem;
+`
+
+export const FilterListItemLabel = styled.label`
+  color: ${ ({ theme: { colors }}) => colors.white };
+  margin: 0.5rem 1rem 0.5rem 0;
+`

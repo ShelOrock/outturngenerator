@@ -5,4 +5,4 @@ const {
   StyledNavigation: { LinkButton }
 } = StyledComponents
 
-export default ({ link = '/', destination = ''}) => <LinkButton to={ link }>{ destination }</LinkButton>
+export default ({ link = '#', destination = ''}) => <LinkButton to={ link }>{ destination }</LinkButton>

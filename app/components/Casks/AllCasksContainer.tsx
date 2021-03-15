@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../Header/PageHeader';
-import FilterMenuToggle from '../FilterMenu/FilterMenuToggle'
+import FilterMenu from '../FilterMenu/FilterMenu';
+
 import ButtonManager from '../Button/ButtonManager';
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
@@ -28,12 +29,15 @@ const { casksThunks: { getCasks } } = thunks;
 
 import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
 import { createModalButton, createButton } from '../../buttonProps';
+import { AllCaskContainerPageHeaderProps } from '../../pageHeaderProps';
 
 export default () => {
 
   const dispatch = useDispatch();
   const [ sort, setSort ] = useState('ascending');
   const [ showMore, setShowMore ] = useState(12);
+  const [ isOpen, setIsOpen ] = useState(false);
+
   const {
     allCasks,
     activeCask,
@@ -52,22 +56,15 @@ export default () => {
   return (
     <div>
       <PageHeader
-        subNavigationProps={ {
-          link: '/',
-          destination: ''
-        } }
-        toolbarProps={ { 
-          pageTitle: 'All Casks',
-          addButtonProps: {
-            variant: 'primary',
-            onClickProps: createModalButton('+ Add a cask', createCaskModal(null, sort, searchFilters)) 
-          },
-          deleteButtonProps: {
-            variant: 'secondary',
-            disabled: !markedCasks.length,
-            onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
-          }
-        } }
+        { ...AllCaskContainerPageHeaderProps({
+          createModalButton,
+          createCaskModal,
+          sort,
+          searchFilters,
+          markedCasks,
+          deleteManyCasksModal,
+          activeCask,
+        }) }
       />
       <Row justifyContent='space-between'>
         <Select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
@@ -88,31 +85,46 @@ export default () => {
           ))
           : null
         }
-        <ButtonManager 
-          variant='tertiary'
-          disabled={ !searchFilters.length }
-          props={ createButton(resetFilters, 'X Clear Filters') }
-        />
+        {
+          searchFilters.length
+          ? <ButtonManager 
+            variant='tertiary'
+            disabled={ !searchFilters.length }
+            props={ createButton(resetFilters, 'X Clear Filters') }
+          />
+          : null
+        }
+        <div>
+          <Button
+            size='default'
+            variant='default'
+            onClick={ () => setIsOpen(!isOpen) }
+          >{ isOpen ? 'Collapse Filters' : 'Show Filters' }</Button>
+          {
+            isOpen
+            ? <FilterMenu />
+            : null
+          }
+        </div>
         </Row>
       </Row>
-      <FilterMenuToggle />
-        <List>
-          {
-            allCasks.length
-          ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } sortMethod={ sort }/>)
-          : null
-          }
-          {
-            showMore < allCasks.length
-          ? <Button
-              size='default'
-              variant='secondary'
-              disabled={ !!isLoading }
-              onClick={ () => setShowMore(showMore + 6) }
-            >Show More</Button>
-          : null
-          }
-        </List>
+      <List>
+        {
+          allCasks.length
+        ? allCasks.slice(0, showMore).map(cask => <CaskListItem key={ cask.id } cask={ cask } sortMethod={ sort }/>)
+        : null
+        }
+        {
+          showMore < allCasks.length
+        ? <Button
+            size='default'
+            variant='secondary'
+            disabled={ !!isLoading }
+            onClick={ () => setShowMore(showMore + 6) }
+          >Show More</Button>
+        : null
+        }
+      </List>
       <Column>
         <ActiveCask />
         <AssociatedOutturn />
