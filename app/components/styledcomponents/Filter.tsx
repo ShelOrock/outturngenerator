@@ -6,7 +6,7 @@ interface FlavourPillPropTypes {
 
 export const FilterContainer = styled.div`
   position: absolute;
-  width: 50vw;
+  width: 45vw;
   z-index: 10;
   right: 1rem;
   background-color: ${ ({ theme: { colors } }) => colors.white };
@@ -16,7 +16,7 @@ export const FilterContainer = styled.div`
 export const FilterList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  padding: 0;
+  padding: 0.5rem 0;
   margin: 0 0.5rem;
 `
 
