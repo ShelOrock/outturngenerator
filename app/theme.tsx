@@ -1,7 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import 'styled-components';
-import { markedCasks } from './redux/markedCasks/reducers';
 
 const theme = {
   colors: {
@@ -133,7 +132,7 @@ const theme = {
         margin: '1rem'
       },
       small: {
-        padding: '1rem',
+        padding: '0.5rem',
         margin: '0rem'
       }
     }

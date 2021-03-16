@@ -1,3 +1,4 @@
 export interface ParamTypes {
-  outturnId: string;
+  outturnId?: string;
+  caskId?: string;
 };

@@ -9,6 +9,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Subheader, Body },
   StyledDiv: { Row, Column },
+  StyledNavigation: { LinkButton },
   StyledForm: { Checkbox },
   StyledCask: { ListItem, CaskListItemButton, FlavourPill }
 } = StyledComponents;
@@ -47,11 +48,13 @@ export default ({ cask, sortMethod }: any) => {
             checked={ markedCasks.includes(cask.id) }
             onChange={ handleOnCheck }
           />
+          <Column alignItems='flex-end'>
+          <LinkButton to={ `/edit/${ cask.id }/step1` }>Edit</LinkButton>
           <ButtonManager
             size="small"
             variant="tertiary"
             props={createModalButton(
-              "X",
+              "X Delete",
               deleteCaskModal(
                 activeCask,
                 cask,
@@ -60,10 +63,11 @@ export default ({ cask, sortMethod }: any) => {
               )
             )}
           />
+          </Column>
         </Row>
         <Row>
           <FlavourPill flavourProfile={ cask.flavourProfile }/>
-          <CaskListItemButton onClick={() => dispatch(getActiveCask(cask.id))}>
+          <CaskListItemButton onClick={() => dispatch(getActiveCask(cask.id)) }>
             <Column>
               <Subheader> {cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask"}</Subheader>
               <Body>{cask.name}</Body>

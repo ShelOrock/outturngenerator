@@ -11,3 +11,29 @@ export const editCaskInputProps = (handleOnChange, state): any[] => (
     }
   ))
 );
+
+export const editCaskHeaderInputProps = (onChangeFunction, state) => ([
+  [
+    {
+      label: 'Cask Number',
+      type: 'text',
+      name: 'caskNumber',
+      value: state.caskNumber,
+      onChangeFunction
+    },
+    {
+      label: 'Name',
+      type: 'text',
+      name: 'name',
+      value: state.name,
+      onChangeFunction,
+    },
+  ],
+  {
+    label: 'Price',
+    type: 'text',
+    name: 'price',
+    value: state.value,
+    onChangeFunction
+  }
+]);

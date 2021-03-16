@@ -6,7 +6,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledNavigation: { NavBar, NavLink },
   StyledDiv: { Row },
-  StyledButton: { SmallButton }
+  StyledButton: { Button }
 } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
@@ -26,7 +26,7 @@ export default () => {
         </Row>
         {
           user.loggedIn
-          ? <SmallButton onClick={ () => dispatch(attemptUserLogout(user.id)) }>Logout</SmallButton>
+          ? <Button onClick={ () => dispatch(attemptUserLogout(user.id)) }>Logout</Button>
           : <NavLink to='/login'>Login</NavLink>
         }
       </Row>

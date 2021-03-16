@@ -20,6 +20,7 @@ const {
 
 import * as actions from '../../redux/actions';
 const {
+  activeCaskActions: { resetActiveCask },
   markCaskActions: { resetMarkedCasks },
   searchFilterActions: { removeFilter, resetFilters }
 } = actions;
@@ -47,6 +48,7 @@ export default () => {
   } = useTypedSelector(state => state);
   
   useEffect(() => { 
+    dispatch(resetActiveCask())
     dispatch(resetMarkedCasks())
     dispatch(resetFilters())
   }, [])
@@ -108,6 +110,7 @@ export default () => {
         </div>
         </Row>
       </Row>
+      <Row>
       <List>
         {
           allCasks.length
@@ -129,6 +132,7 @@ export default () => {
         <ActiveCask />
         <AssociatedOutturn />
       </Column>
+      </Row>
   </div>
   )
 }

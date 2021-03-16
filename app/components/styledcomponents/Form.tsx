@@ -1,19 +1,28 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const FormContainer = styled.div`
+export const FormContainer = css`
+  width: 60vw;
+  margin: auto;
   padding: 1rem;
   background-color: white;
   box-shadow: 0 8px 15px #D5D5D5;
   border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const LoginFormContainer = styled.div`
+  ${ FormContainer }
   width: 40%;
   position:fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between
+`
+
+export const InputFormContainer = styled.div`
+  ${ FormContainer };
 `
 
 export const InputModule = styled.div`
@@ -46,6 +55,7 @@ export const Checkbox = styled.input`
 `
 
 export const Select = styled.select`
+  width: 125px;
   background-color: ${ ({ theme: { colors } }) => colors.white };
   color: ${ ({ theme: { colors } }) => colors.primary };
   border: none;

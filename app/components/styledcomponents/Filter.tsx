@@ -24,6 +24,7 @@ export const FilterListItem = styled.li<FlavourPillPropTypes>`
   list-style-type: none;
   background-color: ${ ({ flavourProfile, theme: { colors }}) => colors.flavourProfiles[flavourProfile]};
   margin: 0.5rem;
+  border-radius: 3px;
 `
 
 export const FilterListItemLabel = styled.label`

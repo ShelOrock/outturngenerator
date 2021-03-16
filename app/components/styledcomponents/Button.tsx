@@ -24,12 +24,3 @@ export const AllButtonStyles = css<ButtonProps>`
 export const Button = styled.button`
   ${ AllButtonStyles }
 `;
-
-export const SmallButton = styled.button`
-  ${ AllButtonStyles }
-`;
-
-export const ButtonDiv = styled.div`
-  color: inherit;
-  background: inherit;
-`;

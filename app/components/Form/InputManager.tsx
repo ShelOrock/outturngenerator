@@ -9,16 +9,14 @@ const {
   }
 } = StyledComponents;
 
-export default ({ props }: any) => {
-  return ( 
-    <InputModule>
-      <InputLabel>{ props.label }</InputLabel>
-      <InputField
-        type={ props.type }
-        name={ props.name }
-        value={ props.value }
-        onChange={ props.onChangeFunction }
-      />
-    </InputModule>
-  )
-}
+export default ({ props }: any) => (
+  <InputModule>
+    <InputLabel>{ props.label }</InputLabel>
+    <InputField
+      type={ props.type }
+      name={ props.name }
+      value={ props.value }
+      onChange={ props.onChangeFunction }
+    />
+  </InputModule>
+)

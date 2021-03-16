@@ -2,29 +2,39 @@ import * as React from 'react';
 const {
   useEffect,
   useState,
-  useReducer
+  useReducer,
 } = React;
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
-import SubNavigation from '../Header/SubNavigation';
 import PageHeader from '../Header/PageHeader'
-import ButtonManager from '../Button/ButtonManager';
 import InputManager from '../Form/InputManager';
+import InputGroupManager from '../Form/InputGroupManager'
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledDiv: { MainDiv, Row },
   StyledNavigation: { LinkButton },
+  StyledForm: { InputFormContainer }
 } = StyledComponents
 
 import * as thunks from '../../redux/thunks';
-const { casksThunks: { editCask } } = thunks;
+const {
+  casksThunks: { editCask },
+  activeCaskThunks: { getActiveCask }
+} = thunks;
 
-import { editCaskInputProps } from '../../inputProps';
+import { editCaskHeaderInputProps } from '../../inputProps';
 import { createButton } from '../../buttonProps';
 
-import { InputOnChangeType, LocalReducerFunctionType } from '../../types/index';
+import {
+  InputOnChangeType,
+  LocalReducerFunctionType,
+  ParamTypes,
+} from '../../types/index';
 
 export default () => {
+
+  const dispatch = useDispatch();
 
   const { activeCask, activeOutturn } = useTypedSelector(state => state); 
   const {
@@ -34,6 +44,7 @@ export default () => {
     price
   } = activeCask
   const [ isEdited, setIsEdited ] = useState(false);
+
 
   const initialState = {
     name,
@@ -54,7 +65,13 @@ export default () => {
 
   const [ localState, dispatchLocally ] = useReducer(reducer, initialState)
 
+  const { caskId } = useParams<ParamTypes>()
+
+  useEffect(() => {
+    dispatch(getActiveCask(caskId))
+  }, [])
   useEffect(() => checkLocalStateEdit(initialState, localState), [activeCask, localState])
+
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
 
@@ -72,20 +89,25 @@ export default () => {
     <div>
       <PageHeader
         subNavigationProps={ {
-          link: `/outturn/${ activeOutturn.id }`,
+          link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
           destination: '< Return to Cask List'
         } }
         toolbarProps={ {
-          pageTitle: `Editing Cask no. ${ caskNumber } ${ name }`
+          pageTitle: `Editing Cask ${ caskNumber } ${ name }`,
+          addButtonProps: {
+            disabled: !isEdited,
+            onClickProps: createButton(editCask, 'Save', id, localState) 
+          }
         } }
       />
-      <MainDiv>
-        { editCaskInputProps(handleOnChange, localState).map((input, idx) => <InputManager key={ idx } props= { input } /> )}
-        <Row>
-          <LinkButton to={ `/edit/${ id }/step2` }>{ 'Next >' }</LinkButton>
-          <ButtonManager disabled={ !isEdited } props={ createButton(editCask, 'Save', id, localState) } />
-        </Row>
-      </MainDiv>
+      <InputFormContainer>
+        { editCaskHeaderInputProps(handleOnChange, localState).map((input, idx) => {
+          return Array.isArray(input)
+            ? <InputGroupManager key={ idx } props={ input } />
+            : <InputManager key={ idx } props={ input } />
+        } )}
+       <LinkButton to={ `/edit/${ id }/step2` }>{ 'Next >' }</LinkButton>
+      </InputFormContainer>
     </div>
   )
 }

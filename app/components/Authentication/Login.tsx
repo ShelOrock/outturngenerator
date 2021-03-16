@@ -7,7 +7,7 @@ import * as StyledComponents from '../styledcomponents/index';
 import ButtonManager from '../Button/ButtonManager';
 const {
   StyledForm: {
-    FormContainer,
+    LoginFormContainer,
     InputModule,
     InputLabel,
     InputField
@@ -45,7 +45,7 @@ export default () => {
   }
 
   return (
-    <FormContainer>
+    <LoginFormContainer>
       <InputModule>
         <InputLabel>Username or Email</InputLabel>
         <InputField
@@ -67,6 +67,6 @@ export default () => {
       </InputModule>
 
       <ButtonManager props={ createButton(attemptUserLogin, 'Login', { usernameOrEmail, password }) } />
-    </FormContainer>
+    </LoginFormContainer>
   )
 }
