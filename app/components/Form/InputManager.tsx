@@ -14,6 +14,7 @@ export default ({ props }: any) => (
     <InputLabel>{ props.label }</InputLabel>
     <InputField
       type={ props.type }
+      size={ props.size || 'default' }
       name={ props.name }
       value={ props.value }
       onChange={ props.onChangeFunction }

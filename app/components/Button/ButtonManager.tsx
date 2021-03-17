@@ -1,27 +1,36 @@
-import * as React from 'react';
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils';
+import * as React from "react";
+import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../../utils";
 
-import * as StyledComponents from '../styledcomponents/index';
-const { StyledButton: { Button } } = StyledComponents;
+import * as StyledComponents from "../styledcomponents/index";
+const {
+  StyledButton: { Button },
+} = StyledComponents;
 
-import { ButtonProps } from '../../types/index';
+import { ButtonProps } from "../../types/index";
 
-export default ({ size, variant, disabled, props }: ButtonProps) => {
-
+export default ({
+  size,
+  variant,
+  disabled,
+  props,
+  dispatchToStore = true,
+}: ButtonProps) => {
   const dispatch = useDispatch();
-  const { isLoading } = useTypedSelector(state => state)
+  const { isLoading } = useTypedSelector((state) => state);
 
-  return (
-    props ?
+  return props ? (
     <Button
-      size={ size || 'default' }
-      disabled={ disabled || !!isLoading || false }
-      variant={ disabled ? 'disabled' : variant || 'default' }
-      onClick={ () => dispatch(props.onClickFunction(...props.arguments)) }
+      size={size || "default"}
+      disabled={disabled || !!isLoading || false}
+      variant={disabled ? "disabled" : variant || "default"}
+      onClick={
+        dispatchToStore
+          ? () => dispatch(props.onClickFunction(...props.arguments))
+          : () => props.onClickFunction(...props.arguments)
+      }
     >
-      { props.text }
+      {props.text}
     </Button>
-    : null
-  )
-}
+  ) : null;
+};

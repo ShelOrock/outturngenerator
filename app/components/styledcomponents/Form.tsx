@@ -29,8 +29,8 @@ export const InputModule = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 80%;
   margin: 1rem;
+  width: 100%;
 `
 
 export const InputLabel = styled.label`
@@ -38,16 +38,23 @@ export const InputLabel = styled.label`
 `
 
 export const InputField = styled.input`
-  padding: 0.5rem
-  &focus: 1px solid #204468;
-  height: 1.5rem;
+  margin: 0.5rem 0;
+  height: 1.2rem;
+  width: ${ ({ size, theme: { input } }) => size ? input.size[size].width : input.size.default.width };
+
+  &focus: {
+    border: 1px solid #204468;
+  }
 `
 
 export const TextArea = styled.textarea`
-  padding: 0.5rem
-  &focus: 1px solid #204468;
+  padding: 0.5rem;
   height: 4rem;
   resize: none;
+
+  &focus: {
+    border: 1px solid #204468;
+  }
 `
 
 export const Checkbox = styled.input`

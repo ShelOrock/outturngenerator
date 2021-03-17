@@ -7,7 +7,7 @@ import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Header, Body },
   StyledCard: {
-    CardContainer,
+    Card,
     CardImage,
   },
   StyledDiv: { Row },
@@ -35,7 +35,7 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
   }
 
   return (
-    <CardContainer>
+    <Card>
         <Row justifyContent='space-between' alignItems='center'>
           <Checkbox
             type='checkbox'
@@ -55,6 +55,6 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
             Insert image here.
           </CardImage>
         </LinkDiv>
-    </CardContainer>
+    </Card>
   )
 };

@@ -135,6 +135,22 @@ const theme = {
         padding: '0.5rem',
         margin: '0rem'
       }
+    },
+  },
+  input: {
+    size: {
+      default: {
+        width: '100%',
+      },
+      small: {
+        width: '20%',
+      },
+      medium: {
+        width: '60%',
+      },
+      large: {
+        width: '100%',
+      }
     }
   }
 };

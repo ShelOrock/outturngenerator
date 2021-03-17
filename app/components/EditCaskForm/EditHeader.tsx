@@ -51,6 +51,7 @@ export default () => {
     caskNumber,
     price
   };
+
   const reducer: LocalReducerFunctionType<typeof initialState> = (state = initialState, action) => {
     switch (action.name) {
       case `${ action.name }`:
@@ -58,7 +59,7 @@ export default () => {
           ...state,
           [action.name]: action.value
         };
-    
+
       default: return state;
     }
   };
@@ -71,6 +72,11 @@ export default () => {
     dispatch(getActiveCask(caskId))
   }, [])
   useEffect(() => checkLocalStateEdit(initialState, localState), [activeCask, localState])
+  useEffect(() => {
+    dispatchLocally({ name: 'name', value: name })
+    dispatchLocally({ name: 'caskNumber', value: caskNumber })
+    dispatchLocally({ name: 'price', value: price })
+  }, [activeCask])
 
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
@@ -101,11 +107,10 @@ export default () => {
         } }
       />
       <InputFormContainer>
-        { editCaskHeaderInputProps(handleOnChange, localState).map((input, idx) => {
-          return Array.isArray(input)
-            ? <InputGroupManager key={ idx } props={ input } />
-            : <InputManager key={ idx } props={ input } />
-        } )}
+        { editCaskHeaderInputProps(handleOnChange, localState).map((input, idx) => Array.isArray(input)
+          ? <InputGroupManager key={ idx } props={ input } />
+          : <InputManager key={ idx } props={ input } />
+        )}
        <LinkButton to={ `/edit/${ id }/step2` }>{ 'Next >' }</LinkButton>
       </InputFormContainer>
     </div>

@@ -1,6 +1,13 @@
 import styled from 'styled-components'
 
-export const CardContainer = styled.div`
+export const CardsContainer = styled.div`
+  width: calc(100% - 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
+export const Card = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;

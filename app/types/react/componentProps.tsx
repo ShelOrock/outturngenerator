@@ -15,5 +15,6 @@ export interface ButtonProps {
   size?: string;
   variant?: string;
   disabled?: boolean;
+  dispatchToStore?: boolean;
   props: any;
 }

@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../Header/PageHeader';
+import ButtonManager from '../Button/ButtonManager';
 import OutturnCard from './OutturnCard';
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledOutturn: { AllOutturnsContainer },
+  StyledCard: { CardsContainer },
   StyledDiv: { Column },
   StyledForm: { Select },
   StyledButton: { Button },
@@ -26,8 +27,7 @@ const {
 } = thunks
 
 import { deleteManyOutturnsModalProps, createOutturnModalProps } from '../../modalProps';
-import { createModalButton } from '../../buttonProps';
-import { Col } from 'sequelize/types/lib/utils';
+import { createButton, createModalButton } from '../../buttonProps';
 
 export default () => {
 
@@ -49,7 +49,7 @@ export default () => {
       <Column>
         <PageHeader
           subNavigationProps={ {
-            link: '/',
+            link: '#',
             destination: ''
           } }
           toolbarProps={ {
@@ -70,16 +70,21 @@ export default () => {
         </Select>
       </Column>
       <Column alignItems='center'>
-      <AllOutturnsContainer>
+      <CardsContainer>
         {
           allOutturns.length
           ? (allOutturns.slice(0, showMore)).map(outturn => <OutturnCard key={ outturn.id } outturn= { outturn } sortMethod={ sort }/>)
           : null
         }
-      </AllOutturnsContainer>
+      </CardsContainer>
         {
           showMore < allOutturns.length
-          ? <Button size='default' variant='secondary' disabled={ !!isLoading } onClick={ () => setShowMore(showMore + 6) }>Show More</Button>
+          ? <ButtonManager 
+              size='default'
+              variant='secondary'
+              disabled={ !!isLoading }
+              dispatchToStore={ false }
+              props={ createButton(setShowMore, 'Show more', showMore + 6)} />
           : null
         }
         </Column>
