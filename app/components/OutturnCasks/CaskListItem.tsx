@@ -53,7 +53,7 @@ export default ({ cask, sortMethod }: any) => {
           <ButtonManager
             size="small"
             variant="tertiary"
-            props={createModalButton(
+            onClickFunctionProps={createModalButton(
               "X Delete",
               deleteCaskModal(
                 activeCask,

@@ -108,8 +108,8 @@ export default () => {
       />
       <InputFormContainer>
         { editCaskHeaderInputProps(handleOnChange, localState).map((input, idx) => Array.isArray(input)
-          ? <InputGroupManager key={ idx } props={ input } />
-          : <InputManager key={ idx } props={ input } />
+        ? <InputGroupManager key={ idx } props={ input } />
+        : <InputManager key={ idx } props={ input } />
         )}
        <LinkButton to={ `/edit/${ id }/step2` }>{ 'Next >' }</LinkButton>
       </InputFormContainer>

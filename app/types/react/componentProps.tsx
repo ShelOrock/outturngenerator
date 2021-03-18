@@ -16,5 +16,5 @@ export interface ButtonProps {
   variant?: string;
   disabled?: boolean;
   dispatchToStore?: boolean;
-  props: any;
+  onClickFunctionProps: any;
 }

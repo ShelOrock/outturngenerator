@@ -11,7 +11,6 @@ const {
   StyledCard: { CardsContainer },
   StyledDiv: { Column },
   StyledForm: { Select },
-  StyledButton: { Button },
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
@@ -84,7 +83,7 @@ export default () => {
               variant='secondary'
               disabled={ !!isLoading }
               dispatchToStore={ false }
-              props={ createButton(setShowMore, 'Show more', showMore + 6)} />
+              onClickFunctionProps={ createButton(setShowMore, 'Show more', showMore + 6)} />
           : null
         }
         </Column>

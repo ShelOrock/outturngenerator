@@ -1,20 +1,20 @@
 import * as React from 'react';
-import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
+import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledNavigation: { NavBar, NavLink },
   StyledDiv: { Row },
-  StyledButton: { Button }
 } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogout } } = thunks;
 
+import { createButton } from "../../buttonProps";
+
 export default () => {
 
-  const dispatch = useDispatch();
   const { user } = useTypedSelector(state => state);
 
   return (
@@ -26,7 +26,10 @@ export default () => {
         </Row>
         {
           user.loggedIn
-          ? <Button onClick={ () => dispatch(attemptUserLogout(user.id)) }>Logout</Button>
+          ? <ButtonManager
+            dispatchToStore={ true }
+            onClickFunctionProps={ createButton(attemptUserLogout, 'Logout', user.id) }
+            />
           : <NavLink to='/login'>Login</NavLink>
         }
       </Row>

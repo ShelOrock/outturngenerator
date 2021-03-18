@@ -7,8 +7,8 @@ import ButtonManager from '../Button/ButtonManager';
 import InputManager from '../Form/InputManager';
 import * as StyledComponents from '../styledcomponents/index';
 const { 
-  StyledType: { Header, Subheader },
-  StyledDiv: { Column, Row },
+  StyledType: { Header },
+  StyledDiv: { Row },
   StyledModal: { ModalContainer }
 } = StyledComponents;
 
@@ -39,8 +39,12 @@ export default () => {
               : null
             }
             <Row justifyContent='space-evenly'>
-              <ButtonManager variant='primary' props={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] } }/>
-              <ButtonManager variant='secondary' props={ modal.cancelButton } />
+              <ButtonManager
+                variant='primary'
+                onClickFunctionProps={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] } }/>
+              <ButtonManager
+                variant='secondary'
+                onClickFunctionProps={ modal.cancelButton } />
             </Row>
           </ModalContainer>
         ): null

@@ -13,7 +13,6 @@ import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledDiv: { Column, Row },
-  StyledButton: { Button },
   StyledForm: { Select },
   StyledCask: { List },
 } = StyledComponents;
@@ -82,7 +81,7 @@ export default () => {
             <ButtonManager
               key={ idx }
               variant={ filter.toString() }
-              props={ createButton(removeFilter, `X ${ filter }`, filter) }
+              onClickFunctionProps={ createButton(removeFilter, `X ${ filter }`, filter) }
             />
           ))
           : null
@@ -92,16 +91,17 @@ export default () => {
           ? <ButtonManager 
             variant='tertiary'
             disabled={ !searchFilters.length }
-            props={ createButton(resetFilters, 'X Clear Filters') }
+            onClickFunctionProps={ createButton(resetFilters, 'X Clear Filters') }
           />
           : null
         }
         <div>
-          <Button
+          <ButtonManager
             size='default'
             variant='default'
-            onClick={ () => setIsOpen(!isOpen) }
-          >{ isOpen ? 'Collapse Filters' : 'Show Filters' }</Button>
+            dispatchToStore={ true }
+            onClickFunctionProps={ createButton(setIsOpen, isOpen ? 'Collapse Filters' : 'Show Filters', !isOpen) }
+          />{ isOpen ? 'Collapse Filters' : 'Show Filters' }
           {
             isOpen
             ? <FilterMenu />
@@ -119,12 +119,13 @@ export default () => {
         }
         {
           showMore < allCasks.length
-        ? <Button
+        ? <ButtonManager
             size='default'
             variant='secondary'
             disabled={ !!isLoading }
-            onClick={ () => setShowMore(showMore + 6) }
-          >Show More</Button>
+            dispatchToStore={ false }
+            onClickFunctionProps={ createButton(setShowMore, 'Show More', showMore + 6) }
+          />
         : null
         }
       </List>

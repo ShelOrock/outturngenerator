@@ -66,7 +66,9 @@ export default () => {
         />
       </InputModule>
 
-      <ButtonManager props={ createButton(attemptUserLogin, 'Login', { usernameOrEmail, password }) } />
+      <ButtonManager
+        dispatchToStore={ true }
+        onClickFunctionProps={ createButton(attemptUserLogin, 'Login', { usernameOrEmail, password }) } />
     </LoginFormContainer>
   )
 }

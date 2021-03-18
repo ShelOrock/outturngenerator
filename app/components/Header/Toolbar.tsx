@@ -10,8 +10,6 @@ const {
 export default ({
   pageTitle,
   addButtonProps = {},
-  sortProps = {},
-  filterProps = {},
   deleteButtonProps = {},
 }: any) => (
   <Row justifyContent="space-between">
@@ -22,7 +20,7 @@ export default ({
           size={addButtonProps.size}
           disabled={addButtonProps.disabled}
           variant={addButtonProps.variant}
-          props={addButtonProps.onClickProps}
+          onClickFunctionProps={addButtonProps.onClickProps}
         />
       ) : null }
     </Row>
@@ -32,7 +30,7 @@ export default ({
         size={deleteButtonProps.size}
         disabled={deleteButtonProps.disabled}
         variant={deleteButtonProps.variant}
-        props={deleteButtonProps.onClickProps}
+        onClickFunctionProps={deleteButtonProps.onClickProps}
       />
     ) : null }
     </Row>

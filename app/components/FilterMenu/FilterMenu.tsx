@@ -76,7 +76,7 @@ export default () => {
       <ButtonManager
         size="default"
         variant="primary"
-        props={createButton(setFilters, "Apply Filters", localFilters)}
+        onClickFunctionProps={createButton(setFilters, "Apply Filters", localFilters)}
       />
     </FilterContainer>
   );
