@@ -34,19 +34,30 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
     else dispatch(markOutturn(e.target.name));
   }
 
+  const checkOutturnCheckboxProps = {
+    type: 'checkbox',
+    name: id,
+    checked: markedOutturns.includes(id),
+    onChange: handleOnCheck
+  }
+
+  const deleteOutturnButtonProps = {
+    size: 'small',
+    variant: 'tertiary',
+    onClickFunctionProps: createModalButton(
+      'X', deleteOutturnModalProps(
+        outturn,
+        activeOutturn.id,
+        sortMethod
+      )
+    )
+  }
+
   return (
     <Card>
         <Row justifyContent='space-between' alignItems='center'>
-          <Checkbox
-            type='checkbox'
-            name={ id }
-            checked={ markedOutturns.includes(id) }
-            onChange={ handleOnCheck }
-          />
-          <ButtonManager
-            size='small'
-            variant='tertiary'
-            onClickFunctionProps={ createModalButton('X', deleteOutturnModalProps(outturn, activeOutturn.id, sortMethod)) } />
+          <Checkbox { ...checkOutturnCheckboxProps }/>
+          <ButtonManager { ...deleteOutturnButtonProps } />
         </Row>
         <LinkDiv to={ `/outturn/${ id }`}>
           <Header>{ name }</Header>

@@ -6,8 +6,9 @@ const theme = {
   colors: {
     black: 'black',
     white: 'white',
-    gray: '#999',
-    lightgray: '#DDD',
+    darkgray: '#777',
+    gray: '#DDD',
+    lightgray: '#EEE',
     body: '#FAFAFF',
     primary: '#21A0A0',
     flavourProfiles: {

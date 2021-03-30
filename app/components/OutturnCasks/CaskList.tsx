@@ -76,25 +76,35 @@ export default () => {
     }
   }
 
+  const checkAllCasksCheckboxProps = {
+    type: 'checkbox',
+    checked: casks && casks.length && casks.length === markedCasks.length,
+    onChange: handleAllCasksOnCheck
+  }
+
+  const editManyCasksButtonProps = {
+    variant: 'primary',
+    disabled: !isEdited,
+    onClickFunctionProps: createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder)
+  }
+
+  const cancelChangesButtonProps = {
+    variant: 'secondary',
+    disabled: !isEdited,
+    onClickFunctionProps: createButton(setLocalCaskOrder, 'Cancel', casks)
+  }
+
+  const generateOutturnButtonProps = { 
+    variant: 'primary',
+    onClickFunctionProps: createButton(generateOutturn(activeOutturn), "Generate Outturn") 
+  }
+
   return (
     <Column justifyContent='center'>
       <Row alignItems='center'>
-        <Checkbox
-          type="checkbox"
-          checked={casks && casks.length && casks.length === markedCasks.length}
-          onChange={handleAllCasksOnCheck}
-        />
-        <ButtonManager
-          variant="primary"
-          disabled={ !isEdited }
-          onClickFunctionProps={ createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder) }
-        />
-        <ButtonManager
-          size='default'
-          variant='secondary'
-          disabled={ !isEdited }
-          onClickFunctionProps={ createButton(setLocalCaskOrder, 'Cancel', casks) }
-        />
+        <Checkbox { ...checkAllCasksCheckboxProps } />
+        <ButtonManager { ...editManyCasksButtonProps } />
+        <ButtonManager { ...cancelChangesButtonProps } />
       </Row>
       <Row>
         <List>
@@ -110,10 +120,7 @@ export default () => {
               )}
             </Droppable>
           </DragDropContext>
-          <ButtonManager
-            variant="primary"
-            onClickFunctionProps={ createButton(generateOutturn(activeOutturn), "Generate Outturn") }
-          />
+          <ButtonManager { ...generateOutturnButtonProps } />
         </List>
         <ActiveCask />
       </Row>

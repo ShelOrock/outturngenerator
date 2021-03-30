@@ -34,27 +34,28 @@ export default () => {
     dispatch(resetMarkedCasks())
   }, []);
 
+  const pageHeaderProps = {
+    subNavigationProps: {
+      link: '/',
+      destination: '< Back'
+    },
+    toolbarProps: {
+      pageTitle: activeOutturn.name,
+      addButtonProps: {
+        onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id))
+      },
+      deleteButtonProps: {
+        variant: 'tertiary',
+        disabled: !markedCasks.length,
+        onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
+      }
+    }
+  }
+
   return (
     <Column>
-        <PageHeader
-          subNavigationProps={ {
-            link: '/',
-            destination: '< Back'
-          } }
-          toolbarProps={ {
-            pageTitle: activeOutturn.name,
-            addButtonProps: {
-              onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id))
-            },
-            deleteButtonProps: {
-              variant: 'tertiary',
-              disabled: !markedCasks.length,
-              onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
-            }
-          } }
-        />
+      <PageHeader { ...pageHeaderProps }/>
       <CaskList />
     </Column>
-
   )
 }

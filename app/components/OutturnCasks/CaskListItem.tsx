@@ -38,31 +38,35 @@ export default ({ cask, sortMethod }: any) => {
     else dispatch(markCask(e.target.name));
   };
 
+  const checkCaskCheckboxProps = {
+    type: 'checkbox',
+    name: cask.id,
+    checked: markedCasks.includes(cask.id),
+    onChange: handleOnCheck
+  }
+
+  const deleteCaskButtonProps = {
+    size: 'small',
+    variant: 'tertiary',
+    onClickFunctionProps: createModalButton(
+      "X Delete",
+      deleteCaskModal(
+        activeCask,
+        cask,
+        activeOutturn.id,
+        sortMethod
+      )
+    )
+  }
+
   return (
     <ListItem flavourProfile={ cask.flavourProfile }>
       <Column>
         <Row alignItems="center" justifyContent="space-between">
-          <Checkbox
-            type="checkbox"
-            name={cask.id}
-            checked={ markedCasks.includes(cask.id) }
-            onChange={ handleOnCheck }
-          />
+          <Checkbox { ...checkCaskCheckboxProps }/>
           <Column alignItems='flex-end'>
           <LinkButton to={ `/edit/${ cask.id }/step1` }>Edit</LinkButton>
-          <ButtonManager
-            size="small"
-            variant="tertiary"
-            onClickFunctionProps={createModalButton(
-              "X Delete",
-              deleteCaskModal(
-                activeCask,
-                cask,
-                activeOutturn.id,
-                sortMethod
-              )
-            )}
-          />
+          <ButtonManager { ...deleteCaskButtonProps } />
           </Column>
         </Row>
         <Row>

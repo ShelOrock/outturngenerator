@@ -3,6 +3,7 @@ const { useState, useEffect } = React;
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector } from '../../utils';
 
+import InputForm from '../EditCaskForm/InputForm';
 import * as StyledComponents from '../styledcomponents/index';
 import ButtonManager from '../Button/ButtonManager';
 const {
@@ -20,6 +21,8 @@ const { authenticationThunks: { attemptUserLogin } } = thunks;
 import { createButton } from '../../buttonProps';
 
 import { InputOnChangeType } from '../../types/index';
+
+import { loginInputProps } from '../../inputProps'
 
 export default () => {
 

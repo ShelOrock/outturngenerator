@@ -12,7 +12,7 @@ const {
   StyledModal: { ModalContainer }
 } = StyledComponents;
 
-import { editCaskInputProps } from '../../inputProps';
+import { genericInputProps } from '../../inputProps';
 
 export default () => {
 
@@ -35,7 +35,7 @@ export default () => {
               && Object.keys(localModalState)
               && modal.confirmButton
               && modal.cancelButton
-              ? editCaskInputProps(handleOnChange, localModalState).map((input, idx) => <InputManager key={ idx } props= { input } />)
+              ? genericInputProps(handleOnChange, localModalState).map((input, idx) => <InputManager key={ idx } props= { input } />)
               : null
             }
             <Row justifyContent='space-evenly'>

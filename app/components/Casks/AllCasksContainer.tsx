@@ -99,9 +99,9 @@ export default () => {
           <ButtonManager
             size='default'
             variant='default'
-            dispatchToStore={ true }
+            dispatchToStore={ false }
             onClickFunctionProps={ createButton(setIsOpen, isOpen ? 'Collapse Filters' : 'Show Filters', !isOpen) }
-          />{ isOpen ? 'Collapse Filters' : 'Show Filters' }
+          />
           {
             isOpen
             ? <FilterMenu />

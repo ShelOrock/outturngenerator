@@ -34,13 +34,18 @@ export const InputModule = styled.div`
 `
 
 export const InputLabel = styled.label`
+  color: ${ ({ theme: { colors } }) => colors.darkgray };
   padding: 1rem, 0.5rem;
 `
 
 export const InputField = styled.input`
   margin: 0.5rem 0;
-  height: 1.2rem;
+  padding: 0 0.5rem;
+  height: 1.7rem;
   width: ${ ({ size, theme: { input } }) => size ? input.size[size].width : input.size.default.width };
+  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
+  border: none;
+  border-radius: 3px;
 
   &focus: {
     border: 1px solid #204468;
