@@ -8,7 +8,7 @@ import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
 import AllCasksContainer from './Casks/AllCasksContainer';
 import CasksContainer from './OutturnCasks/CasksContainer';
-import EditHeader from './EditCaskForm/EditHeader';
+import EditHeader from './EditCaskForm/EditCaskForm';
 import ModalManager from './Modal/ModalManager';
 import Toast from './Toast/Toast';
 
@@ -38,7 +38,7 @@ export default () => {
           <Route exact path='/login' component={ Login } />
           <Route exact path='/casks' component={ AllCasksContainer } />
           <Route exact path='/outturn/:outturnId' component={ CasksContainer }/>
-          <Route exact path='/edit/:caskId/step1' component={ EditHeader } />
+          <Route exact path='/edit/:caskId' component={ EditHeader } />
         </Switch>
       </Router>
       <ModalManager />

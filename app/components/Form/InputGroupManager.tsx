@@ -1,13 +1,15 @@
-import * as React from 'react';
+import * as React from "react";
 
-import InputManager from '../Form/InputManager';
-import * as StyledComponents from '../styledcomponents/index';
+import InputManager from "../Form/InputManager";
+import * as StyledComponents from "../styledcomponents/index";
 const {
-  StyledDiv: { Row }
+  StyledDiv: { Row },
 } = StyledComponents;
 
-export default ({ props }) => {
-  return <Row>
-  { props.map((input, idx) => <InputManager key={ idx } props={ input } /> )}
-  </Row>
+export default ({ inputProps, handleOnChange }) => {
+  return (
+    <Row>
+      { inputProps.map((input, idx) => <InputManager key={ idx } { ...input } handleOnChange={ handleOnChange }/> ) }
+    </Row>
+  );
 };

@@ -65,7 +65,7 @@ export default ({ cask, sortMethod }: any) => {
         <Row alignItems="center" justifyContent="space-between">
           <Checkbox { ...checkCaskCheckboxProps }/>
           <Column alignItems='flex-end'>
-          <LinkButton to={ `/edit/${ cask.id }/step1` }>Edit</LinkButton>
+          <LinkButton to={ `/edit/${ cask.id }` }>Edit</LinkButton>
           <ButtonManager { ...deleteCaskButtonProps } />
           </Column>
         </Row>

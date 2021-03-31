@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import InputSectionManager from "../Form/InputSectionManager";
+import InputSectionManager from "./InputSectionManager";
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledDiv: { Row },
@@ -12,27 +12,20 @@ export default ({
   backLinkButton,
   forwardLinkButton,
   inputPropsGenerator,
-  handleOnChange,
-  localState,
+  handleOnChange
 }) => {
   return (
     <InputFormContainer>
-      {Array.isArray(inputPropsGenerator(handleOnChange, localState)) ? (
-        <InputSectionManager
-          sectionHeaderProps={""}
-          inputProps={inputPropsGenerator(handleOnChange, localState)}
-        />
-      ) : (
-        Object.entries(inputPropsGenerator(handleOnChange, localState)).map(
-          (section, idx) => (
-            <InputSectionManager
-              key={idx}
-              sectionHeaderProps={section[0]}
-              inputProps={section[1]}
-            />
-          )
-        )
-      )}
+    {
+      inputPropsGenerator.map(({ sectionTitle, inputProps }, idx) => (
+      <InputSectionManager
+        key={ idx }
+        sectionHeaderProps={ sectionTitle }
+        inputProps={ inputProps }
+        handleOnChange={ handleOnChange }
+      />
+      ))
+    }
       <Row>
         <LinkButton to={backLinkButton.link}>
           {backLinkButton.destination}

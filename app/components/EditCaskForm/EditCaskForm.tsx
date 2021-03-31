@@ -9,7 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../Header/PageHeader'
-import InputForm from './InputForm';
+import InputForm from '../Form/InputForm';
 import * as StyledComponents from '../styledcomponents/index';
 const { StyledDiv: { Column } } = StyledComponents;
 
@@ -19,7 +19,6 @@ const {
   activeCaskThunks: { getActiveCask }
 } = thunks;
 
-import { editCaskInputProps } from '../../inputProps';
 import { createButton } from '../../buttonProps';
 
 import {
@@ -37,6 +36,14 @@ export default () => {
     id,
     name,
     caskNumber,
+    price,
+    age,
+    date,
+    region,
+    caskType,
+    bottleOutturn,
+    allocation,
+    description
   } = activeCask
   const [ isEdited, setIsEdited ] = useState(false);
 
@@ -69,14 +76,9 @@ export default () => {
 
   const { caskId } = useParams<ParamTypes>()
 
-  useEffect(() => {
-    dispatch(getActiveCask(caskId))
-  }, [])
-  useEffect(() => checkLocalStateEdit(initialState, localState), [activeCask, localState])
-  useEffect(() => {
-    Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] }))
-  }, [activeCask])
-
+  useEffect(() => { dispatch(getActiveCask(caskId)) }, [])
+  useEffect(() => { checkLocalStateEdit(initialState, localState) }, [activeCask, localState])
+  useEffect(() => { Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] })) }, [activeCask])
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
 
@@ -104,18 +106,106 @@ export default () => {
     }
   }
 
+  const editCaskInputProps = [
+    {
+      sectionTitle: "Header",
+      inputProps: [
+        [
+          {
+            label: "Cask Number",
+            type: "text",
+            name: "caskNumber",
+            size: "large",
+            value: localState.caskNumber,
+          },
+          {
+            label: "Name",
+            type: "text",
+            name: "name",
+            size: "large",
+            value: localState.name,
+          },
+        ],
+        {
+          label: "Price",
+          type: "text",
+          name: "price",
+          size: "small",
+          value: localState.price,
+        },
+      ],
+    },
+    {
+      sectionTitle: "Body",
+      inputProps: [
+        [
+          {
+            label: "Age",
+            type: "text",
+            name: "age",
+            size: "large",
+            value: localState.age,
+          },
+          {
+            label: "Date",
+            type: "text",
+            name: "date",
+            size: "large",
+            value: localState.date,
+          },
+        ],
+        {
+          label: "Region",
+          type: "text",
+          name: "region",
+          size: "medium",
+          value: localState.region,
+        },
+        {
+          label: "Cask Type",
+          type: "text",
+          name: "caskType",
+          size: "medium",
+          value: localState.caskType,
+        },
+        [
+          {
+            label: "Outturn",
+            type: "text",
+            name: "bottleOutturn",
+            size: "small",
+            value: localState.bottleOutturn,
+          },
+          {
+            label: "Allocation",
+            type: "text",
+            name: "allocation",
+            size: "small",
+            value: localState.allocation,
+          },
+        ],
+        {
+          label: "Tasting Note",
+          type: "text",
+          name: "description",
+          size: "medium",
+          value: localState.description,
+        },
+      ],
+    },
+  ]
+
   const inputFormProps = {
     backLinkButton: {
       link: '#',
       destination: ''
     },
     forwardLinkButton: {
-      link: `/edit/${id}/step2`,
+      link: activeCask.id ? `/edit/${id}/step2` : `/cask`,
       destination: 'Next >'
     },
-    inputPropsGenerator: { editCaskInputProps },
-    handleOnChange: { handleOnChange },
-    localState: { localState }
+    inputPropsGenerator: editCaskInputProps,
+    handleOnChange,
   }
 
   return (

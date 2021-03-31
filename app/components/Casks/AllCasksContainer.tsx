@@ -27,9 +27,8 @@ const {
 import * as thunks from '../../redux/thunks';
 const { casksThunks: { getCasks } } = thunks;
 
-import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
 import { createModalButton, createButton } from '../../buttonProps';
-import { AllCaskContainerPageHeaderProps } from '../../pageHeaderProps';
+import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
 
 export default () => {
 
@@ -52,21 +51,53 @@ export default () => {
     dispatch(resetFilters())
   }, [])
 
-  useEffect(() => { dispatch(getCasks(sort, searchFilters)) }, [sort, searchFilters]);
+  useEffect(() => {
+    dispatch(getCasks(sort, searchFilters))
+  }, [sort, searchFilters]);
+
+  const pageHeaderProps = {
+    subNavigationProps: {
+      link: '#',
+      destination: ''
+    },
+    toolbarProps: {
+      pageTitle: 'All Casks',
+      addButtonProps: {
+        variant: 'primary',
+        onClickProps: createModalButton('+ Add a cask', createCaskModal(null, sort, searchFilters)) 
+      },
+      deleteButtonProps: {
+        variant: 'secondary',
+        disabled: !markedCasks.length,
+        onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask, null, sort))
+      }
+    }
+  };
+
+  const resetFilterButtonProps = {
+    variant: 'tertiary',
+    disabled: !searchFilters.length,
+    onClickFunctionProps: createButton(resetFilters, 'X Clear Filters') 
+  };
+
+  const setIsOpenButtonProps = {
+    size: 'default',
+    variant: 'default',
+    dispatchToStore: false,
+    onClickFunctionProps: createButton(setIsOpen, isOpen ? 'Collapse Filters' : 'Show Filters', !isOpen)
+  }
+
+  const showMoreButtonProps = {
+    size: 'default',
+    variant: 'secondary',
+    disabled: !!isLoading,
+    dispatchToStore: false,
+    onClickFunctionProps: createButton(setShowMore, 'Show More', showMore + 6)
+  }
 
   return (
     <div>
-      <PageHeader
-        { ...AllCaskContainerPageHeaderProps({
-          createModalButton,
-          createCaskModal,
-          sort,
-          searchFilters,
-          markedCasks,
-          deleteManyCasksModal,
-          activeCask,
-        }) }
-      />
+      <PageHeader { ...pageHeaderProps } />
       <Row justifyContent='space-between'>
         <Select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
           <option value='ascending'>Ascending</option>
@@ -88,25 +119,12 @@ export default () => {
         }
         {
           searchFilters.length
-          ? <ButtonManager 
-            variant='tertiary'
-            disabled={ !searchFilters.length }
-            onClickFunctionProps={ createButton(resetFilters, 'X Clear Filters') }
-          />
+          ? <ButtonManager { ...resetFilterButtonProps }/>
           : null
         }
         <div>
-          <ButtonManager
-            size='default'
-            variant='default'
-            dispatchToStore={ false }
-            onClickFunctionProps={ createButton(setIsOpen, isOpen ? 'Collapse Filters' : 'Show Filters', !isOpen) }
-          />
-          {
-            isOpen
-            ? <FilterMenu />
-            : null
-          }
+          <ButtonManager { ...setIsOpenButtonProps }/>
+          { isOpen ? <FilterMenu /> : null }
         </div>
         </Row>
       </Row>
@@ -119,13 +137,7 @@ export default () => {
         }
         {
           showMore < allCasks.length
-        ? <ButtonManager
-            size='default'
-            variant='secondary'
-            disabled={ !!isLoading }
-            dispatchToStore={ false }
-            onClickFunctionProps={ createButton(setShowMore, 'Show More', showMore + 6) }
-          />
+        ? <ButtonManager { ...showMoreButtonProps }/>
         : null
         }
       </List>
