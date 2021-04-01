@@ -21,7 +21,8 @@ import * as actions from '../../redux/actions';
 const {
   activeCaskActions: { resetActiveCask },
   markCaskActions: { resetMarkedCasks },
-  searchFilterActions: { removeFilter, resetFilters }
+  searchFilterActions: { removeFilter, resetFilters },
+  activeOutturnActions: { resetActiveOutturn }
 } = actions;
 
 import * as thunks from '../../redux/thunks';
@@ -46,9 +47,10 @@ export default () => {
   } = useTypedSelector(state => state);
   
   useEffect(() => { 
-    dispatch(resetActiveCask())
-    dispatch(resetMarkedCasks())
-    dispatch(resetFilters())
+    dispatch(resetActiveCask());
+    dispatch(resetMarkedCasks());
+    dispatch(resetFilters());
+    dispatch(resetActiveOutturn());
   }, [])
 
   useEffect(() => {
@@ -57,8 +59,8 @@ export default () => {
 
   const pageHeaderProps = {
     subNavigationProps: {
-      link: '#',
-      destination: ''
+      link: '/',
+      destination: '< Back'
     },
     toolbarProps: {
       pageTitle: 'All Casks',

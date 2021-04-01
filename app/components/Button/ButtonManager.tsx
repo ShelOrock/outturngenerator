@@ -18,7 +18,7 @@ export default ({
 }: ButtonProps) => {
   const dispatch = useDispatch();
   const { isLoading } = useTypedSelector((state) => state);
-
+  
   return onClickFunctionProps.onClickFunction ? (
     <Button
       size={size || "default"}

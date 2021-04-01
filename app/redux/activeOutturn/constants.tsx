@@ -1,1 +1,3 @@
 export const SET_ACTIVE_OUTTURN = Symbol('SET_ACTIVE_OUTTURN');
+
+export const RESET_ACTIVE_OUTTURN = Symbol('RESET_ACTIVE_OUTTURN');

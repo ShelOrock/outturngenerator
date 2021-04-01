@@ -36,14 +36,6 @@ export default () => {
     id,
     name,
     caskNumber,
-    price,
-    age,
-    date,
-    region,
-    caskType,
-    bottleOutturn,
-    allocation,
-    description
   } = activeCask
   const [ isEdited, setIsEdited ] = useState(false);
 
@@ -75,14 +67,14 @@ export default () => {
   const [ localState, dispatchLocally ] = useReducer(reducer, initialState)
 
   const { caskId } = useParams<ParamTypes>()
-
+  
   useEffect(() => { dispatch(getActiveCask(caskId)) }, [])
-  useEffect(() => { checkLocalStateEdit(initialState, localState) }, [activeCask, localState])
+  useEffect(() => { checkLocalStateEdit(activeCask, localState) }, [activeCask, localState])
   useEffect(() => { Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] })) }, [activeCask])
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
 
-  const checkLocalStateEdit = (previousState: typeof localState, currentState: typeof localState): void => {
+  const checkLocalStateEdit = (previousState: typeof activeCask, currentState: typeof localState): void => {
     setIsEdited(false);
 
     Object.keys(previousState).forEach(key => {
@@ -90,7 +82,7 @@ export default () => {
         if(previousState[key] !== currentState[key]) setIsEdited(true);
       };
     });
-  }
+  };
 
   const pageHeaderProps = {
     subNavigationProps: {
@@ -101,7 +93,13 @@ export default () => {
       pageTitle: `Editing Cask ${ caskNumber } ${ name }`,
       addButtonProps: {
         disabled: !isEdited,
-        onClickProps: createButton(editCask, 'Save', id, localState) 
+        onClickProps: createButton(editCask, 'Save Changes', id, localState) 
+      },
+      deleteButtonProps: {
+        variant: 'secondary',
+        disabled: !isEdited,
+        dispatchToStore: false,
+        onClickProps: createButton(setIsEdited, 'Cancel Changes', false)
       }
     }
   }
@@ -201,7 +199,7 @@ export default () => {
       destination: ''
     },
     forwardLinkButton: {
-      link: activeCask.id ? `/edit/${id}/step2` : `/cask`,
+      link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: 'Next >'
     },
     inputPropsGenerator: editCaskInputProps,

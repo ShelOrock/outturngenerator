@@ -78,24 +78,27 @@ export default () => {
 
   const checkAllCasksCheckboxProps = {
     type: 'checkbox',
-    checked: casks && casks.length && casks.length === markedCasks.length,
+    checked: casks && casks.length && casks.length == markedCasks.length || false,
     onChange: handleAllCasksOnCheck
   }
 
   const editManyCasksButtonProps = {
     variant: 'primary',
     disabled: !isEdited,
+    dispatchToStore: true,
     onClickFunctionProps: createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder)
   }
 
   const cancelChangesButtonProps = {
     variant: 'secondary',
     disabled: !isEdited,
+    dispatchToStore: false,
     onClickFunctionProps: createButton(setLocalCaskOrder, 'Cancel', casks)
   }
 
   const generateOutturnButtonProps = { 
     variant: 'primary',
+    dispatchToStore: false,
     onClickFunctionProps: createButton(generateOutturn(activeOutturn), "Generate Outturn") 
   }
 

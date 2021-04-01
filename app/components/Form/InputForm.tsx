@@ -26,7 +26,7 @@ export default ({
       />
       ))
     }
-      <Row>
+      <Row justifyContent='flex-end'>
         <LinkButton to={backLinkButton.link}>
           {backLinkButton.destination}
         </LinkButton>

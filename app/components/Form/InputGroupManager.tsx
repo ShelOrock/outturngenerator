@@ -9,7 +9,7 @@ const {
 export default ({ inputProps, handleOnChange }) => {
   return (
     <Row>
-      { inputProps.map((input, idx) => <InputManager key={ idx } { ...input } handleOnChange={ handleOnChange }/> ) }
+      {inputProps.map((input, idx) => <InputManager key={idx} {...input} handleOnChange={handleOnChange} />)}
     </Row>
   );
 };

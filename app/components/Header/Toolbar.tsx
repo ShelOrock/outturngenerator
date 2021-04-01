@@ -17,6 +17,7 @@ export default ({
     size: addButtonProps.size,
     disabled: addButtonProps.disabled,
     variant: addButtonProps.variant,
+    dispatchToStore: addButtonProps.dispatchToStore,
     onClickFunctionProps: addButtonProps.onClickProps
   }
 
@@ -24,6 +25,7 @@ export default ({
     size: deleteButtonProps.size,
     disabled: deleteButtonProps.disabled,
     variant: deleteButtonProps.variant,
+    dispatchToStore: deleteButtonProps.dispatchToStore,
     onClickFunctionProps: deleteButtonProps.onClickProps  
   }
 

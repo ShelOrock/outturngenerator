@@ -50,7 +50,7 @@ export default () => {
     Object.keys(activeCask).length
       ? (
     <MainDiv>
-      <LinkButton to={ `/edit/${ activeCask.id }/step1` }>Edit</LinkButton>
+      <LinkButton to={ `/edit/${ activeCask.id }` }>Edit</LinkButton>
           <Row>
             <Row>
               <ImageContainer>Insert image here</ImageContainer>

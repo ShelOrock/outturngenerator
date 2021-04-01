@@ -28,3 +28,8 @@ export const Column = styled.div`
   ${ RowsAndColumns }
   flex-direction: column;
 `;
+
+export const HorizontalRule = styled.hr`
+  width: 100%;
+  color: ${ ({ theme: { colors } }) => colors.lightgray }
+`
