@@ -5,12 +5,12 @@ import { useTypedSelector } from "../../utils";
 
 import PageHeader from "../Header/PageHeader";
 import ButtonManager from "../Button/ButtonManager";
+import SelectManager from '../Select/SelectManager';
 import OutturnCard from "./OutturnCard";
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledCard: { CardsContainer },
   StyledDiv: { Column },
-  StyledForm: { Select },
 } = StyledComponents;
 
 import * as actions from "../../redux/actions";
@@ -73,6 +73,21 @@ export default () => {
     },
   };
 
+  const sortOutturnSelectProps = {
+    selectValue: sort,
+    onChangeFunction: (e) => setSort(e.target.value),
+    options: [
+      {
+        value: 'newest',
+        name: 'Newest'
+      },
+      {
+        value: 'oldest',
+        name: 'Oldest'
+      }
+    ]
+  }
+
   const showMoreButtonProps = {
     size: "default",
     variant: "secondary",
@@ -85,15 +100,7 @@ export default () => {
     <div>
       <Column>
         <PageHeader {...pageHeaderProps} />
-        <Select
-          id="sortBy"
-          name="sortBy"
-          value={sort}
-          onChange={(e) => setSort(e.target.value)}
-        >
-          <option value="newest">Newest</option>
-          <option value="oldest">Oldest</option>
-        </Select>
+        <SelectManager { ...sortOutturnSelectProps }/>
       </Column>
       <Column alignItems="center">
         <CardsContainer>

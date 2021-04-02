@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface SelectProps {
+  flavourProfile?: string;
+}
+
 export const FormContainer = css`
   width: 60vw;
   margin: auto;
@@ -66,24 +70,23 @@ export const Checkbox = styled.input`
   margin: 1rem;
 `
 
-export const Select = styled.select`
+export const Select = styled.select<SelectProps>`
   width: 125px;
-  background-color: ${ ({ theme: { colors } }) => colors.white };
-  color: ${ ({ theme: { colors } }) => colors.primary };
+  background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.white };
+  color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };
   border: none;
   border-radius: 3px;
   padding: 1rem;
   margin: 1rem 2rem;
 
   &:focus {
-    border: 1px solid ${ ({ theme: { colors } }) => colors.primary };
+    border: 1px solid ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };
     outline: none;
   }
 
 `;
 
 export const Option = styled.option`
-  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
   color: ${ ({ theme: { colors } }) => colors.primary };
   padding: 1rem;
   border: 1px solid black;

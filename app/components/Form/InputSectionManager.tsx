@@ -2,6 +2,7 @@ import * as React from "react";
 
 import InputGroupManager from "./InputGroupManager";
 import InputManager from "./InputManager";
+import SelectManager from "../Select/SelectManager";
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledType: { Subheader },
@@ -20,12 +21,14 @@ export default ({ sectionHeaderProps, inputProps, handleOnChange }) => {
                 inputProps={ ...input }
                 handleOnChange={ handleOnChange }
               />
-            : <InputManager
+            : input.type == 'select' 
+              ? <SelectManager key={ idx } { ...input }/>
+              : <InputManager
                 key={ idx }
                 { ...input }
                 handleOnChange={ handleOnChange }
               />
-          ) }
+            ) }
         </Column>
       </Row>
       <HorizontalRule />

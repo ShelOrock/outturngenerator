@@ -5,7 +5,7 @@ interface FlavourPillPropTypes {
 }
 
 export const FlavourPillStyles = css<FlavourPillPropTypes>`
-  background ${ ({ flavourProfile, theme: { colors } }) => colors[flavourProfile]}
+  background ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] }
 `;
 
 export const FlavourPill = styled.div<FlavourPillPropTypes>`

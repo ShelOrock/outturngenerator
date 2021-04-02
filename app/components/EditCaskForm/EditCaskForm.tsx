@@ -6,7 +6,7 @@ const {
 } = React;
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils';
+import { useTypedSelector, flavourProfiles } from '../../utils';
 
 import PageHeader from '../Header/PageHeader'
 import InputForm from '../Form/InputForm';
@@ -43,6 +43,7 @@ export default () => {
     name: '',
     caskNumber: '',
     price: '',
+    flavourProfile: 'Choose a flavour Profile',
     age: '',
     date: '',
     region: '',
@@ -52,8 +53,11 @@ export default () => {
     description: '',
   };
 
-  const reducer: LocalReducerFunctionType<typeof initialState> = (state = initialState, action) => {
+  const reducer: LocalReducerFunctionType<any> = (state = initialState, action) => {
     switch (action.name) {
+      case 'CANCEL_CHANGES':
+        return activeCask;
+
       case `${ action.name }`:
         return {
           ...state,
@@ -99,7 +103,7 @@ export default () => {
         variant: 'secondary',
         disabled: !isEdited,
         dispatchToStore: false,
-        onClickProps: createButton(setIsEdited, 'Cancel Changes', false)
+        onClickProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
       }
     }
   }
@@ -130,6 +134,21 @@ export default () => {
           name: "price",
           size: "small",
           value: localState.price,
+        },
+        {
+          type: 'select',
+          selectValue: localState.flavourProfile,
+          onChangeFunction: (e) => dispatchLocally({ name: 'flavourProfile', value: e.target.value}),
+          options: [
+            {
+              value: 'Choose a Flavour Profile',
+              name: 'Choose a Flavour Profile'
+            },
+            ...flavourProfiles.map(flavourProfile => ({
+              value: flavourProfile,
+              name: flavourProfile
+            }))         
+          ]
         },
       ],
     },

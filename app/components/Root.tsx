@@ -3,9 +3,9 @@ const { useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from './Home';
 import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
+import AllOutturnsContainer from './Outturns/AllOutturnContainer';
 import AllCasksContainer from './Casks/AllCasksContainer';
 import CasksContainer from './OutturnCasks/CasksContainer';
 import EditHeader from './EditCaskForm/EditCaskForm';
@@ -34,7 +34,7 @@ export default () => {
       <Router>
         <Navigation />
         <Switch>
-          <Route exact path='/' component={ Home } />
+          <Route exact path='/' component={ AllOutturnsContainer } />
           <Route exact path='/login' component={ Login } />
           <Route exact path='/casks' component={ AllCasksContainer } />
           <Route exact path='/outturn/:outturnId' component={ CasksContainer }/>

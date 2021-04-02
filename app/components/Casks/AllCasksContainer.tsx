@@ -6,6 +6,7 @@ import { useTypedSelector } from '../../utils';
 import PageHeader from '../Header/PageHeader';
 import FilterMenu from '../FilterMenu/FilterMenu';
 
+import SelectManager from '../Select/SelectManager';
 import ButtonManager from '../Button/ButtonManager';
 import CaskListItem from '../OutturnCasks/CaskListItem';
 import ActiveCask from '../OutturnCasks/ActiveCask';
@@ -13,7 +14,6 @@ import AssociatedOutturn from './AssociatedOutturn';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledDiv: { Column, Row },
-  StyledForm: { Select },
   StyledCask: { List },
 } = StyledComponents;
 
@@ -76,6 +76,29 @@ export default () => {
     }
   };
 
+  const sortCasksSelectProps = {
+    selectValue: sort,
+    onChangeFunction: (e) => setSort(e.target.value),
+    options: [
+      {
+        value: 'ascending',
+        name: 'Ascending'
+      },
+      {
+        value: 'descending',
+        name: 'Descending',
+      },
+      {
+        value: 'newest',
+        name: 'Newest'
+      },
+      {
+        value: 'oldest',
+        name: 'Oldest'
+      },
+    ]
+  }
+
   const resetFilterButtonProps = {
     variant: 'tertiary',
     disabled: !searchFilters.length,
@@ -101,12 +124,7 @@ export default () => {
     <div>
       <PageHeader { ...pageHeaderProps } />
       <Row justifyContent='space-between'>
-        <Select id='sortBy' name='sortBy' value={ sort } onChange={ e => setSort(e.target.value) }>
-          <option value='ascending'>Ascending</option>
-          <option value='descending'>Descending</option>
-          <option value='newest'>Newest</option>
-          <option value='oldest'>Oldest</option>
-        </Select>
+        <SelectManager { ...sortCasksSelectProps }/>
         <Row>
         {
           searchFilters.length

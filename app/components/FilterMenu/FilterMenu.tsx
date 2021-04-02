@@ -1,6 +1,6 @@
 import * as React from "react";
 const { useEffect, useReducer } = React;
-import { useTypedSelector } from "../../utils";
+import { useTypedSelector, flavourProfiles } from "../../utils";
 
 import ButtonManager from "../Button/ButtonManager";
 import * as StyledComponents from "../styledcomponents/index";
@@ -81,18 +81,3 @@ export default () => {
     </FilterContainer>
   );
 };
-
-const flavourProfiles = [
-  "Young & spritely",
-  "Sweet, fruity & mellow",
-  "Spicy & sweet",
-  "Spicy & dry",
-  "Deep, rich & dried fruits",
-  "Old & dignified",
-  "Light & delicate",
-  "Juicy, oak & vanilla",
-  "Oily & coastal",
-  "Lightly peated",
-  "Peated",
-  "Heavily peated",
-];

@@ -99,7 +99,7 @@ export default () => {
   const generateOutturnButtonProps = { 
     variant: 'primary',
     dispatchToStore: false,
-    onClickFunctionProps: createButton(generateOutturn(activeOutturn), "Generate Outturn") 
+    onClickFunctionProps: createButton(generateOutturn, "Generate Outturn", activeOutturn) 
   }
 
   return (

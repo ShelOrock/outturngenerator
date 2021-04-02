@@ -2,7 +2,7 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import 'styled-components';
 
-const theme = {
+export const theme = {
   colors: {
     black: 'black',
     white: 'white',
