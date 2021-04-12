@@ -4,7 +4,15 @@ interface DivProps {
   alignItems?: string;
   justifyContent?: string;
   flexWrap?: string;
+  flexGrow?: string;
   width?: string;
+}
+
+interface PaddedDivProps {
+  paddingTop?: string;
+  paddingRight?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
 }
 
 export const MainDiv = styled.div`
@@ -17,11 +25,12 @@ const RowsAndColumns = css<DivProps>`
   justify-content: ${ ({ justifyContent }) => justifyContent };
   align-items: ${ ({ alignItems }) => alignItems };
   flex-wrap: ${ ({ flexWrap }) => flexWrap || 'nowrap' };
+  flex-grow: ${ ({ flexGrow }) => flexGrow || '0' };  
+  width: ${ ({ width }) => width || 'auto' };
 `;
 
 export const Row = styled.div`
   ${ RowsAndColumns }
-  width: ${ ({ width }) => width || 'auto' };
 `;
 
 export const Column = styled.div`
@@ -32,4 +41,8 @@ export const Column = styled.div`
 export const HorizontalRule = styled.hr`
   width: 100%;
   color: ${ ({ theme: { colors } }) => colors.lightgray }
+`
+
+export const PaddedDiv = styled.div<PaddedDivProps>`
+  padding: ${ (props) => `${ props.paddingTop || 0 } ${ props.paddingRight || 0 } ${ props.paddingBottom || 0 } ${ props.paddingLeft || 0 }` }
 `

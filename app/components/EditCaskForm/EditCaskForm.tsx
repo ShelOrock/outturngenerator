@@ -6,7 +6,7 @@ const {
 } = React;
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector, flavourProfiles } from '../../utils';
+import { useTypedSelector, createButton, flavourProfiles } from '../../utils';
 
 import PageHeader from '../Header/PageHeader'
 import InputForm from '../Form/InputForm';
@@ -19,8 +19,6 @@ const {
   activeCaskThunks: { getActiveCask }
 } = thunks;
 
-import { createButton } from '../../buttonProps';
-
 import {
   InputOnChangeType,
   LocalReducerFunctionType,
@@ -31,13 +29,12 @@ export default () => {
 
   const dispatch = useDispatch();
 
-  const { activeCask, activeOutturn } = useTypedSelector(state => state); 
+  const { activeCask, activeOutturn, allOutturns } = useTypedSelector(state => state); 
   const {
     id,
     name,
     caskNumber,
   } = activeCask
-  const [ isEdited, setIsEdited ] = useState(false);
 
   const initialState = {
     name: '',
@@ -51,8 +48,8 @@ export default () => {
     bottleOutturn: '',
     allocation: '',
     description: '',
+    outturnId: '',
   };
-
   const reducer: LocalReducerFunctionType<any> = (state = initialState, action) => {
     switch (action.name) {
       case 'CANCEL_CHANGES':
@@ -69,12 +66,12 @@ export default () => {
   };
 
   const [ localState, dispatchLocally ] = useReducer(reducer, initialState)
-
+  const [ isEdited, setIsEdited ] = useState(false);
   const { caskId } = useParams<ParamTypes>()
   
   useEffect(() => { dispatch(getActiveCask(caskId)) }, [])
   useEffect(() => { checkLocalStateEdit(activeCask, localState) }, [activeCask, localState])
-  useEffect(() => { Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] })) }, [activeCask])
+  useEffect(() => { Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] == null ? '' : activeCask[item] })) }, [activeCask])
 
   const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
 
@@ -83,7 +80,13 @@ export default () => {
 
     Object.keys(previousState).forEach(key => {
       if(key !== 'updatedAt') {
-        if(previousState[key] !== currentState[key]) setIsEdited(true);
+        if(key !== 'outturnId') {
+          if(previousState[key] !== currentState[key]) setIsEdited(true);
+        } else {
+          if(!!previousState[key] || !!currentState[key]) {
+            if(!!previousState[key] !== !!currentState[key] || previousState[key] !== currentState[key]) setIsEdited(true); 
+          }
+        }
       };
     });
   };
@@ -108,7 +111,7 @@ export default () => {
     }
   }
 
-  const editCaskInputProps = [
+  const caskFormInputProps = [
     {
       sectionTitle: "Header",
       inputProps: [
@@ -138,7 +141,9 @@ export default () => {
         {
           type: 'select',
           selectValue: localState.flavourProfile,
+          label: 'Flavour Profile',
           onChangeFunction: (e) => dispatchLocally({ name: 'flavourProfile', value: e.target.value}),
+          width: '200px',
           options: [
             {
               value: 'Choose a Flavour Profile',
@@ -175,14 +180,14 @@ export default () => {
           label: "Region",
           type: "text",
           name: "region",
-          size: "medium",
+          size: "large",
           value: localState.region,
         },
         {
           label: "Cask Type",
           type: "text",
           name: "caskType",
-          size: "medium",
+          size: "large",
           value: localState.caskType,
         },
         [
@@ -203,27 +208,60 @@ export default () => {
         ],
         {
           label: "Tasting Note",
-          type: "text",
+          type: "textArea",
           name: "description",
-          size: "medium",
+          size: "large",
           value: localState.description,
         },
       ],
     },
-  ]
+    {
+      sectionTitle: 'Outturn',
+      inputProps: [
+        {
+          type: 'select',
+          selectValue: localState.outturnId,
+          label: 'Choose an Outturn',
+          onChangeFunction: (e) => dispatchLocally({ name: 'outturnId', value: e.target.value}),
+          width: '250px',
+          options: [
+            {
+              value: '',
+              name: 'No Associated Outturn'
+            },
+            ...allOutturns.map(outturn => ({
+              value: outturn.id,
+              name: outturn.name
+            }))
+          ],
+        },
+      ],
+    },
+  ];
 
   const inputFormProps = {
     backLinkButton: {
-      link: '#',
-      destination: ''
+      link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
+      destination: `< Return to ${ activeOutturn.id ? 'Outturn' : 'Cask List' }`
     },
     forwardLinkButton: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: 'Next >'
     },
-    inputPropsGenerator: editCaskInputProps,
+    confirmButton: {
+      disabled: !isEdited,
+      onClickFunctionProps: createButton(editCask, 'Save Changes', id, localState) 
+    },
+    cancelButton: {
+      variant: 'secondary',
+      disabled: !isEdited,
+      dispatchToStore: false,
+      onClickFunctionProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
+    },
+    inputPropsGenerator: caskFormInputProps,
     handleOnChange,
   }
+
 
   return (
     <Column>

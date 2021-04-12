@@ -33,18 +33,10 @@ export default ({
   <Row justifyContent="space-between">
     <Row alignItems="center">
       <PageTitle>{ pageTitle }</PageTitle>
-      {
-      Object.keys(addButtonProps).length
-      ? <ButtonManager { ...addButton } />
-      : null
-      }
+      { !!Object.keys(addButtonProps).length && <ButtonManager { ...addButton } /> }
     </Row>
     <Row alignItems='center'>
-    {
-      Object.keys(deleteButtonProps).length
-      ? <ButtonManager { ...deleteButton }/>
-      : null
-    }
+    { !!Object.keys(deleteButtonProps).length && <ButtonManager { ...deleteButton }/> }
     </Row>
   </Row>
 )};

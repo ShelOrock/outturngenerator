@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 interface SelectProps {
   flavourProfile?: string;
+  width?: string;
 }
 
 export const FormContainer = css`
@@ -39,12 +40,11 @@ export const InputModule = styled.div`
 
 export const InputLabel = styled.label`
   color: ${ ({ theme: { colors } }) => colors.darkgray };
-  padding: 1rem, 0.5rem;
+  padding: 0.5rem 0;
 `
 
 export const InputField = styled.input`
-  margin: 0.5rem 0;
-  padding: 0 0.5rem;
+  padding: 0.25rem;
   height: 1.7rem;
   width: ${ ({ size, theme: { input } }) => size ? input.size[size].width : input.size.default.width };
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };
@@ -57,9 +57,15 @@ export const InputField = styled.input`
 `
 
 export const TextArea = styled.textarea`
+  background-color: ${ ({ theme: { colors } }) => colors.lightgray };
+  border: none;
+  margin: 0.5rem 1rem 0.5rem 0;
   padding: 0.5rem;
-  height: 4rem;
+  font-family: Roboto;
+  height: 6rem;
+  width: 60%;
   resize: none;
+ 
 
   &focus: {
     border: 1px solid #204468;
@@ -71,13 +77,13 @@ export const Checkbox = styled.input`
 `
 
 export const Select = styled.select<SelectProps>`
-  width: 125px;
+  width: ${ ({ width }) => width || '125px' };
   background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.white };
   color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };
   border: none;
   border-radius: 3px;
   padding: 1rem;
-  margin: 1rem 2rem;
+  box-shadow: 0px 4px 8px #D5D5D5;
 
   &:focus {
     border: 1px solid ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };

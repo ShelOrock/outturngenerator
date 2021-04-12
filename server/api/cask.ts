@@ -105,6 +105,8 @@ router.post('/create-new-cask', (req: Request, res: Response, next: NextFunction
 });
 
 router.put('/:caskId', (req: Request, res: Response, next: NextFunction) => {
+  if(!req.body.outturnId) req.body.outturnId = null;
+
   Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {

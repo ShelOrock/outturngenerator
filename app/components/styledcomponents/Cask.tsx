@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface FlavourPillPropTypes {
   flavourProfile?: string;
+  width?: string;
 }
 
 export const List = styled.div`
@@ -30,8 +31,13 @@ export const CaskListItemButton = styled.div`
 `;
 
 export const FlavourPill = styled.div<FlavourPillPropTypes>`
-  background: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default };
-  padding: 35px 10px;
+  background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default };
+  color: white;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  max-width: 200px;
+  border-radius: 100px;
+  margin: 0.5rem 0;
 `
 
 export const ActiveCaskHeader = styled.div`

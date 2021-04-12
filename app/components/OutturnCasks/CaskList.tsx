@@ -2,10 +2,10 @@ import * as React from "react";
 const { useState, useEffect } = React;
 import { useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { useTypedSelector, generateOutturn } from "../../utils";
+import { useTypedSelector, createButton, generateOutturn } from "../../utils";
 
 import CaskListItemContainer from "./CaskListItemContainer";
-import ActiveCask from './ActiveCask';
+import ActiveCaskContainer from './ActiveCaskContainer';
 import ButtonManager from "../Button/ButtonManager";
 import * as StyledComponents from "../styledcomponents/index";
 const {
@@ -23,8 +23,6 @@ import * as thunks from '../../redux/thunks';
 const {
   casksThunks: { editManyCasks }
 } = thunks;
-
-import { createButton } from "../../buttonProps";
 
 import { InputOnChangeType } from "../../types/index";
 
@@ -102,6 +100,23 @@ export default () => {
     onClickFunctionProps: createButton(generateOutturn, "Generate Outturn", activeOutturn) 
   }
 
+  const renderCaskListItemContainerProps = () => (
+    localCaskOrder.map((cask, idx) => (
+      <CaskListItemContainer
+        key={cask.id}
+        index={idx}
+        cask={cask}
+      />
+    ))
+  );
+
+  const renderDragDropProvided = provided => (
+    <div ref={provided.innerRef} {...provided.droppableProps}>
+      {localCaskOrder && renderCaskListItemContainerProps() }
+      {provided.placeholder}
+    </div>
+  )
+
   return (
     <Column justifyContent='center'>
       <Row alignItems='center'>
@@ -109,23 +124,18 @@ export default () => {
         <ButtonManager { ...editManyCasksButtonProps } />
         <ButtonManager { ...cancelChangesButtonProps } />
       </Row>
-      <Row>
-        <List>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="list">
-              {provided => (
-                <div ref={provided.innerRef} {...provided.droppableProps}>
-                  {localCaskOrder
-                    ? localCaskOrder.map((cask, idx) => <CaskListItemContainer key={cask.id} index={idx} cask={cask} />)
-                    : null}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+      <Row alignItems='flex-start'>
+        <Column alignItems='center'>
+          <List>
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="list">
+                { provided => renderDragDropProvided(provided) }
+              </Droppable>
+            </DragDropContext>
+          </List>
           <ButtonManager { ...generateOutturnButtonProps } />
-        </List>
-        <ActiveCask />
+        </Column>
+        <ActiveCaskContainer />
       </Row>
     </Column>
   );

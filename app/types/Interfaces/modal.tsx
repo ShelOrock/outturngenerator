@@ -19,9 +19,9 @@ export type ModalInputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement>) =
 
 export interface ModalButton {
   type?: 'CREATE' | 'DELETE',
-  text: string;
-  arguments: any[];
-  onClickFunction: ModalFunctionOnClickType;
+  text?: string;
+  arguments?: any[];
+  onClickFunction?: ModalFunctionOnClickType;
 }
 
 export interface Modal<stateShapeTypes = CreateCaskModalState | CreateOutturnModalState> {

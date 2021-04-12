@@ -1,7 +1,7 @@
 import * as React from "react";
 const { useState, useEffect } = React;
 import { useDispatch } from "react-redux";
-import { useTypedSelector } from "../../utils";
+import { useTypedSelector, createButton } from "../../utils";
 
 import PageHeader from "../Header/PageHeader";
 import ButtonManager from "../Button/ButtonManager";
@@ -10,7 +10,7 @@ import OutturnCard from "./OutturnCard";
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledCard: { CardsContainer },
-  StyledDiv: { Column },
+  StyledDiv: { PaddedDiv, Column },
 } = StyledComponents;
 
 import * as actions from "../../redux/actions";
@@ -22,22 +22,24 @@ const {
 
 import * as thunks from "../../redux/thunks";
 const {
-  outturnsThunks: { getOutturns },
+  outturnsThunks: {
+    getOutturns,
+    addOutturn,
+    deleteManyOutturns
+  },
 } = thunks;
-
-import {
-  deleteManyOutturnsModalProps,
-  createOutturnModalProps,
-} from "../../modalProps";
-import { createButton, createModalButton } from "../../buttonProps";
 
 export default () => {
   const dispatch = useDispatch();
   const [showMore, setShowMore] = useState(6);
   const [sort, setSort] = useState("newest");
-  const { allOutturns, markedOutturns, isLoading } = useTypedSelector(
-    (state) => state
-  );
+
+  const {
+    allOutturns,
+    activeOutturn,
+    markedOutturns,
+    isLoading,
+  } = useTypedSelector((state) => state);
 
   useEffect(() => {
     dispatch(resetActiveCask());
@@ -49,6 +51,30 @@ export default () => {
     dispatch(getOutturns(sort));
   }, [sort]);
 
+  const createOutturnModalProps = {
+    modalHeader: `Creating a new outturn`,
+    stateShape: {
+      name: '',
+      description: ''
+    },
+    confirmButton: {
+      type: 'CREATE',
+      text: 'Create outturn',
+      arguments: [ sort ],
+      onClickFunction: addOutturn,
+    },
+  };
+
+  const deleteManyOutturnsModalProps = {
+    modalHeader: 'Are you sure you want to delete these outturns?',
+    confirmButton: {
+      type: 'DELETE',
+      text: 'Delete outturns',
+      arguments: [ markedOutturns, sort ],
+      onClickFunction: deleteManyOutturns,
+    },
+  };
+
   const pageHeaderProps = {
     subNavigationProps: {
       link: "#",
@@ -57,17 +83,19 @@ export default () => {
     toolbarProps: {
       pageTitle: "All Projects",
       addButtonProps: {
-        onClickProps: createModalButton(
+        onClickProps: createButton(
+          setModal,
           "+ New Project",
-          createOutturnModalProps(sort)
+          createOutturnModalProps
         ),
       },
       deleteButtonProps: {
         variant: "tertiary",
         disabled: !markedOutturns.length,
-        onClickProps: createModalButton(
+        onClickProps: createButton(
+          setModal,
           "X Delete Marked Outturns",
-          deleteManyOutturnsModalProps(markedOutturns, sort)
+          deleteManyOutturnsModalProps
         ),
       },
     },
@@ -75,7 +103,9 @@ export default () => {
 
   const sortOutturnSelectProps = {
     selectValue: sort,
+    label: '',
     onChangeFunction: (e) => setSort(e.target.value),
+    width: '150px',
     options: [
       {
         value: 'newest',
@@ -96,32 +126,32 @@ export default () => {
     onClickFunctionProps: createButton(setShowMore, "Show more", showMore + 6),
   };
 
+  const renderOutturnCards = () => (
+    allOutturns
+      .slice(0, showMore)
+      .map((outturn) => (
+        <OutturnCard
+          key={outturn.id}
+          outturn={outturn}
+          sortMethod={sort}
+        />
+      ))
+  );
+
   return (
-    <div>
+    <Column>
       <Column>
         <PageHeader {...pageHeaderProps} />
-        <SelectManager { ...sortOutturnSelectProps }/>
+        <PaddedDiv paddingLeft='1rem' paddingRight='1rem'>
+          <SelectManager { ...sortOutturnSelectProps }/>
+        </PaddedDiv>
       </Column>
       <Column alignItems="center">
         <CardsContainer>
-          {allOutturns.length
-            ? allOutturns
-                .slice(0, showMore)
-                .map((outturn) => (
-                  <OutturnCard
-                    key={outturn.id}
-                    outturn={outturn}
-                    sortMethod={sort}
-                  />
-                ))
-            : null}
+          { !!allOutturns.length && renderOutturnCards() }
         </CardsContainer>
-        {
-          showMore < allOutturns.length
-          ? <ButtonManager {...showMoreButtonProps} />
-          : null
-        }
+        { showMore < allOutturns.length && <ButtonManager {...showMoreButtonProps} /> }
       </Column>
-    </div>
+    </Column>
   );
 };

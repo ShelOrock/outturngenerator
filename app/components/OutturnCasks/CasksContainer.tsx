@@ -2,7 +2,7 @@ import * as React from 'react';
 const { useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { useTypedSelector } from '../../utils';
+import { useTypedSelector, createButton } from '../../utils';
 
 import PageHeader from '../Header/PageHeader';
 import CaskList from './CaskList'
@@ -12,13 +12,16 @@ const {
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
-const { markCaskActions: { resetMarkedCasks } } = actions;
+const {
+  markCaskActions: { resetMarkedCasks },
+  modalActions: { setModal }
+} = actions;
 
 import * as thunks from '../../redux/thunks';
-const { activeOutturnThunks: { getActiveOutturn } } = thunks;
-
-import { createModalButton } from '../../buttonProps';
-import { createCaskModal, deleteManyCasksModal } from '../../modalProps';
+const {
+  activeOutturnThunks: { getActiveOutturn },
+  casksThunks: { addNewCask, deleteManyCasks }
+} = thunks;
 
 import { ParamTypes } from '../../types/index';
 
@@ -34,6 +37,30 @@ export default () => {
     dispatch(resetMarkedCasks())
   }, []);
 
+  const createCaskModal = {
+    modalHeader: `Creating a new cask`,
+    stateShape: {
+      name: '',
+      caskNumber: '',
+    },
+    confirmButton: {
+      type: 'CREATE',
+      text: 'Create cask',
+      arguments: [ activeOutturn.id ],
+      onClickFunction: addNewCask,
+    },
+  };
+
+  const deleteManyCasksModal = {
+    modalHeader: 'Are you sure you want to delete these casks?',
+    confirmButton: {
+      type: 'DELETE',
+      text: 'Delete Casks',
+      arguments: [ markedCasks, activeCask.id, activeOutturn.id ],
+      onClickFunction: deleteManyCasks,
+    },
+  }
+
   const pageHeaderProps = {
     subNavigationProps: {
       link: '/',
@@ -42,12 +69,20 @@ export default () => {
     toolbarProps: {
       pageTitle: activeOutturn.name,
       addButtonProps: {
-        onClickProps: createModalButton('+ Add a cask', createCaskModal(activeOutturn.id))
+        onClickProps: createButton(
+          setModal,
+          '+ Add a cask',
+          createCaskModal
+        )
       },
       deleteButtonProps: {
         variant: 'tertiary',
         disabled: !markedCasks.length,
-        onClickProps: createModalButton('X Delete Marked Casks', deleteManyCasksModal(markedCasks, activeCask.id, activeOutturn.id))
+        onClickProps: createButton(
+          setModal,
+          'X Delete Marked Casks',
+          deleteManyCasksModal
+        )
       }
     }
   }

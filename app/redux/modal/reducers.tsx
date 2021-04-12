@@ -6,7 +6,11 @@ import {
   State
 } from '../../types/index';
 
-const initialState: State<Modal> = {}
+const initialState: State<any> = {
+  modalHeader: '',
+  stateShape: {},
+  confirmButton: {}
+}
 
 export const modal: ReducerFunctionType<typeof initialState, Modal> = (state = initialState, action) => {
   switch (action.type) {

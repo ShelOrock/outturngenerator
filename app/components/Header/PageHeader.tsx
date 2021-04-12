@@ -9,12 +9,28 @@ const {
 
 export default ({
   subNavigationProps: { link, destination },
-  toolbarProps: { pageTitle, addButtonProps, deleteButtonProps }
+  toolbarProps: {
+    pageTitle,
+    addButtonProps,
+    deleteButtonProps
+  }
 }: any) => {
+
+  const subNavigationProps = {
+    link,
+    destination
+  }
+
+  const toolBarProps = {
+    pageTitle,
+    addButtonProps,
+    deleteButtonProps
+  }
+
   return (
     <Column>
-      <SubNavigation link={ link } destination={ destination } />
-      <Toolbar pageTitle={ pageTitle } addButtonProps= { addButtonProps } deleteButtonProps={ deleteButtonProps } />
+      <SubNavigation { ...subNavigationProps } />
+      <Toolbar { ...toolBarProps } />
     </Column>
   )
 }

@@ -11,7 +11,11 @@ export const truncateText = (string: string): string => {
 
 export const capitalizeString = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
-export const convertFromCamelCaseToSentenceCase = (str: string): string => str.replace(/([A-Z])/g, " $1");
+export const createButton = (onClickFunction, text, ...args) => ({
+  text,
+  arguments: [ ...args ],
+  onClickFunction
+});
 
 export const flavourProfiles = [
   "Young & spritely",

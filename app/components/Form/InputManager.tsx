@@ -9,15 +9,20 @@ const {
   }
 } = StyledComponents;
 
-export default ({ label, type, size, name, value, handleOnChange }: any) => (
-  <InputModule>
-    <InputLabel>{ label }</InputLabel>
-    <InputField
-      type={ type }
-      size={ size || 'default' }
-      name={ name }
-      value={ value }
-      onChange={ handleOnChange }
-    />
-  </InputModule>
-)
+export default ({ label, type, size, name, value, handleOnChange }: any) => {
+  
+  const inputFieldProps = {
+    type,
+    size: size || 'default',
+    name,
+    value: value,
+    onChange: handleOnChange
+  }
+
+  return (
+    <InputModule>
+      <InputLabel>{ label }</InputLabel>
+      <InputField { ...inputFieldProps }/>
+    </InputModule>
+  )
+}

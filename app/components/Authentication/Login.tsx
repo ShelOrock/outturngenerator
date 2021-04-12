@@ -1,28 +1,21 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { useHistory } from 'react-router-dom';
-import { useTypedSelector } from '../../utils';
+import { useTypedSelector, createButton } from '../../utils';
 
-import InputForm from '../Form/InputForm';
+import InputForm from '../form/InputForm';
 import * as StyledComponents from '../styledcomponents/index';
 import ButtonManager from '../Button/ButtonManager';
 const {
   StyledForm: {
     LoginFormContainer,
-    InputModule,
-    InputLabel,
-    InputField
   },
 } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogin } } = thunks;
 
-import { createButton } from '../../buttonProps';
-
 import { InputOnChangeType } from '../../types/index';
-
-import { loginInputProps } from '../../inputProps'
 
 export default () => {
 
@@ -47,31 +40,49 @@ export default () => {
     })
   }
 
+  const loginFormInputProps = [
+    {
+      inputProps: [
+        {
+          label: 'Username or Email',
+          type: 'text',
+          name: 'usernameOrEmail',
+          size: 'large',
+          value: usernameOrEmail,
+        },
+        {
+          label: 'Password',
+          type: 'password',
+          name: 'password',
+          size: 'large',
+          value: password
+        }
+      ]
+    }
+  ]
+
+  const inputFormProps = {
+    backLinkButton: {
+      link: '#',
+      destination: ''
+    },
+    forwardLinkButton: {
+      link: '#',
+      destination: ''
+    },
+    inputPropsGenerator: loginFormInputProps,
+    handleOnChange
+  }
+
+  const attemptUserLoginButtonProps = {
+    dispatchToStore: true,
+    onClickFunctionProps: createButton(attemptUserLogin, 'Login', { usernameOrEmail, password })
+  }
+
   return (
     <LoginFormContainer>
-      <InputModule>
-        <InputLabel>Username or Email</InputLabel>
-        <InputField
-          type='text'
-          name='usernameOrEmail'
-          value={ usernameOrEmail }
-          onChange={ handleOnChange }
-        />
-      </InputModule>
-
-      <InputModule>
-        <InputLabel>Password</InputLabel>
-        <InputField
-          type='password'
-          name='password'
-          value={ password }
-          onChange={ handleOnChange }
-        />
-      </InputModule>
-
-      <ButtonManager
-        dispatchToStore={ true }
-        onClickFunctionProps={ createButton(attemptUserLogin, 'Login', { usernameOrEmail, password }) } />
+      <InputForm { ...inputFormProps } />
+      <ButtonManager { ...attemptUserLoginButtonProps } />
     </LoginFormContainer>
   )
 }

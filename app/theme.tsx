@@ -141,16 +141,16 @@ export const theme = {
   input: {
     size: {
       default: {
-        width: '100%',
+        width: '300px',
       },
       small: {
-        width: '20%',
+        width: '100px',
       },
       medium: {
-        width: '60%',
+        width: '200px',
       },
       large: {
-        width: '100%',
+        width: '300px',
       }
     }
   }

@@ -11,12 +11,10 @@ export interface CaskAttributes {
   date?: string;
   region?: string;
   caskType?: string;
-  grapeVariety?: string;
   abv?: string;
   bottleOutturn?: number;
   allocation?: number;
   description?: string;
-  image?: number[];
   outturnId?: string | number;
 
   readonly createdAt?: Date;

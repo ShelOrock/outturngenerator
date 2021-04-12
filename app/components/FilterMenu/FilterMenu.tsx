@@ -1,6 +1,6 @@
 import * as React from "react";
 const { useEffect, useReducer } = React;
-import { useTypedSelector, flavourProfiles } from "../../utils";
+import { useTypedSelector, createButton, flavourProfiles } from "../../utils";
 
 import ButtonManager from "../Button/ButtonManager";
 import * as StyledComponents from "../styledcomponents/index";
@@ -18,8 +18,6 @@ import * as actions from "../../redux/actions";
 const {
   searchFilterActions: { setFilters },
 } = actions;
-
-import { createButton } from "../../buttonProps";
 
 import { InputOnChangeType, LocalReducerFunctionType } from "../../types";
 
@@ -51,33 +49,36 @@ export default () => {
   );
 
   const handleOnCheck: InputOnChangeType = ({ target: { name } }) => {
-    if (localFilters.includes(name))
-      dispatchLocally({ type: "REMOVE_FILTER", value: name });
+    if (localFilters.includes(name)) dispatchLocally({ type: "REMOVE_FILTER", value: name });
     else dispatchLocally({ type: "ADD_FILTER", value: name });
   };
+
+  const setFiltersButtonProps = {
+    size: "default",
+    variant: "primary",
+    onClickFunctionProps: createButton(setFilters, "Apply Filters", localFilters)
+  }
+
+  const renderFilterListItems = () => (
+    flavourProfiles.map((flavour, idx) => (
+      <FilterListItem key={idx} flavourProfile={flavour}>
+        <Checkbox
+          type="checkbox"
+          name={flavour}
+          checked={localFilters.includes(flavour)}
+          onChange={handleOnCheck}
+        />
+        <FilterListItemLabel>{flavour}</FilterListItemLabel>
+      </FilterListItem>
+    ))
+  )
 
   return (
     <FilterContainer>
       <FilterList>
-        {flavourProfiles.map((flavour, idx) => {
-          return (
-            <FilterListItem key={idx} flavourProfile={flavour}>
-              <Checkbox
-                type="checkbox"
-                name={flavour}
-                checked={localFilters.includes(flavour)}
-                onChange={handleOnCheck}
-              />
-              <FilterListItemLabel>{flavour}</FilterListItemLabel>
-            </FilterListItem>
-          );
-        })}
+        { renderFilterListItems() }
       </FilterList>
-      <ButtonManager
-        size="default"
-        variant="primary"
-        onClickFunctionProps={createButton(setFilters, "Apply Filters", localFilters)}
-      />
+      <ButtonManager { ...setFiltersButtonProps }/>
     </FilterContainer>
   );
 };

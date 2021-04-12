@@ -28,7 +28,10 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
   Outturn.findAll({
     order: [
       [ sortByProperty, sortMethod ]
-    ]
+    ],
+    include: [{
+      model: Cask
+    }],
   })
   .then(outturnsOrNull => {
     if(!outturnsOrNull) {

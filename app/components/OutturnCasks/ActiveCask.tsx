@@ -1,33 +1,24 @@
-import * as React from 'react';
-import { useTypedSelector } from '../../utils';
+import * as React from "react";
+import { useTypedSelector } from "../../utils";
 
-import * as StyledComponents from '../styledcomponents/index';
+import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledCask: {
     FlavourStrip,
     ActiveCaskHeader,
-    ImageContainer,
+    ImageContainer
   },
-  StyledList: {
-    List,
-    ListItem
-  },
+  StyledList: { List, ListItem },
   StyledNavigation: { LinkButton },
-  StyledDiv: {
-    MainDiv,
-    Row,
-    Column,
-  },
+  StyledDiv: { Row, Column },
   StyledType: {
     Header,
     SmallListItemHeader,
     Body
-  }
-} = StyledComponents;
+  } } = StyledComponents;
 
 export default () => {
-
-  const activeCask = useTypedSelector(state => state.activeCask)
+  const activeCask = useTypedSelector((state) => state.activeCask);
 
   const {
     caskNumber,
@@ -38,78 +29,73 @@ export default () => {
     date,
     region,
     caskType,
-    grapeVariety,
     bottleOutturn,
     allocation,
-    description
-  } = activeCask
+    description,
+  } = activeCask;
 
   return (
-    <div>
-    { 
-    Object.keys(activeCask).length
-      ? (
-    <MainDiv>
-      <LinkButton to={ `/edit/${ activeCask.id }` }>Edit</LinkButton>
+    <Row>
+      { !!Object.keys(activeCask).length && (
+        <Column>
+          <LinkButton to={`/edit/${activeCask.id}`}>Edit</LinkButton>
           <Row>
             <Row>
               <ImageContainer>Insert image here</ImageContainer>
               <Column>
                 <ActiveCaskHeader>
-                  <Header textAlign='left'>CASK NO. { caskNumber ? caskNumber.toUpperCase() : null }</Header>
-                  <SmallListItemHeader textAlign='left'>{ name ? name.toUpperCase() : null }</SmallListItemHeader>
-                  <Header textAlign='left'>{ price ? `$${ price }` : null }</Header>
-                  <FlavourStrip flavourProfile={ flavourProfile }>
-                    <SmallListItemHeader color='white' textAlign='left'>{ flavourProfile ? flavourProfile.toUpperCase() : null }</SmallListItemHeader>
+                  <Header textAlign="left">
+                    CASK NO. {caskNumber && caskNumber.toUpperCase() }
+                  </Header>
+                  <SmallListItemHeader textAlign="left">
+                    {name && name.toUpperCase() }
+                  </SmallListItemHeader>
+                  <Header textAlign="left">{price && `$${price}` }</Header>
+                  <FlavourStrip flavourProfile={flavourProfile}>
+                    <SmallListItemHeader color="white" textAlign="left">
+                      { flavourProfile && flavourProfile.toUpperCase() }
+                    </SmallListItemHeader>
                   </FlavourStrip>
                 </ActiveCaskHeader>
                 <List>
-                  <Row justifyContent='space-between'>
+                  <Row justifyContent="space-between">
                     <ListItem>
                       <SmallListItemHeader>Age:</SmallListItemHeader>
-                      <Body>{ age } years</Body>
+                      <Body>{age} years</Body>
                     </ListItem>
                     <ListItem>
                       <SmallListItemHeader>Date distilled:</SmallListItemHeader>
-                      <Body>{ date }</Body>
+                      <Body>{date}</Body>
                     </ListItem>
                   </Row>
                   <ListItem>
                     <SmallListItemHeader>Region:</SmallListItemHeader>
-                    <Body>{ region }</Body>
+                    <Body>{region}</Body>
                   </ListItem>
                   <ListItem>
                     <SmallListItemHeader>Cask type:</SmallListItemHeader>
-                    <Body>{ caskType }</Body>
+                    <Body>{caskType}</Body>
                   </ListItem>
-                  { grapeVariety ? (
-                    <ListItem>
-                      <SmallListItemHeader>Grape variety:</SmallListItemHeader>
-                      <Body>{ grapeVariety }</Body>
-                    </ListItem>
-                  ) : null }
-                  <Row justifyContent='space-between'>
+                  <Row justifyContent="space-between">
                     <ListItem>
                       <SmallListItemHeader>Outturn:</SmallListItemHeader>
-                      <Body>{ bottleOutturn }</Body>
+                      <Body>{bottleOutturn}</Body>
                     </ListItem>
                     <ListItem>
                       <SmallListItemHeader>Allocation:</SmallListItemHeader>
-                      <Body>{ allocation }</Body>
+                      <Body>{allocation}</Body>
                     </ListItem>
                   </Row>
                   <ListItem>
                     <SmallListItemHeader>Tasting Note:</SmallListItemHeader>
-                    <Body>{ description }</Body>
+                    <Body>{description}</Body>
                   </ListItem>
                 </List>
               </Column>
             </Row>
           </Row>
-    </MainDiv>
-  )
-  : null
-}
-</div>
-  )
-}
+        </Column>
+      ) }
+    </Row>
+  );
+};

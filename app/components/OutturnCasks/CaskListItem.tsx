@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils';
+import { useTypedSelector, createButton } from '../../utils';
 
 import { InputOnChangeType } from '../../types/index';
 
@@ -8,7 +8,7 @@ import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledType: { Subheader, Body },
-  StyledDiv: { Row, Column },
+  StyledDiv: { PaddedDiv, Row, Column },
   StyledNavigation: { LinkButton },
   StyledForm: { Checkbox },
   StyledCask: { ListItem, CaskListItemButton, FlavourPill }
@@ -17,15 +17,14 @@ const {
 import * as actions from "../../redux/actions";
 const {
   markCaskActions: { markCask, unmarkCask },
+  modalActions: { setModal },
 } = actions;
 
 import * as thunks from "../../redux/thunks";
 const {
-  activeCaskThunks: { getActiveCask },
+  activeCaskThunks: { getActiveCask, },
+  casksThunks: { deleteCask }
 } = thunks;
-
-import { createModalButton } from "../../buttonProps";
-import { deleteCaskModal } from "../../modalProps";
 
 export default ({ cask, sortMethod }: any) => {
 
@@ -45,17 +44,23 @@ export default ({ cask, sortMethod }: any) => {
     onChange: handleOnCheck
   }
 
+  const deleteCaskModal = {
+    modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
+    confirmButton: {
+      type: 'DELETE',
+      text: `Delete Cask no. ${ cask.caskNumber }`,
+      arguments: [ activeCask.id, cask.id, activeOutturn.id, sortMethod ],
+      onClickFunction: deleteCask
+    },
+  }
+
   const deleteCaskButtonProps = {
     size: 'small',
     variant: 'tertiary',
-    onClickFunctionProps: createModalButton(
+    onClickFunctionProps: createButton(
+      setModal,
       "X Delete",
-      deleteCaskModal(
-        activeCask,
-        cask,
-        activeOutturn.id,
-        sortMethod
-      )
+      deleteCaskModal
     )
   }
 
@@ -64,20 +69,20 @@ export default ({ cask, sortMethod }: any) => {
       <Column>
         <Row alignItems="center" justifyContent="space-between">
           <Checkbox { ...checkCaskCheckboxProps }/>
-          <Column alignItems='flex-end'>
-          <LinkButton to={ `/edit/${ cask.id }` }>Edit</LinkButton>
-          <ButtonManager { ...deleteCaskButtonProps } />
+          <Row alignItems='center' justifyContent='flex-end'>
+            <LinkButton to={ `/edit/${ cask.id }` }>Edit</LinkButton>
+            <ButtonManager { ...deleteCaskButtonProps } />
+          </Row>
+        </Row>
+        <CaskListItemButton onClick={() => dispatch(getActiveCask(cask.id)) }>
+          <Column>
+            <Subheader> {cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask"}</Subheader>
+            <Body>{cask.name}</Body>
+            <PaddedDiv paddingTop='1rem' paddingRight='1rem' paddingBottom='1rem' paddingLeft='1rem'>
+              <FlavourPill flavourProfile={ cask.flavourProfile }>{ cask.flavourProfile || 'Other' }</FlavourPill>
+            </PaddedDiv>
           </Column>
-        </Row>
-        <Row>
-          <FlavourPill flavourProfile={ cask.flavourProfile }/>
-          <CaskListItemButton onClick={() => dispatch(getActiveCask(cask.id)) }>
-            <Column>
-              <Subheader> {cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask"}</Subheader>
-              <Body>{cask.name}</Body>
-            </Column>
-          </CaskListItemButton>
-        </Row>
+        </CaskListItemButton>
       </Column>
     </ListItem>
   )

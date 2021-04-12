@@ -56,11 +56,6 @@ const Cask = <CaskModelStatic>db.define('cask', {
     type: STRING,
   },
 
-  grapeVariety: {
-    type: STRING,
-    allowNull: true,
-  },
-
   abv: {
     type: STRING,
   },
@@ -75,10 +70,6 @@ const Cask = <CaskModelStatic>db.define('cask', {
 
   description: {
     type: TEXT,
-  },
-
-  image: {
-    type: BLOB,
   },
 })
 
