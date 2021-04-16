@@ -7,26 +7,28 @@ const {
   StyledDiv: { Row },
 } = StyledComponents;
 
+import { ButtonProps, ToolbarPropTypes } from "../../types";
+
 export default ({
   pageTitle,
-  addButtonProps = {},
-  deleteButtonProps = {},
-}: any) => {
+  addButtonProps = {} as ButtonProps,
+  deleteButtonProps = {} as ButtonProps,
+}: ToolbarPropTypes) => {
 
-  const addButton = {
+  const addButton: ButtonProps = {
     size: addButtonProps.size,
     disabled: addButtonProps.disabled,
     variant: addButtonProps.variant,
     dispatchToStore: addButtonProps.dispatchToStore,
-    onClickFunctionProps: addButtonProps.onClickProps
+    onClickFunctionProps: addButtonProps.onClickFunctionProps
   }
 
-  const deleteButton = {
+  const deleteButton: ButtonProps = {
     size: deleteButtonProps.size,
     disabled: deleteButtonProps.disabled,
     variant: deleteButtonProps.variant,
     dispatchToStore: deleteButtonProps.dispatchToStore,
-    onClickFunctionProps: deleteButtonProps.onClickProps  
+    onClickFunctionProps: deleteButtonProps.onClickFunctionProps  
   }
 
   return (

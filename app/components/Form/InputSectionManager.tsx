@@ -7,7 +7,7 @@ import TextAreaManager from './TextAreaManager';
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledType: { Subheader },
-  StyledDiv: { PaddedDiv, Row, Column, HorizontalRule },
+  StyledDiv: { Row, Column, PaddedDiv, HorizontalRule },
 } = StyledComponents;
 
 export default ({ sectionHeaderProps, inputProps, handleOnChange }) => {

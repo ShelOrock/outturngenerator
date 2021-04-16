@@ -39,12 +39,11 @@ export default () => {
 
   const createCaskModal = {
     modalHeader: `Creating a new cask`,
-    stateShape: {
+    modalState: {
       name: '',
       caskNumber: '',
     },
     confirmButton: {
-      type: 'CREATE',
       text: 'Create cask',
       arguments: [ activeOutturn.id ],
       onClickFunction: addNewCask,
@@ -69,7 +68,7 @@ export default () => {
     toolbarProps: {
       pageTitle: activeOutturn.name,
       addButtonProps: {
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           '+ Add a cask',
           createCaskModal
@@ -78,7 +77,7 @@ export default () => {
       deleteButtonProps: {
         variant: 'tertiary',
         disabled: !markedCasks.length,
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           'X Delete Marked Casks',
           deleteManyCasksModal

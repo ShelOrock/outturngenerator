@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InputManagerPropTypes, TextInputPropTypes } from '../../types/react/componentProps';
 
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -9,20 +10,19 @@ const {
   }
 } = StyledComponents;
 
-export default ({ label, type, size, name, value, handleOnChange }: any) => {
-  
-  const inputFieldProps = {
+export default ({ label, type, size, name, value, onChange }: InputManagerPropTypes) => {
+
+  const inputFieldProps: TextInputPropTypes = {
     type,
-    size: size || 'default',
     name,
-    value: value,
-    onChange: handleOnChange
+    value,
+    onChange
   }
 
   return (
     <InputModule>
       <InputLabel>{ label }</InputLabel>
-      <InputField { ...inputFieldProps }/>
+      <InputField { ...inputFieldProps } inputSize={ size }/>
     </InputModule>
   )
 }

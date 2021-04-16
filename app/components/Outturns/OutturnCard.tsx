@@ -49,7 +49,6 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
   const deleteOutturnModalProps = {
     modalHeader: `Are you sure you want to delete ${ outturn.name }`,
     confirmButton: {
-      type: 'DELETE',
       text: 'Delete',
       arguments: [ outturn.id, activeOutturn.id, sortMethod ],
       onClickFunction: deleteOutturn,

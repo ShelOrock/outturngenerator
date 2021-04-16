@@ -20,10 +20,14 @@ const {
 } = thunks;
 
 import {
+  InputFormPropTypes,
   InputOnChangeType,
   LocalReducerFunctionType,
+  PageHeaderPropTypes,
   ParamTypes,
 } from '../../types/index';
+
+import { CaskFormPropTypes } from '../../types';
 
 export default () => {
 
@@ -91,7 +95,7 @@ export default () => {
     });
   };
 
-  const pageHeaderProps = {
+  const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: '< Return to Cask List'
@@ -100,18 +104,18 @@ export default () => {
       pageTitle: `Editing Cask ${ caskNumber } ${ name }`,
       addButtonProps: {
         disabled: !isEdited,
-        onClickProps: createButton(editCask, 'Save Changes', id, localState) 
+        onClickFunctionProps: createButton(editCask, 'Save Changes', id, localState) 
       },
       deleteButtonProps: {
         variant: 'secondary',
         disabled: !isEdited,
         dispatchToStore: false,
-        onClickProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
+        onClickFunctionProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
       }
     }
   }
-
-  const caskFormInputProps = [
+;
+  const caskFormInputProps: CaskFormPropTypes = [
     {
       sectionTitle: "Header",
       inputProps: [
@@ -239,7 +243,7 @@ export default () => {
     },
   ];
 
-  const inputFormProps = {
+  const inputFormProps: InputFormPropTypes = {
     backLinkButton: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: `< Return to ${ activeOutturn.id ? 'Outturn' : 'Cask List' }`

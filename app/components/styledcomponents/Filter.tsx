@@ -9,6 +9,7 @@ export const FilterContainer = styled.div`
   width: 45vw;
   z-index: 10;
   right: 1rem;
+  margin-top: 6rem;
   background-color: ${ ({ theme: { colors } }) => colors.white };
   box-shadow: 0px 8px 15px #D5D5D5;
 `;

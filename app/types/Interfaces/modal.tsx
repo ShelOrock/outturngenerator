@@ -18,17 +18,15 @@ export type ModalFunctionOnClickType = (...args: any) => AppThunk | ActionTypes;
 export type ModalInputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement>) => void;
 
 export interface ModalButton {
-  type?: 'CREATE' | 'DELETE',
   text?: string;
   arguments?: any[];
   onClickFunction?: ModalFunctionOnClickType;
 }
 
-export interface Modal<stateShapeTypes = CreateCaskModalState | CreateOutturnModalState> {
+export interface Modal<modalStateTypes = CreateCaskModalState | CreateOutturnModalState> {
   modalHeader?: string;
-  stateShape?: stateShapeTypes;
-  confirmButton?: ModalButton;
-  cancelButton?: ModalButton;
+  modalState?: modalStateTypes;
+  confirmButton: ModalButton;
 }
 
 export type ModalFunctionType = (...args: any) => Modal

@@ -11,11 +11,13 @@ const {
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogout } } = thunks;
 
+import { AttemptUserLogoutButtonPropTypes } from '../../types';
+
 export default () => {
 
   const { user } = useTypedSelector(state => state);
   
-  const attemptUserLogoutButtonProps = {
+  const attemptUserLogoutButtonProps: AttemptUserLogoutButtonPropTypes = {
     dispatchToStore: true,
     onClickFunctionProps: createButton(attemptUserLogout, 'Logout', user.id)
   }

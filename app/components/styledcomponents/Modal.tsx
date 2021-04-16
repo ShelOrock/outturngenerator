@@ -23,3 +23,7 @@ export const ModalBackdrop = styled.div`
   top: 0;
   background: rgba(0, 0, 0, 0.5);
 `;
+
+export const Temp = styled.div`
+z-index: 500;
+`

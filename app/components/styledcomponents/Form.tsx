@@ -1,8 +1,12 @@
 import styled, { css } from 'styled-components';
 
-interface SelectProps {
+interface SelectPropTypes {
   flavourProfile?: string;
   width?: string;
+}
+
+interface InputPropTypes {
+  inputSize?: string;
 }
 
 export const FormContainer = css`
@@ -43,10 +47,10 @@ export const InputLabel = styled.label`
   padding: 0.5rem 0;
 `
 
-export const InputField = styled.input`
+export const InputField = styled.input<InputPropTypes>`
   padding: 0.25rem;
   height: 1.7rem;
-  width: ${ ({ size, theme: { input } }) => size ? input.size[size].width : input.size.default.width };
+  width: ${ ({ inputSize, theme: { input } }) => inputSize ? input.size[inputSize].width : input.size.default.width };
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };
   border: none;
   border-radius: 3px;
@@ -76,7 +80,7 @@ export const Checkbox = styled.input`
   margin: 1rem;
 `
 
-export const Select = styled.select<SelectProps>`
+export const Select = styled.select<SelectPropTypes>`
   width: ${ ({ width }) => width || '125px' };
   background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.white };
   color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };

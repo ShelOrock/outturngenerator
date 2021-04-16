@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 import { useTypedSelector, createButton } from '../../utils';
 
-import { InputOnChangeType } from '../../types/index';
-
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -26,13 +24,15 @@ const {
   casksThunks: { deleteCask }
 } = thunks;
 
+import { ButtonProps, InputOnChangeType, Modal } from '../../types/index';
+
 export default ({ cask, sortMethod }: any) => {
 
   const dispatch = useDispatch();  
 
   const { markedCasks, activeOutturn, activeCask } = useTypedSelector((state) => state);
 
-  const handleOnCheck: InputOnChangeType = (e) => {
+  const handleOnCheck: InputOnChangeType = e => {
     if (markedCasks.includes(e.target.name)) dispatch(unmarkCask(e.target.name));
     else dispatch(markCask(e.target.name));
   };
@@ -44,17 +44,16 @@ export default ({ cask, sortMethod }: any) => {
     onChange: handleOnCheck
   }
 
-  const deleteCaskModal = {
+  const deleteCaskModal: Modal = {
     modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
     confirmButton: {
-      type: 'DELETE',
       text: `Delete Cask no. ${ cask.caskNumber }`,
       arguments: [ activeCask.id, cask.id, activeOutturn.id, sortMethod ],
       onClickFunction: deleteCask
     },
   }
 
-  const deleteCaskButtonProps = {
+  const deleteCaskButtonProps: ButtonProps = {
     size: 'small',
     variant: 'tertiary',
     onClickFunctionProps: createButton(

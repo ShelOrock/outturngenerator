@@ -10,7 +10,7 @@ const {
   },
   StyledList: { List, ListItem },
   StyledNavigation: { LinkButton },
-  StyledDiv: { Row, Column },
+  StyledDiv: { Row, Column, PaddedDiv },
   StyledType: {
     Header,
     SmallListItemHeader,
@@ -38,7 +38,9 @@ export default () => {
     <Row>
       { !!Object.keys(activeCask).length && (
         <Column>
-          <LinkButton to={`/edit/${activeCask.id}`}>Edit</LinkButton>
+          <PaddedDiv paddingTop='0.5rem' paddingBottom='0.5rem'>
+            <LinkButton to={`/edit/${activeCask.id}`}>Edit</LinkButton>
+          </PaddedDiv>
           <Row>
             <Row>
               <ImageContainer>Insert image here</ImageContainer>

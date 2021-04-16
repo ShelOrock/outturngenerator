@@ -3,7 +3,9 @@ import * as React from 'react';
 import * as StyledComponents from '../styledcomponents/index';
 const { StyledForm: { InputModule, InputLabel, Select, Option } } = StyledComponents;
 
-export default ({ label, selectValue, onChangeFunction, width, options }) => {
+import { SelectPropTypes } from '../../types';
+
+export default ({ label, selectValue, onChangeFunction, width, options }: SelectPropTypes) => {
   
   const selectProps = {
     value: selectValue,

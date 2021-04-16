@@ -3,19 +3,20 @@ const { useState, useEffect } = React;
 import { useHistory } from 'react-router-dom';
 import { useTypedSelector, createButton } from '../../utils';
 
-import InputForm from '../form/InputForm';
-import * as StyledComponents from '../styledcomponents/index';
+import InputForm from '../Form/InputForm';
 import ButtonManager from '../Button/ButtonManager';
-const {
-  StyledForm: {
-    LoginFormContainer,
-  },
-} = StyledComponents;
+import * as StyledComponents from '../styledcomponents/index';
+const { StyledForm: { LoginFormContainer } } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogin } } = thunks;
 
-import { InputOnChangeType } from '../../types/index';
+import {
+  InputOnChangeType,
+  InputFormPropTypes,
+  LoginFormPropTypes,
+  AttemptUserLoginButtonPropTypes
+} from '../../types/index';
 
 export default () => {
 
@@ -40,7 +41,7 @@ export default () => {
     })
   }
 
-  const loginFormInputProps = [
+  const loginFormInputProps: LoginFormPropTypes = [
     {
       inputProps: [
         {
@@ -61,7 +62,7 @@ export default () => {
     }
   ]
 
-  const inputFormProps = {
+  const inputFormProps: InputFormPropTypes = {
     backLinkButton: {
       link: '#',
       destination: ''
@@ -74,7 +75,7 @@ export default () => {
     handleOnChange
   }
 
-  const attemptUserLoginButtonProps = {
+  const attemptUserLoginButtonProps: AttemptUserLoginButtonPropTypes = {
     dispatchToStore: true,
     onClickFunctionProps: createButton(attemptUserLogin, 'Login', { usernameOrEmail, password })
   }

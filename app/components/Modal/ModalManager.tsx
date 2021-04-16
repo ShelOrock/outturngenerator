@@ -1,7 +1,8 @@
 import * as React from 'react';
 const { useState, useEffect } = React;
-import { useTypedSelector } from '../../utils';
+import { createButton, useTypedSelector } from '../../utils';
 
+import ModalInputManager from './ModalInputManager'
 import ButtonManager from '../Button/ButtonManager';
 import * as StyledComponents from '../styledcomponents/index';
 const { 
@@ -9,37 +10,50 @@ const {
   StyledDiv: { Row },
   StyledModal: { ModalContainer }
 } = StyledComponents;
+
 import * as actions from '../../redux/actions';
+import { addOutturn } from '../../redux/outturns/thunks';
 const { modalActions: { resetModal } } = actions;
 
 export default () => {
 
   const { modal } = useTypedSelector(state => state);
-  const [ localModalState, setLocalModalState ] = useState({ ...modal.stateShape })
+  const [ localModalState, setLocalModalState ] = useState({ ...modal.modalState })
 
-  useEffect(() => setLocalModalState({ ...modal.stateShape }), [modal])
+  useEffect(() => setLocalModalState({ ...modal.modalState }), [modal])
 
   const handleOnChange = ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value })
 
-  const confirmProps = {
-    text: 'Test',
-    arguments: [],
-  }
+  const generateInputProps = () => (
+    Object.keys(localModalState).map(stateSlice => ({
+      label: stateSlice,
+      type: 'text',
+      name: stateSlice,
+      value: localModalState[stateSlice]
+    }))
+  );
 
-  const cancelProps = {
-    text: 'Cancel',
-    arguments: [],
-    onClickFunction: resetModal
+  const inputFormProps = {
+    inputPropsGenerator: generateInputProps(),
+    handleOnChange,
   }
 
   const confirmButtonProps = {
     variant: 'primary',
-    onClickFunctionProps: confirmProps
-  }
+    onClickFunctionProps: modal.confirmButton && createButton(
+      modal.confirmButton.onClickFunction,
+      modal.confirmButton.text,
+      ...modal.confirmButton.arguments,
+      localModalState,
+    )
+  };
 
   const cancelButtonProps = {
     variant: 'secondary',
-    onClickFunctionProps: cancelProps
+    onClickFunctionProps: createButton(
+      resetModal,
+      'Cancel'
+    )
   };
 
   return (
@@ -47,11 +61,10 @@ export default () => {
       { !!Object.keys(modal).length 
         && (
           <ModalContainer>
-            { modal.modalHeader && <Header>{ modal.modalHeader }</Header> }
-            <Row justifyContent='space-evenly'>
-              { modal.confirmButton.arguments && <ButtonManager    
-                variant= 'primary'
-                onClickFunctionProps={ { ...modal.confirmButton, arguments: [ ...modal.confirmButton.arguments, localModalState ] }}/> }
+            <Header>{ modal.modalHeader }</Header>
+            <ModalInputManager { ...inputFormProps } />
+            <Row>
+              <ButtonManager { ...confirmButtonProps }/>
               <ButtonManager { ...cancelButtonProps } />
             </Row>
           </ModalContainer>

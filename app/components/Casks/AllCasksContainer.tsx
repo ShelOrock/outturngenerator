@@ -11,7 +11,7 @@ import ButtonManager from "../Button/ButtonManager";
 import CaskListItem from "../OutturnCasks/CaskListItem";
 import ActiveCaskContainer from "../OutturnCasks/ActiveCaskContainer";
 import AssociatedOutturn from "./AssociatedOutturn";
-import * as StyledComponents from "../styledcomponents/index";
+import * as StyledComponents from "../styledcomponents";
 const {
   StyledDiv: { Column, Row, PaddedDiv },
   StyledCask: { List },
@@ -34,6 +34,9 @@ const {
     deleteManyCasks
   },
 } = thunks;
+
+import { Modal, PageHeaderPropTypes } from "../../types";
+import { SelectPropTypes } from "../../types/react/componentProps";
 
 export default () => {
   const dispatch = useDispatch();
@@ -60,31 +63,29 @@ export default () => {
     dispatch(getCasks(sort, searchFilters));
   }, [sort, searchFilters]);
 
-  const createCaskModal = {
+  const createCaskModal: Modal = {
     modalHeader: `Creating a new cask`,
-    stateShape: {
+    modalState: {
       name: '',
       caskNumber: '',
     },
     confirmButton: {
-      type: 'CREATE',
       text: 'Create cask',
-      arguments: [],
+      arguments: [ activeCask.id, sort, searchFilters ],
       onClickFunction: addNewCask,
     },
   };
 
-  const deleteManyCasksModal = {
+  const deleteManyCasksModal: Modal = {
     modalHeader: 'Are you sure you want to delete these casks?',
     confirmButton: {
-      type: 'DELETE',
       text: 'Delete Casks',
       arguments: [ markedCasks, activeCask.id ],
       onClickFunction: deleteManyCasks,
     }
   }
 
-  const pageHeaderProps = {
+  const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {
       link: "/",
       destination: "< Back",
@@ -93,7 +94,7 @@ export default () => {
       pageTitle: "All Casks",
       addButtonProps: {
         variant: "primary",
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           "+ Add a cask",
           createCaskModal
@@ -102,7 +103,7 @@ export default () => {
       deleteButtonProps: {
         variant: "secondary",
         disabled: !markedCasks.length,
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           "X Delete Marked Casks",
           deleteManyCasksModal
@@ -111,7 +112,7 @@ export default () => {
     },
   };
 
-  const sortCasksSelectProps = {
+  const sortCasksSelectProps: SelectPropTypes = {
     selectValue: sort,
     label: "",
     onChangeFunction: (e) => setSort(e.target.value),
@@ -193,12 +194,12 @@ export default () => {
         <PaddedDiv paddingLeft="1rem" paddingRight="1rem">
           <SelectManager {...sortCasksSelectProps} />
         </PaddedDiv>
-        <Row>
+        <Row alignItems='center'>
           { !!searchFilters.length && renderSearchFilters() }
           { !!searchFilters.length && <ButtonManager {...resetFilterButtonProps} />}
           <ButtonManager {...setIsOpenButtonProps} />
-          { isOpen && <FilterMenu />}
         </Row>
+        { isOpen && <FilterMenu />}
       </Row>
       <Row>
         <List>

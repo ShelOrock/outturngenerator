@@ -1,12 +1,16 @@
+//Dependency Libraries
 import * as React from "react";
 const { useState, useEffect } = React;
 import { useDispatch } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+//Dependency Functions
 import { useTypedSelector, createButton, generateOutturn } from "../../utils";
 
+//Components
 import CaskListItemContainer from "./CaskListItemContainer";
 import ActiveCaskContainer from './ActiveCaskContainer';
 import ButtonManager from "../Button/ButtonManager";
+//StyledComponents
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledDiv: { Column, Row },
@@ -14,17 +18,20 @@ const {
   StyledForm: { Checkbox },
 } = StyledComponents;
 
+//Redux Actions
 import * as actions from "../../redux/actions";
 const {
   markCaskActions: { markAllCasks, unmarkAllCasks, resetMarkedCasks },
 } = actions;
 
+//Redux Thunks
 import * as thunks from '../../redux/thunks';
 const {
   casksThunks: { editManyCasks }
 } = thunks;
 
-import { InputOnChangeType } from "../../types/index";
+//Types
+import { ButtonProps, InputOnChangeType } from "../../types/index";
 
 export default () => {
   const dispatch = useDispatch();
@@ -64,7 +71,7 @@ export default () => {
     setLocalCaskOrder(reorderedCasks);
   };
 
-  const checkLocalStateHasChanged = (previousCaskOrder, currentCaskOrder) => {
+  const checkLocalStateHasChanged = (previousCaskOrder, currentCaskOrder): void => {
     setIsEdited(false);
 
     if(currentCaskOrder) {
@@ -80,21 +87,21 @@ export default () => {
     onChange: handleAllCasksOnCheck
   }
 
-  const editManyCasksButtonProps = {
+  const editManyCasksButtonProps: ButtonProps = {
     variant: 'primary',
     disabled: !isEdited,
     dispatchToStore: true,
     onClickFunctionProps: createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder)
   }
 
-  const cancelChangesButtonProps = {
+  const cancelChangesButtonProps: ButtonProps = {
     variant: 'secondary',
     disabled: !isEdited,
     dispatchToStore: false,
     onClickFunctionProps: createButton(setLocalCaskOrder, 'Cancel', casks)
   }
 
-  const generateOutturnButtonProps = { 
+  const generateOutturnButtonProps: ButtonProps = { 
     variant: 'primary',
     dispatchToStore: false,
     onClickFunctionProps: createButton(generateOutturn, "Generate Outturn", activeOutturn) 

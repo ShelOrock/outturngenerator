@@ -17,7 +17,7 @@ import * as actions from "../../redux/actions";
 const {
   activeCaskActions: { resetActiveCask },
   markOutturnActions: { resetMarkedOutturns },
-  modalActions: { setModal },
+  modalActions: { setModal, resetModal },
 } = actions;
 
 import * as thunks from "../../redux/thunks";
@@ -36,14 +36,13 @@ export default () => {
 
   const {
     allOutturns,
-    activeOutturn,
     markedOutturns,
     isLoading,
   } = useTypedSelector((state) => state);
 
   useEffect(() => {
     dispatch(resetActiveCask());
-    dispatch(setModal({}));
+    dispatch(resetModal());
     dispatch(resetMarkedOutturns());
   }, []);
 
@@ -53,22 +52,20 @@ export default () => {
 
   const createOutturnModalProps = {
     modalHeader: `Creating a new outturn`,
-    stateShape: {
+    modalState: {
       name: '',
       description: ''
     },
     confirmButton: {
-      type: 'CREATE',
+      onClickFunction: addOutturn,
       text: 'Create outturn',
       arguments: [ sort ],
-      onClickFunction: addOutturn,
     },
   };
 
   const deleteManyOutturnsModalProps = {
     modalHeader: 'Are you sure you want to delete these outturns?',
     confirmButton: {
-      type: 'DELETE',
       text: 'Delete outturns',
       arguments: [ markedOutturns, sort ],
       onClickFunction: deleteManyOutturns,
@@ -83,7 +80,7 @@ export default () => {
     toolbarProps: {
       pageTitle: "All Projects",
       addButtonProps: {
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           "+ New Project",
           createOutturnModalProps
@@ -92,7 +89,7 @@ export default () => {
       deleteButtonProps: {
         variant: "tertiary",
         disabled: !markedOutturns.length,
-        onClickProps: createButton(
+        onClickFunctionProps: createButton(
           setModal,
           "X Delete Marked Outturns",
           deleteManyOutturnsModalProps

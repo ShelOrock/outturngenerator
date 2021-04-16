@@ -1,4 +1,8 @@
-import { Outturn, Cask } from '../index';
+import {
+  Outturn,
+  Cask,
+  InputOnChangeType
+} from '../index';
 
 export interface OutturnCard {
   key: string;
@@ -18,3 +22,94 @@ export interface ButtonProps {
   dispatchToStore?: boolean;
   onClickFunctionProps: any;
 }
+
+export interface SubNavigationPropTypes {
+  link: string;
+  destination: string;
+}
+
+export interface ToolbarPropTypes {
+  pageTitle: string;
+  addButtonProps: ButtonProps;
+  deleteButtonProps: ButtonProps;
+}
+
+export interface PageHeaderPropTypes {
+  subNavigationProps: SubNavigationPropTypes,
+  toolbarProps: ToolbarPropTypes
+}
+
+export interface InputFormPropTypes {
+  backLinkButton: SubNavigationPropTypes;
+  forwardLinkButton: SubNavigationPropTypes;
+  confirmButton?: ButtonProps;
+  cancelButton?: ButtonProps;
+  inputPropsGenerator;
+  handleOnChange: InputOnChangeType;
+}
+
+export interface InputPropTypes {
+  label: string;
+  type: 'text'
+    |'password'
+    | 'select'
+    | 'textArea';
+  name: string;
+  size: 'small'
+    | 'medium'
+    | 'large'
+    | 'default';
+  value: string;
+};
+
+export interface TextInputPropTypes {
+  type: 'text' | 'password';
+  name: string;
+  value: string;
+  onChange?: InputOnChangeType
+}
+
+export interface InputManagerPropTypes {
+  label: string;
+  type: 'text' | 'password';
+  size: 'small'
+    | 'medium'
+    | 'large'
+    | 'default';
+  name: string;
+  value: string;
+  onChange: InputOnChangeType;
+}
+
+export interface OptionPropTypes {
+  value: string;
+  name: string;
+}
+
+export type SelectOptionPropTypes = OptionPropTypes[]
+
+export interface SelectPropTypes {
+  selectValue: string;
+  label: string;
+  onChangeFunction: InputOnChangeType
+  width?: string;
+  options: SelectOptionPropTypes
+}
+
+export type InputGroupPropTypes = InputPropTypes | SelectPropTypes | (InputPropTypes|SelectPropTypes)[];
+
+export interface FormInputPropTypes {
+  sectionTitle?: string;
+  inputProps: InputGroupPropTypes | InputGroupPropTypes[]
+}
+
+export interface AttemptUserLoginButtonPropTypes {
+  dispatchToStore: boolean,
+  onClickFunctionProps: any;
+}
+
+export interface AttemptUserLogoutButtonPropTypes extends AttemptUserLoginButtonPropTypes {}
+
+export type LoginFormPropTypes = FormInputPropTypes[];
+
+export type CaskFormPropTypes = FormInputPropTypes[] | SelectPropTypes;

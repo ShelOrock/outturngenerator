@@ -2,12 +2,14 @@ import * as React from "react";
 
 import InputSectionManager from "./InputSectionManager";
 import ButtonManager from '../Button/ButtonManager';
-import * as StyledComponents from "../styledcomponents/index";
+import * as StyledComponents from "../styledcomponents";
 const {
   StyledDiv: { Row },
   StyledNavigation: { LinkButton },
   StyledForm: { InputFormContainer },
 } = StyledComponents;
+
+import { InputFormPropTypes } from "../../types";
 
 export default ({
   backLinkButton,
@@ -16,7 +18,7 @@ export default ({
   cancelButton,
   inputPropsGenerator,
   handleOnChange
-}: any) => {
+}: InputFormPropTypes) => {
 
   const renderInputSectionManagers = inputPropsGenerator => (
     inputPropsGenerator.map(({ sectionTitle, inputProps }, idx) => (
@@ -33,15 +35,19 @@ export default ({
     <InputFormContainer>
     { renderInputSectionManagers(inputPropsGenerator) }
       <Row alignItems='center' justifyContent='space-between'>
-        <LinkButton to={backLinkButton.link}>
-          {backLinkButton.destination}
-        </LinkButton>
+        { backLinkButton && 
+          <LinkButton to={backLinkButton.link}>
+            {backLinkButton.destination}
+          </LinkButton>
+        }
         <Row alignItems='center'>
           { confirmButton && <ButtonManager { ...confirmButton } /> }
           { cancelButton && <ButtonManager { ...cancelButton } /> }
-          <LinkButton to={forwardLinkButton.link}>
-            {forwardLinkButton.destination}
-          </LinkButton>
+          { forwardLinkButton &&
+            <LinkButton to={forwardLinkButton.link}>
+              {forwardLinkButton.destination}
+            </LinkButton>
+          }
         </Row>
       </Row>
     </InputFormContainer>

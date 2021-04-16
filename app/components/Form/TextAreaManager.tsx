@@ -8,6 +8,7 @@ const { StyledForm: {
 } } = StyledComponents
 
 export default ({ label, name, value, handleOnChange }: any) => {
+    
   const textAreaInputProps = {
     name,
     value,

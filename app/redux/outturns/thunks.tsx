@@ -24,12 +24,12 @@ export const getOutturns: ThunkFunctionType = sortBy => {
   };
 };
 
-export const addOutturn: ThunkFunctionType = (outturnName, sortBy) => {
-  console.log(outturnName)
+export const addOutturn: ThunkFunctionType = (sortBy, outturnDetails) => {
+
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .post(`${ API_URL }`, outturnName)
+      .post(`${ API_URL }`, outturnDetails)
       .then(() => {
         dispatch(resetModal());
         dispatch(getOutturns(sortBy));
@@ -40,7 +40,6 @@ export const addOutturn: ThunkFunctionType = (outturnName, sortBy) => {
 };
 
 export const deleteOutturn: ThunkFunctionType = (outturnId, activeOutturnId, sortBy) => {
-  console.log(outturnId)
   return dispatch => {
     dispatch(setLoading(true));
     axios

@@ -17,10 +17,9 @@ export const NavLink = styled(Link)`
 `
 
 export const LinkButton = styled(Link)`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   display: block;
   margin: ${ ({ theme: { buttons } }) => buttons.size.small.margin };
-  padding: ${ ({ theme: { buttons } }) => buttons.size.small.padding };
   text-decoration: none;
   cursor: default;
   color: ${ ({ theme: { colors } }) => colors.primary };

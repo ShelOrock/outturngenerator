@@ -47,7 +47,6 @@ export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, filterB
 };
 
 export const editCask: ThunkFunctionType = (caskId, cask) => {
-  console.log(cask)
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -74,6 +73,7 @@ export const editManyCasks: ThunkFunctionType = (outturnId, casks) => {
 };
 
 export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sortBy, filterBy) => {
+  console.log(activeCaskId, caskId, outturnId, sortBy, filterBy)
   return dispatch => {
     dispatch(setLoading(true))
     axios

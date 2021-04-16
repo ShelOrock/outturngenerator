@@ -20,16 +20,14 @@ export default ({
   const dispatch = useDispatch();
   const { isLoading } = useTypedSelector((state) => state);
 
-  const buttonProps = {
+  const buttonProps: ButtonProps = {
     size: size || 'default',
     disabled: disabled || !!isLoading || false,
     variant: disabled ? 'disabled' : variant || 'default',
-    onClick: dispatchToStore
+    onClickFunctionProps: dispatchToStore
       ? () => dispatch(onClickFunctionProps.onClickFunction(...onClickFunctionProps.arguments))
       : () => onClickFunctionProps.onClickFunction(...onClickFunctionProps.arguments)
   }
-
-  console.log({ dispatchToStore, buttonProps})
 
   return (
     onClickFunctionProps.onClickFunction && (
