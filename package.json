@@ -11,7 +11,7 @@
     "start:client-dev": "./node_modules/.bin/webpack --mode=\"development\" --watch",
     "start:server-dev": "nodemon server/index.ts --ignore public --exec ts-node",
     "start-dev": "npm run start:client-dev & npm run start:server-dev",
-    "start": "node serve/index.tsc NODE_ENV=production"
+    "start": "node server/index.tsc NODE_ENV=production"
   },
   "keywords": [],
   "author": "",
