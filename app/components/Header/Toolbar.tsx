@@ -1,12 +1,16 @@
+//Dependency Libraries
 import * as React from "react";
 
+//Components
 import ButtonManager from "../Button/ButtonManager";
+//Styled Components
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledType: { PageTitle },
   StyledDiv: { Row },
 } = StyledComponents;
 
+//Types
 import { ButtonProps, ToolbarPropTypes } from "../../types";
 
 export default ({
@@ -15,30 +19,32 @@ export default ({
   deleteButtonProps = {} as ButtonProps,
 }: ToolbarPropTypes) => {
 
-  const addButton: ButtonProps = {
+  const addButton: ButtonProps = addButtonProps
+  && {
     size: addButtonProps.size,
     disabled: addButtonProps.disabled,
     variant: addButtonProps.variant,
     dispatchToStore: addButtonProps.dispatchToStore,
-    onClickFunctionProps: addButtonProps.onClickFunctionProps
+    onClick: addButtonProps.onClick
   }
 
-  const deleteButton: ButtonProps = {
+  const deleteButton: ButtonProps = deleteButtonProps
+  && {
     size: deleteButtonProps.size,
     disabled: deleteButtonProps.disabled,
     variant: deleteButtonProps.variant,
     dispatchToStore: deleteButtonProps.dispatchToStore,
-    onClickFunctionProps: deleteButtonProps.onClickFunctionProps  
+    onClick: deleteButtonProps.onClick  
   }
 
   return (
   <Row justifyContent="space-between">
     <Row alignItems="center">
       <PageTitle>{ pageTitle }</PageTitle>
-      { !!Object.keys(addButtonProps).length && <ButtonManager { ...addButton } /> }
+      { addButtonProps && !!Object.keys(addButtonProps).length && <ButtonManager { ...addButton } /> }
     </Row>
     <Row alignItems='center'>
-    { !!Object.keys(deleteButtonProps).length && <ButtonManager { ...deleteButton }/> }
+    { deleteButtonProps && !!Object.keys(deleteButtonProps).length && <ButtonManager { ...deleteButton }/> }
     </Row>
   </Row>
 )};

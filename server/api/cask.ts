@@ -15,24 +15,31 @@ router.post('/get-casks', (req: Request, res: Response, next: NextFunction): voi
   let sortMethod;
   switch(req.query.sort_by) {
     case 'ascending':
-      sortByProperty = 'caskNumber',
-      sortMethod = 'ASC'
+      sortByProperty = 'caskNumber';
+      sortMethod = 'ASC';
       break;
     case 'descending': 
-      sortByProperty = 'caskNumber',
-      sortMethod = 'DESC'
+      sortByProperty = 'caskNumber';
+      sortMethod = 'DESC';
       break;
+    case 'A-Z':
+      sortByProperty = 'name';
+      sortMethod = 'ASC';
+      break;
+    case 'Z-A':
+      sortByProperty = 'name';
+      sortMethod = 'DESC';
     case 'newest': 
-      sortByProperty = 'updatedAt',
-      sortMethod = 'DESC'
+      sortByProperty = 'createdAt';
+      sortMethod = 'DESC';
       break;
     case 'oldest': 
-      sortByProperty = 'updatedAt',
-      sortMethod = 'ASC'
+      sortByProperty = 'createdAt';
+      sortMethod = 'ASC';
       break;
     default: 
-      sortByProperty = 'caskNumber',
-      sortMethod = 'ASC'
+      sortByProperty = 'caskNumber';
+      sortMethod = 'ASC';
       break;
   }
 

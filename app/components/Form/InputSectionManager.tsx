@@ -1,32 +1,39 @@
+//Dependency Libraries
 import * as React from "react";
 
+//Components
 import InputGroupManager from "./InputGroupManager";
 import InputManager from "./InputManager";
 import SelectManager from "../Select/SelectManager";
 import TextAreaManager from './TextAreaManager';
+//StyledComponents
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledType: { Subheader },
   StyledDiv: { Row, Column, PaddedDiv, HorizontalRule },
 } = StyledComponents;
 
-export default ({ sectionHeaderProps, inputProps, handleOnChange }) => {
+export default ({ sectionHeaderProps, inputProps, onChange }) => {
 
-  const renderInputManagers = () => (
+  const renderInputManagers = (): JSX.Element | JSX.Element[] => (
     inputProps.map((input, idx) => Array.isArray(input)
   ? <InputGroupManager
       key={ idx }
       inputProps={ ...input }
-      handleOnChange={ handleOnChange }
+      onChange={ onChange }
     />
   : input.type == 'select' 
     ? <SelectManager key={ idx } { ...input }/>
     : input.type == 'textArea' 
-      ? <TextAreaManager key={ idx } { ...input } handleOnChange={ handleOnChange }/>
+      ? <TextAreaManager
+          key={ idx }
+          { ...input }
+          onChange={ onChange }
+        />
       : <InputManager
         key={ idx }
         { ...input }
-        handleOnChange={ handleOnChange }
+        onChange={ onChange }
       />
   ))
 

@@ -64,13 +64,13 @@ const generateCaskInformation = (): CaskAttributes => {
     caskNumber: `${ (Math.random() * 150.000).toFixed(Math.ceil(Math.random() * 3)) }`,
     price: `${ Math.ceil(Math.random() * (2000 - 150) + 150) }`,
     flavourProfile: `${ flavourProfileData[Math.floor(Math.random() * flavourProfileData.length)] }`,
-    age: ageData,
+    age: `${ ageData }`,
     date: `${ monthData[Math.floor(Math.random() * monthData.length)] } ${ 2020 - ageData }`,
     region: `${ regionData[Math.floor(Math.random() * regionData.length)] }`,
     caskType: `${ caskTypeData[Math.floor(Math.random() * caskTypeData.length )] }`,
     abv: (Math.random() * (60 - 40) + 40).toFixed(1),
-    bottleOutturn: bottleOutturnData,
-    allocation: Math.ceil(Math.random() * (bottleOutturnData - 30) + 30)
+    bottleOutturn: `${ bottleOutturnData }`,
+    allocation: `${ Math.ceil(Math.random() * (bottleOutturnData - 30) + 30) }`
   }
 
   return generatedData;

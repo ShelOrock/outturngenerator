@@ -1,5 +1,7 @@
+//Dependency Libraries
 import * as React from 'react';
 
+//Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const { StyledForm: {
   InputModule,
@@ -7,13 +9,17 @@ const { StyledForm: {
   TextArea,
 } } = StyledComponents
 
-export default ({ label, name, value, handleOnChange }: any) => {
-    
+//Types
+import { InputManagerPropTypes } from '../../types';
+
+export default ({ label, name, value, onChange }: InputManagerPropTypes) => {
+
   const textAreaInputProps = {
     name,
     value,
-    onChange: handleOnChange
+    onChange: onChange
   }
+
   return (
     <InputModule>
       <InputLabel>{ label }</InputLabel>

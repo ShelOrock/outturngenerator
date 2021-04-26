@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
 import { useTypedSelector, createButton } from '../../utils';
 
-import PageHeader from '../Header/PageHeader';
+import PageHeader from '../Header/PageHeaderManager';
 import CaskList from './CaskList'
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -23,21 +23,29 @@ const {
   casksThunks: { addNewCask, deleteManyCasks }
 } = thunks;
 
-import { ParamTypes } from '../../types/index';
+import { Modal, PageHeaderPropTypes, ParamTypes } from '../../types/index';
+import { CreateCaskModalState } from '../../types/Interfaces/modal';
 
 export default () => {
 
   const dispatch = useDispatch();
 
   const { outturnId } = useParams<ParamTypes>();
-  const { activeOutturn, activeCask, markedCasks } = useTypedSelector(state => state);
+  const {
+    activeOutturn,
+    activeCask,
+    markedCasks,
+    activeUser
+  } = useTypedSelector(state => state);
 
   useEffect(() => {
     dispatch(getActiveOutturn(outturnId))
     dispatch(resetMarkedCasks())
   }, []);
 
-  const createCaskModal = {
+  const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
+
+  const createCaskModal: Modal<CreateCaskModalState> = {
     modalHeader: `Creating a new cask`,
     modalState: {
       name: '',
@@ -45,44 +53,54 @@ export default () => {
     },
     confirmButton: {
       text: 'Create cask',
-      arguments: [ activeOutturn.id ],
-      onClickFunction: addNewCask,
+      arguments: [
+        activeOutturn.id,
+        activeOutturn.casks,
+        null,
+        null
+      ],
+      onClick: addNewCask,
     },
   };
 
-  const deleteManyCasksModal = {
+  const deleteManyCasksModal: Modal = {
     modalHeader: 'Are you sure you want to delete these casks?',
     confirmButton: {
-      type: 'DELETE',
       text: 'Delete Casks',
-      arguments: [ markedCasks, activeCask.id, activeOutturn.id ],
-      onClickFunction: deleteManyCasks,
+      arguments: [
+        markedCasks,
+        activeCask.id,
+        activeOutturn.id
+      ],
+      onClick: deleteManyCasks,
     },
   }
 
-  const pageHeaderProps = {
+  const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {
       link: '/',
       destination: '< Back'
     },
     toolbarProps: {
       pageTitle: activeOutturn.name,
-      addButtonProps: {
-        onClickFunctionProps: createButton(
-          setModal,
-          '+ Add a cask',
-          createCaskModal
-        )
+      addButtonProps: evaluateUserType
+      && {
+          onClick: createButton(
+            setModal,
+            '+ Add a cask',
+            createCaskModal
+          )
       },
-      deleteButtonProps: {
-        variant: 'tertiary',
-        disabled: !markedCasks.length,
-        onClickFunctionProps: createButton(
-          setModal,
-          'X Delete Marked Casks',
-          deleteManyCasksModal
-        )
-      }
+      deleteButtonProps: evaluateUserType
+      && {
+          variant: 'tertiary',
+          disabled: !markedCasks.length,
+          onClick: createButton(
+            setModal,
+            'X Delete Marked Casks',
+            deleteManyCasksModal
+          )
+      },
     }
   }
 

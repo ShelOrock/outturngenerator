@@ -8,12 +8,17 @@ import session from 'express-session';
 
 import { User } from './db/index';
 
+if(process.env.NODE !== 'production') {
+  require('dotenv').config();
+};
+
 const app = express();
 
 app.use(session({
-  secret: 'meow',
+  secret: process.env.SESSION,
   resave: true,
   cookie: {
+    secure: process.env.NODE_ENV == 'production' ? true : false,
     maxAge: 1000 * 60 * 60 * 24
   },
 }));
@@ -24,7 +29,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     if(!userOrNull) {
       User.create({
         sessionId: req.session.id,
-        userType: 'guest',
+        userType: 'Guest',
       })
       .then(user => {
         res.cookie('sessionId', user.sessionId)

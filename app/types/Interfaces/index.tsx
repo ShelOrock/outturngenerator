@@ -1,9 +1,14 @@
 import { Outturn, Outturns } from './outturn';
 import { Cask, Casks } from './cask';
-import { User } from './user';
+import { User, Users } from './user';
 import { UserCredentials } from './authentication';
 import { InputOnChangeType, ButtonOnClickType } from './form';
-import { Modal, ModalFunctionType } from './modal';
+import {
+  Modal,
+  ModalFunctionType,
+  CreateOutturnModalState,
+  CreateCaskModalState
+} from './modal';
 import { Toast } from './toast';
 import { Loading } from './loading';
 
@@ -13,11 +18,14 @@ export {
   Cask,
   Casks,
   User,
+  Users,
   UserCredentials,
   InputOnChangeType,
   ButtonOnClickType,
   Modal,
   ModalFunctionType,
+  CreateOutturnModalState,
+  CreateCaskModalState,
   Loading,
   Toast
 };

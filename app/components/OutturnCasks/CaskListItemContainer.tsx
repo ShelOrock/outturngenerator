@@ -1,11 +1,13 @@
+//Dependency Libraries
 import * as React from "react";
 import { Draggable } from "react-beautiful-dnd";
 
+//Components
 import CaskListItem from './CaskListItem';
 
 export default ({ cask, index, sortMethod }: any) => {
 
-  const renderDragDropProvided = provided => (
+  const renderDragDropProvided = (provided): JSX.Element => (
     <div 
       ref={ provided.innerRef}
       {...provided.draggableProps}

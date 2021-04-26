@@ -1,6 +1,7 @@
+//Dependency Libraries
 import * as React from 'react';
-import { InputManagerPropTypes, TextInputPropTypes } from '../../types/react/componentProps';
 
+//Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const {
   StyledForm: {
@@ -9,6 +10,9 @@ const {
     InputField,
   }
 } = StyledComponents;
+
+//Types
+import { InputManagerPropTypes, TextInputPropTypes } from '../../types/react/componentProps';
 
 export default ({ label, type, size, name, value, onChange }: InputManagerPropTypes) => {
 

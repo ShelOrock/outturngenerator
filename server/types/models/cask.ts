@@ -7,13 +7,13 @@ export interface CaskAttributes {
   name?: string;
   price?: string;
   flavourProfile?: string;
-  age?: number | null;
+  age?: string | null;
   date?: string;
   region?: string;
   caskType?: string;
   abv?: string;
-  bottleOutturn?: number;
-  allocation?: number;
+  bottleOutturn?: string | null;
+  allocation?: string | null;
   description?: string;
   outturnId?: string | number;
 

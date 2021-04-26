@@ -1,18 +1,23 @@
+//Dependency Libraries
 import * as React from "react";
 const { useState, useEffect } = React;
 import { useDispatch } from "react-redux";
+//Dependency Functions
 import { useTypedSelector, createButton } from "../../utils";
 
-import PageHeader from "../Header/PageHeader";
+//Components
+import PageHeader from "../Header/PageHeaderManager";
 import ButtonManager from "../Button/ButtonManager";
 import SelectManager from '../Select/SelectManager';
 import OutturnCard from "./OutturnCard";
+//Styled Components
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledCard: { CardsContainer },
   StyledDiv: { PaddedDiv, Column },
 } = StyledComponents;
 
+//Redux actions
 import * as actions from "../../redux/actions";
 const {
   activeCaskActions: { resetActiveCask },
@@ -20,6 +25,7 @@ const {
   modalActions: { setModal, resetModal },
 } = actions;
 
+//Redux thunks
 import * as thunks from "../../redux/thunks";
 const {
   outturnsThunks: {
@@ -29,14 +35,24 @@ const {
   },
 } = thunks;
 
+//Types
+import {
+  ButtonProps,
+  Modal,
+  PageHeaderPropTypes,
+  SelectPropTypes,
+  CreateOutturnModalState } from "../../types";
+
 export default () => {
+
   const dispatch = useDispatch();
+
   const [showMore, setShowMore] = useState(6);
   const [sort, setSort] = useState("newest");
-
   const {
     allOutturns,
     markedOutturns,
+    activeUser,
     isLoading,
   } = useTypedSelector((state) => state);
 
@@ -45,63 +61,70 @@ export default () => {
     dispatch(resetModal());
     dispatch(resetMarkedOutturns());
   }, []);
-
   useEffect(() => {
     dispatch(getOutturns(sort));
   }, [sort]);
 
-  const createOutturnModalProps = {
+  const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
+
+  const createOutturnModalProps: Modal<CreateOutturnModalState> = {
     modalHeader: `Creating a new outturn`,
     modalState: {
       name: '',
       description: ''
     },
     confirmButton: {
-      onClickFunction: addOutturn,
+      onClick: addOutturn,
       text: 'Create outturn',
       arguments: [ sort ],
     },
   };
 
-  const deleteManyOutturnsModalProps = {
+  const deleteManyOutturnsModalProps: Modal = {
     modalHeader: 'Are you sure you want to delete these outturns?',
     confirmButton: {
       text: 'Delete outturns',
       arguments: [ markedOutturns, sort ],
-      onClickFunction: deleteManyOutturns,
+      onClick: deleteManyOutturns,
     },
   };
 
-  const pageHeaderProps = {
+  const addButtonProps: ButtonProps = evaluateUserType
+  && {
+    onClick: createButton(
+      setModal,
+      "+ New Project",
+      createOutturnModalProps
+    ),
+  }
+
+  const deleteButtonProps: ButtonProps = evaluateUserType
+  && {
+    variant: "tertiary",
+    disabled: !markedOutturns.length,
+    onClick: createButton(
+      setModal,
+      "X Delete Marked Outturns",
+      deleteManyOutturnsModalProps
+    ),
+  }
+
+  const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {
       link: "#",
       destination: "",
     },
     toolbarProps: {
       pageTitle: "All Projects",
-      addButtonProps: {
-        onClickFunctionProps: createButton(
-          setModal,
-          "+ New Project",
-          createOutturnModalProps
-        ),
-      },
-      deleteButtonProps: {
-        variant: "tertiary",
-        disabled: !markedOutturns.length,
-        onClickFunctionProps: createButton(
-          setModal,
-          "X Delete Marked Outturns",
-          deleteManyOutturnsModalProps
-        ),
-      },
+      addButtonProps,
+      deleteButtonProps,
     },
   };
 
-  const sortOutturnSelectProps = {
+  const sortOutturnSelectProps: SelectPropTypes = {
     selectValue: sort,
     label: '',
-    onChangeFunction: (e) => setSort(e.target.value),
+    onChange: (e) => setSort(e.target.value),
     width: '150px',
     options: [
       {
@@ -115,15 +138,19 @@ export default () => {
     ]
   }
 
-  const showMoreButtonProps = {
+  const showMoreButtonProps: ButtonProps = {
     size: "default",
     variant: "secondary",
     disabled: !!isLoading,
     dispatchToStore: false,
-    onClickFunctionProps: createButton(setShowMore, "Show more", showMore + 6),
+    onClick: createButton(
+      setShowMore,
+      "Show more", 
+      showMore + 6
+    ),
   };
 
-  const renderOutturnCards = () => (
+  const renderOutturnCards = (): JSX.Element[] => (
     allOutturns
       .slice(0, showMore)
       .map((outturn) => (

@@ -2,7 +2,6 @@ import {
   UUID,
   UUIDV4,
   STRING,
-  BOOLEAN
 } from 'sequelize';
 
 import db from '../database';
@@ -39,20 +38,33 @@ const User = <UserModelStatic>db.define('user', {
   },
 
   loggedIn: {
-    type: BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
+    type: STRING,
+    validate: {
+      isIn: [
+        ['Online', 'Offline']
+      ]
+    },
+    defaultValue: 'Offline',
   },
 
   userType: {
     type: STRING,
     validate: {
       isIn: [
-        ['guest', 'standard', 'admin']
+        ['Guest', 'Unconfirmed', 'Standard', 'Admin']
       ]
     },
-    defaultValue: 'guest'
+    defaultValue: 'Guest'
   }
+}, {
+  defaultScope: {
+    attributes: { exclude: ['password'] },
+  },
+  scopes: {
+    withPassword: {
+      attributes: { exclude: [] }
+    }
+  },
 });
 
 export default User;

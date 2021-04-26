@@ -9,7 +9,7 @@ const {
   loadingActions: { setLoading }
 } = actions;
 
-import { ThunkFunctionType } from '../../types/index';
+import { ThunkFunctionType } from '../../types';
 
 const API_URL = '/api/outturn';
 
@@ -25,7 +25,6 @@ export const getOutturns: ThunkFunctionType = sortBy => {
 };
 
 export const addOutturn: ThunkFunctionType = (sortBy, outturnDetails) => {
-
   return dispatch => {
     dispatch(setLoading(true));
     axios

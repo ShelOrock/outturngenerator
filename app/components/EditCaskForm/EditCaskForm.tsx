@@ -1,3 +1,4 @@
+//Dependency Libraries
 import * as React from 'react';
 const {
   useEffect,
@@ -6,20 +7,27 @@ const {
 } = React;
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+//Dependency Functions
 import { useTypedSelector, createButton, flavourProfiles } from '../../utils';
 
-import PageHeader from '../Header/PageHeader'
+//Components
+import PageHeader from '../Header/PageHeaderManager'
 import InputForm from '../Form/InputForm';
+//Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const { StyledDiv: { Column } } = StyledComponents;
 
+//Redux Thunks
 import * as thunks from '../../redux/thunks';
 const {
   casksThunks: { editCask },
   activeCaskThunks: { getActiveCask }
 } = thunks;
 
+//Types
 import {
+  ButtonProps,
+  CaskFormPropTypes,
   InputFormPropTypes,
   InputOnChangeType,
   LocalReducerFunctionType,
@@ -27,13 +35,17 @@ import {
   ParamTypes,
 } from '../../types/index';
 
-import { CaskFormPropTypes } from '../../types';
-
 export default () => {
 
   const dispatch = useDispatch();
 
-  const { activeCask, activeOutturn, allOutturns } = useTypedSelector(state => state); 
+  const {
+    activeCask,
+    activeOutturn,
+    allOutturns,
+    activeUser
+  } = useTypedSelector(state => state); 
+
   const {
     id,
     name,
@@ -53,11 +65,20 @@ export default () => {
     allocation: '',
     description: '',
     outturnId: '',
+    caskPosition: null,
   };
+
   const reducer: LocalReducerFunctionType<any> = (state = initialState, action) => {
     switch (action.name) {
       case 'CANCEL_CHANGES':
         return activeCask;
+
+      case 'SET_CASK_POSITION':
+        return {
+          ...state,
+          caskPosition: action.value
+        }
+
 
       case `${ action.name }`:
         return {
@@ -72,16 +93,18 @@ export default () => {
   const [ localState, dispatchLocally ] = useReducer(reducer, initialState)
   const [ isEdited, setIsEdited ] = useState(false);
   const { caskId } = useParams<ParamTypes>()
-  
+
   useEffect(() => { dispatch(getActiveCask(caskId)) }, [])
   useEffect(() => { checkLocalStateEdit(activeCask, localState) }, [activeCask, localState])
+  useEffect(() => { evaluateCaskPosition() }, [localState.outturnId])
   useEffect(() => { Object.keys(activeCask).forEach(item => dispatchLocally({ name: `${ item }`, value: activeCask[item] == null ? '' : activeCask[item] })) }, [activeCask])
 
-  const handleOnChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
+  const onChange: InputOnChangeType = ({ target: { name, value } }) => dispatchLocally({ name, value });
+
+  const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard'
 
   const checkLocalStateEdit = (previousState: typeof activeCask, currentState: typeof localState): void => {
     setIsEdited(false);
-
     Object.keys(previousState).forEach(key => {
       if(key !== 'updatedAt') {
         if(key !== 'outturnId') {
@@ -95,6 +118,29 @@ export default () => {
     });
   };
 
+  const addButtonProps: ButtonProps = evaluateUserType
+    && {
+      disabled: !isEdited,
+      onClick: createButton(
+        editCask,
+        'Save Changes',
+        id,
+        localState
+      ) 
+  };
+
+  const deleteButtonProps: ButtonProps = evaluateUserType
+  && {
+      variant: 'secondary',
+      disabled: !isEdited,
+      dispatchToStore: false,
+      onClick: createButton(
+        dispatchLocally,
+        'Cancel Changes',
+        { name: 'CANCEL_CHANGES' }
+      )
+  }
+
   const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
@@ -102,16 +148,8 @@ export default () => {
     },
     toolbarProps: {
       pageTitle: `Editing Cask ${ caskNumber } ${ name }`,
-      addButtonProps: {
-        disabled: !isEdited,
-        onClickFunctionProps: createButton(editCask, 'Save Changes', id, localState) 
-      },
-      deleteButtonProps: {
-        variant: 'secondary',
-        disabled: !isEdited,
-        dispatchToStore: false,
-        onClickFunctionProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
-      }
+      addButtonProps,
+      deleteButtonProps,
     }
   }
 ;
@@ -146,7 +184,7 @@ export default () => {
           type: 'select',
           selectValue: localState.flavourProfile,
           label: 'Flavour Profile',
-          onChangeFunction: (e) => dispatchLocally({ name: 'flavourProfile', value: e.target.value}),
+          onChange: (e) => dispatchLocally({ name: 'flavourProfile', value: e.target.value}),
           width: '200px',
           options: [
             {
@@ -226,7 +264,7 @@ export default () => {
           type: 'select',
           selectValue: localState.outturnId,
           label: 'Choose an Outturn',
-          onChangeFunction: (e) => dispatchLocally({ name: 'outturnId', value: e.target.value}),
+          onChange: (e) => dispatchLocally({ name: 'outturnId', value: e.target.value}),
           width: '250px',
           options: [
             {
@@ -243,6 +281,38 @@ export default () => {
     },
   ];
 
+  const evaluateCaskPosition = () => {
+    if(localState.outturnId) {
+      let caskLength = allOutturns.find(outturn => outturn.id == localState.outturnId).casks
+      dispatchLocally({ name: 'SET_CASK_POSITION', value: caskLength.length })
+    } else {
+      dispatchLocally({ name: 'SET_CASK_POSITION', value: null })
+    }
+  }
+
+  const confirmButton: ButtonProps = evaluateUserType
+  && {
+    disabled: !isEdited,
+    onClick: createButton(
+      editCask,
+      'Save Changes',
+      id,
+      localState,
+    ) 
+  }
+
+  const cancelButton: ButtonProps = evaluateUserType
+  && {
+      variant: 'secondary',
+      disabled: !isEdited,
+      dispatchToStore: false,
+      onClick: createButton(
+        dispatchLocally,
+        'Cancel Changes',
+        { name: 'CANCEL_CHANGES' }
+      )
+  }
+
   const inputFormProps: InputFormPropTypes = {
     backLinkButton: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
@@ -252,18 +322,10 @@ export default () => {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: 'Next >'
     },
-    confirmButton: {
-      disabled: !isEdited,
-      onClickFunctionProps: createButton(editCask, 'Save Changes', id, localState) 
-    },
-    cancelButton: {
-      variant: 'secondary',
-      disabled: !isEdited,
-      dispatchToStore: false,
-      onClickFunctionProps: createButton(dispatchLocally, 'Cancel Changes', { name: 'CANCEL_CHANGES' })
-    },
+    confirmButton,
+    cancelButton,
     inputPropsGenerator: caskFormInputProps,
-    handleOnChange,
+    onChange,
   }
 
 

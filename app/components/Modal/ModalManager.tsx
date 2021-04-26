@@ -1,19 +1,26 @@
+//Dependency Libraries
 import * as React from 'react';
 const { useState, useEffect } = React;
+//Dependency Functions
 import { createButton, useTypedSelector } from '../../utils';
 
+//Components
 import ModalInputManager from './ModalInputManager'
 import ButtonManager from '../Button/ButtonManager';
-import * as StyledComponents from '../styledcomponents/index';
+//StyledComponents
+import * as StyledComponents from '../styledcomponents';
 const { 
   StyledType: { Header },
   StyledDiv: { Row },
   StyledModal: { ModalContainer }
 } = StyledComponents;
 
+//Redux actions
 import * as actions from '../../redux/actions';
-import { addOutturn } from '../../redux/outturns/thunks';
 const { modalActions: { resetModal } } = actions;
+
+//Types
+import { ButtonProps, InputOnChangeType } from '../../types';
 
 export default () => {
 
@@ -22,7 +29,7 @@ export default () => {
 
   useEffect(() => setLocalModalState({ ...modal.modalState }), [modal])
 
-  const handleOnChange = ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value })
+  const onChange: InputOnChangeType = ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value })
 
   const generateInputProps = () => (
     Object.keys(localModalState).map(stateSlice => ({
@@ -35,22 +42,24 @@ export default () => {
 
   const inputFormProps = {
     inputPropsGenerator: generateInputProps(),
-    handleOnChange,
+    onChange,
   }
 
-  const confirmButtonProps = {
+  const confirmButtonProps: ButtonProps = {
     variant: 'primary',
-    onClickFunctionProps: modal.confirmButton && createButton(
-      modal.confirmButton.onClickFunction,
-      modal.confirmButton.text,
-      ...modal.confirmButton.arguments,
-      localModalState,
-    )
+    dispatchToStore: modal.confirmButton && modal.confirmButton.dispatchToStore,
+    onClick: modal.confirmButton
+      && createButton(
+        modal.confirmButton.onClick,
+        modal.confirmButton.text,
+        ...modal.confirmButton.arguments,
+        localModalState,
+      )
   };
 
-  const cancelButtonProps = {
+  const cancelButtonProps: ButtonProps = {
     variant: 'secondary',
-    onClickFunctionProps: createButton(
+    onClick: createButton(
       resetModal,
       'Cancel'
     )

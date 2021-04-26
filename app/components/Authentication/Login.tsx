@@ -1,16 +1,25 @@
+//Dependency Libraries
 import * as React from 'react';
 const { useState, useEffect } = React;
 import { useHistory } from 'react-router-dom';
+//Dependency Functions
 import { useTypedSelector, createButton } from '../../utils';
 
+//Components
 import InputForm from '../Form/InputForm';
 import ButtonManager from '../Button/ButtonManager';
+//Styled Components
 import * as StyledComponents from '../styledcomponents/index';
-const { StyledForm: { LoginFormContainer } } = StyledComponents;
+const {
+  StyledForm: { LoginFormContainer },
+  StyledNavigation: { LargeLinkButton },
+} = StyledComponents;
 
+//Redux thunks
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserLogin } } = thunks;
 
+//Types
 import {
   InputOnChangeType,
   InputFormPropTypes,
@@ -20,21 +29,20 @@ import {
 
 export default () => {
 
+  const history = useHistory();
+
+  const { activeUser } = useTypedSelector(state => state);
   const [ localState, setLocalState ] = useState({
     usernameOrEmail: '',
     password: ''
   })
   const { usernameOrEmail, password } = localState;
-
-  const { user } = useTypedSelector(state => state);
-
-  const history = useHistory();
   
   useEffect(() => {
-    if(user.loggedIn) history.push('/')
-  }, [user])
+    if(activeUser.loggedIn == 'Online') history.push('/')
+  }, [activeUser])
 
-  const handleOnChange: InputOnChangeType = ({ target: { name, value } } ) => {
+  const onChange: InputOnChangeType = ({ target: { name, value } } ) => {
     setLocalState({
       ...localState,
       [name]: value
@@ -72,18 +80,26 @@ export default () => {
       destination: ''
     },
     inputPropsGenerator: loginFormInputProps,
-    handleOnChange
+    onChange
   }
 
   const attemptUserLoginButtonProps: AttemptUserLoginButtonPropTypes = {
     dispatchToStore: true,
-    onClickFunctionProps: createButton(attemptUserLogin, 'Login', { usernameOrEmail, password })
+    onClick: createButton(
+      attemptUserLogin,
+      'Login',
+      { usernameOrEmail, password }
+    )
   }
 
   return (
     <LoginFormContainer>
       <InputForm { ...inputFormProps } />
       <ButtonManager { ...attemptUserLoginButtonProps } />
+      <LargeLinkButton
+        to='/signup'
+        variant='secondary'
+      >Sign up</LargeLinkButton>
     </LoginFormContainer>
   )
 }

@@ -31,7 +31,7 @@ export const CaskListItemButton = styled.div`
 `;
 
 export const FlavourPill = styled.div<FlavourPillPropTypes>`
-  background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default };
+  background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.other };
   color: white;
   text-align: center;
   padding: 0.5rem 1rem;

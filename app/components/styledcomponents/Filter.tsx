@@ -23,7 +23,7 @@ export const FilterList = styled.ul`
 
 export const FilterListItem = styled.li<FlavourPillPropTypes>`
   list-style-type: none;
-  background-color: ${ ({ flavourProfile, theme: { colors }}) => colors.flavourProfiles[flavourProfile]};
+  background-color: ${ ({ flavourProfile, theme: { colors }}) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default};
   margin: 0.5rem;
   border-radius: 3px;
 `

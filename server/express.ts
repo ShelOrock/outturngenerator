@@ -8,7 +8,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 
 import sessionMiddleware from './sessions';
-import apiRouter from './api/index';
+import apiRouter from './api';
 
 import HttpError from './types/express';
 

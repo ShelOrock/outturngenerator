@@ -10,8 +10,8 @@ export const users: UserAttributes[] = [
     email: 'shel@gmail.com',
     password: bcrypt.hashSync('1234', SALTROUNDS),
     sessionId: '0',
-    loggedIn: false,
-    userType: 'admin',
+    loggedIn: 'Offline',
+    userType: 'Admin',
   },
 
   {
@@ -19,8 +19,8 @@ export const users: UserAttributes[] = [
     email: 'spongebob@gmail.com',
     password: bcrypt.hashSync('1234', SALTROUNDS),
     sessionId: '1',
-    loggedIn: false,
-    userType: 'admin',
+    loggedIn: 'Offline',
+    userType: 'Admin',
   },
 
   {
@@ -28,8 +28,8 @@ export const users: UserAttributes[] = [
     email: 'patrick@gmail.com',
     password: bcrypt.hashSync('1234', SALTROUNDS),
     sessionId: '2',
-    loggedIn: false,
-    userType: 'standard',
+    loggedIn: 'Offline',
+    userType: 'Standard',
   },
 
   {
@@ -37,8 +37,8 @@ export const users: UserAttributes[] = [
     email: 'squidward@gmail.com',
     password: bcrypt.hashSync('1234', SALTROUNDS),
     sessionId: '3',
-    loggedIn: false,
-    userType: 'standard',
+    loggedIn: 'Online',
+    userType: 'Standard',
   },
 
   {
@@ -46,8 +46,8 @@ export const users: UserAttributes[] = [
     email: 'sandy@gmail.com',
     password: bcrypt.hashSync('1234', SALTROUNDS),
     sessionId: '4',
-    loggedIn: false,
-    userType: 'standard',
+    loggedIn: 'Offline',
+    userType: 'Unconfirmed',
   }
 ];
 

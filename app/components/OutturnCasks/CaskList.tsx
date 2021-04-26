@@ -20,15 +20,18 @@ const {
 
 //Redux Actions
 import * as actions from "../../redux/actions";
-const {
-  markCaskActions: { markAllCasks, unmarkAllCasks, resetMarkedCasks },
+const { 
+  markCaskActions: {
+    markAllCasks,
+    unmarkAllCasks,
+    resetMarkedCasks
+  },
+  modalActions: { setModal }
 } = actions;
 
 //Redux Thunks
 import * as thunks from '../../redux/thunks';
-const {
-  casksThunks: { editManyCasks }
-} = thunks;
+const { casksThunks: { editManyCasks } } = thunks;
 
 //Types
 import { ButtonProps, InputOnChangeType } from "../../types/index";
@@ -36,7 +39,11 @@ import { ButtonProps, InputOnChangeType } from "../../types/index";
 export default () => {
   const dispatch = useDispatch();
 
-  const { activeOutturn, markedCasks } = useTypedSelector((state) => state);
+  const {
+    activeOutturn,
+    markedCasks,
+    activeUser
+  } = useTypedSelector((state) => state);
   const { casks } = activeOutturn;
   const [ localCaskOrder, setLocalCaskOrder ] = useState(casks);
   const [ isEdited, setIsEdited ] = useState(false);
@@ -44,6 +51,8 @@ export default () => {
   useEffect(() => { dispatch(resetMarkedCasks()) }, []);
   useEffect(() => setLocalCaskOrder(casks ? casks.map((cask) => cask) : []), [casks]);
   useEffect(() => checkLocalStateHasChanged(casks, localCaskOrder), [casks, localCaskOrder])
+
+  const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
 
   const handleAllCasksOnCheck: InputOnChangeType = () => {
     if (markedCasks.length === casks.length) dispatch(unmarkAllCasks());
@@ -91,36 +100,64 @@ export default () => {
     variant: 'primary',
     disabled: !isEdited,
     dispatchToStore: true,
-    onClickFunctionProps: createButton(editManyCasks, "Save", activeOutturn.id, localCaskOrder)
+    onClick: createButton(
+      editManyCasks,
+      "Save",
+      activeOutturn.id,
+      localCaskOrder
+    )
   }
 
   const cancelChangesButtonProps: ButtonProps = {
     variant: 'secondary',
     disabled: !isEdited,
     dispatchToStore: false,
-    onClickFunctionProps: createButton(setLocalCaskOrder, 'Cancel', casks)
+    onClick: createButton(
+      setLocalCaskOrder,
+      'Cancel',
+      casks
+    )
+  }
+
+  const generateOutturnModal = {
+    modalHeader: `${ activeOutturn.name }`,
+    modalState: {
+      HTML: generateOutturn(activeOutturn)
+    },
+    confirmButton: {
+      text: 'Copy to clipboard',
+      arguments: [],
+      dispatchToStore: false,
+      onClick: () => navigator.clipboard.writeText(generateOutturn(activeOutturn))
+    }
   }
 
   const generateOutturnButtonProps: ButtonProps = { 
     variant: 'primary',
-    dispatchToStore: false,
-    onClickFunctionProps: createButton(generateOutturn, "Generate Outturn", activeOutturn) 
+    onClick: createButton(
+      setModal,
+      "Generate Outturn",
+      generateOutturnModal
+    ) 
   }
 
-  const renderCaskListItemContainerProps = () => (
+  const renderCaskListItemContainer = () => (
     localCaskOrder.map((cask, idx) => (
       <CaskListItemContainer
-        key={cask.id}
-        index={idx}
-        cask={cask}
+        key={ cask.id }
+        index={ idx }
+        cask={ cask }
       />
     ))
   );
 
   const renderDragDropProvided = provided => (
-    <div ref={provided.innerRef} {...provided.droppableProps}>
-      {localCaskOrder && renderCaskListItemContainerProps() }
-      {provided.placeholder}
+    <div
+      ref={ provided.innerRef }
+      { ...provided.droppableProps }
+    >
+      { localCaskOrder && renderCaskListItemContainer() }
+      { provided.placeholder }
     </div>
   )
 
@@ -128,8 +165,8 @@ export default () => {
     <Column justifyContent='center'>
       <Row alignItems='center'>
         <Checkbox { ...checkAllCasksCheckboxProps } />
-        <ButtonManager { ...editManyCasksButtonProps } />
-        <ButtonManager { ...cancelChangesButtonProps } />
+        { evaluateUserType && <ButtonManager { ...editManyCasksButtonProps } /> }
+        { evaluateUserType && <ButtonManager { ...cancelChangesButtonProps } /> }
       </Row>
       <Row alignItems='flex-start'>
         <Column alignItems='center'>

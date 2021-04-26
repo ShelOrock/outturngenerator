@@ -1,16 +1,19 @@
+//Dependency Libraries
 import * as React from 'react';
 
+//Components
 import Toolbar from './Toolbar';
 import SubNavigation from './SubNavigation';
-import * as StyledComponents from '../styledcomponents/index';
-import { PaddedDiv } from '../styledcomponents/Div';
-const { StyledDiv: { Column } } = StyledComponents;
+//Styled Components
+import * as StyledComponents from '../styledcomponents';
+const { StyledDiv: { PaddedDiv, Column } } = StyledComponents;
 
+//Types
 import {
   SubNavigationPropTypes,
   ToolbarPropTypes,
   PageHeaderPropTypes
-} from '../../types/index';
+} from '../../types';
 
 export default ({
   subNavigationProps: { link, destination },
@@ -34,7 +37,7 @@ export default ({
 
   return (
     <Column>
-      <PaddedDiv paddingTop='1rem' paddingBottom='1rem' paddingRight='1rem' paddingLeft='2rem'>
+      <PaddedDiv paddingTop='1rem' paddingBottom='1rem' paddingRight='1rem' paddingLeft='1rem'>
         <SubNavigation { ...subNavigationProps } />
       </PaddedDiv>
       <Toolbar { ...toolBarProps } />

@@ -4,7 +4,6 @@ import {
   STRING,
   INTEGER,
   TEXT,
-  BLOB
 } from 'sequelize'
 
 import db from '../database';
@@ -20,6 +19,8 @@ const Cask = <CaskModelStatic>db.define('cask', {
 
   caskPosition: {
     type: INTEGER,
+    allowNull: true,
+    defaultValue: null
   },
 
   caskNumber: {
@@ -32,44 +33,54 @@ const Cask = <CaskModelStatic>db.define('cask', {
 
   price: {
     type: STRING,
+    defaultValue: ''
   },
 
   flavourProfile: {
     type: STRING,
+    defaultValue: ''
   },
 
   age: {
-    type: INTEGER,
+    type: STRING,
     allowNull: true,
+    defaultValue: ''
   },
 
   date: {
     type: STRING,
     allowNull: true,
+    defaultValue: ''
   },
 
   region: {
     type: STRING,
+    defaultValue: ''
   },
 
   caskType: {
     type: STRING,
+    defaultValue: ''
   },
 
   abv: {
     type: STRING,
+    defaultValue: ''
   },
 
   bottleOutturn: {
-    type: INTEGER,
+    type: STRING,
+    defaultValue: ''
   },
 
   allocation: {
-    type: INTEGER,
+    type: STRING,
+    defaultValue: ''
   },
 
   description: {
     type: TEXT,
+    defaultValue: ''
   },
 })
 

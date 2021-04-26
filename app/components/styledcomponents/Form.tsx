@@ -77,7 +77,7 @@ export const TextArea = styled.textarea`
 `
 
 export const Checkbox = styled.input`
-  margin: 1rem;
+  margin: 0 1rem;
 `
 
 export const Select = styled.select<SelectPropTypes>`

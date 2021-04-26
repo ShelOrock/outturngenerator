@@ -5,24 +5,28 @@ const { StyledForm: { InputModule, InputLabel, Select, Option } } = StyledCompon
 
 import { SelectPropTypes } from '../../types';
 
-export default ({ label, selectValue, onChangeFunction, width, options }: SelectPropTypes) => {
+export default ({ label, selectValue, onChange, width, disabled, options }: SelectPropTypes) => {
   
   const selectProps = {
     value: selectValue,
-    onChange: onChangeFunction,
+    onChange,
     flavourProfile: selectValue,
-    width
+    width,
+    disabled
   }
 
-  const renderOptions = () => (
+  const renderOptions = (): JSX.Element[] => (
     options.map((option, idx) => (
-      <Option key={ idx } value={ option.value }>{ option.name }</Option>
+      <Option
+        key={ idx }
+        value={ option.value }
+      >{ option.name }</Option>
     ))
   )
 
   return (
   <InputModule>
-    <InputLabel>{ label }</InputLabel>
+    { label && <InputLabel>{ label }</InputLabel> }
     <Select { ...selectProps } >
       { renderOptions() }
     </Select>

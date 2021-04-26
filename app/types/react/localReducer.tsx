@@ -1,7 +1,7 @@
 export interface LocalReducerActionTypes {
   name?: string;
   type?: string;
-  value: string | string[];
+  value: any;
 }
-      
+
 export type LocalReducerFunctionType<State> = (state: State, action: LocalReducerActionTypes) => State

@@ -9,7 +9,7 @@ export const AllTypeStyles = css<TextPropTypes>`
   padding: 0 1rem;
   margin: 0;
   text-align: ${ ({ textAlign }) => textAlign || 'left' };
-  color: ${ ({ theme: { colors } }) => colors.black };
+  color: ${ ({ color, theme: { colors } }) => colors[color] || colors.black };
 `;
 
 export const PageTitle = styled.h1`

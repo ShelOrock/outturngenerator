@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
 
-import { allOutturns } from './outturns/reducers';
+import { allOutturns } from './allOutturns/reducers';
 import { activeOutturn } from './activeOutturn/reducers';
 import { allCasks } from './allCasks/reducers';
 import { activeCask } from './activeCask/reducers';
-import { user } from './user/reducers';
+import { activeUser } from './activeUser/reducers';
+import { allUsers } from './allUsers/reducers';
 import { markedCasks } from './markedCasks/reducers';
 import { markedOutturns } from './markedOutturns/reducers';
 import { searchFilters } from './searchFilters/reducers';
@@ -17,7 +18,8 @@ export default combineReducers({
   activeOutturn,
   allCasks,
   activeCask,
-  user,
+  activeUser,
+  allUsers,
   markedCasks,
   markedOutturns,
   searchFilters,

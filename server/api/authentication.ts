@@ -3,9 +3,7 @@ import express, {
   Response,
   NextFunction
 } from 'express';
-
 import Sequelize from 'sequelize';
-
 import bcrypt from 'bcrypt';
 
 import { User } from '../db/index';
@@ -14,7 +12,7 @@ const router: express.Router = express.Router();
 
 router.post('/login', (req: Request, res: Response, next: NextFunction) => {
   const { usernameOrEmail, password } = req.body;
-  User.findOne({
+  User.scope('withPassword').findOne({
     where: Sequelize.or(
       { username: usernameOrEmail },
       { email: usernameOrEmail}
@@ -26,10 +24,29 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
         .status(404)
         .send('User not found')
     } else {
-      if(userOrNull.loggedIn) {
-        res
-          .status(200)
-          .send(userOrNull)
+      if(userOrNull.loggedIn == 'Online') {
+        User.destroy({
+          where: Sequelize.and(
+            { sessionId: req.session.id },
+            { userType: 'Guest' }
+          )
+        })
+        .then(() => {
+          User.findOne({
+            where: Sequelize.or(
+              { username: usernameOrEmail },
+              { email: usernameOrEmail }
+            ),
+            attributes: {
+              exclude: [ 'password' ]
+            }
+          })
+          .then(user => {
+            res
+              .status(200)
+              .send(user)
+          })
+        })
       } else { 
         bcrypt.compare(password, userOrNull.password)
         .then(result => {
@@ -41,19 +58,30 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
             User.destroy({
               where: Sequelize.and(
                 { sessionId: req.session.id },
-                { userType: 'guest' }
+                { userType: 'Guest' }
               )
             })
             .then(() => {
               userOrNull.update({
-              loggedIn: true,
+              loggedIn: 'Online',
               sessionId: req.session.id
               })
-              .then(updatedUser => {
-                res
-                  .status(201)
-                  .send(updatedUser)
-              });
+              .then(() => {
+                User.findOne({
+                  where: Sequelize.or(
+                    { username: usernameOrEmail },
+                    { email: usernameOrEmail }
+                  ),
+                  attributes: {
+                    exclude: [ 'password' ]
+                  }
+                })
+                .then(user => {
+                  res
+                    .status(201)
+                    .send(user)
+                });
+              })
             });
           };
         })
@@ -68,6 +96,51 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
   });
 });
 
+router.post('/signup', ( req: Request, res: Response, next: NextFunction) => {
+  const hashedPasswrd = bcrypt.hashSync(req.body.password, 12);
+  User.destroy({
+    where: Sequelize.and(
+      { sessionId: req.session.id },
+      { userType: 'Guest' }
+    )
+  })
+  .then(() => {
+    User.create({ 
+      sessionId: req.session.id,
+      username: req.body.usernameOrEmail,
+      password: hashedPasswrd,
+      userType: 'Unconfirmed'
+    })
+    .then(createdUser => {
+      createdUser.update({
+        loggedIn: 'Online',
+      })
+      .then(() => {
+        User.findOne({
+          where: Sequelize.or(
+            { username: req.body.usernameOrEmail },
+            { email: req.body.usernameOrEmail }
+          ),
+          attributes: {
+            exclude: [ 'password' ]
+          }
+        })
+        .then(user => {
+          res
+            .status(201)
+            .send(user)
+        })
+      })
+    })
+  })
+  .catch(e => {
+    res
+      .status(500)
+      .send();
+      next(e);
+  })
+});
+
 router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
   User.findByPk(req.body.userId)
   .then(userOrNull => {
@@ -76,7 +149,7 @@ router.post('/logout', (req: Request, res: Response, next: NextFunction) => {
         .status(404)
         .send('User not found')
     } else {
-      userOrNull.update({ loggedIn: false })
+      userOrNull.update({ loggedIn: 'Offline' })
       .then(() => User.create({ sessionId: req.session.id }))
       .then(user => {
         res

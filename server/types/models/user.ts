@@ -19,8 +19,8 @@ export interface UserAttributes {
   username?: string;
   password?: string;
   sessionId?: string;
-  loggedIn?: boolean;
-  userType?: 'guest' | 'standard' | 'admin';
+  loggedIn?: 'Online' | 'Offline';
+  userType?: 'Guest' | 'Unconfirmed' | 'Standard' | 'Admin';
 
   readonly createdAt?: Date;
   readonly updatedAt?: Date;

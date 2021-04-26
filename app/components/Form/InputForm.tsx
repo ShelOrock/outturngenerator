@@ -1,7 +1,10 @@
+//Dependency Libraries
 import * as React from "react";
 
+//Components
 import InputSectionManager from "./InputSectionManager";
 import ButtonManager from '../Button/ButtonManager';
+//StyledComponents
 import * as StyledComponents from "../styledcomponents";
 const {
   StyledDiv: { Row },
@@ -9,6 +12,7 @@ const {
   StyledForm: { InputFormContainer },
 } = StyledComponents;
 
+//Types
 import { InputFormPropTypes } from "../../types";
 
 export default ({
@@ -17,16 +21,16 @@ export default ({
   confirmButton,
   cancelButton,
   inputPropsGenerator,
-  handleOnChange
+  onChange
 }: InputFormPropTypes) => {
 
-  const renderInputSectionManagers = inputPropsGenerator => (
+  const renderInputSectionManagers = (inputPropsGenerator): JSX.Element[] => (
     inputPropsGenerator.map(({ sectionTitle, inputProps }, idx) => (
       <InputSectionManager
         key={ idx }
         sectionHeaderProps={ sectionTitle }
         inputProps={ inputProps }
-        handleOnChange={ handleOnChange }
+        onChange={ onChange }
       />
     ))
   );

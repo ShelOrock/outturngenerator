@@ -1,9 +1,12 @@
+//Dependency Libraries
 import * as React from 'react';
-import { SubNavigationPropTypes } from '../../types';
 
+//Styled Components
 import * as StyledComponents from '../styledcomponents/index';
-
 const { StyledNavigation: { LinkButton } } = StyledComponents
+
+//Types
+import { SubNavigationPropTypes } from '../../types';
 
 export default ({ link = '#', destination = ''}: SubNavigationPropTypes) => (
   <LinkButton to={ link }>

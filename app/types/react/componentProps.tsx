@@ -20,7 +20,7 @@ export interface ButtonProps {
   variant?: string;
   disabled?: boolean;
   dispatchToStore?: boolean;
-  onClickFunctionProps: any;
+  onClick: any;
 }
 
 export interface SubNavigationPropTypes {
@@ -30,8 +30,8 @@ export interface SubNavigationPropTypes {
 
 export interface ToolbarPropTypes {
   pageTitle: string;
-  addButtonProps: ButtonProps;
-  deleteButtonProps: ButtonProps;
+  addButtonProps: ButtonProps | null;
+  deleteButtonProps: ButtonProps | null;
 }
 
 export interface PageHeaderPropTypes {
@@ -45,7 +45,7 @@ export interface InputFormPropTypes {
   confirmButton?: ButtonProps;
   cancelButton?: ButtonProps;
   inputPropsGenerator;
-  handleOnChange: InputOnChangeType;
+  onChange: InputOnChangeType;
 }
 
 export interface InputPropTypes {
@@ -91,7 +91,8 @@ export type SelectOptionPropTypes = OptionPropTypes[]
 export interface SelectPropTypes {
   selectValue: string;
   label: string;
-  onChangeFunction: InputOnChangeType
+  disabled?: boolean;
+  onChange: InputOnChangeType
   width?: string;
   options: SelectOptionPropTypes
 }
@@ -105,11 +106,17 @@ export interface FormInputPropTypes {
 
 export interface AttemptUserLoginButtonPropTypes {
   dispatchToStore: boolean,
-  onClickFunctionProps: any;
+  onClick: any;
 }
 
-export interface AttemptUserLogoutButtonPropTypes extends AttemptUserLoginButtonPropTypes {}
+export interface AttemptUserSignUpButtonPropTypes extends AttemptUserLoginButtonPropTypes {}
+
+export interface AttemptUserLogoutButtonPropTypes extends AttemptUserLoginButtonPropTypes {
+  size: 'small' | 'default'
+}
 
 export type LoginFormPropTypes = FormInputPropTypes[];
+
+export type SignUpFormPropTypes = FormInputPropTypes[];
 
 export type CaskFormPropTypes = FormInputPropTypes[] | SelectPropTypes;

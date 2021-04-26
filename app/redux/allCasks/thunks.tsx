@@ -14,22 +14,22 @@ import { ThunkFunctionType } from '../../types/index';
 
 const API_URL = '/api/cask'
 
-export const getCasks: ThunkFunctionType = (sortBy, filterBy = []) => {
+export const getCasks: ThunkFunctionType = (sort, filters = []) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .post(`${ API_URL }/get-casks/?sort_by=${ sortBy }`, { filters: filterBy })
+      .post(`${ API_URL }/get-casks/?sort_by=${ sort }`, { filters })
       .then(res => dispatch(setCasks(res.data)))
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, filterBy, cask) => {
+export const addNewCask: ThunkFunctionType = (outturnId = null, caskList = [], sort, filters, cask) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
-      .post(`${ API_URL }/create-new-cask`, { outturnId: outturnId, ...cask })
+      .post(`${ API_URL }/create-new-cask`, { ...cask, outturnId: outturnId, caskPosition: caskList.length })
       .then(res => {
         if(outturnId) dispatch(getActiveOutturn(outturnId));
         dispatch(addToast({
@@ -38,7 +38,7 @@ export const addNewCask: ThunkFunctionType = (outturnId = null,  sortBy, filterB
           message: res.data.message
         }))
         dispatch(resetModal());
-        dispatch(getCasks(sortBy, filterBy));
+        dispatch(getCasks(sort, filters));
         dispatch(getActiveCask(res.data.createdCask.id));
       })
       .catch(e => console.error(e))
@@ -72,8 +72,7 @@ export const editManyCasks: ThunkFunctionType = (outturnId, casks) => {
   };
 };
 
-export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sortBy, filterBy) => {
-  console.log(activeCaskId, caskId, outturnId, sortBy, filterBy)
+export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = null, sort, filter) => {
   return dispatch => {
     dispatch(setLoading(true))
     axios
@@ -83,14 +82,14 @@ export const deleteCask: ThunkFunctionType = (activeCaskId, caskId, outturnId = 
         if(outturnId) dispatch(getActiveOutturn(outturnId));
         dispatch(unmarkCask(caskId))
         dispatch(resetModal());
-        dispatch(getCasks(sortBy, filterBy));
+        dispatch(getCasks(sort, filter));
       })
       .catch(e => console.error(e))
       .finally(() => dispatch(setLoading(false)));
   };
 };
 
-export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId, sortBy, filterBy) => {
+export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, outturnId, sort, filters) => {
   return dispatch => {
     dispatch(setLoading(true));
     axios
@@ -104,7 +103,7 @@ export const deleteManyCasks: ThunkFunctionType = (markedCasks, activeCaskId, ou
         if (markedCasks.includes(activeCaskId)) dispatch(setActiveCask({}));
         dispatch(resetMarkedCasks());
         dispatch(resetModal());
-        dispatch(getCasks(sortBy, filterBy));
+        dispatch(getCasks(sort, filters));
         dispatch(resetActiveCask())
         if (outturnId) dispatch(getActiveOutturn(outturnId));
       })

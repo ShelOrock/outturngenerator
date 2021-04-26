@@ -19,12 +19,13 @@ export const theme = {
       ['Deep, rich & dried fruits']: '#D76E57',
       ['Old & dignified']: '#982130',
       ['Light & delicate']: '#99D4DF',
-      ['Juicy, oak & vanilla']: '#679ABC',
+      ['Juicy, oak & vanilla']: '#569ABC',
       ['Oily & coastal']: '#2E5C74',
       ['Lightly peated']: '#C5DEAC',
       ['Peated']: '#81AC6D',
       ['Heavily peated']: '#5B7C4E',
-      default: '#202448',
+      other: '#202448',
+      default: '#21A0A0',
     }
   },
   font: 'Roboto',
@@ -125,7 +126,7 @@ export const theme = {
         background: '#202448',
         text: 'white',
         border: 'none',
-      }
+      },
     },
     size: {
       default: {
@@ -134,8 +135,8 @@ export const theme = {
       },
       small: {
         padding: '0.5rem',
-        margin: '0rem'
-      }
+        margin: '0.5rem 1rem'
+      },
     },
   },
   input: {

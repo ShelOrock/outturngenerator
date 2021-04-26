@@ -20,13 +20,14 @@ export type ModalInputOnChangeType = (e?: React.ChangeEvent<HTMLInputElement>) =
 export interface ModalButton {
   text?: string;
   arguments?: any[];
-  onClickFunction?: ModalFunctionOnClickType;
-}
+  dispatchToStore?: boolean;
+  onClick: ModalFunctionOnClickType;
+};
 
-export interface Modal<modalStateTypes = CreateCaskModalState | CreateOutturnModalState> {
+export interface Modal<ModalStateTypes = CreateCaskModalState | CreateOutturnModalState> {
   modalHeader?: string;
-  modalState?: modalStateTypes;
+  modalState?: ModalStateTypes;
   confirmButton: ModalButton;
-}
+};
 
 export type ModalFunctionType = (...args: any) => Modal

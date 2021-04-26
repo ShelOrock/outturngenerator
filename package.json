@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node seed/newSeed.ts",
-    "build": "webpack --mode\"production\"",
-    "build-watch": "webpack -w --mode\"development\"",
+    "build": "webpack --mode=\"production\"",
+    "build-watch": "webpack -w --mode=\"development\"",
     "start:client-dev": "./node_modules/.bin/webpack --mode=\"development\" --watch",
     "start:server-dev": "nodemon server/index.ts --ignore public --exec ts-node",
     "start-dev": "npm run start:client-dev & npm run start:server-dev"
@@ -19,6 +19,7 @@
     "axios": "^0.19.2",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "pg": "^8.3.0",
