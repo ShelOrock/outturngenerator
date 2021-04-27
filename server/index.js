@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
-import app from './express.ts';
-import db from './db/database.ts';
+import app from './express';
+import db from './db/database';
 
 const PORT = process.env.PORT || 3000;
 
