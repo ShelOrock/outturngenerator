@@ -3,7 +3,7 @@ import chalk from 'chalk';
 import app from './express';
 import db from './db/database';
 
-const PORT: string | number = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 db.sync()
   .then(() => {
@@ -14,6 +14,6 @@ db.sync()
       console.log(chalk.magentaBright(`App is listening on localhost:${ PORT }`))
     });
   })
-  .catch((e: string) => {
+  .catch((e) => {
     console.error(chalk.red('Error syncing database', e));
   })
