@@ -34,7 +34,7 @@ const User = <UserModelStatic>db.define('user', {
 
   sessionId: {
     type: STRING,
-    allowNull: false,
+    allowNull: true,
   },
 
   loggedIn: {
