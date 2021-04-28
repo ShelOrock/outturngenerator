@@ -10,7 +10,7 @@ const db: DBInterface = new Sequelize(
     logging: false,
     dialect: 'postgres',
     dialectOptions: {
-      ssl: true
+      ssl: { rejectUnauthorized: false }
     }
   },
   
