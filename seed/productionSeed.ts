@@ -12,7 +12,7 @@ const productionSeed = async () => {
   })
 }
 
-db.sync()
+db.sync({ force: true })
   .then(() => productionSeed())
   .then(() => {
     console.log(chalk.blue('new seed created successfully'));
