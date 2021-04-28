@@ -9,6 +9,7 @@ const productionSeed = async () => {
   await User.create({
     username: 'Shel',
     password: bcrypt.hashSync('1234', SALT_ROUNDS),
+    userType: 'Admin'
   })
 }
 
