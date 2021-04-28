@@ -15,7 +15,7 @@ if(process.env.NODE !== 'production') {
 const app = express();
 
 app.use(session({
-  secret: process.env.SESSION,
+  secret: process.env.SESSION_SECRET,
   resave: true,
   cookie: {
     secure: process.env.NODE_ENV == 'production' ? true : false,
