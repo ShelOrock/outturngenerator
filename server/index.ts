@@ -16,4 +16,5 @@ db.sync()
   })
   .catch((e) => {
     console.error(chalk.red('Error syncing database', e));
+    process.exit(1);
   })
