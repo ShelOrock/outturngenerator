@@ -2,13 +2,13 @@ import bcrypt from 'bcrypt';
 
 import { UserAttributes } from '../../server/types/models/index';
 
-const SALTROUNDS = 12;
+const SALT_ROUNDS = 12;
 
 export const users: UserAttributes[] = [
   {
     username: 'Shel',
     email: 'shel@gmail.com',
-    password: bcrypt.hashSync('1234', SALTROUNDS),
+    password: bcrypt.hashSync('1234', SALT_ROUNDS),
     sessionId: '0',
     loggedIn: 'Offline',
     userType: 'Admin',
@@ -17,7 +17,7 @@ export const users: UserAttributes[] = [
   {
     username: 'Spongebob',
     email: 'spongebob@gmail.com',
-    password: bcrypt.hashSync('1234', SALTROUNDS),
+    password: bcrypt.hashSync('1234', SALT_ROUNDS),
     sessionId: '1',
     loggedIn: 'Offline',
     userType: 'Admin',
@@ -26,7 +26,7 @@ export const users: UserAttributes[] = [
   {
     username: 'Patrick',
     email: 'patrick@gmail.com',
-    password: bcrypt.hashSync('1234', SALTROUNDS),
+    password: bcrypt.hashSync('1234', SALT_ROUNDS),
     sessionId: '2',
     loggedIn: 'Offline',
     userType: 'Standard',
@@ -35,7 +35,7 @@ export const users: UserAttributes[] = [
   {
     username: 'Squidward',
     email: 'squidward@gmail.com',
-    password: bcrypt.hashSync('1234', SALTROUNDS),
+    password: bcrypt.hashSync('1234', SALT_ROUNDS),
     sessionId: '3',
     loggedIn: 'Online',
     userType: 'Standard',
@@ -44,7 +44,7 @@ export const users: UserAttributes[] = [
   {
     username: 'Sandy',
     email: 'sandy@gmail.com',
-    password: bcrypt.hashSync('1234', SALTROUNDS),
+    password: bcrypt.hashSync('1234', SALT_ROUNDS),
     sessionId: '4',
     loggedIn: 'Offline',
     userType: 'Unconfirmed',
