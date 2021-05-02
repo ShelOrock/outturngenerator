@@ -100,8 +100,8 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
         >
           { cask.caskNumber } { cask.name }
         </FlavourPill>
-      ))  
-  )
+      ))
+  );
 
   return (
     <Card>
@@ -113,7 +113,7 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
         <LinkDiv to={ `/outturn/${ id }`}>
           <Header>{ name }</Header>
           <Body>{ description && truncateText(description) }</Body>
-          { !!outturn.casks.length &&
+          { !!outturn.casks && !!outturn.casks.length &&
             <PaddedDiv
               paddingTop='1rem'
               paddingRight='1rem'

@@ -5,6 +5,7 @@ const {
   outturnsActions: { setOutturns },
   activeOutturnActions: { setActiveOutturn },
   markOutturnActions: { unmarkOutturn, resetMarkedOutturns },
+  searchActions: { setSearch },
   modalActions: { resetModal },
   loadingActions: { setLoading }
 } = actions;

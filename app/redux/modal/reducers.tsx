@@ -4,7 +4,7 @@ import {
   Modal,
   ReducerFunctionType,
   State
-} from '../../types/index';
+} from '../../types';
 
 const initialState: State<Modal> = {} as Modal;
 
@@ -13,5 +13,5 @@ export const modal: ReducerFunctionType<typeof initialState, Modal> = (state = i
     case SET_MODAL: return action.payload;
     case RESET_MODAL: return {} as Modal;
     default: return state;
-  }
+  };
 };

@@ -31,7 +31,8 @@ const {
   activeOutturnActions: { resetActiveOutturn },
   activeCaskActions: { resetActiveCask },
   markCaskActions: { resetMarkedCasks },
-  searchFilterActions: { removeFilter, resetFilters },
+  filterActions: { removeFilter, resetFilters },
+  searchActions: { setSearch, resetSearch },
   modalActions: { setModal },
 } = actions;
 
@@ -53,6 +54,7 @@ import {
   SelectPropTypes,
   CreateCaskModalState
 } from "../../types";
+import SearchManager from "../SearchManager/SearchManager";
 
 export default () => {
 
@@ -67,18 +69,23 @@ export default () => {
     activeUser,
     markedCasks,
     isLoading,
-    searchFilters,
+    filters,
+    search,
   } = useTypedSelector((state) => state);
 
   useEffect(() => {
     dispatch(resetActiveCask());
+    dispatch(resetActiveOutturn());
     dispatch(resetMarkedCasks());
     dispatch(resetFilters());
-    dispatch(resetActiveOutturn());
+    dispatch(resetSearch());
   }, []);
   useEffect(() => {
-    dispatch(getCasks(sort, searchFilters));
-  }, [sort, searchFilters]);
+    dispatch(getCasks(sort, filters));
+  }, [sort, filters]);
+  useEffect(() => {
+    dispatch(setSearch(allCasks))
+  }, [allCasks])
 
   const evaluateUserType = activeUser.userType =='Admin' || activeUser.userType == 'Standard';
 
@@ -94,7 +101,7 @@ export default () => {
         activeCask.id,
         [],
         sort,
-        searchFilters
+        filters
       ],
       onClick: addNewCask,
     },
@@ -181,7 +188,7 @@ export default () => {
 
   const resetFilterButtonProps: ButtonProps = {
     variant: "tertiary",
-    disabled: !searchFilters.length,
+    disabled: !filters.length,
     onClick: createButton(
       resetFilters,
       "X Clear Filters"
@@ -211,8 +218,15 @@ export default () => {
     ),
   };
 
+  const searchManagerProps = {
+    placeholder: 'Search Casks',
+    searchSet: allCasks,
+    firstCriteria: 'name',
+    secondCriteria: 'caskNumber'
+  };
+
   const renderSearchFilters = (): JSX.Element[] => (
-    searchFilters.map((filter: string, idx: number) => (
+    filters.map((filter: string, idx: number) => (
       <ButtonManager
         key={ idx }
         variant={ flavourProfiles.includes(filter) ? filter : 'default' }
@@ -226,34 +240,40 @@ export default () => {
   );
 
   const renderCaskListItems = (): JSX.Element[] => (
-    allCasks
-      .slice(0, showMore)
-      .map((cask) => (
-        <CaskListItem
-          key={ cask.id }
-          cask={ cask }
-          sortMethod={ sort }
-        />
-      ))
+    search
+    .slice(0, showMore)
+    .map((cask) => (
+      <CaskListItem
+        key={ cask.id }
+        cask={ cask }
+        sortMethod={ sort }
+      />
+    ))
   );
 
   return (
     <Column>
       <PageHeaderManager {...pageHeaderProps} />
-      <Row justifyContent="space-between">
-        <PaddedDiv
+      <PaddedDiv
           paddingLeft="1rem"
           paddingRight="1rem"
-        >
+      >
+        <Row justifyContent="space-between">
           <SelectManager {...sortCasksSelectProps} />
-        </PaddedDiv>
-        <Row alignItems='center'>
-          { !!searchFilters.length && renderSearchFilters() }
-          { !!searchFilters.length && <ButtonManager { ...resetFilterButtonProps } />}
-          <ButtonManager { ...setIsOpenButtonProps } />
+          <Row alignItems='center'>
+            { !!filters.length && renderSearchFilters() }
+            { !!filters.length && <ButtonManager { ...resetFilterButtonProps } />}
+            <ButtonManager { ...setIsOpenButtonProps } />
+          </Row>
+          { isOpen && <FilterMenuManager filterItems={ flavourProfiles }/>}
         </Row>
-        { isOpen && <FilterMenuManager filters={ flavourProfiles }/>}
-      </Row>
+      </PaddedDiv>
+      <PaddedDiv
+          paddingLeft="1rem"
+          paddingRight="1rem"
+      >
+        <SearchManager { ...searchManagerProps } />
+      </PaddedDiv>
       <Row>
         <List>
           { !!allCasks.length && renderCaskListItems() }

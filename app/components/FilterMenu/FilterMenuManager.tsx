@@ -21,7 +21,7 @@ const {
 
 //Redux Actions
 import * as actions from "../../redux/actions";
-const { searchFilterActions: { setFilters } } = actions;
+const { filterActions: { setFilters } } = actions;
 
 //Types
 import {
@@ -30,8 +30,8 @@ import {
   LocalReducerFunctionType
 } from "../../types";
 
-export default ({ filters }) => {
-  const { searchFilters } = useTypedSelector((state) => state);
+export default ({ filterItems }) => {
+  const { filters } = useTypedSelector((state) => state);
 
   const initialState: string[] = [];
   const reducer: LocalReducerFunctionType<typeof initialState> = (
@@ -53,8 +53,8 @@ export default ({ filters }) => {
   const [localFilters, dispatchLocally] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    dispatchLocally({ type: "UPDATE_FILTERS", value: searchFilters })
-  }, [searchFilters]);
+    dispatchLocally({ type: "UPDATE_FILTERS", value: filters })
+  }, [filters]);
 
   const handleOnCheck: InputOnChangeType = ({ target: { name } }) => {
     if (localFilters.includes(name)) {
@@ -75,7 +75,7 @@ export default ({ filters }) => {
   }
 
   const renderFilterListItems = (): JSX.Element[] => (
-    filters.map((filter, idx) => (
+    filterItems.map((filter, idx) => (
       <FilterListItem key={idx} flavourProfile={ filter }>
         <PaddedDiv
           paddingTop='1rem'

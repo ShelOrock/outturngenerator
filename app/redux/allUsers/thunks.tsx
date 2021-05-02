@@ -3,6 +3,7 @@ import axios from 'axios';
 import * as actions from '../actions'
 const {
   usersActions: { setAllUsers },
+  searchActions: { setSearch },
   modalActions: { resetModal },
   loadingActions: { setLoading },
 } = actions;
@@ -12,7 +13,6 @@ import { ThunkFunctionType } from '../../types'
 const API_URL = '/api/user';
 
 export const getAllUsers: ThunkFunctionType = (sort, filters = []) => {
-  console.log(sort, filters)
   return dispatch => {
     dispatch(setLoading(true))
     axios

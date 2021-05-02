@@ -10,7 +10,7 @@ import { setLoading } from '../loading/actions';
 import { getActiveOutturn } from '../activeOutturn/thunks'
 import { getActiveCask } from '../activeCask/thunks'
 
-import { ThunkFunctionType } from '../../types/index';
+import { ThunkFunctionType } from '../../types';
 
 const API_URL = '/api/cask'
 

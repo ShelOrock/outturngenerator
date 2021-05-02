@@ -21,7 +21,10 @@ const {
 
 //Redux actions
 import * as actions from '../../redux/actions';
-const { searchFilterActions: { removeFilter, resetFilters } } = actions;
+const {
+  filterActions: { removeFilter, resetFilters },
+  searchActions: { setSearch, resetSearch },
+} = actions;
 
 //Redux thunks
 import * as thunks from '../../redux/thunks';
@@ -35,6 +38,7 @@ import {
   ButtonProps,
   SelectPropTypes,
 } from '../../types';
+import SearchManager from '../SearchManager/SearchManager';
 
 export default () => {
 
@@ -46,7 +50,8 @@ export default () => {
   const {
     allUsers,
     activeUser,
-    searchFilters,
+    filters,
+    search,
   } = useTypedSelector(state => state)
 
   useEffect(() => {
@@ -54,10 +59,13 @@ export default () => {
     dispatch(resetFilters());
   }, []);
   useEffect(() => {
-    dispatch(getAllUsers(sort, searchFilters))
-  }, [sort, searchFilters]);
+    dispatch(getAllUsers(sort, filters))
+  }, [sort, filters]);
   useEffect(() => {
-    if(activeUser.loggedIn == 'Offline') history.push('/')
+    dispatch(setSearch(allUsers))
+  }, [allUsers])
+  useEffect(() => {
+    if(!activeUser.loggedIn || activeUser.loggedIn == 'Offline') history.push('/')
   }, [activeUser])
 
   const subNavigationProps: SubNavigationPropTypes = {
@@ -101,15 +109,21 @@ export default () => {
     ]
   }
 
-  const filters = [ 'Admin', 'Standard', 'Unconfirmed', 'Online', 'Offline' ]
+  const filterItems = [ 'Admin', 'Standard', 'Unconfirmed', 'Online', 'Offline' ]
 
   const resetFilterButtonProps: ButtonProps = {
     variant: 'tertiary',
-    disabled: !searchFilters.length,
+    disabled: !filters.length,
     onClick: createButton(
       resetFilters,
       'X Clear Filters',
     )
+  }
+
+  const searchManagerProps = {
+    placeholder: 'Search Users',
+    searchSet: allUsers,
+    firstCriteria: 'username'
   }
 
   const setIsOpenButtonProps: ButtonProps = {
@@ -123,8 +137,8 @@ export default () => {
     )
   }
 
-  const renderSearchFilters = (): JSX.Element[] => (
-    searchFilters.map((filter: string, idx: number) => (
+  const renderfilters = (): JSX.Element[] => (
+    filters.map((filter: string, idx: number) => (
       <ButtonManager 
         key={ idx }
         variant='default'
@@ -138,7 +152,7 @@ export default () => {
   )
 
   const renderUserListItems = () => (
-    allUsers.map(user => {
+    search.map(user => {
       return <UserListItem
         key={ user.id }
         user={ user }
@@ -158,11 +172,19 @@ export default () => {
             <SelectManager { ...sortUsersSelectProps } />
           </PaddedDiv>
         <Row alignItems='center'>
-          { !!searchFilters.length && renderSearchFilters() }
-          { !!searchFilters.length && < ButtonManager { ...resetFilterButtonProps } /> }
+          { !!filters.length && renderfilters() }
+          { !!filters.length && < ButtonManager { ...resetFilterButtonProps } /> }
           <ButtonManager { ...setIsOpenButtonProps } />
         </Row>
-        { isOpen && <FilterMenuManager filters={ filters } /> }
+        { isOpen && <FilterMenuManager filterItems={ filterItems } /> }
+      </Row>
+      <Row>
+        <PaddedDiv
+          paddingLeft='1rem'
+          paddingRight='1rem'
+        >
+          <SearchManager { ...searchManagerProps } />
+        </PaddedDiv>
       </Row>
       <List>
         { !!allUsers.length && renderUserListItems() }

@@ -5,7 +5,8 @@ import * as casksActions from './allCasks/actions';
 import * as activeCaskActions from './activeCask/actions';
 import * as markOutturnActions from './markedOutturns/actions';
 import * as markCaskActions from './markedCasks/actions';
-import * as searchFilterActions from './searchFilters/actions';
+import * as filterActions from './filters/actions';
+import * as searchActions from './search/actions';
 import * as activeUserActions from './activeUser/actions';
 import * as usersActions from './allUsers/actions';
 import * as modalActions from './modal/actions';
@@ -20,7 +21,8 @@ export {
   activeCaskActions,
   markOutturnActions,
   markCaskActions,
-  searchFilterActions,
+  filterActions,
+  searchActions,
   activeUserActions,
   usersActions,
   modalActions,

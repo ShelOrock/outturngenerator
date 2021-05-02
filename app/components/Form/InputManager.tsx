@@ -14,9 +14,18 @@ const {
 //Types
 import { InputManagerPropTypes, TextInputPropTypes } from '../../types/react/componentProps';
 
-export default ({ label, type, size, name, value, onChange }: InputManagerPropTypes) => {
+export default ({
+  label = '',
+  placeholder = '',
+  type,
+  size = 'default',
+  name,
+  value,
+  onChange
+}: InputManagerPropTypes) => {
 
   const inputFieldProps: TextInputPropTypes = {
+    placeholder,
     type,
     name,
     value,

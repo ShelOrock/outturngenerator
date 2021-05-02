@@ -8,7 +8,8 @@ import { activeUser } from './activeUser/reducers';
 import { allUsers } from './allUsers/reducers';
 import { markedCasks } from './markedCasks/reducers';
 import { markedOutturns } from './markedOutturns/reducers';
-import { searchFilters } from './searchFilters/reducers';
+import { filters } from './filters/reducers';
+import { search } from './search/reducers';
 import { modal } from './modal/reducers';
 import { toast } from './toast/reducers';
 import { isLoading } from './loading/reducers';
@@ -22,7 +23,8 @@ export default combineReducers({
   allUsers,
   markedCasks,
   markedOutturns,
-  searchFilters,
+  filters,
+  search,
   modal,
   toast,
   isLoading,
