@@ -39,16 +39,16 @@ export const InputModule = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
-  width: 100%;
 `
 
-export const InputLabel = styled.label`
+export const InputLabel = styled.label<InputPropTypes>`
   color: ${ ({ theme: { colors } }) => colors.darkgray };
   padding: 0.5rem 0;
+  width: ${ ({ inputSize, theme: { input } }) => inputSize ? input.size[inputSize].width : input.size.default.width };
 `
 
 export const InputField = styled.input<InputPropTypes>`
-  padding: 0.25rem;
+  padding: 0.5rem 1rem;
   height: 1.7rem;
   width: ${ ({ inputSize, theme: { input } }) => inputSize ? input.size[inputSize].width : input.size.default.width };
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };

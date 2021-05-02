@@ -13,7 +13,11 @@ const {
   StyledDiv: { Row, Column, PaddedDiv, HorizontalRule },
 } = StyledComponents;
 
-export default ({ sectionHeaderProps, inputProps, onChange }) => {
+export default ({
+  sectionHeaderProps,
+  inputProps,
+  onChange
+}) => {
 
   const renderInputManagers = (): JSX.Element | JSX.Element[] => (
     inputProps.map((input, idx) => Array.isArray(input)

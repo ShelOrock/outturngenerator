@@ -9,12 +9,17 @@ import { useTypedSelector, createButton } from "../../utils";
 import PageHeader from "../Header/PageHeaderManager";
 import ButtonManager from "../Button/ButtonManager";
 import SelectManager from '../Select/SelectManager';
+import SearchManager from "../SearchManager/SearchManager";
 import OutturnCard from "./OutturnCard";
 //Styled Components
 import * as StyledComponents from "../styledcomponents/index";
 const {
   StyledCard: { CardsContainer },
-  StyledDiv: { PaddedDiv, Column },
+  StyledDiv: {
+    PaddedDiv,
+    Row,
+    Column
+  },
 } = StyledComponents;
 
 //Redux actions
@@ -22,6 +27,7 @@ import * as actions from "../../redux/actions";
 const {
   activeCaskActions: { resetActiveCask },
   markOutturnActions: { resetMarkedOutturns },
+  searchActions: { setSearch, resetSearch },
   modalActions: { setModal, resetModal },
 } = actions;
 
@@ -41,7 +47,8 @@ import {
   Modal,
   PageHeaderPropTypes,
   SelectPropTypes,
-  CreateOutturnModalState } from "../../types";
+  CreateOutturnModalState
+} from "../../types";
 
 export default () => {
 
@@ -53,17 +60,22 @@ export default () => {
     allOutturns,
     markedOutturns,
     activeUser,
+    search,
     isLoading,
   } = useTypedSelector((state) => state);
 
   useEffect(() => {
     dispatch(resetActiveCask());
-    dispatch(resetModal());
     dispatch(resetMarkedOutturns());
+    dispatch(resetSearch());
+    dispatch(resetModal());
   }, []);
   useEffect(() => {
     dispatch(getOutturns(sort));
   }, [sort]);
+  useEffect(() => {
+    dispatch(setSearch(allOutturns))
+  }, [allOutturns])
 
   const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
 
@@ -138,6 +150,12 @@ export default () => {
     ]
   }
 
+  const searchManagerProps = {
+    placeholder: 'Search Outturns',
+    searchSet: allOutturns,
+    firstCriteria: 'name'
+  }
+
   const showMoreButtonProps: ButtonProps = {
     size: "default",
     variant: "secondary",
@@ -151,7 +169,7 @@ export default () => {
   };
 
   const renderOutturnCards = (): JSX.Element[] => (
-    allOutturns
+    search
       .slice(0, showMore)
       .map((outturn) => (
         <OutturnCard
@@ -166,8 +184,19 @@ export default () => {
     <Column>
       <Column>
         <PageHeader {...pageHeaderProps} />
-        <PaddedDiv paddingLeft='1rem' paddingRight='1rem'>
-          <SelectManager { ...sortOutturnSelectProps }/>
+        <PaddedDiv
+          paddingLeft='1rem'
+          paddingRight='1rem'
+        >
+          <Row alignItems='center' justifyContent='space-between'>
+            <SelectManager { ...sortOutturnSelectProps }/>
+          </Row>
+        </PaddedDiv>
+        <PaddedDiv
+          paddingLeft='1rem'
+          paddingRight='1rem'
+        >
+          <SearchManager { ...searchManagerProps }/>
         </PaddedDiv>
       </Column>
       <Column alignItems="center">

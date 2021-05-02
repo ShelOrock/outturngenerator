@@ -151,8 +151,8 @@ export default () => {
       addButtonProps,
       deleteButtonProps,
     }
-  }
-;
+  };
+  
   const caskFormInputProps: CaskFormPropTypes = [
     {
       sectionTitle: "Header",
@@ -184,7 +184,10 @@ export default () => {
           type: 'select',
           selectValue: localState.flavourProfile,
           label: 'Flavour Profile',
-          onChange: (e) => dispatchLocally({ name: 'flavourProfile', value: e.target.value}),
+          onChange: (e) => dispatchLocally(
+            { name: 'flavourProfile',
+            value: e.target.value}
+          ),
           width: '200px',
           options: [
             {

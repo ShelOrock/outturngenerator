@@ -63,14 +63,16 @@ export interface InputPropTypes {
 };
 
 export interface TextInputPropTypes {
+  placeholder: string;
   type: 'text' | 'password';
   name: string;
   value: string;
-  onChange?: InputOnChangeType
+  onChange?: InputOnChangeType;
 }
 
 export interface InputManagerPropTypes {
-  label: string;
+  label?: string;
+  placeholder?: string;
   type: 'text' | 'password';
   size: 'small'
     | 'medium'

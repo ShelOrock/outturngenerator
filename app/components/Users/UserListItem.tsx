@@ -39,7 +39,7 @@ export default ({ user, sortMethod }) => {
 
   const [ selectValue, setSelectValue ] = useState(user.userType)
   const [ isEdited, setIsEdited ] = useState(false)
-  const { activeUser, searchFilters } = useTypedSelector(state => state)
+  const { activeUser, filters } = useTypedSelector(state => state)
 
   useEffect(() => { checkIsEdited(user.userType, selectValue) }, [user.userType, selectValue]);
 
@@ -55,7 +55,7 @@ export default ({ user, sortMethod }) => {
       user.id,
       { userType: selectValue },
       sortMethod,
-      searchFilters
+      filters
     )
   }
 
@@ -90,7 +90,7 @@ export default ({ user, sortMethod }) => {
     modalHeader: `Are you sure you want to delete ${ user.username || 'this user' }?`,
     confirmButton: {
       text: `Delete ${ user.username || 'this user' }`,
-      arguments: [ user.id, sortMethod, searchFilters ],
+      arguments: [ user.id, sortMethod, filters ],
       onClick: deleteUser,
     }
   }

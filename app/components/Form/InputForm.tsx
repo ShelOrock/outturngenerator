@@ -40,16 +40,16 @@ export default ({
     { renderInputSectionManagers(inputPropsGenerator) }
       <Row alignItems='center' justifyContent='space-between'>
         { backLinkButton && 
-          <LinkButton to={backLinkButton.link}>
-            {backLinkButton.destination}
+          <LinkButton to={ backLinkButton.link }>
+            { backLinkButton.destination }
           </LinkButton>
         }
         <Row alignItems='center'>
           { confirmButton && <ButtonManager { ...confirmButton } /> }
           { cancelButton && <ButtonManager { ...cancelButton } /> }
           { forwardLinkButton &&
-            <LinkButton to={forwardLinkButton.link}>
-              {forwardLinkButton.destination}
+            <LinkButton to={ forwardLinkButton.link}>
+              { forwardLinkButton.destination }
             </LinkButton>
           }
         </Row>
