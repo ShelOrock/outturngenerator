@@ -6,10 +6,12 @@ import axios from 'axios';
 
 import { rootReducer } from './reducers';
 
-const middleware = [
+let middleware = [
   thunkMiddleware.withExtraArgument({ axios }),
-  createLogger({ collapsed: true }),
 ];
+if(process.env.NODE_ENV !== 'production') {
+  middleware = [ ...middleware, createLogger({ collapsed: true }) ]
+}
 
 export default createStore(
   rootReducer,
