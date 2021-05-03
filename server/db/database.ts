@@ -6,7 +6,7 @@ const DATABASE_NAME: string = 'outturngenerator';
 
 const db: DBInterface = process.env.DATABASE_URL
   ? new Sequelize(
-    process.env.DATABASE_NAME,
+    process.env.DATABASE_URL,
       {
         logging: false,
         dialect: 'postgres',
