@@ -22,6 +22,6 @@ export default () => {
   }, [toast.length])
 
   return (
-    <div>meow</div>
+    <div></div>
   )
 }
