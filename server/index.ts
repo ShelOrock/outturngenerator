@@ -14,7 +14,7 @@ db.sync()
       console.log(chalk.magentaBright(`App is listening on localhost:${ PORT }`))
     });
   })
-  .catch((e) => {
+  .catch(e => {
     console.error(chalk.red('Error syncing database', e));
     process.exit(1);
   })

@@ -153,7 +153,8 @@ export default () => {
   const searchManagerProps = {
     placeholder: 'Search Outturns',
     searchSet: allOutturns,
-    firstCriteria: 'name'
+    firstCriteria: 'name',
+    secondCriteria: '',
   }
 
   const showMoreButtonProps: ButtonProps = {
