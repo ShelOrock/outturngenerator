@@ -18,10 +18,17 @@ export default () => {
 
   const handleOnChange: InputOnChangeType = e => setSearchInput(e.target.value);
 
+  const inputFieldProps = {
+    type: 'text',
+    name: 'caskSearch',
+    value: searchInput,
+    onChange: handleOnChange
+  }
+
   return <div>
     <InputModule>
       <InputLabel>Search</InputLabel>
-      <InputField type='text' name='caskSearch' value={ searchInput } onChange={ handleOnChange } />
+      <InputField { ...inputFieldProps } />
     </InputModule>
   </div>
 }
