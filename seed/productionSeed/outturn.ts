@@ -1,4 +1,4 @@
-import { OutturnAttributes } from '../../../server/types/models'
+import { OutturnAttributes } from '../../server/types/models'
 
 export const outturns: OutturnAttributes[] = [
   {

@@ -1,4 +1,4 @@
-import { CaskAttributes } from '../../../server/types/models'
+import { CaskAttributes } from '../../server/types/models'
 
 export const marchCasks: CaskAttributes[] = [
   {

@@ -20,7 +20,7 @@ import {
   Outturn,
   User,
   db
-} from '../../../server/db'
+} from '../../server/db'
 
 const productionSeed = async () => {
   const allOutturns = await Promise.all(outturns.map(outturn => Outturn.create(outturn)));
