@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 
-import { UserAttributes } from '../../../server/types/models'
+import { UserAttributes } from '../../server/types/models'
 
 const SALT_ROUNDS: number = 12;
 
