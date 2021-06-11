@@ -10,7 +10,6 @@ export const NavBar = styled.div`
   padding: 2rem;
   margin: 0;
   box-shadow: 0px 8px 15px #D5D5D5;
-  width: 97vw;
 `
 
 export const NavLink = styled(Link)`
@@ -40,8 +39,8 @@ export const LargeLinkButton = styled(Link)<LinkButtonPropTypes>`
   color: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].text };
   border: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].border};
   border-radius: 3px;
-  padding: ${ ({ theme: { buttons } }) => buttons.size.default.padding };
-  margin: ${ ({ theme: { buttons } }) => buttons.size.default.margin };
+  padding: ${ ({ theme: { buttons } }) => buttons.size.large.padding };
+  margin: ${ ({ theme: { buttons } }) => buttons.size.large.margin };
   font-weight: bold;
 
   &:focus {

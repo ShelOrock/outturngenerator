@@ -21,6 +21,7 @@ export default ({
   confirmButton,
   cancelButton,
   inputPropsGenerator,
+  width,
   onChange
 }: InputFormPropTypes) => {
 
@@ -36,7 +37,7 @@ export default ({
   );
 
   return (
-    <InputFormContainer>
+    <InputFormContainer width={ width }>
     { renderInputSectionManagers(inputPropsGenerator) }
       <Row alignItems='center' justifyContent='space-between'>
         { backLinkButton && 

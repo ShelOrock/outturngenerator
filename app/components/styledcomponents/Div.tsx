@@ -18,6 +18,7 @@ interface PaddedDivProps {
 export const MainDiv = styled.div`
   box-shadow: 0px 8px 15px #D5D5D5;
   background: white;
+  width: 75%;
 `;
 
 const RowsAndColumns = css<DivProps>`
@@ -44,5 +45,5 @@ export const HorizontalRule = styled.hr`
 `
 
 export const PaddedDiv = styled.div<PaddedDivProps>`
-  padding: ${ (props) => `${ props.paddingTop || 0 } ${ props.paddingRight || 0 } ${ props.paddingBottom || 0 } ${ props.paddingLeft || 0 }` }
+  padding: ${ props => `${ props.paddingTop || 0 } ${ props.paddingRight || 0 } ${ props.paddingBottom || 0 } ${ props.paddingLeft || 0 }` }
 `

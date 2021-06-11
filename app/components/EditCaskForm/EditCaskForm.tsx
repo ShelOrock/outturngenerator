@@ -65,7 +65,7 @@ export default () => {
     allocation: '',
     description: '',
     outturnId: '',
-    caskPosition: null,
+    caskPosition: activeCask.caskPosition,
   };
 
   const reducer: LocalReducerFunctionType<any> = (state = initialState, action) => {
@@ -329,8 +329,8 @@ export default () => {
     cancelButton,
     inputPropsGenerator: caskFormInputProps,
     onChange,
+    width: '60%'
   }
-
 
   return (
     <Column>

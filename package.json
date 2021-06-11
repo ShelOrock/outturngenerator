@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "ts-node seed/newSeed.ts",
+    "production-seed": "ts-node seed/productionSeed/seed",
     "build": "webpack --mode=\"production\"",
     "build-watch": "webpack -w --mode=\"development\"",
     "start:client-dev": "./node_modules/.bin/webpack --mode=\"development\" --watch",

@@ -4,11 +4,12 @@ import { useHistory } from 'react-router-dom';
 import { useTypedSelector, createButton } from '../../utils';
 
 //Components
+import PageHeaderManager from '../Header/PageHeaderManager';
 import InputForm from '../Form/InputForm';
 import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents/index';
-const { StyledForm: { LoginFormContainer } } = StyledComponents;
+const { StyledDiv: { Row, Column } } = StyledComponents;
 
 import * as thunks from '../../redux/thunks';
 const { authenticationThunks: { attemptUserSignUp } } = thunks;
@@ -17,7 +18,8 @@ import {
   InputOnChangeType,
   InputFormPropTypes,
   SignUpFormPropTypes,
-  AttemptUserSignUpButtonPropTypes
+  AttemptUserSignUpButtonPropTypes,
+  PageHeaderPropTypes
 } from '../../types';
 
 export default () => {
@@ -40,6 +42,18 @@ export default () => {
       ...localState,
       [name]: value
     })
+  };
+
+  const pageHeaderProps: PageHeaderPropTypes = {
+    subNavigationProps: {
+      link: "/",
+      destination: "< Back",
+    },
+    toolbarProps: {
+      pageTitle: 'Sign up',
+      addButtonProps: null,
+      deleteButtonProps: null
+    }
   };
 
   const loginFormInputProps: SignUpFormPropTypes = [
@@ -73,7 +87,8 @@ export default () => {
       destination: ''
     },
     inputPropsGenerator: loginFormInputProps,
-    onChange
+    onChange,
+    width: '40%'
   };
 
   const attemptUserSignUpButtonProps: AttemptUserSignUpButtonPropTypes = {
@@ -82,13 +97,17 @@ export default () => {
       attemptUserSignUp,
       'Sign Up',
       { usernameOrEmail, password }
-    )
+    ),
+    size: 'large'
   }
 
   return (
-    <LoginFormContainer>
+    <Column>
+      <PageHeaderManager { ...pageHeaderProps }/>
       <InputForm { ...inputFormProps } />
-      <ButtonManager { ...attemptUserSignUpButtonProps } />
-    </LoginFormContainer>
+      <Row width='100%' alignItems='center' justifyContent='center'>
+        <ButtonManager { ...attemptUserSignUpButtonProps } />
+      </Row>
+    </Column>
   )
 }

@@ -6,13 +6,14 @@ import { useHistory } from 'react-router-dom';
 import { useTypedSelector, createButton } from '../../utils';
 
 //Components
+import PageHeaderManager from '../Header/PageHeaderManager';
 import InputForm from '../Form/InputForm';
 import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledForm: { LoginFormContainer },
   StyledNavigation: { LargeLinkButton },
+  StyledDiv: { Row, Column },
 } = StyledComponents;
 
 //Redux thunks
@@ -24,7 +25,8 @@ import {
   InputOnChangeType,
   InputFormPropTypes,
   LoginFormPropTypes,
-  AttemptUserLoginButtonPropTypes
+  AttemptUserLoginButtonPropTypes,
+  PageHeaderPropTypes
 } from '../../types/index';
 
 export default () => {
@@ -48,6 +50,18 @@ export default () => {
       [name]: value
     })
   }
+
+  const pageHeaderProps: PageHeaderPropTypes = {
+    subNavigationProps: {
+      link: "/",
+      destination: "< Back",
+    },
+    toolbarProps: {
+      pageTitle: 'Login',
+      addButtonProps: null,
+      deleteButtonProps: null
+    }
+  };
 
   const loginFormInputProps: LoginFormPropTypes = [
     {
@@ -80,7 +94,8 @@ export default () => {
       destination: ''
     },
     inputPropsGenerator: loginFormInputProps,
-    onChange
+    onChange,
+    width: '40%'
   }
 
   const attemptUserLoginButtonProps: AttemptUserLoginButtonPropTypes = {
@@ -89,17 +104,23 @@ export default () => {
       attemptUserLogin,
       'Login',
       { usernameOrEmail, password }
-    )
+    ),
+    size: 'large'
   }
 
   return (
-    <LoginFormContainer>
+    <Column>
+      <PageHeaderManager { ...pageHeaderProps }/>
+      <Column alignItems='center'>
       <InputForm { ...inputFormProps } />
-      <ButtonManager { ...attemptUserLoginButtonProps } />
-      <LargeLinkButton
-        to='/signup'
-        variant='secondary'
-      >Sign up</LargeLinkButton>
-    </LoginFormContainer>
+      <Row width='100%' alignItems='center' justifyContent='center'>
+        <ButtonManager { ...attemptUserLoginButtonProps } />
+        <LargeLinkButton
+          to='/signup'
+          variant='secondary'
+        >Sign up</LargeLinkButton>
+      </Row>
+      </Column>
+    </Column>
   )
 }

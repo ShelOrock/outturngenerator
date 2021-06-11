@@ -94,6 +94,7 @@ router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void =
 });
 
 router.post('/create-new-cask', (req: Request, res: Response, next: NextFunction) => {
+  console.log(req.body);
   Cask.create({ ...req.body })
   .then(createdCask => {
     res
