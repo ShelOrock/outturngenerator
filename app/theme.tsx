@@ -137,21 +137,25 @@ export const theme = {
         padding: '0.5rem',
         margin: '0.5rem 1rem'
       },
+      large: {
+        padding: '1rem 4rem',
+        margin: '1rem'
+      }
     },
   },
   input: {
     size: {
       default: {
-        width: '300px',
+        width: '80%',
       },
       small: {
-        width: '100px',
+        width: '15%',
       },
       medium: {
-        width: '200px',
+        width: '50%',
       },
       large: {
-        width: '300px',
+        width: '80%',
       }
     }
   }

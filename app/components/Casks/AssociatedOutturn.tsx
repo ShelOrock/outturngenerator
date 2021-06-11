@@ -37,7 +37,7 @@ export default () => {
   return (
     <PaddedDiv paddingTop='1rem'>
       <MainDiv>
-        { !!Object.keys(activeCask).length &&  evaluateCaskAssignment }
+        { !!Object.keys(activeCask).length && evaluateCaskAssignment }
       </MainDiv>
     </PaddedDiv>
   )

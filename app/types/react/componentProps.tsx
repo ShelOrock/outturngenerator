@@ -46,6 +46,7 @@ export interface InputFormPropTypes {
   cancelButton?: ButtonProps;
   inputPropsGenerator;
   onChange: InputOnChangeType;
+  width: string;
 }
 
 export interface InputPropTypes {
@@ -109,6 +110,7 @@ export interface FormInputPropTypes {
 export interface AttemptUserLoginButtonPropTypes {
   dispatchToStore: boolean,
   onClick: any;
+  size: string;
 }
 
 export interface AttemptUserSignUpButtonPropTypes extends AttemptUserLoginButtonPropTypes {}

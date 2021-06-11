@@ -42,11 +42,13 @@ export default ({
   ))
 
   return (
-    <Column>
-      <Row justifyContent='space-between'>
+    <Column width='100%'>
+      <Row justifyContent='space-between' width='100%'>
+        { sectionHeaderProps &&
         <PaddedDiv paddingTop='1rem'>
           <Subheader> { sectionHeaderProps } </Subheader>
         </PaddedDiv>
+        }
         <Column width='80%'>
           { renderInputManagers() }
         </Column>

@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components';
 
+interface InputFormContainerPropTypes {
+  width: string;
+}
+
 interface SelectPropTypes {
   flavourProfile?: string;
   width?: string;
@@ -9,8 +13,8 @@ interface InputPropTypes {
   inputSize?: string;
 }
 
-export const FormContainer = css`
-  width: 60vw;
+export const FormContainer = css<InputFormContainerPropTypes>`
+  width: ${ ({ width }) => width };
   margin: auto;
   padding: 1rem;
   background-color: white;
@@ -19,16 +23,8 @@ export const FormContainer = css`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
 `;
-
-export const LoginFormContainer = styled.div`
-  ${ FormContainer }
-  width: 40%;
-  position:fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
 
 export const InputFormContainer = styled.div`
   ${ FormContainer };
@@ -39,6 +35,7 @@ export const InputModule = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
+  width: 100%;
 `
 
 export const InputLabel = styled.label<InputPropTypes>`
@@ -67,7 +64,7 @@ export const TextArea = styled.textarea`
   padding: 0.5rem;
   font-family: Roboto;
   height: 6rem;
-  width: 60%;
+  width: 80%;
   resize: none;
  
 
@@ -81,7 +78,7 @@ export const Checkbox = styled.input`
 `
 
 export const Select = styled.select<SelectPropTypes>`
-  width: ${ ({ width }) => width || '125px' };
+  width: ${ ({ width }) => { console.log(width); return width || '125px' }};
   background-color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.white };
   color: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] ? colors.white : colors.primary };
   border: none;

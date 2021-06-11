@@ -10,7 +10,7 @@ const {
   }
 } = StyledComponents;
 
-import { InputOnChangeType } from '../../types/index';
+import { CaskFormPropTypes, InputOnChangeType } from '../../types/index';
 
 export default () => {
 
@@ -22,13 +22,13 @@ export default () => {
     type: 'text',
     name: 'caskSearch',
     value: searchInput,
-    onChange: handleOnChange
+    onChange: handleOnChange,
   }
 
-  return <div>
+  return (
     <InputModule>
       <InputLabel>Search</InputLabel>
-      <InputField { ...inputFieldProps } />
+      <InputField { ...inputFieldProps } inputSize='small' />
     </InputModule>
-  </div>
+  )
 }

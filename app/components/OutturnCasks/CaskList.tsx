@@ -164,14 +164,14 @@ export default () => {
   return (
     <Column justifyContent='center'>
       <Row alignItems='center'>
-        <Checkbox { ...checkAllCasksCheckboxProps } />
+        { evaluateUserType && <Checkbox { ...checkAllCasksCheckboxProps } /> }
         { evaluateUserType && <ButtonManager { ...editManyCasksButtonProps } /> }
         { evaluateUserType && <ButtonManager { ...cancelChangesButtonProps } /> }
       </Row>
       <Row alignItems='flex-start'>
         <Column alignItems='center'>
           <List>
-            <DragDropContext onDragEnd={onDragEnd}>
+            <DragDropContext onDragEnd={ onDragEnd }>
               <Droppable droppableId="list">
                 { provided => renderDragDropProvided(provided) }
               </Droppable>
@@ -179,7 +179,9 @@ export default () => {
           </List>
           <ButtonManager { ...generateOutturnButtonProps } />
         </Column>
+        <Column>
         <ActiveCaskContainer />
+        </Column>
       </Row>
     </Column>
   );

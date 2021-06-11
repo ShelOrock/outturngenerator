@@ -31,10 +31,25 @@ export const Subheader = styled.h3`
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
 `;
 
+export const CaskTitle = styled.h4`
+  ${ AllTypeStyles }
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
+  color: ${ ( { theme: { colors } }) => colors.darkgray };
+  margin: 0.5rem 0;
+`;
+
+export const FlavourProfileTitle = styled.p`
+  ${ AllTypeStyles }
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
+  color: ${ ( { theme: { colors } }) => colors.white };
+  margin: 0;
+`
+
 export const SmallListItemHeader = styled.p`
   ${ AllTypeStyles }
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
-  color: ${ ( { theme: { colors } }) => colors.gray };
+  color: ${ ( { theme: { colors } }) => colors.darkgray };
+  margin: 0;
 `
 
 export const Body = styled.p`

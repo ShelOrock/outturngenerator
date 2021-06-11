@@ -17,6 +17,7 @@ import ButtonManager from "../Button/ButtonManager";
 import CaskListItem from "../OutturnCasks/CaskListItem";
 import ActiveCaskContainer from "../OutturnCasks/ActiveCaskContainer";
 import AssociatedOutturn from "./AssociatedOutturn";
+import SearchManager from "../SearchManager/SearchManager";
 
 //StyledComponents
 import * as StyledComponents from "../styledcomponents";
@@ -54,7 +55,6 @@ import {
   SelectPropTypes,
   CreateCaskModalState
 } from "../../types";
-import SearchManager from "../SearchManager/SearchManager";
 
 export default () => {
 
@@ -64,6 +64,7 @@ export default () => {
   const [ showMore, setShowMore ] = useState(12);
   const [ isOpen, setIsOpen ] = useState(false);
   const {
+    activeOutturn,
     allCasks,
     activeCask,
     activeUser,
@@ -98,7 +99,7 @@ export default () => {
     confirmButton: {
       text: 'Create cask',
       arguments: [
-        activeCask.id,
+        activeOutturn.id,
         [],
         sort,
         filters
@@ -157,7 +158,7 @@ export default () => {
     selectValue: sort,
     label: "",
     onChange: (e) => setSort(e.target.value),
-    width: "auto",
+    width: "150px",
     options: [
       {
         value: "ascending",
@@ -253,7 +254,7 @@ export default () => {
 
   return (
     <Column>
-      <PageHeaderManager {...pageHeaderProps} />
+      <PageHeaderManager { ...pageHeaderProps } />
       <PaddedDiv
           paddingLeft="1rem"
           paddingRight="1rem"
@@ -274,12 +275,14 @@ export default () => {
       >
         <SearchManager { ...searchManagerProps } />
       </PaddedDiv>
-      <Row>
-        <List>
-          { !!allCasks.length && renderCaskListItems() }
-          { showMore < allCasks.length && <ButtonManager { ...showMoreButtonProps } />}
-        </List>
-        <Column>
+      <Row width='100%'>
+        <Column alignItems='center'>
+          <List>
+            { !!allCasks.length && renderCaskListItems() }
+            { showMore < allCasks.length && <ButtonManager { ...showMoreButtonProps } />}
+          </List>
+        </Column>
+        <Column width='100%'>
           <ActiveCaskContainer />
           <AssociatedOutturn />
         </Column>

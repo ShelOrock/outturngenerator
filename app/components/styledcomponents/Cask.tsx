@@ -41,18 +41,21 @@ export const FlavourPill = styled.div<FlavourPillPropTypes>`
 `
 
 export const ActiveCaskHeader = styled.div`
-  width: 300px;
+  width: 100%;
   padding: 1rem 0;
 `
 
 export const FlavourStrip = styled.div<FlavourPillPropTypes>`
-  background: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.default};
+  background: ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.other };
   padding: 0.5rem 0rem;
   color: white;
   margin: 1rem 0 0;
+  width: 100%;
 `
 
 export const ImageContainer = styled.div`
-  width: 250px;
-  height: 400px;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

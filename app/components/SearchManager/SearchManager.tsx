@@ -30,7 +30,7 @@ export default ({ placeholder, searchSet, firstCriteria = '', secondCriteria = '
   const searchFieldProps: InputManagerPropTypes = {
     placeholder, 
     type: 'text',
-    size: 'large',
+    size: 'small',
     name: 'searchField',
     value: searchField,
     onChange: handleOnChange
