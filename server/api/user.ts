@@ -3,7 +3,6 @@ import express, {
   Response,
   NextFunction
 } from 'express';
-import { Op } from 'sequelize';
 
 import { User } from '../db/index';
 

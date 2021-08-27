@@ -22,5 +22,4 @@ const db: DBInterface = process.env.DATABASE_URL
       }
     )
 
-
 export default db;

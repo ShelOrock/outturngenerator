@@ -25,6 +25,7 @@ export const attemptUserLogin: ThunkFunctionType = credentials => {
 };
 
 export const attemptUserSignUp: ThunkFunctionType = credentials => {
+  console.log(credentials)
   return dispatch => {
     setLoading(true);
     axios

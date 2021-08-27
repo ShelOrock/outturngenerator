@@ -31,11 +31,5 @@ export default ({
       : () => onClick.onClickFunction(...onClick.arguments)
   }
   
-  return (
-    onClick.onClickFunction && (
-      <Button { ...buttonProps }>
-        { onClick.text }
-      </Button>
-    )
-  );
+  return onClick.onClickFunction && <Button { ...buttonProps }>{ onClick.text }</Button>;
 };

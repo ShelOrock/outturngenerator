@@ -13,7 +13,7 @@ import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents';
 const {
-  StyledType: { Header, Body },
+  StyledType: { Heading, Body },
   StyledCard: { Card },
   StyledCask: { FlavourPill },
   StyledDiv: { PaddedDiv, Row },
@@ -111,7 +111,7 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
       </Row>
       <PaddedDiv paddingTop='1rem'>
         <LinkDiv to={ `/outturn/${ id }`}>
-          <Header>{ name }</Header>
+          <Heading>{ name }</Heading>
           <Body>{ description && truncateText(description) }</Body>
           { !!outturn.casks && !!outturn.casks.length &&
             <PaddedDiv

@@ -10,7 +10,7 @@ import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from '../styledcomponents';
 const { 
-  StyledType: { Header },
+  StyledType: { Heading },
   StyledDiv: { Row },
   StyledModal: { ModalContainer }
 } = StyledComponents;
@@ -70,7 +70,7 @@ export default () => {
       { !!Object.keys(modal).length 
         && (
           <ModalContainer>
-            <Header>{ modal.modalHeader }</Header>
+            <Heading>{ modal.modalHeader }</Heading>
             <ModalInputManager { ...inputFormProps } />
             <Row>
               <ButtonManager { ...confirmButtonProps }/>

@@ -18,6 +18,7 @@ import {
 } from './Interfaces/index';
 
 import {
+  GenericComponentProps,
   OutturnCard,
   CaskListItem,
   ButtonProps,
@@ -25,15 +26,16 @@ import {
   ToolbarPropTypes,
   PageHeaderPropTypes,
   TextInputPropTypes,
-  InputFormPropTypes,
+  FormInputPropTypes,
+  FormPropTypes,
   InputManagerPropTypes,
   LoginFormPropTypes,
   SignUpFormPropTypes,
   CaskFormPropTypes,
   AttemptUserLoginButtonPropTypes,
-  AttemptUserSignUpButtonPropTypes,
   AttemptUserLogoutButtonPropTypes,
   SelectPropTypes,
+  SelectOptionPropTypes,
   LocalReducerFunctionType,
   ParamTypes
 } from './react/index';
@@ -45,6 +47,7 @@ import {
   ReducerFunctionType,
   RootState,
   AppThunk,
+  AppDispatch,
   ThunkFunctionType
 } from './redux/index';
 
@@ -57,6 +60,7 @@ export {
   Users,
   UserCredentials,
   Search,
+  GenericComponentProps,
   OutturnCard,
   CaskListItem,
   ButtonProps,
@@ -64,15 +68,16 @@ export {
   ToolbarPropTypes,
   PageHeaderPropTypes,
   TextInputPropTypes,
-  InputFormPropTypes,
+  FormInputPropTypes,
+  FormPropTypes,
   InputManagerPropTypes,
   LoginFormPropTypes,
   SignUpFormPropTypes,
   CaskFormPropTypes,
   AttemptUserLoginButtonPropTypes,
-  AttemptUserSignUpButtonPropTypes,
   AttemptUserLogoutButtonPropTypes,
   SelectPropTypes,
+  SelectOptionPropTypes,
   LocalReducerFunctionType,
   InputOnChangeType,
   ButtonOnClickType,
@@ -89,5 +94,6 @@ export {
   ReducerFunctionType,
   RootState,
   AppThunk,
+  AppDispatch,
   ThunkFunctionType
 };

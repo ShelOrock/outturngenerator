@@ -4,6 +4,10 @@ import {
   InputOnChangeType
 } from '../index';
 
+export interface GenericComponentProps {
+  children?: React.ReactNode;
+};
+
 export interface OutturnCard {
   key: string;
   outturn: Outturn;
@@ -39,7 +43,7 @@ export interface PageHeaderPropTypes {
   toolbarProps: ToolbarPropTypes
 }
 
-export interface InputFormPropTypes {
+export interface FormPropTypes {
   backLinkButton: SubNavigationPropTypes;
   forwardLinkButton: SubNavigationPropTypes;
   confirmButton?: ButtonProps;
@@ -112,8 +116,6 @@ export interface AttemptUserLoginButtonPropTypes {
   onClick: any;
   size: string;
 }
-
-export interface AttemptUserSignUpButtonPropTypes extends AttemptUserLoginButtonPropTypes {}
 
 export interface AttemptUserLogoutButtonPropTypes extends AttemptUserLoginButtonPropTypes {
   size: 'small' | 'default'
