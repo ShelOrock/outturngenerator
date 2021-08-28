@@ -1,13 +1,13 @@
-import CaskListItem from './CaskListItem';
+import OutturnCard from './OutturnCard';
 import Toolbar from './Toolbar';
 import Header from './Header';
-import Buttons from './Buttons';
 import Body from './Body';
+import Pills from './Pills';
 
 export {
-  CaskListItem,
+  OutturnCard,
   Toolbar,
   Header,
-  Buttons,
-  Body
+  Body,
+  Pills
 };

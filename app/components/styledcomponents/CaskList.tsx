@@ -18,7 +18,7 @@ export const CaskListItem = styled.div<CaskListItem>`
   }
 `;
 
-export const Header = styled.div`
+export const Toolbar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,8 +30,14 @@ export const Buttons = styled.div`
   justify-content: flex-end;
 `;
 
+export const Header = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+`;
+
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
+  margin-top: 1rem;
 `;

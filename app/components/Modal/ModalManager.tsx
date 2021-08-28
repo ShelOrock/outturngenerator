@@ -12,7 +12,7 @@ import * as StyledComponents from '../styledcomponents';
 const { 
   StyledType: { Heading },
   StyledDiv: { Row },
-  StyledModal: { ModalContainer }
+  StyledModal: { Modal }
 } = StyledComponents;
 
 //Redux actions
@@ -69,14 +69,14 @@ export default () => {
     <div>
       { !!Object.keys(modal).length 
         && (
-          <ModalContainer>
+          <Modal>
             <Heading>{ modal.modalHeader }</Heading>
             <ModalInputManager { ...inputFormProps } />
             <Row>
               <ButtonManager { ...confirmButtonProps }/>
               <ButtonManager { ...cancelButtonProps } />
             </Row>
-          </ModalContainer>
+          </Modal>
         )
       }
     </div>

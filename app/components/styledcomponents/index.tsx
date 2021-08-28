@@ -14,6 +14,7 @@ import * as StyledToast from './Toast';
 import * as StyledNavigation from './Navigation';
 
 import * as StyledCaskList from './CaskList';
+import * as StyledOutturnList from './OutturnList';
 
 export {
   GlobalStyle,
@@ -30,5 +31,6 @@ export {
   StyledModal,
   StyledToast,
   StyledNavigation,
-  StyledCaskList
+  StyledCaskList,
+  StyledOutturnList,
 };

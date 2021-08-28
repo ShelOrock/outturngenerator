@@ -25,55 +25,55 @@ import { activeCaskThunks } from '../../redux/thunks';
 interface ComponentProps extends GenericComponentProps {
   cask: Cask;
   markedCasks: String[];
-  activeUser: User;
   onCheck: InputOnChangeType;
+  user: User;
 };
 
 export default ({
   cask = {} as Cask,
   markedCasks = [],
-  activeUser = {} as User,
-  onCheck
+  onCheck,
+  user = {} as User,
 }: ComponentProps): JSX.Element => {
 
   const dispatch = useDispatch()
   
   return (
     <CaskListItemContainers.CaskListItem>
-      <CaskListItemContainers.Header>
-        { activeUser.userType !== 'Guest' && (
+      <CaskListItemContainers.Toolbar>
+        { user.userType !== 'Guest' && (
           <Form.Checkbox
-            type='checkbox'
+            type={ 'checkbox' }
             name={ cask.id }
             checked={ markedCasks.includes(cask.id) }
             onChange={ () => onCheck() }
           />
         ) }
         <CaskListItemContainers.Buttons>
-          { activeUser.userType !== 'Guest' && <Link.LinkButton to={ `/edit/${ cask.id }` }>Edit</Link.LinkButton>}
-          { activeUser.userType !== 'Guest' && (
+          { user.userType !== 'Guest' && <Link.LinkButton to={ `/edit/${ cask.id }` }>Edit</Link.LinkButton> }
+          { user.userType !== 'Guest' && (
             <Button.DispatchButton
               variant={ 'tertiary' }
               dispatch={ dispatch }
-              onClick={ () => createButton(
-                modalActions.setModal,
-                'X Delete'
-                //TODO
-              ) }
-            />
+              onClick={ () => modalActions.setModal({
+                confirmButton: null //TODO
+              }) }
+            >X Delete</Button.DispatchButton>
           ) }
         </CaskListItemContainers.Buttons>
-      </CaskListItemContainers.Header>
+      </CaskListItemContainers.Toolbar>
       <Button.DispatchButton
         variant={ 'tertiary' }
         dispatch={ dispatch }
         onClick={ () => activeCaskThunks.getActiveCask(cask.id) }
       >
-      <CaskListItemContainers.Body>
-        <Type.Heading>{ cask.caskNumber ? `Cask No. ${ cask.caskNumber }` : 'Untitled Cask' }</Type.Heading>
-        <Type.Body>{ cask.name }</Type.Body>
-        <Pill.SmallPill flavourProfile={ cask.flavourProfile }>{ cask.flavourProfile || 'Other' }</Pill.SmallPill>
-      </CaskListItemContainers.Body>
+        <CaskListItemContainers.Header>
+          <Type.Heading>{ cask.caskNumber ? `Cask No. ${ cask.caskNumber }` : 'Untitled Cask' }</Type.Heading>
+          <Type.Body>{ cask.name }</Type.Body>
+        </CaskListItemContainers.Header>
+        <CaskListItemContainers.Body>
+          <Pill.SmallPill flavourProfile={ cask.flavourProfile }>{ cask.flavourProfile || 'Other' }</Pill.SmallPill>
+        </CaskListItemContainers.Body>
       </Button.DispatchButton>
     </CaskListItemContainers.CaskListItem>
   );
