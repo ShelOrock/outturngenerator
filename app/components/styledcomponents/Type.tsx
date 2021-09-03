@@ -25,12 +25,14 @@ export const SubTitle = styled.h2`
 export const Heading = styled.h3`
   ${ AllTypeStyles }
   font-weight: bold;
+  text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.large };
 `;
 
 export const SubHeading = styled.h4`
   ${ AllTypeStyles }
   font-weight: bold;
+  text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
 `;
 

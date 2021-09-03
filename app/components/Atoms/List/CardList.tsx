@@ -6,4 +6,6 @@ import { StyledList } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): React.ReactNode => <StyledList.CardList>{ children }</StyledList.CardList>;
+const CardList: React.FC<ComponentProps> = ({ children }) => <StyledList.CardList>{ children }</StyledList.CardList>;
+
+export default CardList;

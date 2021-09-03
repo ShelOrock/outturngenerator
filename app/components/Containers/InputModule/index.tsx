@@ -1,7 +1,7 @@
-import InputModule from './InputModule';
+import Main from './Main';
 import Information from './Information';
 
 export {
-  InputModule,
+  Main,
   Information
 };

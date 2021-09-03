@@ -1,11 +1,11 @@
-import CaskListItem from './CaskListItem';
+import Main from './Main';
 import Toolbar from './Toolbar';
 import Header from './Header';
 import Buttons from './Buttons';
 import Body from './Body';
 
 export {
-  CaskListItem,
+  Main,
   Toolbar,
   Header,
   Buttons,

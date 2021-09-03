@@ -6,4 +6,6 @@ import { StyledModal } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledModal.Buttons>{ children }</StyledModal.Buttons>;
+const Buttons: React.FC<ComponentProps> = ({ children }) => <StyledModal.Buttons>{ children }</StyledModal.Buttons>;
+
+export default Buttons;

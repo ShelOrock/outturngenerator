@@ -8,7 +8,9 @@ interface ComponentProps extends GenericComponentProps {
   flavourProfile: string;
 };
 
-export default ({
+const LargePill: React.FC<ComponentProps> = ({
   flavourProfile = '',
   children
-}: ComponentProps): JSX.Element => <StyledPill.LargePill flavourProfile={ flavourProfile }>{ children }</StyledPill.LargePill>;
+}) => <StyledPill.LargePill flavourProfile={ flavourProfile }>{ children }</StyledPill.LargePill>;
+
+export default LargePill;

@@ -8,7 +8,9 @@ interface ComponentProps extends GenericComponentProps {
   to: string;
 };
 
-export default ({
+const NavigationLink: React.FC<ComponentProps> = ({
   to = '#',
   children
-}: ComponentProps): JSX.Element => <StyledNavigation.NavLink to={ to }>{ children }</StyledNavigation.NavLink>;
+}) => <StyledNavigation.NavLink to={ to }>{ children }</StyledNavigation.NavLink>;
+
+export default NavigationLink;

@@ -8,7 +8,9 @@ interface ComponentProps extends GenericComponentProps {
   to: string;
 };
 
-export default ({
+const LinkDiv: React.FC<ComponentProps> = ({
   to = '#',
   children
-}: ComponentProps): JSX.Element => <StyledNavigation.LinkDiv to={ to }>{ children }</StyledNavigation.LinkDiv>;
+}) => <StyledNavigation.LinkDiv to={ to }>{ children }</StyledNavigation.LinkDiv>;
+
+export default LinkDiv;

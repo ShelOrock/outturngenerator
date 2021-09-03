@@ -3,7 +3,7 @@ import React from 'react';
 import { GenericComponentProps, InputOnChangeType } from '../../types';
 
 import { InputModuleContainers } from '../Containers';
-import { Form } from '../Atoms';
+import { Input } from '../Atoms';
 
 interface ComponentProps extends GenericComponentProps {
   type: string;
@@ -15,7 +15,7 @@ interface ComponentProps extends GenericComponentProps {
   error: string;
 };
 
-export default ({
+const InputModule: React.FC<ComponentProps> = ({
   type,
   name,
   value,
@@ -23,18 +23,20 @@ export default ({
   onChange,
   validateField = null, //TODO
   error = ''
-}: ComponentProps): React.ReactNode => (
-  <InputModuleContainers.InputModule>
+}) => (
+  <InputModuleContainers.Main>
     <InputModuleContainers.Information>
-      <Form.Label>{ name }</Form.Label>
-      <Form.Feedback>{ error }</Form.Feedback>
+      <Input.Label>{ name }</Input.Label>
+      <Input.Feedback>{ error }</Input.Feedback>
     </InputModuleContainers.Information>
-    <Form.InputField
+    <Input.InputField
       type={ type }
       name={ name }
       value={ value }
       placeholder={ placeholder }
       onChange={ onChange } 
     />
-  </InputModuleContainers.InputModule>
+  </InputModuleContainers.Main>
 );
+
+export default InputModule;

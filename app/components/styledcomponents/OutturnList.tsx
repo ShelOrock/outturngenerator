@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const OutturnCard = styled.div`
+export const Main = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;

@@ -6,4 +6,6 @@ import { StyledOutturnList } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledOutturnList.Toolbar>{ children }</StyledOutturnList.Toolbar>;
+const Toolbar: React.FC<ComponentProps> = ({ children }) => <StyledOutturnList.Toolbar>{ children }</StyledOutturnList.Toolbar>;
+
+export default Toolbar;

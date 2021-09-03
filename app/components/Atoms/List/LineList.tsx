@@ -6,4 +6,6 @@ import { StyledList } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): React.ReactNode => <StyledList.LineList>{ children }</StyledList.LineList>;
+const LineList: React.FC<ComponentProps> = ({ children }) => <StyledList.LineList>{ children }</StyledList.LineList>;
+
+export default LineList;

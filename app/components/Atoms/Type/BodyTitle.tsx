@@ -6,4 +6,6 @@ import { StyledType } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledType.BodyTitle>{ children }</StyledType.BodyTitle>;
+const BodyTitle: React.FC<ComponentProps> = ({ children }) => <StyledType.BodyTitle>{ children }</StyledType.BodyTitle>;
+
+export default BodyTitle;

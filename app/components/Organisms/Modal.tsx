@@ -3,7 +3,7 @@ import React from 'react';
 import { GenericComponentProps, Modal } from '../../types';
 
 import { ModalContainers } from '../Containers';
-import { InputModule } from '../Molecules';
+import { InputModuleMolecules } from '../Molecules';
 import { Type, Button } from '../Atoms';
 
 interface ComponentProps extends GenericComponentProps {
@@ -11,7 +11,7 @@ interface ComponentProps extends GenericComponentProps {
 };
 
 export default ({ modal }: ComponentProps): JSX.Element => (
-  <ModalContainers.Modal>
+  <ModalContainers.Main>
     <ModalContainers.Background />
     <Type.Heading> { modal.modalHeader }</Type.Heading>
     <ModalContainers.InputModules>
@@ -20,5 +20,5 @@ export default ({ modal }: ComponentProps): JSX.Element => (
     <ModalContainers.Buttons>
       {/*TODO*/}
     </ModalContainers.Buttons>
-  </ModalContainers.Modal>
+  </ModalContainers.Main>
 );

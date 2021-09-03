@@ -2,4 +2,6 @@ import React from 'react';
 
 import { StyledModal } from '../../styledcomponents';
 
-export default (): JSX.Element => <StyledModal.Background />
+const Background: React.FC = () => <StyledModal.Background />;
+
+export default Background;

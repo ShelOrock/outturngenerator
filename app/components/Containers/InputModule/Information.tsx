@@ -6,4 +6,6 @@ import { StyledForm } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledForm.Information>{ children }</StyledForm.Information>;
+const Information: React.FC<ComponentProps> = ({ children }) => <StyledForm.Information>{ children }</StyledForm.Information>;
+
+export default Information;

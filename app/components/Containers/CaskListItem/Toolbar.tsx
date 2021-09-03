@@ -2,8 +2,10 @@ import React from 'react';
 
 import { GenericComponentProps } from '../../../types';
 
-import { StyledCaskList } from '../../styledcomponents';
+import { StyledCaskListItem } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledCaskList.Toolbar>{ children }</StyledCaskList.Toolbar>;
+const Toolbar: React.FC<ComponentProps> = ({ children }) => <StyledCaskListItem.Toolbar>{ children }</StyledCaskListItem.Toolbar>;
+
+export default Toolbar;

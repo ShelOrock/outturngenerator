@@ -2,10 +2,12 @@ import React from 'react';
 
 import { GenericComponentProps } from '../../../types';
 
-import { StyledPill } from '../../styledcomponents';
+import { StyledImage } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {
-  variant: string;
+  src: string;
 };
 
-export default ({ variant, children }: ComponentProps): React.ReactNode => <StyledPill.OnlineIcon variant={ variant }>{ children }</StyledPill.OnlineIcon>;
+const Icon: React.FC<ComponentProps> = ({ src = '' }) => <StyledImage.Icon src={ src } />;
+
+export default Icon;

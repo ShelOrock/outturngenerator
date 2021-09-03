@@ -12,13 +12,13 @@ interface ComponentProps extends GenericComponentProps {
   variant: string;
 };
 
-export default ({
+const Button: React.FC<ComponentProps> = ({
   disabled = false,
   onClick,
   size,
   variant,
   children
-}: ComponentProps): JSX.Element => {
+}) => {
 
   const { isLoading } = useTypedSelector(state => state);
 
@@ -31,3 +31,5 @@ export default ({
     >{ children }</StyledButton.Button>
   );
 };
+
+export default Button;

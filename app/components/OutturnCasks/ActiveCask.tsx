@@ -21,7 +21,7 @@ const {
     PaddedDiv
   },
   StyledType: {
-    Header,
+    Heading,
     CaskTitle,
     FlavourProfileTitle,
     SmallListItemHeader,
@@ -94,7 +94,7 @@ export default () => {
               paddingLeft='0.5rem'
               paddingRight='0.5rem'
             >
-              { evaluateUserType && <LinkButton to={`/edit/${activeCask.id}`}>Edit</LinkButton> }
+              { evaluateUserType && <LinkButton to={`/edit/${ activeCask.id }`}>Edit</LinkButton> }
             </PaddedDiv>
             <PaddedDiv
               paddingTop='0.5rem'
@@ -110,13 +110,13 @@ export default () => {
               <ImageContainer>Insert image here</ImageContainer>
               <Column width='100%'>
                 <ActiveCaskHeader>
-                  <Header textAlign="left">
+                  <Heading textAlign="left">
                     CASK NO. {caskNumber && caskNumber.toUpperCase() }
-                  </Header>
+                  </Heading>
                   <CaskTitle textAlign="left">
                     { name && name.toUpperCase() }
                   </CaskTitle>
-                  <Header textAlign="left">{ price && `$${price}` }</Header>
+                  <Heading textAlign="left">{ price && `$${price}` }</Heading>
                   <FlavourStrip flavourProfile={ flavourProfile }>
                     <FlavourProfileTitle>
                       { flavourProfile && flavourProfile.toUpperCase() }

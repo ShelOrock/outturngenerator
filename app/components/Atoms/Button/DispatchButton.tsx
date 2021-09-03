@@ -18,13 +18,13 @@ interface ComponentProps extends GenericComponentProps {
   variant: string;
 };
 
-export default ({
+const DispatchButton: React.FC<ComponentProps> = ({
   disabled = false,
   onClick,
   size,
   variant,
   children
-}: ComponentProps): JSX.Element => {
+}) => {
 
   const dispatch = useDispatch();
 
@@ -39,3 +39,5 @@ export default ({
     >{ children }</StyledButton.Button>
   );
 };
+
+export default DispatchButton;

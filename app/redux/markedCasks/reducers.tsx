@@ -8,9 +8,9 @@ import {
 
 import { ReducerFunctionType, State } from '../../types/index';
 
-const initialState: State<String[]> = [];
+const initialState: State<string[]> = [];
 
-export const markedCasks: ReducerFunctionType<typeof initialState, String> = (state = initialState, action) => {
+export const markedCasks: ReducerFunctionType<typeof initialState, string> = (state = initialState, action) => {
   switch (action.type) {
     case MARK_CASK: 
       return [ ...state, action.payload ];

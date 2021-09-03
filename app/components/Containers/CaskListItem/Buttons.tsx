@@ -2,8 +2,10 @@ import React from 'react';
 
 import { GenericComponentProps } from '../../../types';
 
-import { StyledCaskList } from '../../styledcomponents';
+import { StyledCaskListItem } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledCaskList.Buttons>{ children }</StyledCaskList.Buttons>;
+const Buttons: React.FC<ComponentProps> = ({ children }) => <StyledCaskListItem.Buttons>{ children }</StyledCaskListItem.Buttons>;
+
+export default Buttons;

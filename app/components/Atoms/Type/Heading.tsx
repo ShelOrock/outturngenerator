@@ -6,4 +6,6 @@ import { StyledType } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledType.Heading>{ children }</StyledType.Heading>;
+const Heading: React.FC<ComponentProps> = ({ children }) => <StyledType.Heading>{ children }</StyledType.Heading>;
+
+export default Heading;

@@ -1,10 +1,10 @@
-import Modal from './Modal';
+import Main from './Main';
 import Background from './Background';
 import InputModules from './InputModules';
 import Buttons from './Buttons';
 
 export {
-  Modal,
+  Main,
   Background,
   InputModules,
   Buttons

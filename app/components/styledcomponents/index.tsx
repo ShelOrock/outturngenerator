@@ -13,8 +13,15 @@ import * as StyledModal from './Modal';
 import * as StyledToast from './Toast';
 import * as StyledNavigation from './Navigation';
 
+import * as StyledInput from './Input';
+import * as StyledImage from './Image';
+
+import * as StyledPage from './Page';
 import * as StyledCaskList from './CaskList';
+import * as StyledCaskListItem from './CaskListItem';
 import * as StyledOutturnList from './OutturnList';
+import * as StyledActiveCask from './ActiveCask';
+import * as StyledAssociatedOutturn from './AssociatedOutturn';
 
 export {
   GlobalStyle,
@@ -31,6 +38,12 @@ export {
   StyledModal,
   StyledToast,
   StyledNavigation,
+  StyledInput,
+  StyledImage,
+  StyledPage,
   StyledCaskList,
+  StyledCaskListItem,
   StyledOutturnList,
+  StyledActiveCask,
+  StyledAssociatedOutturn
 };

@@ -6,4 +6,6 @@ import { StyledOutturnList } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledOutturnList.Body>{ children }</StyledOutturnList.Body>;
+const Body: React.FC<ComponentProps> = ({ children }) => <StyledOutturnList.Body>{ children }</StyledOutturnList.Body>;
+
+export default Body;

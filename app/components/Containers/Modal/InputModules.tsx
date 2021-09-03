@@ -6,4 +6,6 @@ import { StyledModal } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {};
 
-export default ({ children }: ComponentProps): JSX.Element => <StyledModal.InputModules>{ children }</StyledModal.InputModules>;
+const InputModules: React.FC<ComponentProps> = ({ children }) => <StyledModal.InputModules>{ children }</StyledModal.InputModules>;
+
+export default InputModules;

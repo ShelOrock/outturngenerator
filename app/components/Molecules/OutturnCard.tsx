@@ -11,7 +11,7 @@ import {
 
 import { OutturnCardContainers } from '../Containers';
 import {
-  Form,
+  Input,
   Button,
   Link,
   Type
@@ -27,21 +27,21 @@ interface ComponentProps extends GenericComponentProps {
   user: User;
 };
 
-export default ({
+const OutturnCard: React.FC<ComponentProps> = ({
   outturn = {} as Outturn,
   markedOutturns = [],
   casks = [],
   onCheck,
   user = {} as User,
-}: ComponentProps): JSX.Element => {
+}) => {
 
   const dispatch = useDispatch();
 
   return (
-    <OutturnCardContainers.OutturnCard>
+    <OutturnCardContainers.Main>
       <OutturnCardContainers.Toolbar>
         { user.userType !== 'Guest' && (
-          <Form.Checkbox
+          <Input.Checkbox
             type={ 'checkbox' }
             name={ outturn.id }
             checked={ markedOutturns.includes(outturn.id) }
@@ -71,6 +71,8 @@ export default ({
           </OutturnCardContainers.Pills>
         </OutturnCardContainers.Body>
       </Link.LinkDiv>
-    </OutturnCardContainers.OutturnCard>
-  )
-}
+    </OutturnCardContainers.Main>
+  );
+};
+
+export default OutturnCard;
