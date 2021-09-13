@@ -8,16 +8,14 @@ import {
   Type
 } from '../Atoms';
 
-import { modalActions } from '../../redux/actions';
-
 import {
     GenericComponentProps,
-    InputOnChangeType,
     AppDispatch,
+    ActionFunctionType,
+    InputOnChangeType,
     Outturn,
     Cask,
     User,
-    AppThunk,
   } from '../../types';
 
 interface ComponentProps extends GenericComponentProps {
@@ -25,7 +23,7 @@ interface ComponentProps extends GenericComponentProps {
   markedOutturns: String[];
   casks: Cask[];
   handleOnCheck: InputOnChangeType;
-  handleSetModal: () => AppThunk;
+  handleSetModal: ActionFunctionType;
   user: User;
   dispatch: AppDispatch
 };

@@ -1,24 +1,29 @@
 import React from 'react';
 import { DropResult } from 'react-beautiful-dnd';
 
+import CaskListCard from './CaskListCard';
 import { CaskListContainers } from '../Containers';
 import { List, DragAndDrop } from '../Atoms';
 
 import {
   GenericComponentProps,
   AppDispatch,
+  ActionFunctionType,
+  ThunkFunctionType,
+  InputOnChangeType,
   Cask,
   User,
-  InputOnChangeType,
 } from '../../types';
-import CaskListItem from './CaskListItem';
 
 interface ComponentProps extends GenericComponentProps {
   markedCasks: string[];
   user: User
   dispatch: AppDispatch
   localCaskOrder: Cask[];
-  onCheck: InputOnChangeType
+  getActiveCask: ThunkFunctionType;
+  handleMarkCask: InputOnChangeType
+  handleSaveCasks: ThunkFunctionType;
+  handleSetModal: ActionFunctionType;
   onDragEnd: (DropResult) => void;
 };
 
@@ -27,7 +32,9 @@ const CaskList: React.FC<ComponentProps> = ({
   user = {} as User,
   dispatch,
   localCaskOrder,
-  onCheck,
+  getActiveCask,
+  handleMarkCask,
+  handleSetModal,
   onDragEnd,
 }) => (
   <CaskListContainers.Main>
@@ -39,11 +46,13 @@ const CaskList: React.FC<ComponentProps> = ({
               caskId={ cask.id }
               index={ idx }
             >
-              <CaskListItem
+              <CaskListCard
                 key={ cask.id }
                 cask={ cask }
                 markedCasks={ markedCasks }
-                onCheck={ onCheck }
+                handleMarkCask={ handleMarkCask }
+                handleSetModal={ handleSetModal }
+                getActiveCask={ getActiveCask }
                 dispatch={ dispatch }
                 user={ user }
               />

@@ -28,7 +28,7 @@ const {
 import * as thunks from "../../redux/thunks";
 const {
   activeCaskThunks: { getActiveCask, },
-  casksThunks: { deleteCask }
+  allCasksThunks: { deleteCask }
 } = thunks;
 
 //Types

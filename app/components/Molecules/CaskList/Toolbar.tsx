@@ -6,6 +6,8 @@ import { Input, Button } from '../../Atoms';
 import { 
   GenericComponentProps,
   AppDispatch,
+  AppThunk,
+  InputOnChangeType,
   Cask,
 } from '../../../types';
 
@@ -19,6 +21,8 @@ interface ComponentProps extends GenericComponentProps {
   | 'Standard'
   | 'Unconfirmed'
   | 'Guest';
+  handleMarkAllCasks: InputOnChangeType;
+  handleSaveCasks: () => AppThunk
   dispatch: AppDispatch;
 
 };
@@ -29,6 +33,8 @@ const Toolbar: React.FC<ComponentProps> = ({
   outturnId,
   isEdited = false,
   userType = 'Guest',
+  handleMarkAllCasks,
+  handleSaveCasks,
   dispatch,
 }) => (
   <CaskListContainers.Toolbar>
@@ -37,7 +43,7 @@ const Toolbar: React.FC<ComponentProps> = ({
         type={ 'checkbox' }
         name={ outturnId }
         checked={ casks.length && casks.length === markedCasks.length }
-        onChange={ () => {} /*TODO*/ }
+        onChange={ handleMarkAllCasks }
       />
     ) }
     { userType === 'Admin' || userType === 'Standard' && (
@@ -45,7 +51,7 @@ const Toolbar: React.FC<ComponentProps> = ({
         variant={ 'primary' }
         disabled={ !isEdited }
         dispatch={ dispatch }
-        onClick={ () => {} /*TODO*/ }
+        onClick={ handleSaveCasks }
       >Save</Button.DispatchButton>
     ) }
     { userType === 'Admin' || userType ==='Standard' && (

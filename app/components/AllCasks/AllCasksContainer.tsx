@@ -29,7 +29,7 @@ const {
 //Redux thunks
 import * as thunks from "../../redux/thunks";
 const {
-  casksThunks: {
+  allCasksThunks: {
     getCasks,
     addNewCask,
     deleteManyCasks

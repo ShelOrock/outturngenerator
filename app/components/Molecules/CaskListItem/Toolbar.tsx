@@ -1,11 +1,5 @@
 import React from 'react';
 
-import {
-  GenericComponentProps,
-  InputOnChangeType,
-  AppDispatch
-} from '../../../types';
-
 import { CaskListItemContainers } from '../../Containers';
 import {
   Link,
@@ -13,13 +7,19 @@ import {
   Button
 } from '../../Atoms';
 
-import { modalActions } from '../../../redux/actions';
+import {
+  GenericComponentProps,
+  AppDispatch,
+  ActionFunctionType,
+  InputOnChangeType,
+} from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
   userType: string;
   caskId: string;
   markedCasks: String[]
-  onCheck: InputOnChangeType;
+  handleMarkCask: InputOnChangeType;
+  handleSetModal: ActionFunctionType;
   dispatch: AppDispatch
 };
 
@@ -27,7 +27,8 @@ const Toolbar: React.FC<ComponentProps> = ({
   userType = 'Guest',
   caskId,
   markedCasks = [],
-  onCheck,
+  handleMarkCask,
+  handleSetModal,
   dispatch
 }) => (
   <CaskListItemContainers.Toolbar>
@@ -36,7 +37,7 @@ const Toolbar: React.FC<ComponentProps> = ({
         type={ 'checkbox' }
         name={ caskId }
         checked={ markedCasks.includes(caskId) }
-        onChange={ () => onCheck() }
+        onChange={ handleMarkCask }
       />
     ) }
     <CaskListItemContainers.Buttons>
@@ -45,10 +46,7 @@ const Toolbar: React.FC<ComponentProps> = ({
       <Button.DispatchButton
         variant={ 'tertiary' }
         dispatch={ dispatch }
-        onClick={ () => modalActions.setModal({
-          modalHeader: '',
-          confirmButton: null //TODO
-        }) }
+        onClick={ handleSetModal }
       >X Delete</Button.DispatchButton>
     ) } 
     </CaskListItemContainers.Buttons>

@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ActiveCaskContainers } from '../Containers';
-import { ActiveCaskMolecules } from '../Molecules';
+import { ActiveCaskContainers } from '../../Containers';
+import { ActiveCaskMolecules } from '../../Molecules';
 
-import { GenericComponentProps, Cask } from '../../types';
+import { GenericComponentProps, Cask } from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
   cask: Cask

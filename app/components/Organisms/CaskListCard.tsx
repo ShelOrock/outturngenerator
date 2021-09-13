@@ -1,10 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 import {
   GenericComponentProps,
-  InputOnChangeType,
   AppDispatch,
+  ActionFunctionType,
+  ThunkFunctionType,
+  InputOnChangeType,
   Cask,
   User,
 } from '../../types';
@@ -13,35 +14,38 @@ import { CaskListItemContainers } from '../Containers';
 import { CaskListItemMolecules } from '../Molecules';
 import { Button } from '../Atoms';
 
-import { activeCaskThunks } from '../../redux/thunks';
-
 interface ComponentProps extends GenericComponentProps {
   cask: Cask;
   markedCasks: String[];
-  onCheck: InputOnChangeType;
+  handleMarkCask: InputOnChangeType;
+  handleSetModal: ActionFunctionType;
+  getActiveCask: ThunkFunctionType;
   dispatch: AppDispatch
   user: User;
 };
 
-export default ({
+const CaskListCard: React.FC<ComponentProps> = ({
   cask = {} as Cask,
   markedCasks = [],
-  onCheck,
+  handleMarkCask,
+  handleSetModal,
+  getActiveCask,
   dispatch,
   user = {} as User,
-}: ComponentProps): JSX.Element => (
+}) => (
   <CaskListItemContainers.Main>
     <CaskListItemMolecules.Toolbar
       userType={ user.userType }
       caskId={ cask.id }
       markedCasks={ markedCasks }
-      onCheck={ onCheck }
+      handleMarkCask={ handleMarkCask }
+      handleSetModal={ handleSetModal }
       dispatch={ dispatch }
     />
     <Button.DispatchButton
       variant={ 'tertiary' }
       dispatch={ dispatch }
-      onClick={ () => activeCaskThunks.getActiveCask(cask.id) }
+      onClick={ getActiveCask }
     >
       <CaskListItemMolecules.Header
         caskNumber={ cask.caskNumber }
@@ -53,3 +57,5 @@ export default ({
     </Button.DispatchButton>
   </CaskListItemContainers.Main>
 );
+
+export default CaskListCard;

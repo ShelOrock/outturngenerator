@@ -24,7 +24,7 @@ const { StyledDiv: { Column } } = StyledComponents;
 //Redux Thunks
 import * as thunks from '../../redux/thunks';
 const {
-  casksThunks: { editCask },
+  allCasksThunks: { editCask },
   activeCaskThunks: { getActiveCask }
 } = thunks;
 

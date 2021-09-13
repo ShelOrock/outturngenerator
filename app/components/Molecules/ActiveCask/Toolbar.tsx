@@ -6,7 +6,7 @@ import { Button, Link } from '../../Atoms';
 import {
   GenericComponentProps,
   AppDispatch,
-  ButtonOnClickType
+  AppThunk
 } from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
@@ -17,7 +17,7 @@ interface ComponentProps extends GenericComponentProps {
   | 'Guest',
   caskId: string;
   dispatch: AppDispatch;
-  onClick: ButtonOnClickType
+  onClick: () => AppThunk
 };
 
 const Toolbar: React.FC<ComponentProps> = ({

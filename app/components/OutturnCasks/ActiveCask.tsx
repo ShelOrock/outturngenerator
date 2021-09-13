@@ -35,7 +35,7 @@ const { modalActions: { setModal } } = actions
 
 //Redux thunks
 import * as thunks from '../../redux/thunks';
-const { casksThunks: { deleteCask } } = thunks;
+const { allCasksThunks: { deleteCask } } = thunks;
 
 //Types
 import { ButtonProps, Modal } from '../../types';

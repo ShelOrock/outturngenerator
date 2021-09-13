@@ -4,8 +4,9 @@ import { useTypedSelector } from '../../../utils';
 
 import {
   GenericComponentProps,
-  ButtonOnClickType,
-  AppDispatch
+  AppDispatch,
+  ActionFunctionType,
+  ThunkFunctionType
 } from '../../../types';
 
 import { StyledButton } from '../../styledcomponents';
@@ -13,7 +14,9 @@ import { StyledButton } from '../../styledcomponents';
 interface ComponentProps extends GenericComponentProps {
   disabled?: boolean;
   dispatch: AppDispatch;
-  onClick: ButtonOnClickType;
+  onClick:
+  | ActionFunctionType
+  | ThunkFunctionType;
   size?: string;
   variant: string;
 };
@@ -33,7 +36,7 @@ const DispatchButton: React.FC<ComponentProps> = ({
   return (
     <StyledButton.Button
       disabled={ disabled && !!isLoading }
-      onClick={ e => dispatch(onClick(e)) }
+      onClick={ () => dispatch(onClick()) }
       variant={ variant }
       size={ size }
     >{ children }</StyledButton.Button>

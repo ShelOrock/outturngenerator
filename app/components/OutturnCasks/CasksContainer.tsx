@@ -20,7 +20,7 @@ const {
 import * as thunks from '../../redux/thunks';
 const {
   activeOutturnThunks: { getActiveOutturn },
-  casksThunks: { addNewCask, deleteManyCasks }
+  allCasksThunks: { addNewCask, deleteManyCasks }
 } = thunks;
 
 import { Modal, PageHeaderPropTypes, ParamTypes } from '../../types/index';
