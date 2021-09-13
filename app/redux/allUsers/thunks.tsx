@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as actions from '../actions'
 const {
   usersActions: { setAllUsers },
-  searchActions: { setSearch },
   modalActions: { resetModal },
   loadingActions: { setLoading },
 } = actions;

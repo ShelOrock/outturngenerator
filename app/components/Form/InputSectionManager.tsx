@@ -9,7 +9,7 @@ import TextAreaManager from './TextAreaManager';
 //StyledComponents
 import * as StyledComponents from "../styledcomponents/index";
 const {
-  StyledType: { Subheader },
+  StyledType: { SubHeading },
   StyledDiv: { Row, Column, PaddedDiv, HorizontalRule },
 } = StyledComponents;
 
@@ -46,7 +46,7 @@ export default ({
       <Row justifyContent='space-between' width='100%'>
         { sectionHeaderProps &&
         <PaddedDiv paddingTop='1rem'>
-          <Subheader> { sectionHeaderProps } </Subheader>
+          <SubHeading> { sectionHeaderProps } </SubHeading>
         </PaddedDiv>
         }
         <Column width='80%'>

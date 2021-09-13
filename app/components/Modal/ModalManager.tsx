@@ -10,9 +10,9 @@ import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from '../styledcomponents';
 const { 
-  StyledType: { Header },
+  StyledType: { Heading },
   StyledDiv: { Row },
-  StyledModal: { ModalContainer }
+  StyledModal: { Modal }
 } = StyledComponents;
 
 //Redux actions
@@ -69,14 +69,14 @@ export default () => {
     <div>
       { !!Object.keys(modal).length 
         && (
-          <ModalContainer>
-            <Header>{ modal.modalHeader }</Header>
+          <Modal>
+            <Heading>{ modal.modalHeader }</Heading>
             <ModalInputManager { ...inputFormProps } />
             <Row>
               <ButtonManager { ...confirmButtonProps }/>
               <ButtonManager { ...cancelButtonProps } />
             </Row>
-          </ModalContainer>
+          </Modal>
         )
       }
     </div>

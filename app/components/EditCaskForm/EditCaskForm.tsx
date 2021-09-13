@@ -8,7 +8,11 @@ const {
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 //Dependency Functions
-import { useTypedSelector, createButton, flavourProfiles } from '../../utils';
+import {
+  useTypedSelector,
+  createButton,
+  flavourProfiles
+} from '../../utils';
 
 //Components
 import PageHeader from '../Header/PageHeaderManager'
@@ -20,7 +24,7 @@ const { StyledDiv: { Column } } = StyledComponents;
 //Redux Thunks
 import * as thunks from '../../redux/thunks';
 const {
-  casksThunks: { editCask },
+  allCasksThunks: { editCask },
   activeCaskThunks: { getActiveCask }
 } = thunks;
 
@@ -28,7 +32,7 @@ const {
 import {
   ButtonProps,
   CaskFormPropTypes,
-  InputFormPropTypes,
+  FormPropTypes,
   InputOnChangeType,
   LocalReducerFunctionType,
   PageHeaderPropTypes,
@@ -316,7 +320,7 @@ export default () => {
       )
   }
 
-  const inputFormProps: InputFormPropTypes = {
+  const formProps: FormPropTypes = {
     backLinkButton: {
       link: activeOutturn.id ? `/outturn/${ activeOutturn.id }` : `/casks`,
       destination: `< Return to ${ activeOutturn.id ? 'Outturn' : 'Cask List' }`
@@ -335,7 +339,7 @@ export default () => {
   return (
     <Column>
       <PageHeader { ...pageHeaderProps } />
-      <InputForm { ...inputFormProps } />
+      <InputForm { ...formProps } />
     </Column>
   )
 }

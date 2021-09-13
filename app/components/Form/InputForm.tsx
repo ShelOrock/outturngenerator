@@ -13,7 +13,7 @@ const {
 } = StyledComponents;
 
 //Types
-import { InputFormPropTypes } from "../../types";
+import { FormPropTypes } from "../../types";
 
 export default ({
   backLinkButton,
@@ -23,7 +23,7 @@ export default ({
   inputPropsGenerator,
   width,
   onChange
-}: InputFormPropTypes) => {
+}: FormPropTypes) => {
 
   const renderInputSectionManagers = (inputPropsGenerator): JSX.Element[] => (
     inputPropsGenerator.map(({ sectionTitle, inputProps }, idx) => (

@@ -9,7 +9,7 @@ import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
 import AllOutturnsContainer from './Outturns/AllOutturnContainer';
-import AllCasksContainer from './Casks/AllCasksContainer';
+import AllCasksContainer from './AllCasks/AllCasksContainer';
 import CasksContainer from './OutturnCasks/CasksContainer';
 import CaskForm from './EditCaskForm/EditCaskForm';
 import UserList from './Users/UserList';
@@ -35,7 +35,7 @@ export default () => {
   }, []);
 
   return (
-    <div>
+    <>
       <Router>
         <Navigation />
         <Switch>
@@ -51,6 +51,6 @@ export default () => {
       </Router>
       <ModalManager />
       <Toast />
-    </div>
+    </>
   )
 };

@@ -8,16 +8,28 @@ interface OnlineIconPropTypes {
   variant?: string;
 }
 
-export const FlavourPillStyles = css<FlavourPillPropTypes>`
+export const PillStyles = css<FlavourPillPropTypes>`
   background ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.other }
 `;
 
-export const FlavourPill = styled.div<FlavourPillPropTypes>`
-  ${ FlavourPillStyles }
+export const LargePill = styled.div`
+  ${ PillStyles };
+  padding: 0.5rem 0rem;
   color: white;
-  width: 20px;
-  padding: 35px 0;
-`;
+  margin: 1rem 0 0;
+  width: 100%;
+`
+
+export const SmallPill = styled.div`
+  ${ PillStyles };
+  color: white;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  max-width: 200px;
+  border-radius: 100px;
+  margin: 0.5rem 0;
+`
+
 
 export const OnlineIcon = styled.div<OnlineIconPropTypes>`
   background-color: ${ ({ variant, theme: { colors } }) => colors[variant] };

@@ -10,7 +10,7 @@ import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const {
-  StyledType: { Subheader, Body },
+  StyledType: { SubHeading, Body },
   StyledDiv: { PaddedDiv, Row, Column },
   StyledNavigation: { LinkButton },
   StyledForm: { Checkbox },
@@ -28,14 +28,14 @@ const {
 import * as thunks from "../../redux/thunks";
 const {
   activeCaskThunks: { getActiveCask, },
-  casksThunks: { deleteCask }
+  allCasksThunks: { deleteCask }
 } = thunks;
 
 //Types
 import { ButtonProps, InputOnChangeType, Modal } from '../../types/index';
 
-export default ({ cask, sortMethod }: any) => {
-
+export default (cask, sortMethod: any) => {
+  
   const dispatch = useDispatch();  
 
   const {
@@ -96,7 +96,7 @@ export default ({ cask, sortMethod }: any) => {
         <PaddedDiv paddingTop='1rem'>
           <CaskListItemButton onClick={() => dispatch(getActiveCask(cask.id)) }>
             <Column>
-              <Subheader> { cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask" }</Subheader>
+              <SubHeading> { cask.caskNumber ? `Cask No. ${cask.caskNumber}` : "Untitled Cask" }</SubHeading>
               <Body>{ cask.name }</Body>
               <PaddedDiv
                 paddingTop='1rem'

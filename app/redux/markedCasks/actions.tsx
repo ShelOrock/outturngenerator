@@ -8,17 +8,17 @@ import {
 
 import { ActionFunctionType } from '../../types/index';
 
-export const markCask: ActionFunctionType<String> = caskId => ({
+export const markCask: ActionFunctionType<string> = caskId => ({
   type: MARK_CASK,
   payload: caskId
 });
 
-export const markAllCasks: ActionFunctionType<String[]> = caskIds => ({
+export const markAllCasks: ActionFunctionType<string[]> = caskIds => ({
   type: MARK_ALL_CASKS,
   payload: caskIds
 });
 
-export const unmarkCask: ActionFunctionType<String> = caskId => ({
+export const unmarkCask: ActionFunctionType<string> = caskId => ({
   type: UNMARK_CASK,
   payload: caskId
 });

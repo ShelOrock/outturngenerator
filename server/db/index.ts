@@ -9,7 +9,7 @@ import {
 Outturn.hasMany(Cask);
 Cask.belongsTo(Outturn);
 
-User.belongsToMany(Outturn, { through: 'outturn_user' })
+User.belongsToMany(Outturn, { through: 'outturn_user' });
 Outturn.belongsToMany(User, { through: 'outturn_user' });
 
 export {
@@ -17,4 +17,4 @@ export {
   Cask,
   Outturn,
   User,
-}
+};

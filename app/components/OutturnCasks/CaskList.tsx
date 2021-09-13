@@ -31,7 +31,7 @@ const {
 
 //Redux Thunks
 import * as thunks from '../../redux/thunks';
-const { casksThunks: { editManyCasks } } = thunks;
+const { allCasksThunks: { editManyCasks } } = thunks;
 
 //Types
 import { ButtonProps, InputOnChangeType } from "../../types/index";

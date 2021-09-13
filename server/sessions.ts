@@ -17,8 +17,9 @@ const app = express();
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
+  saveUninitialized: true,
   cookie: {
-    secure: process.env.NODE_ENV == 'production' ? true : false,
+    secure: process.env.NODE_ENV == 'production',
     maxAge: 1000 * 60 * 60 * 24
   },
 }));

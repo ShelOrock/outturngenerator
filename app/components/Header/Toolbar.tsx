@@ -6,7 +6,7 @@ import ButtonManager from "../Button/ButtonManager";
 //Styled Components
 import * as StyledComponents from "../styledcomponents/index";
 const {
-  StyledType: { PageTitle },
+  StyledType: { Title },
   StyledDiv: { Row },
 } = StyledComponents;
 
@@ -40,7 +40,7 @@ export default ({
   return (
   <Row justifyContent="space-between">
     <Row alignItems="center">
-      <PageTitle>{ pageTitle }</PageTitle>
+      <Title>{ pageTitle }</Title>
       { addButtonProps && !!Object.keys(addButtonProps).length && <ButtonManager { ...addButton } /> }
     </Row>
     <Row alignItems='center'>

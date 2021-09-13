@@ -4,7 +4,11 @@ import {
   State,
   ReducerFunctionType,
 } from './actions';
-import { RootState, AppThunk } from './store';
+import {
+  RootState,
+  AppThunk,
+  AppDispatch
+} from './store';
 import { ThunkFunctionType } from './thunks';
 
 export {
@@ -14,5 +18,6 @@ export {
   ReducerFunctionType,
   RootState,
   AppThunk,
+  AppDispatch,
   ThunkFunctionType,
 };

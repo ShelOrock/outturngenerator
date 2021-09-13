@@ -12,48 +12,61 @@ export const AllTypeStyles = css<TextPropTypes>`
   color: ${ ({ color, theme: { colors } }) => colors[color] || colors.black };
 `;
 
-export const PageTitle = styled.h1`
+export const Title = styled.h1`
   ${ AllTypeStyles }
   font-weight: bold;
   margin: 1rem;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.title };
 `
 
-export const Header = styled.h2`
+export const SubTitle = styled.h2`
+`;
+
+export const Heading = styled.h3`
   ${ AllTypeStyles }
   font-weight: bold;
+  text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.large };
 `;
 
-export const Subheader = styled.h3`
+export const SubHeading = styled.h4`
   ${ AllTypeStyles }
   font-weight: bold;
+  text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
 `;
 
-export const CaskTitle = styled.h4`
+export const CaskTitle = styled.h5`
   ${ AllTypeStyles }
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
   color: ${ ( { theme: { colors } }) => colors.darkgray };
   margin: 0.5rem 0;
-`;
+`;//Delete
 
 export const FlavourProfileTitle = styled.p`
   ${ AllTypeStyles }
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
   color: ${ ( { theme: { colors } }) => colors.white };
   margin: 0;
-`
+`;//Delete
 
 export const SmallListItemHeader = styled.p`
   ${ AllTypeStyles }
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
   color: ${ ( { theme: { colors } }) => colors.darkgray };
   margin: 0;
-`
+`;//Delete
+
+export const BodyTitle = styled.p`
+  ${ AllTypeStyles }
+  font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
+  font-size: bold;
+`;
 
 export const Body = styled.p`
   ${ AllTypeStyles }
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
-  font-weight: bold;
-`
+`;
+
+export const Description = styled.p`
+`;

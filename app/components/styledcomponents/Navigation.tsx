@@ -10,14 +10,14 @@ export const NavBar = styled.div`
   padding: 2rem;
   margin: 0;
   box-shadow: 0px 8px 15px #D5D5D5;
-`
+`;
 
 export const NavLink = styled(Link)`
   color: ${ ({ theme: { colors } }) => colors.white };
   text-decoration: none;
   font-weight:bold;
   margin: 0 2rem;
-`
+`;
 
 export const LinkButton = styled(Link)<LinkButtonPropTypes>`
   font-size: 0.9rem;
@@ -29,6 +29,11 @@ export const LinkButton = styled(Link)<LinkButtonPropTypes>`
   background-color: ${ ({ variant, theme: { buttons } }) => variant ? buttons.colors[variant].background : 'transparent' };
   border: ${ ({ variant, theme: { buttons } }) => variant ? buttons.colors[variant].border : 'none' };
   font-weight:bold;
+`;
+
+export const LinkDiv = styled(Link)`
+  text-decoration: inherit;
+  color: inherit;
 `;
 
 export const LargeLinkButton = styled(Link)<LinkButtonPropTypes>`

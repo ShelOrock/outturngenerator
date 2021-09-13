@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 
-export const ModalContainer = styled.div`
+export const Modal = styled.div`
+  position: fixed;
+  width: 50%;
+  z-index: 500;
+  background: ${ ({ theme }) => theme.colors.body };
+  border: 1px solid #ddd;
+  box-shadow: 1px 1px 1px black;
+  padding: 1rem;
+  left: 25%;
+  top: 30%;
+  box-sizing: border-box;
+  transtion: all 0.3s ease-out;
+`;//DELETE
+
+export const Main = styled.div`
   position: fixed;
   width: 50%;
   z-index: 500;
@@ -14,7 +28,7 @@ export const ModalContainer = styled.div`
   transtion: all 0.3s ease-out;
 `;
 
-export const ModalBackdrop = styled.div`
+export const Background = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -24,6 +38,11 @@ export const ModalBackdrop = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-export const Temp = styled.div`
-z-index: 500;
-`
+export const InputModules = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+`;

@@ -1,18 +1,20 @@
 import {
+  GenericComponentProps,
   OutturnCard,
   CaskListItem,
   ButtonProps,
   SubNavigationPropTypes,
   TextInputPropTypes,
-  InputFormPropTypes,
+  FormInputPropTypes,
+  FormPropTypes,
   InputManagerPropTypes,
   LoginFormPropTypes,
   SignUpFormPropTypes,
   CaskFormPropTypes,
   AttemptUserLoginButtonPropTypes,
-  AttemptUserSignUpButtonPropTypes,
   AttemptUserLogoutButtonPropTypes,
   SelectPropTypes,
+  SelectOptionPropTypes,
   ToolbarPropTypes,
   PageHeaderPropTypes
 } from './componentProps';
@@ -20,6 +22,7 @@ import { LocalReducerFunctionType } from './localReducer';
 import { ParamTypes } from './params';
 
 export {
+  GenericComponentProps,
   OutturnCard,
   CaskListItem,
   ButtonProps,
@@ -27,15 +30,16 @@ export {
   ToolbarPropTypes,
   PageHeaderPropTypes,
   TextInputPropTypes,
-  InputFormPropTypes,
+  FormInputPropTypes,
+  FormPropTypes,
   InputManagerPropTypes,
   LoginFormPropTypes,
   SignUpFormPropTypes,
   CaskFormPropTypes,
   AttemptUserLoginButtonPropTypes,
-  AttemptUserSignUpButtonPropTypes,
   AttemptUserLogoutButtonPropTypes,
   SelectPropTypes,
+  SelectOptionPropTypes,
   LocalReducerFunctionType,
   ParamTypes
 }

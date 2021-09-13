@@ -35,8 +35,12 @@ export const InputModule = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin: 1rem;
-  width: 100%;
-`
+`;
+
+export const Information = styled.div`
+  display: flex;
+  margin: 1rem;
+`;
 
 export const InputLabel = styled.label<InputPropTypes>`
   color: ${ ({ theme: { colors } }) => colors.darkgray };
@@ -98,3 +102,7 @@ export const Option = styled.option`
   padding: 1rem;
   border: 1px solid black;
 `
+
+export const Feedback = styled.p`
+  color: #E93935;
+`;
