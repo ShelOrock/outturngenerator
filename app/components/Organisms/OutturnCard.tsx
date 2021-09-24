@@ -48,11 +48,11 @@ const OutturnCard: React.FC<ComponentProps> = ({
         />
       ) }
       { user.userType !== 'Guest' && (
-        <Button.DispatchButton
+        <Button.Button
           dispatch={ dispatch }
           variant={ 'tertiary' }
           onClick={ handleSetModal }
-        >X Delete</Button.DispatchButton>
+        >X Delete</Button.Button>
       ) }
     </OutturnCardContainers.Toolbar>
     <Link.LinkDiv to={ `/outturn/${ outturn.id }` }>

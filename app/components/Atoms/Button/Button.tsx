@@ -1,20 +1,22 @@
 import React from 'react';
 import { useTypedSelector } from '../../../utils';
 
-import { GenericComponentProps, ButtonOnClickType } from '../../../types';
+import { GenericComponentProps, AppDispatch } from '../../../types';
 
 import { StyledButton } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {
   disabled?: boolean;
-  onClick: ButtonOnClickType;
+  dispatch?: AppDispatch | null;
+  onClick?: any //TODO;
   size?: string;
   variant: string;
 };
 
 const Button: React.FC<ComponentProps> = ({
   disabled = false,
-  onClick,
+  dispatch = null,
+  onClick = () => {},
   size,
   variant,
   children
@@ -25,7 +27,7 @@ const Button: React.FC<ComponentProps> = ({
   return (
     <StyledButton.Button
       disabled={ disabled && !!isLoading }
-      onClick={ e => onClick(e) }
+      onClick={ () => dispatch ? dispatch(onClick()) : onClick() }
       variant={ variant }
       size={ size }
     >{ children }</StyledButton.Button>

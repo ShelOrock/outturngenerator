@@ -3,6 +3,7 @@ import {
   Cask,
   InputOnChangeType
 } from '../index';
+import { AppDispatch } from '../redux';
 
 export interface GenericComponentProps {
   children?: React.ReactNode;
@@ -20,11 +21,12 @@ export interface CaskListItem {
 }
 
 export interface ButtonProps {
+  text?: string;
   size?: string;
   variant?: string;
   disabled?: boolean;
-  dispatchToStore?: boolean;
-  onClick: any;
+  dispatch?: AppDispatch | null;
+  onClick?: () => void;
 }
 
 export interface SubNavigationPropTypes {

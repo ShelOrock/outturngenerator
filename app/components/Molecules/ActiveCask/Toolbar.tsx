@@ -29,11 +29,11 @@ const Toolbar: React.FC<ComponentProps> = ({
   <ActiveCaskContainers.Toolbar>
     { userType === 'Admin' || userType === 'Standard' && <Link.LinkButton to={ `edit/${ caskId }` }>Edit</Link.LinkButton> }
     { userType === 'Admin' || userType === 'Standard' && (
-      <Button.DispatchButton
+      <Button.Button
         variant='tertiary'
         dispatch={ dispatch }
         onClick={ onClick }
-      >X Delete</Button.DispatchButton>
+      >X Delete</Button.Button>
     )}
   </ActiveCaskContainers.Toolbar>
 );

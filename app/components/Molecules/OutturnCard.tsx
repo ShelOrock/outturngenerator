@@ -8,16 +8,14 @@ import {
   Type
 } from '../Atoms';
 
-import { modalActions } from '../../redux/actions';
-
 import {
     GenericComponentProps,
-    InputOnChangeType,
     AppDispatch,
+    ActionFunctionType,
+    InputOnChangeType,
     Outturn,
     Cask,
     User,
-    AppThunk,
   } from '../../types';
 
 interface ComponentProps extends GenericComponentProps {
@@ -25,7 +23,7 @@ interface ComponentProps extends GenericComponentProps {
   markedOutturns: String[];
   casks: Cask[];
   handleOnCheck: InputOnChangeType;
-  handleSetModal: () => AppThunk;
+  handleSetModal: ActionFunctionType;
   user: User;
   dispatch: AppDispatch
 };
@@ -50,11 +48,11 @@ const OutturnCard: React.FC<ComponentProps> = ({
         />
       ) }
       { user.userType !== 'Guest' && (
-        <Button.DispatchButton
+        <Button.Button
           dispatch={ dispatch }
           variant={ 'tertiary' }
           onClick={ handleSetModal }
-        >X Delete</Button.DispatchButton>
+        >X Delete</Button.Button>
       ) }
     </OutturnCardContainers.Toolbar>
     <Link.LinkDiv to={ `/outturn/${ outturn.id }` }>

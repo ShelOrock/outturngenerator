@@ -125,7 +125,7 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
           onDragEnd={ onDragEnd }
           dispatch={ dispatch }
         />
-        <CaskListMolecules.Buttons
+        <CaskListMolecules.Actions
           onClick={ generateOutturn }
         />
       </> }

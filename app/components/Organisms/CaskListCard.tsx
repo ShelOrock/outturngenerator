@@ -42,7 +42,7 @@ const CaskListCard: React.FC<ComponentProps> = ({
       handleSetModal={ handleSetModal }
       dispatch={ dispatch }
     />
-    <Button.DispatchButton
+    <Button.Button
       variant={ 'tertiary' }
       dispatch={ dispatch }
       onClick={ getActiveCask }
@@ -54,7 +54,7 @@ const CaskListCard: React.FC<ComponentProps> = ({
       <CaskListItemMolecules.Body
         flavourProfile={ cask.flavourProfile }
       />
-    </Button.DispatchButton>
+    </Button.Button>
   </CaskListItemContainers.Main>
 );
 

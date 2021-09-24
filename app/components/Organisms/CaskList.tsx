@@ -3,7 +3,7 @@ import { DropResult } from 'react-beautiful-dnd';
 
 import CaskListCard from './CaskListCard';
 import { CaskListContainers } from '../Containers';
-import { List, DragAndDrop } from '../Atoms';
+import { Layout, DragAndDrop } from '../Atoms';
 
 import {
   GenericComponentProps,
@@ -38,12 +38,12 @@ const CaskList: React.FC<ComponentProps> = ({
   onDragEnd,
 }) => (
   <CaskListContainers.Main>
-    <List.LineList>
+    <Layout.List>
       <DragAndDrop.DragAndDrop onDragEnd={ onDragEnd }>
         <DragAndDrop.Drop>
           { localCaskOrder.map((cask, idx) => {
             <DragAndDrop.Drag
-              caskId={ cask.id }
+              id={ cask.id }
               index={ idx }
             >
               <CaskListCard
@@ -60,7 +60,7 @@ const CaskList: React.FC<ComponentProps> = ({
           }) }
         </DragAndDrop.Drop>
       </DragAndDrop.DragAndDrop>
-    </List.LineList>
+    </Layout.List>
   </CaskListContainers.Main>
 );
 

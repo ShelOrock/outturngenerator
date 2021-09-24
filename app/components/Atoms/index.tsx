@@ -1,6 +1,6 @@
 import * as Type from './Type';
 import * as Link from './Link';
-import * as List from './List';
+import * as Layout from './Layout';
 import * as Image from './Image';
 import * as Input from './Input';
 import * as Button from './Button';
@@ -10,7 +10,7 @@ import * as DragAndDrop from './DragAndDrop';
 export {
   Type,
   Link,
-  List,
+  Layout,
   Image,
   Input,
   Button,

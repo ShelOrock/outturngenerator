@@ -47,12 +47,12 @@ const Toolbar: React.FC<ComponentProps> = ({
       />
     ) }
     { userType === 'Admin' || userType === 'Standard' && (
-      <Button.DispatchButton
+      <Button.Button
         variant={ 'primary' }
         disabled={ !isEdited }
         dispatch={ dispatch }
         onClick={ handleSaveCasks }
-      >Save</Button.DispatchButton>
+      >Save</Button.Button>
     ) }
     { userType === 'Admin' || userType ==='Standard' && (
       <Button.Button
