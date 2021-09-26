@@ -5,7 +5,7 @@ const { useEffect, useReducer } = React;
 import { useTypedSelector, createButton } from "../../utils";
 
 //Components
-import ButtonManager from "../Button/ButtonManager";
+// import ButtonManager from "../Button/ButtonManager";
 //Styled Components
 import * as StyledComponents from "../styledcomponents/index";
 const {
@@ -67,11 +67,11 @@ export default ({ filterItems }) => {
   const setFiltersButtonProps: ButtonProps = {
     size: "default",
     variant: "primary",
-    onClick: createButton(
-      setFilters,
-      "Apply Filters",
-      localFilters
-    )
+    // onClick: createButton(
+    //   setFilters,
+    //   "Apply Filters",
+    //   localFilters
+    // )
   }
 
   const renderFilterListItems = (): JSX.Element[] => (
@@ -100,7 +100,7 @@ export default ({ filterItems }) => {
       <FilterList>
         { renderFilterListItems() }
       </FilterList>
-      <ButtonManager { ...setFiltersButtonProps }/>
+      {/* <ButtonManager { ...setFiltersButtonProps }/> */}
     </FilterContainer>
   );
 };

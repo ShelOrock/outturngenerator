@@ -4,7 +4,7 @@ import * as React from 'react';
 import { useTypedSelector, createButton} from '../../utils';
 
 //Components
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -40,7 +40,7 @@ export default () => {
   : <NavLink to='signup'>Sign up</NavLink>
 
   const evaluateLoginLogout = activeUser.loggedIn == 'Online'
-  ? <ButtonManager { ...attemptUserLogoutButtonProps } />
+  ? <></>//<ButtonManager { ...attemptUserLogoutButtonProps } />
   : <NavLink to='/login'>Login</NavLink>
 
   return (

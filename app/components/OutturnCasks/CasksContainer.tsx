@@ -85,21 +85,21 @@ export default () => {
       pageTitle: activeOutturn.name,
       addButtonProps: evaluateUserType
       && {
-          onClick: createButton(
-            setModal,
-            '+ Add a cask',
-            createCaskModal
-          )
+          // onClick: createButton(
+          //   setModal,
+          //   '+ Add a cask',
+          //   createCaskModal
+          // )
       },
       deleteButtonProps: evaluateUserType
       && {
-          variant: 'tertiary',
-          disabled: !markedCasks.length,
-          onClick: createButton(
-            setModal,
-            'X Delete Marked Casks',
-            deleteManyCasksModal
-          )
+          // variant: 'tertiary',
+          // disabled: !markedCasks.length,
+          // onClick: createButton(
+          //   setModal,
+          //   'X Delete Marked Casks',
+          //   deleteManyCasksModal
+          // )
       },
     }
   }

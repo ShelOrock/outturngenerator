@@ -4,7 +4,7 @@ import * as React from "react";
 import { useTypedSelector, createButton } from "../../utils";
 
 //Components
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from "../styledcomponents/index";
 const {
@@ -47,6 +47,7 @@ export default () => {
     activeOutturn,
     activeUser
   } = useTypedSelector(state => state);
+
   const {
     id,
     caskNumber,
@@ -76,11 +77,11 @@ export default () => {
   const deleteCaskButtonProps: ButtonProps = {
     size: 'small',
     variant: 'tertiary',
-    onClick: createButton(
-      setModal,
-      "X Delete",
-      deleteCaskModal
-    )
+    // onClick: createButton(
+    //   setModal,
+    //   "X Delete",
+    //   deleteCaskModal
+    // )
   }
 
   return (
@@ -102,7 +103,7 @@ export default () => {
               paddingLeft='0.5rem'
               paddingRight='0.5rem'
             >
-              { evaluateUserType && <ButtonManager { ...deleteCaskButtonProps } /> }
+              {/* { evaluateUserType && <ButtonManager { ...deleteCaskButtonProps } /> } */}
             </PaddedDiv>
           </Row>
           <Row>

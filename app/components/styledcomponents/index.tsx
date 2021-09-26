@@ -8,6 +8,7 @@ import * as StyledList from './List';
 import * as StyledCard from './Card';
 import * as StyledCask from './Cask';
 import * as StyledPill from './Pill';
+import * as StyledChip from './Pill';
 import * as StyledFilter from './Filter';
 import * as StyledModal from './Modal';
 import * as StyledToast from './Toast';
@@ -34,6 +35,7 @@ export {
   StyledCard,
   StyledCask,
   StyledPill,
+  StyledChip,
   StyledFilter,
   StyledModal,
   StyledToast,

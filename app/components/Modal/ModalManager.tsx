@@ -6,7 +6,7 @@ import { createButton, useTypedSelector } from '../../utils';
 
 //Components
 import ModalInputManager from './ModalInputManager'
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from '../styledcomponents';
 const { 
@@ -47,22 +47,22 @@ export default () => {
 
   const confirmButtonProps: ButtonProps = {
     variant: 'primary',
-    dispatchToStore: modal.confirmButton && modal.confirmButton.dispatchToStore,
-    onClick: modal.confirmButton
-      && createButton(
-        modal.confirmButton.onClick,
-        modal.confirmButton.text,
-        ...modal.confirmButton.arguments,
-        localModalState,
-      )
+    // dispatchToStore: modal.confirmButton && modal.confirmButton.dispatchToStore,
+    // onClick: modal.confirmButton
+    //   && createButton(
+    //     modal.confirmButton.onClick,
+    //     modal.confirmButton.text,
+    //     ...modal.confirmButton.arguments,
+    //     localModalState,
+    //   )
   };
 
   const cancelButtonProps: ButtonProps = {
     variant: 'secondary',
-    onClick: createButton(
-      resetModal,
-      'Cancel'
-    )
+    // onClick: createButton(
+    //   resetModal,
+    //   'Cancel'
+    // )
   };
 
   return (
@@ -73,8 +73,8 @@ export default () => {
             <Heading>{ modal.modalHeader }</Heading>
             <ModalInputManager { ...inputFormProps } />
             <Row>
-              <ButtonManager { ...confirmButtonProps }/>
-              <ButtonManager { ...cancelButtonProps } />
+              {/* <ButtonManager { ...confirmButtonProps }/> */}
+              {/* <ButtonManager { ...cancelButtonProps } /> */}
             </Row>
           </Modal>
         )

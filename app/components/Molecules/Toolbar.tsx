@@ -2,38 +2,38 @@ import React from 'react';
 
 import { ButtonProps, GenericComponentProps } from '../../types';
 import { Button, Type } from '../Atoms';
-import { Row } from '../styledcomponents/Div';
+import { Column, Row } from '../styledcomponents/Div';
 
 interface ComponentProps extends GenericComponentProps {
   title: string;
-  primaryButton: ButtonProps;
-  secondaryButton?: ButtonProps;
+  primaryAction: ButtonProps;
+  secondaryAction?: ButtonProps;
 };
 
 const Toolbar: React.FC<ComponentProps> = ({
   title='',
-  primaryButton,
-  secondaryButton
+  primaryAction,
+  secondaryAction
 }) => (
-  <Row>
+  <Column>
     <Type.Title>{ title }</Type.Title>
     <Row>
       <Button.Button
-        dispatch={ primaryButton.dispatch }
-        onClick={ () => primaryButton.onClick }
+        dispatch={ primaryAction.dispatch }
+        onClick={ () => primaryAction.onClick }
         variant={ 'primary' }
       >
-        { primaryButton.text }
+        { primaryAction.text }
       </Button.Button>
       <Button.Button
-        dispatch={ secondaryButton.dispatch }
-        onClick={ () => secondaryButton.onClick }
+        dispatch={ secondaryAction.dispatch }
+        onClick={ () => secondaryAction.onClick }
         variant={ 'secondary' }
       >
-        { secondaryButton.text }
+        { secondaryAction.text }
       </Button.Button>
     </Row>
-  </Row>
+  </Column>
 );
 
 export default Toolbar;

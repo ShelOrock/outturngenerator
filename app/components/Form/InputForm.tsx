@@ -3,7 +3,7 @@ import * as React from "react";
 
 //Components
 import InputSectionManager from "./InputSectionManager";
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //StyledComponents
 import * as StyledComponents from "../styledcomponents";
 const {
@@ -46,8 +46,8 @@ export default ({
           </LinkButton>
         }
         <Row alignItems='center'>
-          { confirmButton && <ButtonManager { ...confirmButton } /> }
-          { cancelButton && <ButtonManager { ...cancelButton } /> }
+          {/* { confirmButton && <ButtonManager { ...confirmButton } /> } */}
+          {/* { cancelButton && <ButtonManager { ...cancelButton } /> } */}
           { forwardLinkButton &&
             <LinkButton to={ forwardLinkButton.link}>
               { forwardLinkButton.destination }

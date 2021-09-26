@@ -22,8 +22,8 @@ const PageHeader: React.FC<ComponentProps> = ({
     />
     <Toolbar
       title={ toolbar.title }
-      primaryButton={ toolbar.primaryButton }
-      secondaryButton={ toolbar.secondaryButton }
+      primaryAction={ toolbar.primaryAction }
+      secondaryAction={ toolbar.secondaryAction }
     />
   </Column>
 );

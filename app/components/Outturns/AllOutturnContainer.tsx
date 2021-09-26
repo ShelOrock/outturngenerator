@@ -7,7 +7,7 @@ import { useTypedSelector, createButton } from "../../utils";
 
 //Components
 import PageHeader from "../Header/PageHeaderManager";
-import ButtonManager from "../Button/ButtonManager";
+// import ButtonManager from "../Button/ButtonManager";
 import SelectManager from '../Select/SelectManager';
 import SearchManager from "../SearchManager/SearchManager";
 import OutturnCard from "./OutturnCard";
@@ -103,22 +103,22 @@ export default () => {
 
   const addButtonProps: ButtonProps = evaluateUserType
   && {
-    onClick: createButton(
-      setModal,
-      "+ New Project",
-      createOutturnModalProps
-    ),
+    // onClick: createButton(
+    //   setModal,
+    //   "+ New Project",
+    //   createOutturnModalProps
+    // ),
   }
 
   const deleteButtonProps: ButtonProps = evaluateUserType
   && {
-    variant: "tertiary",
-    disabled: !markedOutturns.length,
-    onClick: createButton(
-      setModal,
-      "X Delete Marked Outturns",
-      deleteManyOutturnsModalProps
-    ),
+    // variant: "tertiary",
+    // disabled: !markedOutturns.length,
+    // onClick: createButton(
+    //   setModal,
+    //   "X Delete Marked Outturns",
+    //   deleteManyOutturnsModalProps
+    // ),
   }
 
   const pageHeaderProps: PageHeaderPropTypes = {
@@ -161,12 +161,12 @@ export default () => {
     size: "default",
     variant: "secondary",
     disabled: !!isLoading,
-    dispatchToStore: false,
-    onClick: createButton(
-      setShowMore,
-      "Show more", 
-      showMore + 6
-    ),
+    // dispatchToStore: false,
+    // onClick: createButton(
+    //   setShowMore,
+    //   "Show more", 
+    //   showMore + 6
+    // ),
   };
 
   const renderOutturnCards = (): JSX.Element[] => (
@@ -204,7 +204,7 @@ export default () => {
         <CardsContainer>
           { !!allOutturns.length && renderOutturnCards() }
         </CardsContainer>
-        { showMore < allOutturns.length && <ButtonManager {...showMoreButtonProps} /> }
+        {/* { showMore < allOutturns.length && <ButtonManager {...showMoreButtonProps} /> } */}
       </Column>
     </Column>
   );

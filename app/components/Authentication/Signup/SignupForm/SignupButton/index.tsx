@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ButtonManager from '../../../../Button/ButtonManager';
+// import ButtonManager from '../../../../Button/ButtonManager';
 
 import * as reduxThunks from '../../../../../redux/thunks';
 const { authenticationThunks: { attemptUserSignUp } } = reduxThunks;
@@ -33,5 +33,5 @@ export default (credentialProps) => {
     size: 'large'
   };
 
-  return <ButtonManager { ...attemptUserSignUpButtonProps } />
+  return <></>//<ButtonManager { ...attemptUserSignUpButtonProps } />
 };

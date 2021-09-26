@@ -8,6 +8,18 @@ interface OnlineIconPropTypes {
   variant?: string;
 }
 
+interface ChipPropTypes {
+  color: string;
+}
+
+export const Chip = styled.div<ChipPropTypes>`
+height: 32px;
+padding: 4px 12px;
+margin: 1rem 0 0;
+background ${ ({ color, theme }) => theme.colors.flavourProfiles[color] }
+color: white;
+`;
+
 export const PillStyles = css<FlavourPillPropTypes>`
   background ${ ({ flavourProfile, theme: { colors } }) => colors.flavourProfiles[flavourProfile] || colors.flavourProfiles.other }
 `;
