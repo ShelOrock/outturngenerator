@@ -1,7 +1,5 @@
-import ActiveCask from './ActiveCask';
-import CaskList from './CaskList';
+import ActiveCask from './ActiveCask/ActiveCask';
 
 export { 
   ActiveCask,
-  CaskList
 };

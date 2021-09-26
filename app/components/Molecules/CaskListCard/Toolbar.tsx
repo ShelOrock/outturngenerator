@@ -43,11 +43,11 @@ const Toolbar: React.FC<ComponentProps> = ({
     <CaskListItemContainers.Buttons>
     { userType == 'Admin' || userType == 'Standard' && <Link.LinkButton to={ `/edit/${ caskId }` }>Edit</Link.LinkButton> }
     { userType == 'Admin' || userType == 'Standard' && (
-      <Button.DispatchButton
+      <Button.Button
         variant={ 'tertiary' }
         dispatch={ dispatch }
         onClick={ handleSetModal }
-      >X Delete</Button.DispatchButton>
+      >X Delete</Button.Button>
     ) } 
     </CaskListItemContainers.Buttons>
   </CaskListItemContainers.Toolbar>

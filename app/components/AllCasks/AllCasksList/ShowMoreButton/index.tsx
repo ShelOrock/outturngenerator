@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTypedSelector } from '../../../../utils';
 
-import ButtonManager from '../../../Button/ButtonManager';
+// import ButtonManager from '../../../Button/ButtonManager';
 
 export default ({ showMore, setShowMore }) => {
 
@@ -33,5 +33,5 @@ export default ({ showMore, setShowMore }) => {
     variant: "secondary",
   };
 
-  return showMore < allCasks.length && <ButtonManager { ...showMoreButtonProps }/>
+  return showMore < allCasks.length && <></>//<ButtonManager { ...showMoreButtonProps }/>
 }

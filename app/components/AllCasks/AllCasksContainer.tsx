@@ -108,23 +108,23 @@ export default () => {
 
   const addButtonProps: ButtonProps = evaluateUserType
   && {
-      variant: "primary",
-      onClick: createButton(
-        setModal,
-        "+ Add a cask",
-        createCaskModal
-      )
+      // variant: "primary",
+      // onClick: createButton(
+      //   setModal,
+      //   "+ Add a cask",
+      //   createCaskModal
+      // )
   }
 
   const deleteButtonProps: ButtonProps = evaluateUserType
   && {
-      variant: "secondary",
-      disabled: !markedCasks.length,
-      onClick: createButton(
-        setModal,
-        "X Delete Marked Casks",
-        deleteManyCasksModal
-      )
+      // variant: "secondary",
+      // disabled: !markedCasks.length,
+      // onClick: createButton(
+      //   setModal,
+      //   "X Delete Marked Casks",
+      //   deleteManyCasksModal
+      // )
   };
 
   const pageHeaderProps: PageHeaderPropTypes = {

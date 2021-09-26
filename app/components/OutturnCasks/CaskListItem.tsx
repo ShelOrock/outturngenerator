@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useTypedSelector, createButton } from '../../utils';
 
 //Components
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents/index';
 const {
@@ -76,11 +76,11 @@ export default (cask, sortMethod: any) => {
   const deleteCaskButtonProps: ButtonProps = {
     size: 'small',
     variant: 'tertiary',
-    onClick: createButton(
-      setModal,
-      "X Delete",
-      deleteCaskModal
-    )
+    // onClick: createButton(
+    //   setModal,
+    //   "X Delete",
+    //   deleteCaskModal
+    // )
   }
 
   return (
@@ -90,7 +90,7 @@ export default (cask, sortMethod: any) => {
           { evaluateUserType && <Checkbox { ...checkCaskCheckboxProps }/> }
           <Row alignItems='center' justifyContent='flex-end'>
             { evaluateUserType && <LinkButton to={ `/edit/${ cask.id }` }>Edit</LinkButton> }
-            { evaluateUserType && <ButtonManager { ...deleteCaskButtonProps } /> }
+            {/* { evaluateUserType && <ButtonManager { ...deleteCaskButtonProps } /> } */}
           </Row>
         </Row>
         <PaddedDiv paddingTop='1rem'>

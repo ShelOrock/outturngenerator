@@ -11,7 +11,6 @@ interface ComponentProps extends GenericComponentProps {
   value: string;
   placeholder: string;
   onChange: InputOnChangeType;
-  validateField: any //TODO
   error: string;
 };
 
@@ -21,7 +20,6 @@ const InputModule: React.FC<ComponentProps> = ({
   value,
   placeholder = '',
   onChange,
-  validateField = null, //TODO
   error = ''
 }) => (
   <InputModuleContainers.Main>

@@ -5,8 +5,8 @@ const { useEffect, useState } = React;
 import { useTypedSelector, createButton } from '../../utils';
 
 //Components
-import SelectManager from '../Select/SelectManager';
-import ButtonManager from '../Button/ButtonManager';
+// import SelectManager from '../Select/SelectManager';
+// import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents';
 const {
@@ -49,14 +49,14 @@ export default ({ user, sortMethod }) => {
   const changeAuthorizationButtonProps: ButtonProps = {
     size: 'small',
     disabled: !isEdited,
-    onClick: createButton(
-      editUser,
-      'Update Authorization',
-      user.id,
-      { userType: selectValue },
-      sortMethod,
-      filters
-    )
+    // onClick: createButton(
+    //   editUser,
+    //   'Update Authorization',
+    //   user.id,
+    //   { userType: selectValue },
+    //   sortMethod,
+    //   filters
+    // )
   }
 
   const selectAuthorizationProps: SelectPropTypes = {
@@ -98,11 +98,11 @@ export default ({ user, sortMethod }) => {
   const deleteUserButtonProps: ButtonProps = {
     size: 'small',
     variant: 'tertiary',
-    onClick: createButton(
-      setModal,
-      'X Delete',
-      deleteUserModal
-    )
+    // onClick: createButton(
+    //   setModal,
+    //   'X Delete',
+    //   deleteUserModal
+    // )
   }
 
   return (
@@ -115,16 +115,16 @@ export default ({ user, sortMethod }) => {
               <Body color={ user.loggedIn =='Online' ? 'black' : 'gray' }>{ user.loggedIn == 'Online' ? 'Online' : 'Offline' }</Body>
             </Row>
           </PaddedDiv>
-          { evaluateUserIsActive && evaluateUserType && <ButtonManager { ...deleteUserButtonProps }/> }
+          {/* { evaluateUserIsActive && evaluateUserType && <ButtonManager { ...deleteUserButtonProps }/> } */}
         </Row>
         <Column justifyContent='space-between'>
           <Body>{ user.username }</Body>
           <Row justifyContent='space-between' alignItems='center'>
-            { <SelectManager { ...selectAuthorizationProps }/> }
-            { evaluateUserIsActive && <ButtonManager { ...changeAuthorizationButtonProps } /> }
+            {/* { <SelectManager { ...selectAuthorizationProps }/> } */}
+            {/* { evaluateUserIsActive && <ButtonManager { ...changeAuthorizationButtonProps } /> } */}
           </Row>
         </Column>
       </Column>
     </ListItem>
-  )
-}
+  );
+};

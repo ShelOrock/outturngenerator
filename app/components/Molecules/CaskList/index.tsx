@@ -1,7 +1,7 @@
 import Toolbar from './Toolbar';
-import Buttons from './Buttons';
+import Actions from './Actions';
 
 export {
   Toolbar,
-  Buttons
+  Actions
 };

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { DropResult } from 'react-beautiful-dnd';
+import useReorderCasks from '../../hooks';
 import { useTypedSelector } from '../../utils';
 
 import ActiveOutturnTemplate from '../Templates/ActiveOutturn';
 import { CaskListMolecules } from '../Molecules';
-import { CaskList } from '../Organisms';
 import { ActiveCask } from '../Organisms';
-
+import GridCard from '../Organisms/GridCard';
 import { markCaskActions, modalActions } from '../../redux/actions';
 import { activeCaskThunks, allCasksThunks } from '../../redux/thunks';
 
@@ -15,8 +14,11 @@ import {
   GenericComponentProps,
   InputOnChangeType,
   ButtonOnClickType,
-  Cask,
 } from '../../types';
+import List from '../Organisms/List';
+
+import { DragAndDrop } from '../Atoms';
+import { Chip } from '../Atoms/Chip';
 
 interface ComponentProps extends GenericComponentProps {};
 
@@ -32,27 +34,15 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
     activeUser,
   } = useTypedSelector(state => state);
 
-  const [ localCaskOrder, setLocalCaskOrder ] = useState(allCasks);
-  const [ isEdited, setIsEdited ] = useState(false);
+  const {
+    currentCaskOrder,
+    isEdited,
+    onDragEnd
+} = useReorderCasks(allCasks);
 
   useEffect(() => {
     dispatch(markCaskActions.resetMarkedCasks())
   }, []);
-  useEffect(() => {
-    setLocalCaskOrder(allCasks.length ? allCasks : [])
-  }, [allCasks]);
-  useEffect(() => {
-    checkLocalCaskOrder(allCasks, localCaskOrder)
-  }, [allCasks, localCaskOrder]);
-
-  const checkLocalCaskOrder = (previousOrder: Cask[], currentOrder: Cask[]): void => {
-    setIsEdited(false);
-    currentOrder.forEach((_item, idx) => {
-      if(previousOrder[idx] !== currentOrder[idx]) {
-        setIsEdited(true);
-      };
-    });
-  };
 
   const handleMarkCask: InputOnChangeType = e => {
     if(markedCasks.includes(e.target.name)) {
@@ -68,33 +58,6 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
       return;
     };
     dispatch(markCaskActions.markAllCasks(allCasks.map(cask => cask.id)));
-  };
-
-  const handleDeleteCask: ButtonOnClickType = () => {};
-
-  const reorderCasks = (
-    list: Cask[],
-    startIndex: number,
-    endIndex: number
-  ): Cask[] => {
-    let listCopy = [ ...list ];
-    const element = list[startIndex];
-    listCopy.splice(startIndex, 1);
-    listCopy.splice(endIndex, 0 , element);
-    return listCopy;
-  };
-
-  const onDragEnd = ({ destination, source }: DropResult): void => {
-    if(!destination || destination.index === source.index) {
-      return;
-    };
-    const reorderedCasks = reorderCasks(
-      localCaskOrder,
-      source.index,
-      destination.index
-    );
-
-    setLocalCaskOrder(reorderedCasks)
   };
 
   const generateOutturn: ButtonOnClickType = () => {};
@@ -113,27 +76,54 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
           dispatch={ dispatch }
         />
       }
-      sidebar={ <>
-        <CaskList
-          markedCasks={ markedCasks }
-          user={ activeUser }
-          localCaskOrder={ localCaskOrder }
-          handleMarkCask={ handleMarkCask }
-          handleSaveCasks={ allCasksThunks.editManyCasks }
-          handleSetModal={ modalActions.setModal }
-          getActiveCask={ activeCaskThunks.getActiveCask }
-          onDragEnd={ onDragEnd }
-          dispatch={ dispatch }
-        />
-        <CaskListMolecules.Buttons
-          onClick={ generateOutturn }
-        />
-      </> }
+      sidebar={
+        <DragAndDrop.DragAndDrop onDragEnd={ onDragEnd }>
+          <DragAndDrop.Drop>
+          <List
+            listData={ currentCaskOrder }
+            renderData={ (cask, index) => (
+              <DragAndDrop.Drag
+                id={ cask.id }
+                index={ index }
+              >
+                {
+                  <GridCard
+                    color={ cask.flavourProfile }
+                    cardAction={{
+                      dispatch,
+                      onClick: activeCaskThunks.getActiveCask(cask.id),
+                    }}
+                    heading={ cask.caskNumber }
+                    subheading={ cask.name }
+                    body={ cask.description }
+                    chips={ <Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip> }
+                    primaryAction={{
+                      dispatch,
+                      onClick: () => {}, //TODO
+                      text: 'Edit'  
+                    }}
+                    secondaryAction={{
+                      dispatch,
+                      onClick: () => {}, //TODO
+                      text: 'Delete'
+                    }}
+                  />
+                }
+              </DragAndDrop.Drag>
+            ) }
+          />
+          </DragAndDrop.Drop>
+        </DragAndDrop.DragAndDrop>
+
+      }
+      action={ <CaskListMolecules.Actions
+        onClick={ () => generateOutturn() }
+      /> }
       activeContent={ <ActiveCask
         cask={ activeCask }
         userType={ activeUser.userType }
-        deleteCask={ handleDeleteCask }
         dispatch={ dispatch }
+        deleteCask={ () => allCasksThunks.deleteCask(activeCask.id) }
       /> }
     />
   );

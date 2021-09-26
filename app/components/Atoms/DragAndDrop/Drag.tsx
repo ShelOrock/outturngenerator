@@ -6,17 +6,17 @@ import { DragAndDropContainers } from '../../Containers';
 import { GenericComponentProps } from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
-  caskId: string;
+  id: string;
   index: number;
 };
 
 const Drag: React.FC<ComponentProps> = ({
-  caskId,
+  id,
   index,
   children,
 }) => (
   <Draggable
-    draggableId={ caskId }
+    draggableId={ id }
     index={ index }
   >
     { (provided: DraggableProvided): JSX.Element => (

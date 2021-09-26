@@ -8,7 +8,7 @@ import { useTypedSelector, createButton } from '../../utils';
 
 //Components
 import PageHeaderManager from '../Header/PageHeaderManager';
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 import FilterMenuManager from '../FilterMenu/FilterMenuManager';
 import SelectManager from '../Select/SelectManager';
 import UserListItem from './UserListItem';
@@ -114,10 +114,10 @@ export default () => {
   const resetFilterButtonProps: ButtonProps = {
     variant: 'tertiary',
     disabled: !filters.length,
-    onClick: createButton(
-      resetFilters,
-      'X Clear Filters',
-    )
+    // onClick: createButton(
+    //   resetFilters,
+    //   'X Clear Filters',
+    // )
   }
 
   const searchManagerProps = {
@@ -129,25 +129,26 @@ export default () => {
   const setIsOpenButtonProps: ButtonProps = {
     size: 'default',
     variant: 'default',
-    dispatchToStore: false,
-    onClick: createButton(
-      setIsOpen,
-      isOpen ? 'Collapse Filters' : 'Show Filters',
-      !isOpen
-    )
+    // dispatch: false,
+    // onClick: createButton(
+    //   setIsOpen,
+    //   isOpen ? 'Collapse Filters' : 'Show Filters',
+    //   !isOpen
+    // )
   }
 
   const renderfilters = (): JSX.Element[] => (
     filters.map((filter: string, idx: number) => (
-      <ButtonManager 
-        key={ idx }
-        variant='default'
-        onClick={ createButton(
-          removeFilter,
-          `X ${ filter }`,
-          filter
-        ) }
-      />
+      <></>
+      // <ButtonManager 
+      //   key={ idx }
+      //   variant='default'
+      //   onClick={ createButton(
+      //     removeFilter,
+      //     `X ${ filter }`,
+      //     filter
+      //   ) }
+      // />
     ))
   )
 
@@ -173,8 +174,8 @@ export default () => {
           </PaddedDiv>
         <Row alignItems='center'>
           { !!filters.length && renderfilters() }
-          { !!filters.length && < ButtonManager { ...resetFilterButtonProps } /> }
-          <ButtonManager { ...setIsOpenButtonProps } />
+          {/* { !!filters.length && < ButtonManager { ...resetFilterButtonProps } /> } */}
+          {/* <ButtonManager { ...setIsOpenButtonProps } /> */}
         </Row>
         { isOpen && <FilterMenuManager filterItems={ filterItems } /> }
       </Row>

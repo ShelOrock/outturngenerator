@@ -9,7 +9,7 @@ import { useTypedSelector, createButton, generateOutturn } from "../../utils";
 //Components
 import CaskListItemContainer from "./CaskListItemContainer";
 import ActiveCaskContainer from './ActiveCaskContainer';
-import ButtonManager from "../Button/ButtonManager";
+// import ButtonManager from "../Button/ButtonManager";
 //StyledComponents
 import * as StyledComponents from "../styledcomponents/index";
 const {
@@ -99,24 +99,24 @@ export default () => {
   const editManyCasksButtonProps: ButtonProps = {
     variant: 'primary',
     disabled: !isEdited,
-    dispatchToStore: true,
-    onClick: createButton(
-      editManyCasks,
-      "Save",
-      activeOutturn.id,
-      localCaskOrder
-    )
+    // dispatchToStore: true,
+    // onClick: createButton(
+    //   editManyCasks,
+    //   "Save",
+    //   activeOutturn.id,
+    //   localCaskOrder
+    // )
   }
 
   const cancelChangesButtonProps: ButtonProps = {
     variant: 'secondary',
     disabled: !isEdited,
-    dispatchToStore: false,
-    onClick: createButton(
-      setLocalCaskOrder,
-      'Cancel',
-      casks
-    )
+    // dispatchToStore: false,
+    // onClick: createButton(
+    //   setLocalCaskOrder,
+    //   'Cancel',
+    //   casks
+    // )
   }
 
   const generateOutturnModal = {
@@ -134,11 +134,11 @@ export default () => {
 
   const generateOutturnButtonProps: ButtonProps = { 
     variant: 'primary',
-    onClick: createButton(
-      setModal,
-      "Generate Outturn",
-      generateOutturnModal
-    ) 
+    // onClick: createButton(
+    //   setModal,
+    //   "Generate Outturn",
+    //   generateOutturnModal
+    // ) 
   }
 
   const renderCaskListItemContainer = () => (
@@ -165,8 +165,8 @@ export default () => {
     <Column justifyContent='center'>
       <Row alignItems='center'>
         { evaluateUserType && <Checkbox { ...checkAllCasksCheckboxProps } /> }
-        { evaluateUserType && <ButtonManager { ...editManyCasksButtonProps } /> }
-        { evaluateUserType && <ButtonManager { ...cancelChangesButtonProps } /> }
+        {/* { evaluateUserType && <ButtonManager { ...editManyCasksButtonProps } /> } */}
+        {/* { evaluateUserType && <ButtonManager { ...cancelChangesButtonProps } /> } */}
       </Row>
       <Row alignItems='flex-start'>
         <Column alignItems='center'>
@@ -177,7 +177,7 @@ export default () => {
               </Droppable>
             </DragDropContext>
           </List>
-          <ButtonManager { ...generateOutturnButtonProps } />
+          {/* <ButtonManager { ...generateOutturnButtonProps } /> */}
         </Column>
         <Column>
         <ActiveCaskContainer />

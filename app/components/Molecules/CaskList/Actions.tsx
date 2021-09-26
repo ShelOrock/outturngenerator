@@ -15,7 +15,7 @@ const Buttons: React.FC<ComponentProps> = ({
   <CaskListContainers.Buttons>
     <Button.Button
       variant='primary'
-      onClick={ e => onClick(e) /*TODO*/ }
+      onClick={ () => onClick() /*TODO*/ }
     >Generate Outturn</Button.Button>
   </CaskListContainers.Buttons>
 );

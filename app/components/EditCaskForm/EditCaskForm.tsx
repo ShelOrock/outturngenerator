@@ -124,25 +124,25 @@ export default () => {
 
   const addButtonProps: ButtonProps = evaluateUserType
     && {
-      disabled: !isEdited,
-      onClick: createButton(
-        editCask,
-        'Save Changes',
-        id,
-        localState
-      ) 
+      // disabled: !isEdited,
+      // onClick: createButton(
+      //   editCask,
+      //   'Save Changes',
+      //   id,
+      //   localState
+      // ) 
   };
 
   const deleteButtonProps: ButtonProps = evaluateUserType
   && {
-      variant: 'secondary',
-      disabled: !isEdited,
-      dispatchToStore: false,
-      onClick: createButton(
-        dispatchLocally,
-        'Cancel Changes',
-        { name: 'CANCEL_CHANGES' }
-      )
+      // variant: 'secondary',
+      // disabled: !isEdited,
+      // dispatchToStore: false,
+      // onClick: createButton(
+      //   dispatchLocally,
+      //   'Cancel Changes',
+      //   { name: 'CANCEL_CHANGES' }
+      // )
   }
 
   const pageHeaderProps: PageHeaderPropTypes = {
@@ -299,25 +299,25 @@ export default () => {
 
   const confirmButton: ButtonProps = evaluateUserType
   && {
-    disabled: !isEdited,
-    onClick: createButton(
-      editCask,
-      'Save Changes',
-      id,
-      localState,
-    ) 
+    // disabled: !isEdited,
+    // onClick: createButton(
+    //   editCask,
+    //   'Save Changes',
+    //   id,
+    //   localState,
+    // ) 
   }
 
   const cancelButton: ButtonProps = evaluateUserType
   && {
-      variant: 'secondary',
-      disabled: !isEdited,
-      dispatchToStore: false,
-      onClick: createButton(
-        dispatchLocally,
-        'Cancel Changes',
-        { name: 'CANCEL_CHANGES' }
-      )
+      // variant: 'secondary',
+      // disabled: !isEdited,
+      // dispatchToStore: false,
+      // onClick: createButton(
+      //   dispatchLocally,
+      //   'Cancel Changes',
+      //   { name: 'CANCEL_CHANGES' }
+      // )
   }
 
   const formProps: FormPropTypes = {

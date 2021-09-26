@@ -5,11 +5,10 @@ import { useDispatch } from 'react-redux';
 import {
   useTypedSelector,
   truncateText,
-  createButton
 } from '../../utils';
 
 //Components
-import ButtonManager from '../Button/ButtonManager';
+// import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents';
 const {
@@ -81,11 +80,11 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
   const deleteOutturnButtonProps: ButtonProps = {
     size: 'small',
     variant: 'tertiary',
-    onClick: createButton(
-      setModal,
-      'X Delete',
-      deleteOutturnModalProps
-    )
+    // onClick: createButton(
+    //   setModal,
+    //   'X Delete',
+    //   deleteOutturnModalProps
+    // )
   }
 
   const renderFlavourPills = (): JSX.Element[] => (
@@ -104,28 +103,29 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
   );
 
   return (
-    <Card>
-      <Row justifyContent='space-between' alignItems='center'>
-        { evaluateUserType && <Checkbox { ...checkOutturnCheckboxProps }/> }
-        { evaluateUserType && <ButtonManager { ...deleteOutturnButtonProps } /> }
-      </Row>
-      <PaddedDiv paddingTop='1rem'>
-        <LinkDiv to={ `/outturn/${ id }`}>
-          <Heading>{ name }</Heading>
-          <Body>{ description && truncateText(description) }</Body>
-          { !!outturn.casks && !!outturn.casks.length &&
-            <PaddedDiv
-              paddingTop='1rem'
-              paddingRight='1rem'
-              paddingLeft='1rem'
-              paddingBottom='1rem'
-            >
-              { renderFlavourPills() }
-              { outturn.casks.length > 3 && <Body>+ { outturn.casks.length - 3 } More</Body> }
-            </PaddedDiv>
-          }
-        </LinkDiv>
-      </PaddedDiv>
-    </Card>
+    <></>
+    // <Card> 
+      // <Row justifyContent='space-between' alignItems='center'>
+      //   { evaluateUserType && <Checkbox { ...checkOutturnCheckboxProps }/> }
+      //   {/* { evaluateUserType && <ButtonManager { ...deleteOutturnButtonProps } /> } */}
+      // </Row>
+      // <PaddedDiv paddingTop='1rem'>
+      //   <LinkDiv to={ `/outturn/${ id }`}>
+      //     <Heading>{ name }</Heading>
+      //     <Body>{ description && truncateText(description) }</Body>
+      //     { !!outturn.casks && !!outturn.casks.length &&
+      //       <PaddedDiv
+      //         paddingTop='1rem'
+      //         paddingRight='1rem'
+      //         paddingLeft='1rem'
+      //         paddingBottom='1rem'
+      //       >
+      //         { renderFlavourPills() }
+      //         { outturn.casks.length > 3 && <Body>+ { outturn.casks.length - 3 } More</Body> }
+      //       </PaddedDiv>
+      //     }
+      //   </LinkDiv>
+      // </PaddedDiv>
+    // </Card>
   )
 };

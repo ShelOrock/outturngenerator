@@ -3,15 +3,15 @@ import React from 'react';
 import { GenericComponentProps } from '../../../types';
 
 import { CaskListItemContainers } from '../../Containers';
-import { Pill } from '../../Atoms';
+import { Chip } from '../../Atoms';
 
 interface ComponentProps extends GenericComponentProps {
-  flavourProfile: string;
+  color: string;
 };
 
-const Body: React.FC<ComponentProps> = ({ flavourProfile = '' }) => (
+const Body: React.FC<ComponentProps> = ({ color = 'default' }) => (
   <CaskListItemContainers.Body>
-    <Pill.SmallPill flavourProfile={ flavourProfile }>{ flavourProfile }</Pill.SmallPill>
+    <Chip.Chip color={ color }>{ color }</Chip.Chip>
   </CaskListItemContainers.Body>
 );
 
