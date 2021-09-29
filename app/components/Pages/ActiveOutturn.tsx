@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import useReorderCasks from '../../hooks';
 import { useTypedSelector } from '../../utils';
 
-import ActiveOutturnTemplate from '../Templates/ActiveOutturn';
+import CasksTemplate from '../Templates/Casks';
 import { CaskListMolecules } from '../Molecules';
 import { ActiveCask } from '../Organisms';
 import GridCard from '../Organisms/GridCard';
@@ -19,6 +19,9 @@ import List from '../Organisms/List';
 
 import { DragAndDrop } from '../Atoms';
 import { Chip } from '../Atoms/Chip';
+import PageHeader from '../Organisms/PageHeader';
+import SubNavigation from '../Molecules/SubNavigation';
+import Toolbar from '../Molecules/Toolbar';
 
 interface ComponentProps extends GenericComponentProps {};
 
@@ -63,19 +66,29 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
   const generateOutturn: ButtonOnClickType = () => {};
 
   return (
-    <ActiveOutturnTemplate
-      toolbar={
-        <CaskListMolecules.Toolbar
-          casks={ allCasks }
-          markedCasks={ markedCasks }
-          outturnId={ activeOutturn.id }
-          isEdited={ isEdited }
-          userType={ activeUser.userType }
-          handleMarkAllCasks={ handleMarkAllCasks }
-          handleSaveCasks={ allCasksThunks.editManyCasks }
-          dispatch={ dispatch }
+    <CasksTemplate
+      header={
+        <PageHeader
+          to={ '/' }
+          label={ '< Back' }
+          title={ `${ activeOutturn.name }`}
+          primaryAction={{
+            dispatch,
+            onClick: modalActions.setModal(),
+            text: '+ Create Cask',
+          }}
         />
       }
+        // <CaskListMolecules.Toolbar
+        //   casks={ allCasks }
+        //   markedCasks={ markedCasks }
+        //   outturnId={ activeOutturn.id }
+        //   isEdited={ isEdited }
+        //   userType={ activeUser.userType }
+        //   handleMarkAllCasks={ handleMarkAllCasks }
+        //   handleSaveCasks={ allCasksThunks.editManyCasks }
+        //   dispatch={ dispatch }
+        // />
       sidebar={
         <DragAndDrop.DragAndDrop onDragEnd={ onDragEnd }>
           <DragAndDrop.Drop>
@@ -88,6 +101,7 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
               >
                 {
                   <GridCard
+                    key={ cask.id }
                     color={ cask.flavourProfile }
                     cardAction={{
                       dispatch,
