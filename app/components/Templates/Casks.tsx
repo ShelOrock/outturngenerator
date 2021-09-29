@@ -5,20 +5,20 @@ import { PageContainers } from '../Containers';
 import { GenericComponentProps } from '../../types';
 
 interface ComponentProps extends GenericComponentProps {
-  toolbar: JSX.Element;
+  header: JSX.Element;
   sidebar: JSX.Element;
   action: JSX.Element;
   activeContent: JSX.Element;
 };
 
 const ActiveOutturnTemplate: React.FC<ComponentProps> = ({
-  toolbar,
+  header,
   sidebar,
   action,
   activeContent
 }) => (
   <PageContainers.Main>
-    <PageContainers.Header>{ toolbar }</PageContainers.Header>
+    <PageContainers.Header>{ header }</PageContainers.Header>
     <PageContainers.Section>
       <PageContainers.Sidebar>
           { sidebar }

@@ -3,7 +3,7 @@ import {
   Cask,
   InputOnChangeType
 } from '../index';
-import { AppDispatch, AppThunk } from '../redux';
+import { ActionTypes, AppDispatch, AppThunk } from '../redux';
 
 export interface GenericComponentProps {
   children?: React.ReactNode;
@@ -26,7 +26,7 @@ export interface ButtonProps {
   variant?: string;
   disabled?: boolean;
   dispatch?: AppDispatch | null;
-  onClick?: (() => void) | AppThunk;
+  onClick?: (() => void) | AppThunk | ActionTypes;
 }
 
 export interface SubNavigationPropTypes {

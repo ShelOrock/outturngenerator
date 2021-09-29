@@ -3,27 +3,33 @@ import React from 'react';
 import SubNavigation from '../Molecules/SubNavigation';
 import Toolbar from '../Molecules/Toolbar';
 
-import { GenericComponentProps } from '../../types';
+import { ButtonProps, GenericComponentProps } from '../../types';
 import { Column } from '../styledcomponents/Div';
 
 interface ComponentProps extends GenericComponentProps {
-  subNavigation: any //TODO;
-  toolbar: any //TODO;
+  to: string;
+  label: string;
+  title: string;
+  primaryAction: ButtonProps;
+  secondaryAction?: ButtonProps;
 };
 
 const PageHeader: React.FC<ComponentProps> = ({
-  subNavigation,
-  toolbar
+  to = '#',
+  label = '',
+  title = '',
+  primaryAction,
+  secondaryAction = {},
 }) => (
   <Column>
     <SubNavigation
-      to={ subNavigation.to }
-      label={ subNavigation.label }
+      to={ to }
+      label={ label }
     />
     <Toolbar
-      title={ toolbar.title }
-      primaryAction={ toolbar.primaryAction }
-      secondaryAction={ toolbar.secondaryAction }
+      title={ title }
+      primaryAction={ primaryAction }
+      secondaryAction={ secondaryAction }
     />
   </Column>
 );
