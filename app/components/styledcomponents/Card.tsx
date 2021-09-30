@@ -7,22 +7,24 @@ interface CardPropTypes {
 export const Card = styled.div<CardPropTypes>`
   background-color: white;
   width: 348px;
+  margin: 16px 42px;
   display: flex;
   flex-direction: column;
-  border-radius: 4px;
+  justify-content: space-between;
+  border-radius: 8px;
   box-shadow: 0px 8px 15px #D5D5D5;
   transition: all 0.3s ease 0s;
 
   &:hover {
     transform: translateY(-7px);
-    box-shadow: 0px 15px 20px ${ ({ color, theme }) => theme.colors.flavourProfiles[color] };
+    box-shadow: 0px 8px 15px ${ ({ color, theme }) => { console.log(color, theme.colors.flavourProfiles[color] ); return theme.colors.flavourProfiles[color] }};
   }
 `;
 
 export const Actions = styled.div`
   display: flex;
-  padding: 8px;
-  justify-content: space-between;
+  padding: 16px;
+  vertical-align: bottom;
 `;
 
 export const Content = styled.div`
@@ -36,21 +38,6 @@ export const CardsContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `
-
-// export const Card = styled.div`
-//   background-color: white;
-//   display: flex;
-//   flex-direction: column;
-//   width: calc(100% / 4 - 2rem);
-//   margin: 2rem;
-//   box-shadow: 0px 8px 15px #D5D5D5;
-//   transition: all 0.3s ease 0s;
-
-//   &:hover {
-//     transform: translateY(-7px);
-//     box-shadow: 0px 15px 20px #21A0A066;
-//   }
-// `
 
 export const CardImage = styled.div`
   width: 100%;

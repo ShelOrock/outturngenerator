@@ -18,14 +18,12 @@ import {
 import List from '../Organisms/List';
 
 import { DragAndDrop } from '../Atoms';
-import { Chip } from '../Atoms/Chip';
+import { Chip } from '../Atoms';
 import PageHeader from '../Organisms/PageHeader';
-import SubNavigation from '../Molecules/SubNavigation';
-import Toolbar from '../Molecules/Toolbar';
 
 interface ComponentProps extends GenericComponentProps {};
 
-const ActiveOutturn: React.FC<ComponentProps> = () => {
+const ActiveOutturnPage: React.FC<ComponentProps> = () => {
 
   const dispatch = useDispatch();
 
@@ -110,7 +108,7 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
                     heading={ cask.caskNumber }
                     subheading={ cask.name }
                     body={ cask.description }
-                    chips={ <Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip> }
+                    chips={ <Chip.Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip.Chip> }
                     primaryAction={{
                       dispatch,
                       onClick: () => {}, //TODO
@@ -143,4 +141,4 @@ const ActiveOutturn: React.FC<ComponentProps> = () => {
   );
 };
 
-export default ActiveOutturn;
+export default ActiveOutturnPage;

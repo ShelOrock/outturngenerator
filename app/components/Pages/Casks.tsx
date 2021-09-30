@@ -6,7 +6,7 @@ import CasksTemplate from '../Templates/Casks';
 import List from '../Organisms/List';
 import GridCard from '../Organisms/GridCard';
 import { ActiveCask } from '../Organisms';
-import { Chip } from '../Atoms/Chip';
+import { Chip } from '../Atoms';
 
 import { GenericComponentProps } from '../../types';
 import PageHeader from '../Organisms/PageHeader';
@@ -16,7 +16,7 @@ import { Button } from '../Atoms';
 
 interface ComponentProps extends GenericComponentProps {};
 
-const Casks: React.FC<ComponentProps> = () => {
+const CasksPage: React.FC<ComponentProps> = () => {
 
   const dispatch = useDispatch();
 
@@ -56,7 +56,7 @@ const Casks: React.FC<ComponentProps> = () => {
             heading={ cask.caskNumber }
             subheading={ cask.name }
             body={ cask.description }
-            chips={ <Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip> }
+            chips={ <Chip.Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip.Chip> }
             primaryAction={{
               dispatch,
               onClick: () => {}, //TODO
@@ -87,3 +87,5 @@ const Casks: React.FC<ComponentProps> = () => {
     />
   );
 };
+
+export default CasksPage;

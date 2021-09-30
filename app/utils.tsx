@@ -4,8 +4,8 @@ import { theme } from './theme';
 
 export const useTypedSelector: TypedUseSelectorHook<RootState> = useSelector;
 
-export const truncateText = (string: string): string => {
-  if(string.length > 50) return `${ string.slice(0, 50) }...`;
+export const truncateText = (string: string, targetLength: number): string => {
+  if(string.length > targetLength) return `${ string.slice(0, targetLength) }...`;
   return string;
 };
 
