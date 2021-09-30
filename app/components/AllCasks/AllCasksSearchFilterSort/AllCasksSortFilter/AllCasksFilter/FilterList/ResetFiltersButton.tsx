@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useTypedSelector } from '../../../../../../utils';
 
-import ButtonManager from '../../../../../Button/ButtonManager';
+// import ButtonManager from '../../../../../Button/ButtonManager';
 
 import * as ReduxActions from '../../../../../../redux/actions';
 const { filterActions: { resetFilters } } = ReduxActions;
@@ -36,5 +36,5 @@ export default () => {
     onClick: resetFiltersOnClickButtonProps,
   };
 
-  return !!filters.length && <ButtonManager { ...resetFilterButtonProps } />;
+  return <></>//!!filters.length && <ButtonManager { ...resetFilterButtonProps } />;
 };

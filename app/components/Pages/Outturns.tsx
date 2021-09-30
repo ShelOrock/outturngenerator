@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils';
+import { truncateText, useTypedSelector } from '../../utils';
 
 import { OutturnsTemplate } from '../Templates';
 
@@ -26,15 +26,18 @@ const OutturnsPage: React.FC<ComponentProps> = () => {
           listData={ allOutturns }
           renderData={ outturn => (
             <GridCard
-              color={ 'default '}
-              heading={ outturn.name }
-              subheading={ outturn.name }
-              body={ outturn.description }
+              key={ outturn.id }
+              heading={ truncateText(outturn.name, 20) }
+              subheading={ truncateText(outturn.name, 50) }
+              body={ truncateText(outturn.description, 200) }
               chips={ 
                 <List
                   listData={ outturn.casks.slice(0, 3) }
                   renderData={ chip => (
-                    <Chip.Chip color={ chip.flavourProfile }>{ chip.name }</Chip.Chip>
+                    <Chip.Chip
+                      key={ chip.id }
+                      color={ chip.flavourProfile }
+                    >{ truncateText(chip.name, 25) }</Chip.Chip>
                   ) }
                 />
               }

@@ -6,16 +6,15 @@ interface TextPropTypes {
 } 
 
 export const AllTypeStyles = css<TextPropTypes>`
-  padding: 0 1rem;
   margin: 0;
   text-align: ${ ({ textAlign }) => textAlign || 'left' };
   color: ${ ({ color, theme: { colors } }) => colors[color] || colors.black };
+  line-height: 1.4;
 `;
 
 export const Title = styled.h1`
   ${ AllTypeStyles }
   font-weight: bold;
-  margin: 1rem;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.title };
 `
 
@@ -31,6 +30,7 @@ export const Heading = styled.h3`
 
 export const SubHeading = styled.h4`
   ${ AllTypeStyles }
+  margin-top: 8px;
   font-weight: bold;
   text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
@@ -38,6 +38,7 @@ export const SubHeading = styled.h4`
 
 export const CaskTitle = styled.h5`
   ${ AllTypeStyles }
+  margin-top: 8px;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
   color: ${ ( { theme: { colors } }) => colors.darkgray };
   margin: 0.5rem 0;
@@ -52,6 +53,7 @@ export const FlavourProfileTitle = styled.p`
 
 export const SmallListItemHeader = styled.p`
   ${ AllTypeStyles }
+  margin-top: 8px;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
   color: ${ ( { theme: { colors } }) => colors.darkgray };
   margin: 0;
@@ -59,14 +61,18 @@ export const SmallListItemHeader = styled.p`
 
 export const BodyTitle = styled.p`
   ${ AllTypeStyles }
+  margin-top: 8px;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
-  font-size: bold;
 `;
 
 export const Body = styled.p`
   ${ AllTypeStyles }
+  margin-top: 8px;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.small };
+  font-weight: 200;
 `;
 
 export const Description = styled.p`
+  margin-top: 8px;
+
 `;

@@ -7,7 +7,7 @@ import CardContent from '../Molecules/CardContent';
 import { GenericComponentProps, ButtonProps } from '../../types';
 
 interface ComponentProps extends GenericComponentProps {
-  color: string;
+  color?: string;
   cardAction?: ButtonProps;
   heading: string;
   subheading: string;
@@ -18,8 +18,8 @@ interface ComponentProps extends GenericComponentProps {
 };
 
 const GridCard: React.FC<ComponentProps> = ({
-  color,
-  cardAction,
+  color = 'default',
+  cardAction = {},
   heading,
   subheading,
   body,

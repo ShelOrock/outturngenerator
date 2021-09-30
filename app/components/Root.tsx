@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 //Components
+import * as Page from '../components/Pages';
 import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
@@ -20,7 +21,7 @@ import Toast from './Toast/Toast';
 import * as thunks from '../redux/thunks';
 const {
   outturnsThunks: { getOutturns },
-  casksThunks: { getCasks },
+  allCasksThunks: { getCasks },
   activeUserThunks: { getActiveUser }
 } = thunks;
 
@@ -39,7 +40,7 @@ export default () => {
       <Router>
         <Navigation />
         <Switch>
-          <Route exact path='/' component={ AllOutturnsContainer } />
+          <Route exact path='/' component={ Page.OutturnsPage } />
           <Route exact path='/login' component={ Login } />
           <Route exact path='/signup' component={ Signup } />
           <Route exact path='/casks' component={ AllCasksContainer } />

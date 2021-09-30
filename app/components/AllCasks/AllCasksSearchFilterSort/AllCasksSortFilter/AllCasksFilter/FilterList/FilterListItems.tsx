@@ -1,7 +1,7 @@
 import *  as React from 'react';
 import { flavourProfiles } from '../../../../../../utils';
 
-import ButtonManager from '../../../../../Button/ButtonManager';
+// import ButtonManager from '../../../../../Button/ButtonManager';
 
 import * as ReduxActions from '../../../../../../redux/actions';
 const { filterActions: { removeFilter } } = ReduxActions;
@@ -34,5 +34,5 @@ export default ({ filter }) => {
     variant: flavourProfiles.includes(filter) ? filter : 'default'
   };
 
-  return <ButtonManager { ...filterListItemProps } />
+  return <></>//<ButtonManager { ...filterListItemProps } />
 };

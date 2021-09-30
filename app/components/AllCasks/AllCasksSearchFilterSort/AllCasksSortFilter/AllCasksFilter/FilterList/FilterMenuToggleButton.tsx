@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import ButtonManager from '../../../../../Button/ButtonManager';
+// import ButtonManager from '../../../../../Button/ButtonManager';
 
 export default ({ filterMenuIsOpen, setFilterMenuIsOpen}) => {
 
@@ -32,5 +32,5 @@ export default ({ filterMenuIsOpen, setFilterMenuIsOpen}) => {
     onClick: setIsOpenOnClickProps,
   };
 
-  return <ButtonManager { ...setIsOpenButtonProps } />;
+  return <></>//<ButtonManager { ...setIsOpenButtonProps } />;
 };

@@ -13,11 +13,12 @@ interface ChipPropTypes {
 }
 
 export const Chip = styled.div<ChipPropTypes>`
-height: 32px;
-padding: 4px 12px;
-margin: 1rem 0 0;
-background ${ ({ color, theme }) => theme.colors.flavourProfiles[color] }
-color: white;
+  padding: 16px;
+  margin: 8px 0 0;
+  background ${ ({ color, theme }) => theme.colors.flavourProfiles[color] };
+  color: white;
+  border-radius: 32px;
+  text-transform: uppercase;
 `;
 
 export const PillStyles = css<FlavourPillPropTypes>`

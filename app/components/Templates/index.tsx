@@ -1,5 +1,5 @@
 import OutturnsTemplate from './Outturns';
-import ActiveOutturnTemplate from './ActiveOutturn';
+import ActiveOutturnTemplate from './Casks';
 
 export {
   OutturnsTemplate,

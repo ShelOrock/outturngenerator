@@ -25,15 +25,15 @@ export const theme = {
       ['Peated']: '#81AC6D',
       ['Heavily peated']: '#5B7C4E',
       other: '#202448',
-      default: '#21A0A0',
+      default: '#A5A5A5',
     }
   },
   font: 'Roboto',
   fontSizes: {
-    title: '1.8em',
-    large: '1.5em',
-    medium: '1.2em',    
-    small: '1em',
+    title: '40px',
+    large: '32px',
+    medium: '24px',    
+    small: '16px',
   },
   buttons: {
     colors: {
