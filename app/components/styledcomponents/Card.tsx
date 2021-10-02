@@ -17,7 +17,7 @@ export const Card = styled.div<CardPropTypes>`
 
   &:hover {
     transform: translateY(-7px);
-    box-shadow: 0px 8px 15px ${ ({ color, theme }) => { console.log(color, theme.colors.flavourProfiles[color] ); return theme.colors.flavourProfiles[color] }};
+    box-shadow: 0px 8px 15px ${ ({ color, theme }) => theme.colors.flavourProfiles[color] }};
   }
 `;
 
@@ -28,8 +28,10 @@ export const Actions = styled.div`
 `;
 
 export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   padding: 16px;
-  padding-bottom: 24px;
 `;
 
 export const CardsContainer = styled.div`

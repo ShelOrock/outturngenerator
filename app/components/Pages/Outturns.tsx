@@ -8,7 +8,7 @@ import { GenericComponentProps } from '../../types';
 import Grid from '../Organisms/Grid';
 import GridCard from '../Organisms/GridCard';
 import List from '../Organisms/List';
-import { Chip } from '../Atoms';
+import { Chip, Link } from '../Atoms';
 
 interface ComponentProps extends GenericComponentProps {};
 
@@ -25,19 +25,23 @@ const OutturnsPage: React.FC<ComponentProps> = () => {
         <Grid
           listData={ allOutturns }
           renderData={ outturn => (
-            <GridCard
+            <Link.NavigationLink
               key={ outturn.id }
-              heading={ truncateText(outturn.name, 20) }
-              subheading={ truncateText(outturn.name, 50) }
-              body={ truncateText(outturn.description, 200) }
+              to={ `/outturn/${ outturn.id }`}
+              >
+            <GridCard
+              heading={ truncateText(outturn.name, 12) }
+              subheading={ truncateText(outturn.name, 16) }
+              body={ truncateText(outturn.description, 100) }
               chips={ 
                 <List
-                  listData={ outturn.casks.slice(0, 3) }
+                  listData={ outturn.casks.slice(0, 4) }
                   renderData={ chip => (
                     <Chip.Chip
                       key={ chip.id }
                       color={ chip.flavourProfile }
-                    >{ truncateText(chip.name, 25) }</Chip.Chip>
+                      text={ `${ chip.caskNumber } ${ chip.name }` }
+                    />
                   ) }
                 />
               }
@@ -52,6 +56,7 @@ const OutturnsPage: React.FC<ComponentProps> = () => {
                 text: 'Delete'
               }}
             />
+            </Link.NavigationLink>
           ) }
         />
       }

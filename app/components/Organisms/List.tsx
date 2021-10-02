@@ -1,4 +1,5 @@
 import React from 'react';
+import { DroppableProvided } from 'react-beautiful-dnd';
 
 import { GenericComponentProps } from '../../types';
 
@@ -6,12 +7,14 @@ import { Layout } from '../Atoms';
 
 interface ComponentProps extends GenericComponentProps {
   listData: any[];
-  renderData: (any) => JSX.Element;
+  renderData: (any, number) => JSX.Element;
+  provided?: DroppableProvided;
+  ref?: React.ReactNode;
 };
 
-const List = ({
+const List: React.FC<ComponentProps> = ({
   listData = [],
   renderData
-}) => <Layout.List>{ listData.map(listItem => renderData(listItem)) }</Layout.List>;
+}) => <Layout.List>{ listData.map((listItem, index) => renderData(listItem, index)) }</Layout.List>;
 
 export default List;

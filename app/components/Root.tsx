@@ -9,7 +9,6 @@ import * as Page from '../components/Pages';
 import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
-import AllOutturnsContainer from './Outturns/AllOutturnContainer';
 import AllCasksContainer from './AllCasks/AllCasksContainer';
 import CasksContainer from './OutturnCasks/CasksContainer';
 import CaskForm from './EditCaskForm/EditCaskForm';
@@ -44,7 +43,7 @@ export default () => {
           <Route exact path='/login' component={ Login } />
           <Route exact path='/signup' component={ Signup } />
           <Route exact path='/casks' component={ AllCasksContainer } />
-          <Route exact path='/outturn/:outturnId' component={ CasksContainer }/>
+          <Route exact path='/outturn/:outturnId' component={ Page.ActiveOutturnPage }/>
           <Route exact path='/edit/:caskId' component={ CaskForm } />
           <Route exact path='/add/:caskId' component={ CaskForm } />
           <Route exact path='/users' component={ UserList } />

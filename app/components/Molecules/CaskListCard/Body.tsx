@@ -11,7 +11,10 @@ interface ComponentProps extends GenericComponentProps {
 
 const Body: React.FC<ComponentProps> = ({ color = 'default' }) => (
   <CaskListItemContainers.Body>
-    <Chip.Chip color={ color }>{ color }</Chip.Chip>
+    <Chip.Chip
+      color={ color } 
+      text={ color }
+    />
   </CaskListItemContainers.Body>
 );
 

@@ -16,7 +16,6 @@ export const NavLink = styled(Link)`
   color: ${ ({ theme: { colors } }) => colors.white };
   text-decoration: none;
   font-weight:bold;
-  margin: 0 2rem;
 `;
 
 export const LinkButton = styled(Link)<LinkButtonPropTypes>`

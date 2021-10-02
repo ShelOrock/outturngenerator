@@ -1,7 +1,14 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import useReorderCasks from '../../hooks';
-import { useTypedSelector } from '../../utils';
+import { truncateText, useTypedSelector } from '../../utils';
+import {
+  DragDropContext,
+  Droppable,
+  DroppableProvided,
+  Draggable,
+  DraggableProvided
+} from 'react-beautiful-dnd';
 
 import CasksTemplate from '../Templates/Casks';
 import { CaskListMolecules } from '../Molecules';
@@ -17,13 +24,12 @@ import {
 } from '../../types';
 import List from '../Organisms/List';
 
-import { DragAndDrop } from '../Atoms';
 import { Chip } from '../Atoms';
 import PageHeader from '../Organisms/PageHeader';
 
 interface ComponentProps extends GenericComponentProps {};
 
-const ActiveOutturnPage: React.FC<ComponentProps> = () => {
+const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
 
   const dispatch = useDispatch();
 
@@ -88,45 +94,58 @@ const ActiveOutturnPage: React.FC<ComponentProps> = () => {
         //   dispatch={ dispatch }
         // />
       sidebar={
-        <DragAndDrop.DragAndDrop onDragEnd={ onDragEnd }>
-          <DragAndDrop.Drop>
-          <List
-            listData={ currentCaskOrder }
-            renderData={ (cask, index) => (
-              <DragAndDrop.Drag
-                id={ cask.id }
-                index={ index }
-              >
-                {
-                  <GridCard
+        <DragDropContext onDragEnd={ onDragEnd }>
+          <Droppable droppableId='droppable'>
+            { (provided: DroppableProvided) => (
+                <div
+                ref={provided.innerRef}
+                { ...provided.droppableProps}
+                >
+              <List
+                listData={ currentCaskOrder }
+                renderData={ (cask, index) => (
+                  <Draggable
                     key={ cask.id }
-                    color={ cask.flavourProfile }
-                    cardAction={{
-                      dispatch,
-                      onClick: activeCaskThunks.getActiveCask(cask.id),
-                    }}
-                    heading={ cask.caskNumber }
-                    subheading={ cask.name }
-                    body={ cask.description }
-                    chips={ <Chip.Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip.Chip> }
-                    primaryAction={{
-                      dispatch,
-                      onClick: () => {}, //TODO
-                      text: 'Edit'  
-                    }}
-                    secondaryAction={{
-                      dispatch,
-                      onClick: () => {}, //TODO
-                      text: 'Delete'
-                    }}
-                  />
-                }
-              </DragAndDrop.Drag>
-            ) }
-          />
-          </DragAndDrop.Drop>
-        </DragAndDrop.DragAndDrop>
+                    draggableId={ cask.id }
+                    index={ index }
+                  >
+                    { (provided: DraggableProvided) => (
 
+                      <GridCard
+                      {...provided.draggableProps} {...provided.dragHandleProps}
+                      ref={ provided.innerRef }
+
+                        color={ cask.flavourProfile }
+                        cardAction={{
+                          dispatch,
+                          onClick: activeCaskThunks.getActiveCask(cask.id),
+                        }}
+                        heading={ `Cask no. ${ cask.caskNumber }` }
+                        subheading={ cask.name }
+                        body={ truncateText(cask.description, 64) }
+                        chips={
+                          <Chip.Chip
+                            color={ cask.flavourProfile }
+                            text={ cask.flavourProfile }
+                          /> }
+                        primaryAction={{
+                          dispatch,
+                          onClick: () => {}, //TODO
+                          text: 'Edit'  
+                        }}
+                        secondaryAction={{
+                          dispatch,
+                          onClick: () => {}, //TODO
+                          text: 'Delete'
+                        }}
+                      />
+                    ) }
+                  </Draggable>
+                ) }
+              />
+           </div> ) }
+            </Droppable>
+          </DragDropContext>
       }
       action={ <CaskListMolecules.Actions
         onClick={ () => generateOutturn() }

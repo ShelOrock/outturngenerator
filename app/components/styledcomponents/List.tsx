@@ -4,8 +4,7 @@ export const List = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0.5rem 1rem 0;
-  padding: 0;
+  padding: 16px;
 `;
 
 export const ListItem = styled.li`
@@ -16,8 +15,8 @@ export const LineList = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  margin: 1rem 0.5rem 1rem 0;
-  padding: 0;
+  align-items: flex-start;
+  padding: 0 16px;
 `;
 
 export const CardList = styled.div`

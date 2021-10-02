@@ -6,11 +6,12 @@ import { StyledChip } from '../../styledcomponents';
 
 interface ComponentProps extends GenericComponentProps {
   color: string;
+  text: string;
 };
 
 const Chip: React.FC<ComponentProps> = ({
   color = 'default',
-  children
-}) => <StyledChip.Chip color={ color }>{ children }</StyledChip.Chip>;
+  text,
+}) => <StyledChip.Chip color={ color }>{ text }</StyledChip.Chip>;
 
 export default Chip;

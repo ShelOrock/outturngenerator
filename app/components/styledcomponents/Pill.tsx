@@ -13,12 +13,17 @@ interface ChipPropTypes {
 }
 
 export const Chip = styled.div<ChipPropTypes>`
-  padding: 16px;
+  max-width: 266px;
+  padding: 12px 16px;
   margin: 8px 0 0;
   background ${ ({ color, theme }) => theme.colors.flavourProfiles[color] };
   color: white;
   border-radius: 32px;
-  text-transform: uppercase;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  text-align: left;
 `;
 
 export const PillStyles = css<FlavourPillPropTypes>`
