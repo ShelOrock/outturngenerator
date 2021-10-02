@@ -6,7 +6,6 @@ import * as CaskListItemContainers from './CaskListItem';
 import * as ActiveCaskContainers from './ActiveCask';
 import * as AssociatedOutturnContainers from './AssociatedOutturn';
 import * as ModalContainers from './Modal'
-import * as DragAndDropContainers from './DragAndDrop';
 
 export {
   InputModuleContainers,
@@ -17,5 +16,4 @@ export {
   ActiveCaskContainers,
   AssociatedOutturnContainers,
   ModalContainers,
-  DragAndDropContainers,
 };

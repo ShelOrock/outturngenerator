@@ -5,6 +5,7 @@ import CardActions from '../Molecules/CardActions';
 import CardContent from '../Molecules/CardContent';
 
 import { GenericComponentProps, ButtonProps } from '../../types';
+import { DraggableProvided } from 'react-beautiful-dnd';
 
 interface ComponentProps extends GenericComponentProps {
   color?: string;
@@ -15,6 +16,8 @@ interface ComponentProps extends GenericComponentProps {
   chips: JSX.Element;
   primaryAction: ButtonProps;
   secondaryAction?: ButtonProps;
+  provided?: DraggableProvided;
+  ref?: React.ReactNode;
 };
 
 const GridCard: React.FC<ComponentProps> = ({
@@ -40,6 +43,7 @@ const GridCard: React.FC<ComponentProps> = ({
         chips={ chips }
       />
     </Button.Button>
+    { chips }
     <CardActions
       primaryAction={ primaryAction }
       secondaryAction={ secondaryAction }

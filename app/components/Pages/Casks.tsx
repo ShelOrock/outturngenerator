@@ -56,7 +56,10 @@ const CasksPage: React.FC<ComponentProps> = () => {
             heading={ cask.caskNumber }
             subheading={ cask.name }
             body={ cask.description }
-            chips={ <Chip.Chip color={ cask.flavourProfile }>{ cask.flavourProfile }</Chip.Chip> }
+            chips={ <Chip.Chip
+              color={ cask.flavourProfile }
+              text={ cask.flavourProfile }
+            /> }
             primaryAction={{
               dispatch,
               onClick: () => {}, //TODO
