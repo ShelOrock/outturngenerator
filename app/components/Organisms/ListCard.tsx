@@ -12,7 +12,7 @@ const ListCard: React.FC<ComponentProps> = ({
   color,
   cardAction
 }) => (
-  <Card.Card color={ color }>
+  <Card.Main color={ color }>
     <Button.Button
       variant={ 'tertiary' }
       dispatch={ cardAction.dispatch }
@@ -21,7 +21,7 @@ const ListCard: React.FC<ComponentProps> = ({
       <Card.Content />
     </Button.Button>
     <Card.Actions />
-  </Card.Card>
+  </Card.Main>
 );
 
 export default ListCard;

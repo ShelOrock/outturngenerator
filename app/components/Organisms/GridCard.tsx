@@ -1,36 +1,49 @@
 import React from 'react';
 
 import { Card, Button } from '../Atoms';
-import CardActions from '../Molecules/CardActions';
+import CardToolbar from '../Molecules/CardToolbar';
 import CardContent from '../Molecules/CardContent';
+import CardActions from '../Molecules/CardActions';
 
-import { GenericComponentProps, ButtonProps } from '../../types';
-import { DraggableProvided } from 'react-beautiful-dnd';
+import { GenericComponentProps, ButtonProps, InputOnChangeType } from '../../types';
+import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 interface ComponentProps extends GenericComponentProps {
   color?: string;
+  dragHandleProps?: DraggableProvidedDragHandleProps;
   cardAction?: ButtonProps;
+  name?: string;
+  checked?: boolean;
+  onChange?: InputOnChangeType;
   heading: string;
   subheading: string;
   body: string;
   chips: JSX.Element;
   primaryAction: ButtonProps;
   secondaryAction?: ButtonProps;
-  provided?: DraggableProvided;
-  ref?: React.ReactNode;
 };
 
 const GridCard: React.FC<ComponentProps> = ({
   color = 'default',
+  dragHandleProps,
   cardAction = {},
+  name,
+  checked,
+  onChange,
   heading,
   subheading,
   body,
   chips,
   primaryAction,
-  secondaryAction = {}
+  secondaryAction = {},
 }) => (
-  <Card.Card color={ color }>
+  <Card.Main color={ color }>
+    <CardToolbar
+      name={ name }
+      checked={ checked }
+      onChange={ onChange }
+      dragHandleProps={ dragHandleProps }
+    />
     <Button.Button
       variant={ 'tertiary' }
       dispatch={ cardAction.dispatch }
@@ -48,7 +61,7 @@ const GridCard: React.FC<ComponentProps> = ({
       primaryAction={ primaryAction }
       secondaryAction={ secondaryAction }
     />
-  </Card.Card>
+  </Card.Main>
 );
 
 export default GridCard;

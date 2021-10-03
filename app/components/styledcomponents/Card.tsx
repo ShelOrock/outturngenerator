@@ -21,10 +21,11 @@ export const Card = styled.div<CardPropTypes>`
   }
 `;
 
-export const Actions = styled.div`
+export const Toolbar = styled.div`
   display: flex;
+  justify-content: space-between;
   padding: 16px;
-  vertical-align: bottom;
+  padding-bottom: 0;
 `;
 
 export const Content = styled.div`
@@ -32,6 +33,12 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 16px;
+`;
+
+export const Actions = styled.div`
+  display: flex;
+  padding: 16px;
+  vertical-align: bottom;
 `;
 
 export const CardsContainer = styled.div`

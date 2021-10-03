@@ -6,6 +6,7 @@ import * as Image from './Image';
 import * as Input from './Input';
 import * as Button from './Button';
 import * as Chip from './Chip';
+import * as DragAndDrop from './DragAndDrop';
 
 export {
   Type,
@@ -16,4 +17,5 @@ export {
   Input,
   Button,
   Chip,
+  DragAndDrop
 };

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { StyledButton } from '../../styledcomponents';
 
-import { GenericComponentProps, AppDispatch, ButtonProps, ButtonOnClickType, AppThunk } from '../../../types';
+import { GenericComponentProps, AppDispatch } from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
   disabled?: boolean;

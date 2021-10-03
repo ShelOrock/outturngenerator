@@ -34,7 +34,6 @@ const Toolbar: React.FC<ComponentProps> = ({
   <CaskListItemContainers.Toolbar>
     { userType == 'Admin' || userType == 'Standard' && (
       <Input.Checkbox
-        type={ 'checkbox' }
         name={ caskId }
         checked={ markedCasks.includes(caskId) }
         onChange={ handleMarkCask }

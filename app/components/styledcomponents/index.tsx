@@ -23,6 +23,7 @@ import * as StyledCaskListItem from './CaskListItem';
 import * as StyledOutturnList from './OutturnList';
 import * as StyledActiveCask from './ActiveCask';
 import * as StyledAssociatedOutturn from './AssociatedOutturn';
+import * as StyledDragAndDrop from './DragAndDrop';
 
 export {
   GlobalStyle,
@@ -47,5 +48,6 @@ export {
   StyledCaskListItem,
   StyledOutturnList,
   StyledActiveCask,
-  StyledAssociatedOutturn
+  StyledAssociatedOutturn,
+  StyledDragAndDrop,
 };

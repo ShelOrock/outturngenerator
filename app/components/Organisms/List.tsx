@@ -8,8 +8,6 @@ import { Layout } from '../Atoms';
 interface ComponentProps extends GenericComponentProps {
   listData: any[];
   renderData: (any, number) => JSX.Element;
-  provided?: DroppableProvided;
-  ref?: React.ReactNode;
 };
 
 const List: React.FC<ComponentProps> = ({

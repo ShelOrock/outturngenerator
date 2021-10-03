@@ -24,7 +24,7 @@ import {
 } from '../../types';
 import List from '../Organisms/List';
 
-import { Chip } from '../Atoms';
+import { Chip, DragAndDrop } from '../Atoms';
 import PageHeader from '../Organisms/PageHeader';
 
 interface ComponentProps extends GenericComponentProps {};
@@ -95,56 +95,44 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
         // />
       sidebar={
         <DragDropContext onDragEnd={ onDragEnd }>
-          <Droppable droppableId='droppable'>
-            { (provided: DroppableProvided) => (
-                <div
-                ref={provided.innerRef}
-                { ...provided.droppableProps}
+          <DragAndDrop.Drop>
+            <List
+              listData={ currentCaskOrder }
+              renderData={ (cask, index) => (
+                <DragAndDrop.Drag
+                  key={ cask.id }
+                  id={ cask.id }
+                  index={ index }
                 >
-              <List
-                listData={ currentCaskOrder }
-                renderData={ (cask, index) => (
-                  <Draggable
-                    key={ cask.id }
-                    draggableId={ cask.id }
-                    index={ index }
-                  >
-                    { (provided: DraggableProvided) => (
-
-                      <GridCard
-                      {...provided.draggableProps} {...provided.dragHandleProps}
-                      ref={ provided.innerRef }
-
+                  <GridCard
+                    color={ cask.flavourProfile }
+                    cardAction={{
+                      dispatch,
+                      onClick: activeCaskThunks.getActiveCask(cask.id),
+                    }}                    
+                    heading={ `Cask no. ${ cask.caskNumber }` }
+                    subheading={ cask.name }
+                    body={ truncateText(cask.description, 64) }
+                    chips={
+                      <Chip.Chip
                         color={ cask.flavourProfile }
-                        cardAction={{
-                          dispatch,
-                          onClick: activeCaskThunks.getActiveCask(cask.id),
-                        }}
-                        heading={ `Cask no. ${ cask.caskNumber }` }
-                        subheading={ cask.name }
-                        body={ truncateText(cask.description, 64) }
-                        chips={
-                          <Chip.Chip
-                            color={ cask.flavourProfile }
-                            text={ cask.flavourProfile }
-                          /> }
-                        primaryAction={{
-                          dispatch,
-                          onClick: () => {}, //TODO
-                          text: 'Edit'  
-                        }}
-                        secondaryAction={{
-                          dispatch,
-                          onClick: () => {}, //TODO
-                          text: 'Delete'
-                        }}
-                      />
-                    ) }
-                  </Draggable>
+                        text={ cask.flavourProfile }
+                      /> }
+                    primaryAction={{
+                      dispatch,
+                      onClick: () => {}, //TODO
+                      text: 'Edit'  
+                    }}
+                    secondaryAction={{
+                      dispatch,
+                      onClick: () => {}, //TODO
+                      text: 'Delete'
+                    }}
+                  />
+                </DragAndDrop.Drag>
                 ) }
               />
-           </div> ) }
-            </Droppable>
+            </DragAndDrop.Drop>
           </DragDropContext>
       }
       action={ <CaskListMolecules.Actions

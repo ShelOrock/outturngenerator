@@ -41,7 +41,6 @@ const OutturnCard: React.FC<ComponentProps> = ({
     <OutturnCardContainers.Toolbar>
       { user.userType !== 'Guest' && (
         <Input.Checkbox
-          type={ 'checkbox' }
           name={ outturn.id }
           checked={ markedOutturns.includes(outturn.id) }
           onChange={ handleOnCheck }
