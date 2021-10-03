@@ -8,6 +8,6 @@ interface ComponentProps extends GenericComponentProps {
   color: string;
 };
 
-const Card: React.FC<ComponentProps> = ({ color = 'default', children }) => <StyledCard.Card color={ color }>{ children }</StyledCard.Card>
+const Main: React.FC<ComponentProps> = ({ color = 'default', children }) => <StyledCard.Card color={ color }>{ children }</StyledCard.Card>
 
-export default Card;
+export default Main;

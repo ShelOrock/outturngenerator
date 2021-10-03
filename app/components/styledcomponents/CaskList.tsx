@@ -12,11 +12,5 @@ export const Toolbar = styled.div`
   margin: 1rem;
 `;
 
-export const Drag = styled.div`
-`;
-
-export const Drop = styled.div`
-`;
-
 export const Buttons = styled.div`
 `;

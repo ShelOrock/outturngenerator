@@ -1,9 +1,9 @@
-import Card from './Card';
+import Main from './Main';
 import Content from './Content';
 import Actions from './Actions';
 
 export {
-  Card,
+  Main,
   Content,
   Actions
 };

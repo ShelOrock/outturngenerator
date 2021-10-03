@@ -56,9 +56,7 @@ export const TextArea = styled.textarea`
   }
 `
 
-export const Checkbox = styled.input`
-  margin: 0 1rem;
-`
+export const Checkbox = styled.input``;
 
 export const Select = styled.select<SelectPropTypes>`
   width: ${ ({ width }) => { console.log(width); return width || '125px' }};
