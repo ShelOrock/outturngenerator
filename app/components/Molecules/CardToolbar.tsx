@@ -7,6 +7,7 @@ import { Input } from '../Atoms';
 import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 
 interface ComponentProps extends GenericComponentProps {
+  color: string;
   name: string;
   checked: boolean;
   onChange: InputOnChangeType;
@@ -14,12 +15,13 @@ interface ComponentProps extends GenericComponentProps {
 };
 
 const CardToolbar: React.FC<ComponentProps> = ({
+  color = 'default',
   name,
   checked,
   onChange,
   dragHandleProps
 }) => (
-  <StyledCard.Toolbar>
+  <StyledCard.Toolbar color={ color }>
     <Input.Checkbox
       name={ name }
       checked={ checked }

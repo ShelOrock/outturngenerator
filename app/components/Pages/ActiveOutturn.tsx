@@ -1,30 +1,26 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 import useReorderCasks from '../../hooks';
 import { truncateText, useTypedSelector } from '../../utils';
-import {
-  DragDropContext,
-  Droppable,
-  DroppableProvided,
-  Draggable,
-  DraggableProvided
-} from 'react-beautiful-dnd';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import CasksTemplate from '../Templates/Casks';
 import { CaskListMolecules } from '../Molecules';
 import { ActiveCask } from '../Organisms';
 import GridCard from '../Organisms/GridCard';
 import { markCaskActions, modalActions } from '../../redux/actions';
-import { activeCaskThunks, allCasksThunks } from '../../redux/thunks';
+import { activeCaskThunks, activeOutturnThunks, allCasksThunks } from '../../redux/thunks';
 
 import {
   GenericComponentProps,
   InputOnChangeType,
   ButtonOnClickType,
+  ParamTypes,
 } from '../../types';
 import List from '../Organisms/List';
 
-import { Chip, DragAndDrop } from '../Atoms';
+import { DragAndDrop } from '../Atoms';
 import PageHeader from '../Organisms/PageHeader';
 
 interface ComponentProps extends GenericComponentProps {};
@@ -32,6 +28,7 @@ interface ComponentProps extends GenericComponentProps {};
 const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
 
   const dispatch = useDispatch();
+  const { outturnId } = useParams<ParamTypes>();
 
   const {
     allCasks,
@@ -48,7 +45,8 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
 } = useReorderCasks(allCasks);
 
   useEffect(() => {
-    dispatch(markCaskActions.resetMarkedCasks())
+    dispatch(markCaskActions.resetMarkedCasks());
+    dispatch(activeOutturnThunks.getActiveOutturn(outturnId))
   }, []);
 
   const handleMarkCask: InputOnChangeType = e => {
@@ -77,8 +75,26 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
           label={ '< Back' }
           title={ `${ activeOutturn.name }`}
           primaryAction={{
-            dispatch,
-            onClick: modalActions.setModal(),
+            onClick: () => dispatch(modalActions.setModal({
+              heading: 'Creating New Cask',
+              state: {
+                heading: '',
+                subheading: '',
+                description: '',
+              },
+              primaryAction: {
+                text: 'Create Cask',
+                onClick: () => dispatch(allCasksThunks.addNewCask({
+                  activeOutturnId: activeOutturn.id,
+                  casks: activeOutturn.casks,
+                  caskPosition: activeOutturn.casks.length
+                }))
+              },
+              secondaryAction: {
+                text: 'Cancel',
+                onClick: () => dispatch(modalActions.resetModal());
+              }
+            })),
             text: '+ Create Cask',
           }}
         />
@@ -106,25 +122,14 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
                 >
                   <GridCard
                     color={ cask.flavourProfile }
-                    cardAction={{
-                      dispatch,
-                      onClick: activeCaskThunks.getActiveCask(cask.id),
-                    }}                    
+                    cardAction={ () => dispatch(activeCaskThunks.getActiveCask(cask.id)) }                    
                     heading={ `Cask no. ${ cask.caskNumber }` }
-                    subheading={ cask.name }
-                    body={ truncateText(cask.description, 64) }
-                    chips={
-                      <Chip.Chip
-                        color={ cask.flavourProfile }
-                        text={ cask.flavourProfile }
-                      /> }
+                    subheading={ truncateText(cask.name, 20) }
                     primaryAction={{
-                      dispatch,
                       onClick: () => {}, //TODO
                       text: 'Edit'  
                     }}
                     secondaryAction={{
-                      dispatch,
                       onClick: () => {}, //TODO
                       text: 'Delete'
                     }}
@@ -141,8 +146,7 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
       activeContent={ <ActiveCask
         cask={ activeCask }
         userType={ activeUser.userType }
-        dispatch={ dispatch }
-        deleteCask={ () => allCasksThunks.deleteCask(activeCask.id) }
+        deleteCask={ () => dispatch(allCasksThunks.deleteCask(activeCask.id)) }
       /> }
     />
   );

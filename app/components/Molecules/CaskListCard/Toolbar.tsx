@@ -29,7 +29,6 @@ const Toolbar: React.FC<ComponentProps> = ({
   markedCasks = [],
   handleMarkCask,
   handleSetModal,
-  dispatch
 }) => (
   <CaskListItemContainers.Toolbar>
     { userType == 'Admin' || userType == 'Standard' && (
@@ -44,7 +43,6 @@ const Toolbar: React.FC<ComponentProps> = ({
     { userType == 'Admin' || userType == 'Standard' && (
       <Button.Button
         variant={ 'tertiary' }
-        dispatch={ dispatch }
         onClick={ handleSetModal }
       >X Delete</Button.Button>
     ) } 

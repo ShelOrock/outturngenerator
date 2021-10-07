@@ -30,9 +30,9 @@ export const theme = {
   },
   font: 'Roboto',
   fontSizes: {
-    title: '40px',
-    large: '32px',
-    medium: '24px',    
+    title: '36px',
+    large: '24px',
+    medium: '20px',    
     small: '16px',
   },
   buttons: {

@@ -2,16 +2,18 @@ import * as React from 'react';
 
 import { AppThunk } from '../index';
 import { ActionTypes } from '../index';
+import { ButtonOnClickType } from './form';
 
-export interface CreateCaskModalState {
-  name: string;
-  caskNumber: string;
-}
+export interface ModalStateType {
+  heading: string;
+  subheading?: string;
+  description?: string;
+};
 
-export interface CreateOutturnModalState {
-  name: string;
-  description: string;
-}
+export interface ModalActionType {
+  text: string;
+  onClick: ModalFunctionOnClickType;
+};
 
 export type ModalFunctionOnClickType = (...args: any) => AppThunk | ActionTypes;
 
@@ -24,10 +26,11 @@ export interface ModalButton {
   onClick: ModalFunctionOnClickType;
 };
 
-export interface Modal<ModalStateTypes = CreateCaskModalState | CreateOutturnModalState> {
-  modalHeader?: string;
-  modalState?: ModalStateTypes;
-  confirmButton: ModalButton;
+export interface Modal {
+  heading: string;
+  state?: ModalStateType;
+  primaryAction: ModalActionType;
+  secondaryAction: ModalActionType;
 };
 
 export type ModalFunctionType = (...args: any) => Modal

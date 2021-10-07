@@ -30,7 +30,6 @@ export const Heading = styled.h3`
 
 export const SubHeading = styled.h4`
   ${ AllTypeStyles }
-  margin-top: 8px;
   font-weight: bold;
   text-transform: uppercase;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
@@ -38,10 +37,8 @@ export const SubHeading = styled.h4`
 
 export const CaskTitle = styled.h5`
   ${ AllTypeStyles }
-  margin-top: 8px;
   font-size: ${ ({ theme: { fontSizes } }) => fontSizes.medium };
   color: ${ ( { theme: { colors } }) => colors.darkgray };
-  margin: 0.5rem 0;
 `;//Delete
 
 export const FlavourProfileTitle = styled.p`

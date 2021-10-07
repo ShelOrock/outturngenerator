@@ -15,9 +15,8 @@ const ListCard: React.FC<ComponentProps> = ({
   <Card.Main color={ color }>
     <Button.Button
       variant={ 'tertiary' }
-      dispatch={ cardAction.dispatch }
       onClick={ cardAction.onClick }
-      >
+    >
       <Card.Content />
     </Button.Button>
     <Card.Actions />

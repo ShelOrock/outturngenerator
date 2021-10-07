@@ -11,14 +11,14 @@ import { DraggableProvidedDragHandleProps } from 'react-beautiful-dnd';
 interface ComponentProps extends GenericComponentProps {
   color?: string;
   dragHandleProps?: DraggableProvidedDragHandleProps;
-  cardAction?: ButtonProps;
+  cardAction?: any //TODO;
   name?: string;
   checked?: boolean;
   onChange?: InputOnChangeType;
   heading: string;
   subheading: string;
-  body: string;
-  chips: JSX.Element;
+  body?: string;
+  chips?: JSX.Element;
   primaryAction: ButtonProps;
   secondaryAction?: ButtonProps;
 };
@@ -26,19 +26,20 @@ interface ComponentProps extends GenericComponentProps {
 const GridCard: React.FC<ComponentProps> = ({
   color = 'default',
   dragHandleProps,
-  cardAction = {},
+  cardAction = () => {},
   name,
   checked,
   onChange,
   heading,
   subheading,
-  body,
-  chips,
+  body = '',
+  chips = null,
   primaryAction,
   secondaryAction = {},
 }) => (
   <Card.Main color={ color }>
     <CardToolbar
+      color={ color }
       name={ name }
       checked={ checked }
       onChange={ onChange }
@@ -46,14 +47,12 @@ const GridCard: React.FC<ComponentProps> = ({
     />
     <Button.Button
       variant={ 'tertiary' }
-      dispatch={ cardAction.dispatch }
-      onClick={ cardAction.onClick }
+      onClick={ cardAction }
     >
       <CardContent
         heading={ heading }
         subheading={ subheading }
         body={ body }
-        chips={ chips }
       />
     </Button.Button>
     { chips }

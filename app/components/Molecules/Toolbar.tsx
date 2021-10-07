@@ -19,14 +19,12 @@ const Toolbar: React.FC<ComponentProps> = ({
     <Type.Title>{ title }</Type.Title>
     <Row>
       <Button.Button
-        dispatch={ primaryAction.dispatch }
         onClick={ () => primaryAction.onClick }
         variant={ 'primary' }
       >
         { primaryAction.text }
       </Button.Button>
       <Button.Button
-        dispatch={ secondaryAction.dispatch }
         onClick={ () => secondaryAction.onClick }
         variant={ 'secondary' }
       >
