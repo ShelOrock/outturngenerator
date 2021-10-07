@@ -10,7 +10,6 @@ import {
 
 import {
     GenericComponentProps,
-    AppDispatch,
     ActionFunctionType,
     InputOnChangeType,
     Outturn,
@@ -25,7 +24,6 @@ interface ComponentProps extends GenericComponentProps {
   handleOnCheck: InputOnChangeType;
   handleSetModal: ActionFunctionType;
   user: User;
-  dispatch: AppDispatch
 };
 
 const OutturnCard: React.FC<ComponentProps> = ({
@@ -35,7 +33,6 @@ const OutturnCard: React.FC<ComponentProps> = ({
   handleOnCheck,
   handleSetModal,
   user = {} as User,
-  dispatch
 }) => (
   <OutturnCardContainers.Main>
     <OutturnCardContainers.Toolbar>
@@ -48,7 +45,6 @@ const OutturnCard: React.FC<ComponentProps> = ({
       ) }
       { user.userType !== 'Guest' && (
         <Button.Button
-          dispatch={ dispatch }
           variant={ 'tertiary' }
           onClick={ handleSetModal }
         >X Delete</Button.Button>

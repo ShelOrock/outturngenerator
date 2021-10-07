@@ -27,7 +27,6 @@ export const LinkButton = styled(Link)<LinkButtonPropTypes>`
   color: ${ ({ variant, theme: { buttons } }) => variant ? buttons.colors[variant].text : '#21A0A0' };
   background-color: ${ ({ variant, theme: { buttons } }) => variant ? buttons.colors[variant].background : 'transparent' };
   border: ${ ({ variant, theme: { buttons } }) => variant ? buttons.colors[variant].border : 'none' };
-  font-weight:bold;
 `;
 
 export const LinkDiv = styled(Link)`

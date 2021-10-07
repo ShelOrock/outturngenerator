@@ -12,8 +12,10 @@ export const AllButtonStyles = css<ButtonProps>`
   background: ${ ({ variant, theme: { buttons } }) =>  buttons.colors[variant].background} };
   color: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].text };
   border: ${ ({ variant, theme: { buttons } }) => buttons.colors[variant].border};
-  border-radius: 8px;
+  border-radius: 24px;
   font-weight: bold;
+  padding: 12px 8px;
+  margin: 0 8px 0 0;
 
   &:focus {
     outline: none;

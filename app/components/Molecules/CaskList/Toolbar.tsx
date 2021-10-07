@@ -23,7 +23,6 @@ interface ComponentProps extends GenericComponentProps {
   | 'Guest';
   handleMarkAllCasks: InputOnChangeType;
   handleSaveCasks: () => AppThunk
-  dispatch: AppDispatch;
 
 };
 
@@ -35,7 +34,6 @@ const Toolbar: React.FC<ComponentProps> = ({
   userType = 'Guest',
   handleMarkAllCasks,
   handleSaveCasks,
-  dispatch,
 }) => (
   <CaskListContainers.Toolbar>
     { userType === 'Admin' || userType === 'Standard' && (
@@ -49,7 +47,6 @@ const Toolbar: React.FC<ComponentProps> = ({
       <Button.Button
         variant={ 'primary' }
         disabled={ !isEdited }
-        dispatch={ dispatch }
         onClick={ handleSaveCasks }
       >Save</Button.Button>
     ) }

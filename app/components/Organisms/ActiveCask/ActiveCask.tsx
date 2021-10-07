@@ -4,12 +4,7 @@ import { ActiveCaskContainers } from '../../Containers';
 import ActiveCaskBody from './ActiveCaskBody';
 import { ActiveCaskMolecules } from '../../Molecules';
 
-import {
-  GenericComponentProps,
-  ButtonOnClickType,
-  AppDispatch,
-  Cask, 
-} from '../../../types';
+import { GenericComponentProps, Cask } from '../../../types';
 
 interface ComponentProps extends GenericComponentProps {
   userType: 
@@ -19,21 +14,18 @@ interface ComponentProps extends GenericComponentProps {
   | 'Guest',
   cask: Cask,
   deleteCask;
-  dispatch: AppDispatch
 };
 
 const ActiveCask: React.FC<ComponentProps> = ({
   userType = 'Guest',
   cask = {} as Cask,
   deleteCask,
-  dispatch
 }) => (
   <ActiveCaskContainers.Main>
     <ActiveCaskMolecules.Toolbar
       userType={ userType }
       caskId={ cask.id }
       onClick={ deleteCask }
-      dispatch={ dispatch }
     />
     <ActiveCaskMolecules.Header
       number={ cask.caskNumber }

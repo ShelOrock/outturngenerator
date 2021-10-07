@@ -84,8 +84,7 @@ const CasksPage: React.FC<ComponentProps> = () => {
       activeContent={ <ActiveCask
         cask={ activeCask }
         userType={ activeUser.userType }
-        dispatch={ dispatch }
-        deleteCask={ () => allCasksThunks.deleteCask(activeCask.id) }
+        deleteCask={ () => dispatch(allCasksThunks.deleteCask(activeCask.id)) }
       /> }
     />
   );

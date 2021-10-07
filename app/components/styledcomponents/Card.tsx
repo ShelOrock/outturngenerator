@@ -21,11 +21,12 @@ export const Card = styled.div<CardPropTypes>`
   }
 `;
 
-export const Toolbar = styled.div`
+export const Toolbar = styled.div<CardPropTypes>`
   display: flex;
   justify-content: space-between;
-  padding: 16px;
-  padding-bottom: 0;
+  padding: 8px 16px;
+  background-color: ${ ({ color, theme }) => theme.colors.flavourProfiles[color] }};
+  border-radius: 8px 8px 0 0;
 `;
 
 export const Content = styled.div`

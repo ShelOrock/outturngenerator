@@ -14,8 +14,9 @@ interface ChipPropTypes {
 
 export const Chip = styled.div<ChipPropTypes>`
   max-width: 266px;
-  padding: 12px 16px;
-  margin: 8px 0 0;
+  width: max-content;
+  padding: 8px 16px;
+  margin: 8px 16px 0;
   background ${ ({ color, theme }) => theme.colors.flavourProfiles[color] };
   color: white;
   border-radius: 32px;
@@ -24,6 +25,7 @@ export const Chip = styled.div<ChipPropTypes>`
   text-overflow: ellipsis;
   font-size: 16px;
   text-align: left;
+  font-weight: 400;
 `;
 
 export const PillStyles = css<FlavourPillPropTypes>`
