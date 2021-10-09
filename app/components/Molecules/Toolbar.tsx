@@ -11,7 +11,7 @@ interface ComponentProps extends GenericComponentProps {
 };
 
 const Toolbar: React.FC<ComponentProps> = ({
-  title='',
+  title = '',
   primaryAction,
   secondaryAction
 }) => (
@@ -19,7 +19,7 @@ const Toolbar: React.FC<ComponentProps> = ({
     <Type.Title>{ title }</Type.Title>
     <Row>
       <Button.Button
-        onClick={ () => primaryAction.onClick }
+        onClick={ primaryAction.onClick }
         variant={ 'primary' }
       >
         { primaryAction.text }

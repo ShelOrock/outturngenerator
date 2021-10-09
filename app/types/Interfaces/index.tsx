@@ -5,10 +5,8 @@ import { UserCredentials } from './authentication';
 import { Search } from './search';
 import { InputOnChangeType, ButtonOnClickType } from './form';
 import {
-  Modal,
+  ModalTypes,
   ModalFunctionType,
-  CreateOutturnModalState,
-  CreateCaskModalState
 } from './modal';
 import { Toast } from './toast';
 import { Loading } from './loading';
@@ -24,10 +22,8 @@ export {
   Search,
   InputOnChangeType,
   ButtonOnClickType,
-  Modal,
+  ModalTypes,
   ModalFunctionType,
-  CreateOutturnModalState,
-  CreateCaskModalState,
   Loading,
   Toast
 };

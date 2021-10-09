@@ -17,7 +17,6 @@ export const Modal = styled.div`
 export const Main = styled.div`
   position: fixed;
   width: 50%;
-  z-index: 500;
   background: ${ ({ theme }) => theme.colors.body };
   border: 1px solid #ddd;
   box-shadow: 1px 1px 1px black;
@@ -25,17 +24,19 @@ export const Main = styled.div`
   left: 25%;
   top: 30%;
   box-sizing: border-box;
-  transtion: all 0.3s ease-out;
+  z-index: 2;
+  transition: all 0.3s ease-out;
 `;
 
 export const Background = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
-  z-index: 100;
+  z-index: 1;
   left: 0;
   top: 0;
   background: rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-out;
 `;
 
 export const InputModules = styled.div`

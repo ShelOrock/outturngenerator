@@ -13,7 +13,7 @@ interface ChipPropTypes {
 }
 
 export const Chip = styled.div<ChipPropTypes>`
-  max-width: 266px;
+  max-width: 252px;
   width: max-content;
   padding: 8px 16px;
   margin: 8px 16px 0;

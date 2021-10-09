@@ -26,11 +26,12 @@ export interface ModalButton {
   onClick: ModalFunctionOnClickType;
 };
 
-export interface Modal {
+export interface ModalTypes {
+  open: boolean;
   heading: string;
   state?: ModalStateType;
   primaryAction: ModalActionType;
   secondaryAction: ModalActionType;
 };
 
-export type ModalFunctionType = (...args: any) => Modal
+export type ModalFunctionType = (...args: any) => ModalTypes

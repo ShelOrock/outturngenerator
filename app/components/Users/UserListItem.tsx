@@ -2,7 +2,7 @@
 import * as React from 'react';
 const { useEffect, useState } = React;
 //Dependency Functions
-import { useTypedSelector, createButton } from '../../utils';
+import { useTypedSelector } from '../../utils';
 
 //Components
 // import SelectManager from '../Select/SelectManager';
@@ -20,20 +20,8 @@ const {
   StyledPill: { OnlineIcon }
 } = StyledComponents;
 
-//Redux actions
-import * as actions from '../../redux/actions';
-const { modalActions: { setModal } } = actions;
-
-//Redux thunks
-import * as thunks from '../../redux/thunks';
-const { usersThunks: { editUser, deleteUser } } = thunks;
-
 //Types
-import {
-  ButtonProps,
-  Modal,
-  SelectPropTypes
-} from '../../types';
+import { ButtonProps, SelectPropTypes } from '../../types';
 
 export default ({ user, sortMethod }) => {
 
@@ -86,14 +74,14 @@ export default ({ user, sortMethod }) => {
     if(previousState !== currentState) setIsEdited(true);
   };
 
-  const deleteUserModal: Modal = {
-    modalHeader: `Are you sure you want to delete ${ user.username || 'this user' }?`,
-    confirmButton: {
-      text: `Delete ${ user.username || 'this user' }`,
-      arguments: [ user.id, sortMethod, filters ],
-      onClick: deleteUser,
-    }
-  }
+  // const deleteUserModal: Modal = {
+  //   // modalHeader: `Are you sure you want to delete ${ user.username || 'this user' }?`,
+  //   // confirmButton: {
+  //   //   text: `Delete ${ user.username || 'this user' }`,
+  //   //   arguments: [ user.id, sortMethod, filters ],
+  //   //   onClick: deleteUser,
+  //   // }
+  // }
 
   const deleteUserButtonProps: ButtonProps = {
     size: 'small',

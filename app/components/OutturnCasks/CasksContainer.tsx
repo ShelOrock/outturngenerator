@@ -2,7 +2,7 @@ import * as React from 'react';
 const { useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom'
-import { useTypedSelector, createButton } from '../../utils';
+import { useTypedSelector } from '../../utils';
 
 import PageHeader from '../Header/PageHeaderManager';
 import CaskList from './CaskList'
@@ -12,19 +12,13 @@ const {
 } = StyledComponents;
 
 import * as actions from '../../redux/actions';
-const {
-  markCaskActions: { resetMarkedCasks },
-  modalActions: { setModal }
-} = actions;
+const { markCaskActions: { resetMarkedCasks } } = actions;
 
 import * as thunks from '../../redux/thunks';
-const {
-  activeOutturnThunks: { getActiveOutturn },
-  allCasksThunks: { addNewCask, deleteManyCasks }
-} = thunks;
+const { activeOutturnThunks: { getActiveOutturn } } = thunks;
 
-import { Modal, PageHeaderPropTypes, ParamTypes } from '../../types/index';
-import { CreateCaskModalState } from '../../types/Interfaces/modal';
+import { PageHeaderPropTypes, ParamTypes } from '../../types/index';
+// import { CreateCaskModalState } from '../../types/Interfaces/modal';
 
 export default () => {
 
@@ -45,36 +39,36 @@ export default () => {
 
   const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
 
-  const createCaskModal: Modal<CreateCaskModalState> = {
-    modalHeader: `Creating a new cask`,
-    modalState: {
-      name: '',
-      caskNumber: '',
-    },
-    confirmButton: {
-      text: 'Create cask',
-      arguments: [
-        activeOutturn.id,
-        activeOutturn.casks,
-        null,
-        null
-      ],
-      onClick: addNewCask,
-    },
-  };
+  // const createCaskModal: Modal<CreateCaskModalState> = {
+  //   modalHeader: `Creating a new cask`,
+  //   modalState: {
+  //     name: '',
+  //     caskNumber: '',
+  //   },
+  //   confirmButton: {
+  //     text: 'Create cask',
+  //     arguments: [
+  //       activeOutturn.id,
+  //       activeOutturn.casks,
+  //       null,
+  //       null
+  //     ],
+  //     onClick: addNewCask,
+  //   },
+  // };
 
-  const deleteManyCasksModal: Modal = {
-    modalHeader: 'Are you sure you want to delete these casks?',
-    confirmButton: {
-      text: 'Delete Casks',
-      arguments: [
-        markedCasks,
-        activeCask.id,
-        activeOutturn.id
-      ],
-      onClick: deleteManyCasks,
-    },
-  }
+  // const deleteManyCasksModal: Modal = {
+  //   modalHeader: 'Are you sure you want to delete these casks?',
+  //   confirmButton: {
+  //     text: 'Delete Casks',
+  //     arguments: [
+  //       markedCasks,
+  //       activeCask.id,
+  //       activeOutturn.id
+  //     ],
+  //     onClick: deleteManyCasks,
+  //   },
+  // }
 
   const pageHeaderProps: PageHeaderPropTypes = {
     subNavigationProps: {

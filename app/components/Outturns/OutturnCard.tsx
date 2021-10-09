@@ -2,30 +2,17 @@
 import * as React from 'react';
 import { useDispatch } from 'react-redux';
 //Dependency Functions
-import {
-  useTypedSelector,
-  truncateText,
-} from '../../utils';
+import { useTypedSelector } from '../../utils';
 
 //Components
 // import ButtonManager from '../Button/ButtonManager';
 //Styled Components
 import * as StyledComponents from '../styledcomponents';
-const {
-  StyledType: { Heading, Body },
-  StyledCard: { Card },
-  StyledCask: { FlavourPill },
-  StyledDiv: { PaddedDiv, Row },
-  StyledLink: { LinkDiv },
-  StyledForm: { Checkbox }
-} = StyledComponents;
+const { StyledCask: { FlavourPill } } = StyledComponents;
 
 //Redux actions
 import * as actions from '../../redux/actions';
-const {
-  markOutturnActions: { markOutturn, unmarkOutturn },
-  modalActions: { setModal }
-} = actions;
+const { markOutturnActions: { markOutturn, unmarkOutturn } } = actions;
 
 //Redux thunks
 import * as thunks from '../../redux/thunks';
@@ -35,7 +22,6 @@ const { outturnsThunks: { deleteOutturn } } = thunks;
 import {
   OutturnCard,
   InputOnChangeType,
-  Modal,
   ButtonProps
 } from '../../types';
 
@@ -68,14 +54,14 @@ export default ({ outturn, sortMethod }: OutturnCard) => {
     onChange: handleOnCheck
   }
 
-  const deleteOutturnModalProps: Modal = {
-    modalHeader: `Are you sure you want to delete ${ outturn.name }`,
-    confirmButton: {
-      text: 'Delete',
-      arguments: [ outturn.id, activeOutturn.id, sortMethod ],
-      onClick: deleteOutturn,
-    },
-  };
+  // const deleteOutturnModalProps: Modal = {
+  //   modalHeader: `Are you sure you want to delete ${ outturn.name }`,
+  //   confirmButton: {
+  //     text: 'Delete',
+  //     arguments: [ outturn.id, activeOutturn.id, sortMethod ],
+  //     onClick: deleteOutturn,
+  //   },
+  // };
 
   const deleteOutturnButtonProps: ButtonProps = {
     size: 'small',

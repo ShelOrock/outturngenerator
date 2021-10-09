@@ -9,6 +9,7 @@ import Grid from '../Organisms/Grid';
 import GridCard from '../Organisms/GridCard';
 import List from '../Organisms/List';
 import { Chip, Link } from '../Atoms';
+import Modal from '../Organisms/Modal';
 
 interface ComponentProps extends GenericComponentProps {};
 
@@ -20,7 +21,7 @@ const OutturnsPage: React.FC<ComponentProps> = () => {
 
   return (
     <OutturnsTemplate
-      header={ <></> }
+      header={ <></> } //header
       outturns={
         <Grid
           listData={ allOutturns }
@@ -59,7 +60,7 @@ const OutturnsPage: React.FC<ComponentProps> = () => {
             </Link.NavigationLink>
           ) }
         />
-      }
+      } //outturns
     />
   );
 };

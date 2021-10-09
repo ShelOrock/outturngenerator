@@ -38,10 +38,8 @@ const {
 
 //Types
 import {
-  Modal,
   PageHeaderPropTypes,
   ButtonProps,
-  CreateCaskModalState,
 } from "../../types";
 import AllCasksList from "./AllCasksList";
 
@@ -75,36 +73,36 @@ export default () => {
 
   const evaluateUserType = activeUser.userType =='Admin' || activeUser.userType == 'Standard';
 
-  const createCaskModal: Modal<CreateCaskModalState> = {
-    modalHeader: `Creating a new cask`,
-    modalState: {
-      name: '',
-      caskNumber: '',
-    },
-    confirmButton: {
-      text: 'Create cask',
-      arguments: [
-        activeOutturn.id,
-        [],
-        sort,
-        filters
-      ],
-      onClick: addNewCask,
-    },
-  };
+  // const createCaskModal: Modal = {
+  //   modalHeader: `Creating a new cask`,
+  //   modalState: {
+  //     name: '',
+  //     caskNumber: '',
+  //   },
+  //   confirmButton: {
+  //     text: 'Create cask',
+  //     arguments: [
+  //       activeOutturn.id,
+  //       [],
+  //       sort,
+  //       filters
+  //     ],
+  //     onClick: addNewCask,
+  //   },
+  // };
 
-  const deleteManyCasksModal: Modal = {
-    modalHeader: 'Are you sure you want to delete these casks?',
-    confirmButton: {
-      text: 'Delete Casks',
-      arguments: [
-        markedCasks,
-        activeCask.id,
-        null
-      ],
-      onClick: deleteManyCasks,
-    }
-  }
+  // const deleteManyCasksModal: Modal = {
+  //   modalHeader: 'Are you sure you want to delete these casks?',
+  //   confirmButton: {
+  //     text: 'Delete Casks',
+  //     arguments: [
+  //       markedCasks,
+  //       activeCask.id,
+  //       null
+  //     ],
+  //     onClick: deleteManyCasks,
+  //   }
+  // }
 
   const addButtonProps: ButtonProps = evaluateUserType
   && {
