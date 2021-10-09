@@ -73,9 +73,11 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
         <PageHeader
           to={ '/' }
           label={ '< Back' }
-          title={ `${ activeOutturn.name }`}
+          title={ activeOutturn.name }
           primaryAction={{
+            text: '+ Create Cask',
             onClick: () => dispatch(modalActions.setModal({
+              open: true,
               heading: 'Creating New Cask',
               state: {
                 heading: '',
@@ -92,10 +94,9 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
               },
               secondaryAction: {
                 text: 'Cancel',
-                onClick: () => dispatch(modalActions.resetModal());
+                onClick: () => dispatch(modalActions.resetModal())
               }
             })),
-            text: '+ Create Cask',
           }}
         />
       }

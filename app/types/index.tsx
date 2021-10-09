@@ -9,10 +9,8 @@ import {
   Search,
   InputOnChangeType,
   ButtonOnClickType,
-  Modal,
+  ModalTypes,
   ModalFunctionType,
-  CreateOutturnModalState,
-  CreateCaskModalState,
   Loading,
   Toast
 } from './Interfaces/index';
@@ -82,10 +80,8 @@ export {
   InputOnChangeType,
   ButtonOnClickType,
   ParamTypes,
-  Modal,
+  ModalTypes,
   ModalFunctionType,
-  CreateOutturnModalState,
-  CreateCaskModalState,
   Loading,
   Toast,
   ActionTypes,

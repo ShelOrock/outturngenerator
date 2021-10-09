@@ -17,7 +17,7 @@ export const LineList = styled.ul`
   flex-direction: column;
   align-items: flex-start;
   margin: 0;
-  padding: 0;
+  padding: 0 16px;
 `;
 
 export const CardList = styled.div`

@@ -25,9 +25,9 @@ import { ButtonProps, InputOnChangeType } from '../../types';
 export default () => {
 
   const { modal } = useTypedSelector(state => state);
-  const [ localModalState, setLocalModalState ] = useState({ ...modal.modalState })
+  const [ localModalState, setLocalModalState ] = useState({ ...modal.state })
 
-  useEffect(() => setLocalModalState({ ...modal.modalState }), [modal])
+  useEffect(() => setLocalModalState({ ...modal.state }), [modal])
 
   const onChange: InputOnChangeType = ( { target: { name, value } } ) => setLocalModalState({ ...localModalState, [name]: value })
 
@@ -70,7 +70,7 @@ export default () => {
       { !!Object.keys(modal).length 
         && (
           <Modal>
-            <Heading>{ modal.modalHeader }</Heading>
+            <Heading>{ modal.heading }</Heading>
             <ModalInputManager { ...inputFormProps } />
             <Row>
               {/* <ButtonManager { ...confirmButtonProps }/> */}

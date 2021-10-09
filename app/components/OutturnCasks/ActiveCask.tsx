@@ -1,7 +1,7 @@
 //Dependency Libraries
 import * as React from "react";
 //Dependency Functions
-import { useTypedSelector, createButton } from "../../utils";
+import { useTypedSelector } from "../../utils";
 
 //Components
 // import ButtonManager from '../Button/ButtonManager';
@@ -29,16 +29,8 @@ const {
   }
 } = StyledComponents;
 
-//Redux actions
-import * as actions from '../../redux/actions';
-const { modalActions: { setModal } } = actions
-
-//Redux thunks
-import * as thunks from '../../redux/thunks';
-const { allCasksThunks: { deleteCask } } = thunks;
-
 //Types
-import { ButtonProps, Modal } from '../../types';
+import { ButtonProps } from '../../types';
 
 export default () => {
 
@@ -65,14 +57,14 @@ export default () => {
 
   const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard'
 
-  const deleteCaskModal: Modal = {
-    modalHeader: `Are you sure you want to delete ${ caskNumber } ${ name }`,
-    confirmButton: {
-      text: `Delete Cask no. ${ caskNumber }`,
-      arguments: [ id, id, activeOutturn.id ],
-      onClick: deleteCask
-    },
-  }
+  // const deleteCaskModal: Modal = {
+  //   modalHeader: `Are you sure you want to delete ${ caskNumber } ${ name }`,
+  //   confirmButton: {
+  //     text: `Delete Cask no. ${ caskNumber }`,
+  //     arguments: [ id, id, activeOutturn.id ],
+  //     onClick: deleteCask
+  //   },
+  // }
 
   const deleteCaskButtonProps: ButtonProps = {
     size: 'small',

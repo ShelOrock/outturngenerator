@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useDispatch } from 'react-redux';
 
 //Dependency Functions
-import { useTypedSelector, createButton } from '../../utils';
+import { useTypedSelector } from '../../utils';
 
 //Components
 // import ButtonManager from '../Button/ButtonManager';
@@ -19,20 +19,14 @@ const {
 
 //Redux Actions
 import * as actions from "../../redux/actions";
-const {
-  markCaskActions: { markCask, unmarkCask },
-  modalActions: { setModal },
-} = actions;
+const { markCaskActions: { markCask, unmarkCask } } = actions;
 
 //Redux Thunks
 import * as thunks from "../../redux/thunks";
-const {
-  activeCaskThunks: { getActiveCask, },
-  allCasksThunks: { deleteCask }
-} = thunks;
+const { activeCaskThunks: { getActiveCask, } } = thunks;
 
 //Types
-import { ButtonProps, InputOnChangeType, Modal } from '../../types/index';
+import { ButtonProps, InputOnChangeType } from '../../types/index';
 
 export default (cask, sortMethod: any) => {
   
@@ -59,19 +53,19 @@ export default (cask, sortMethod: any) => {
     onChange: handleOnCheck
   }
 
-  const deleteCaskModal: Modal = {
-    modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
-    confirmButton: {
-      text: `Delete Cask no. ${ cask.caskNumber }`,
-      arguments: [
-        activeCask.id,
-        cask.id,
-        activeOutturn.id,
-        sortMethod 
-      ],
-      onClick: deleteCask
-    }
-  }
+  // const deleteCaskModal: Modal = {
+  //   modalHeader: `Are you sure you want to delete ${ cask.caskNumber } ${ cask.name }`,
+  //   confirmButton: {
+  //     text: `Delete Cask no. ${ cask.caskNumber }`,
+  //     arguments: [
+  //       activeCask.id,
+  //       cask.id,
+  //       activeOutturn.id,
+  //       sortMethod 
+  //     ],
+  //     onClick: deleteCask
+  //   }
+  // }
 
   const deleteCaskButtonProps: ButtonProps = {
     size: 'small',

@@ -11,7 +11,7 @@ interface ComponentProps extends GenericComponentProps {
 
 const OutturnsTemplate: React.FC<ComponentProps> = ({
   header,
-  outturns
+  outturns,
 }) => (
   <PageContainers.Main>
     <PageContainers.Header>

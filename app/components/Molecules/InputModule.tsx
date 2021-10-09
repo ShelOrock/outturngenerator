@@ -11,7 +11,7 @@ interface ComponentProps extends GenericComponentProps {
   value: string;
   placeholder: string;
   onChange: InputOnChangeType;
-  error: string;
+  error?: string;
 };
 
 const InputModule: React.FC<ComponentProps> = ({

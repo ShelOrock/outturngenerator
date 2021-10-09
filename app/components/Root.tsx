@@ -3,6 +3,7 @@ import * as React from 'react';
 const { useEffect } = React;
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useTypedSelector } from '../utils';
 
 //Components
 import * as Page from '../components/Pages';
@@ -10,10 +11,9 @@ import Navigation from './Navigation/Navigation';
 import Login from './Authentication/Login';
 import Signup from './Authentication/Signup';
 import AllCasksContainer from './AllCasks/AllCasksContainer';
-import CasksContainer from './OutturnCasks/CasksContainer';
 import CaskForm from './EditCaskForm/EditCaskForm';
 import UserList from './Users/UserList';
-import ModalManager from './Modal/ModalManager';
+import Modal from '../components/Organisms/Modal';
 import Toast from './Toast/Toast';
 
 //Redux thunks
@@ -27,6 +27,8 @@ const {
 export default () => {
 
   const dispatch = useDispatch();
+
+  const { modal } = useTypedSelector(state => state);
 
   useEffect(() => {
     dispatch(getActiveUser(document.cookie.replace(/sessionId=/, '')));
@@ -49,7 +51,7 @@ export default () => {
           <Route exact path='/users' component={ UserList } />
         </Switch>
       </Router>
-      <ModalManager />
+      { modal.open && <Modal modal={ modal }/> }
       <Toast />
     </>
   )

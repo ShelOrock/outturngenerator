@@ -3,7 +3,7 @@ import * as React from "react";
 const { useState, useEffect } = React;
 import { useDispatch } from "react-redux";
 //Dependency Functions
-import { useTypedSelector, createButton } from "../../utils";
+import { useTypedSelector } from "../../utils";
 
 //Components
 import PageHeader from "../Header/PageHeaderManager";
@@ -28,26 +28,18 @@ const {
   activeCaskActions: { resetActiveCask },
   markOutturnActions: { resetMarkedOutturns },
   searchActions: { setSearch, resetSearch },
-  modalActions: { setModal, resetModal },
+  modalActions: { resetModal },
 } = actions;
 
 //Redux thunks
 import * as thunks from "../../redux/thunks";
-const {
-  outturnsThunks: {
-    getOutturns,
-    addOutturn,
-    deleteManyOutturns
-  },
-} = thunks;
+const { outturnsThunks: { getOutturns } } = thunks;
 
 //Types
 import {
   ButtonProps,
-  Modal,
   PageHeaderPropTypes,
   SelectPropTypes,
-  CreateOutturnModalState
 } from "../../types";
 
 export default () => {
@@ -79,27 +71,27 @@ export default () => {
 
   const evaluateUserType = activeUser.userType == 'Admin' || activeUser.userType == 'Standard';
 
-  const createOutturnModalProps: Modal<CreateOutturnModalState> = {
-    modalHeader: `Creating a new outturn`,
-    modalState: {
-      name: '',
-      description: ''
-    },
-    confirmButton: {
-      onClick: addOutturn,
-      text: 'Create outturn',
-      arguments: [ sort ],
-    },
-  };
+  // const createOutturnModalProps: Modal<CreateOutturnModalState> = {
+  //   modalHeader: `Creating a new outturn`,
+  //   modalState: {
+  //     name: '',
+  //     description: ''
+  //   },
+  //   confirmButton: {
+  //     onClick: addOutturn,
+  //     text: 'Create outturn',
+  //     arguments: [ sort ],
+  //   },
+  // };
 
-  const deleteManyOutturnsModalProps: Modal = {
-    modalHeader: 'Are you sure you want to delete these outturns?',
-    confirmButton: {
-      text: 'Delete outturns',
-      arguments: [ markedOutturns, sort ],
-      onClick: deleteManyOutturns,
-    },
-  };
+  // const deleteManyOutturnsModalProps: Modal = {
+  //   modalHeader: 'Are you sure you want to delete these outturns?',
+  //   confirmButton: {
+  //     text: 'Delete outturns',
+  //     arguments: [ markedOutturns, sort ],
+  //     onClick: deleteManyOutturns,
+  //   },
+  // };
 
   const addButtonProps: ButtonProps = evaluateUserType
   && {
