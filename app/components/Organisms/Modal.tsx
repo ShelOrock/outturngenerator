@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GenericComponentProps, ModalTypes } from '../../types';
+import { ButtonOnClickType, ButtonProps, GenericComponentProps, InputOnChangeType, ModalTypes } from '../../types';
 
 import { ModalContainers } from '../Containers';
 import { InputModuleMolecules } from '../Molecules';
@@ -8,38 +8,35 @@ import {
   Type,
   Button } from '../Atoms';
 import InputModule from '../Molecules/InputModule';
+import { ModalStateType } from '../../types/Interfaces/modal';
 
 interface ComponentProps extends GenericComponentProps {
-  modal?: ModalTypes;
+  open: boolean;
+  heading: string;
+  primaryAction: ButtonProps;
+  secondaryAction: ButtonProps;
 };
 
-const Modal: React.FC<ComponentProps> = ({ modal }) => (
- <>
+const Modal: React.FC<ComponentProps> = ({
+  open = false,
+  heading = '',
+  primaryAction = null,
+  secondaryAction = null,
+  children
+}) => (
+ open && <>
     <ModalContainers.Background />
     <ModalContainers.Main>
-    <Type.Heading>{ modal.heading }</Type.Heading>
-    <ModalContainers.InputModules>
-      {
-        Object.keys(modal.state).map(input => (
-          <InputModule
-            key={ input }
-            type={ 'text' }
-            name={ input }
-            value={ modal.state[input] }
-            placeholder={ input }
-            onChange={ () => {} }
-          />
-        ))
-      }
-    </ModalContainers.InputModules>
+    <Type.Heading>{ heading }</Type.Heading>
+      { children }
     <Button.Button
       variant={ 'primary' }
-      { ...modal.primaryAction }
-    />
+      onClick={ primaryAction.onClick }
+    >{ primaryAction.text }</Button.Button>
     <Button.Button
       variant={ 'secondary' }
-      { ...modal.secondaryAction }
-    />
+      onClick={ secondaryAction.onClick }
+    >{ secondaryAction.text }</Button.Button>
   </ModalContainers.Main>
   </>
 );

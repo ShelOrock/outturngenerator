@@ -20,7 +20,7 @@ const Checkbox: React.FC<ComponentProps> = ({
     type={ 'checkbox' }
     name={ name }
     checked={ checked }
-    onChange={ () => onChange() }
+    onChange={ e => onChange(e) }
   >{ children }</StyledInput.Checkbox>
 );
 

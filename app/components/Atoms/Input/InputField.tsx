@@ -24,7 +24,7 @@ const InputField: React.FC<ComponentProps> = ({
     name={ name }
     value={ value }
     placeholder={ placeholder }
-    onChange={ () => onChange() }
+    onChange={ e => onChange(e) }
   />
 );
 

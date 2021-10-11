@@ -1,20 +1,24 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import useReorderCasks from '../../hooks';
-import { truncateText, useTypedSelector } from '../../utils';
 import { DragDropContext } from 'react-beautiful-dnd';
+import {
+  useForm,
+  useModal,
+  useCheckbox,
+  useReorderList
+} from '../../hooks';
+import { truncateText, useTypedSelector } from '../../utils';
 
 import CasksTemplate from '../Templates/Casks';
 import { CaskListMolecules } from '../Molecules';
 import { ActiveCask } from '../Organisms';
 import GridCard from '../Organisms/GridCard';
-import { markCaskActions, modalActions } from '../../redux/actions';
+import { modalActions } from '../../redux/actions';
 import { activeCaskThunks, activeOutturnThunks, allCasksThunks } from '../../redux/thunks';
 
 import {
   GenericComponentProps,
-  InputOnChangeType,
   ButtonOnClickType,
   ParamTypes,
 } from '../../types';
@@ -33,37 +37,33 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
   const {
     allCasks,
     activeCask,
-    markedCasks,
     activeOutturn,
     activeUser,
+    modal
   } = useTypedSelector(state => state);
+
+//   const {
+//     formValues,
+//     formErrors,
+//     containsErrors,
+//     handleOnChange
+//   } = useForm(initialFormState);
 
   const {
     currentCaskOrder,
     isEdited,
     onDragEnd
-} = useReorderCasks(allCasks);
+  } = useReorderList(allCasks);
+
+  const {
+    marked,
+    handleMarkCask,
+    handleMarkAllCasks
+  } = useCheckbox(allCasks);
 
   useEffect(() => {
-    dispatch(markCaskActions.resetMarkedCasks());
     dispatch(activeOutturnThunks.getActiveOutturn(outturnId))
   }, []);
-
-  const handleMarkCask: InputOnChangeType = e => {
-    if(markedCasks.includes(e.target.name)) {
-      dispatch(markCaskActions.unmarkCask(e.target.name));
-      return;
-    };
-    dispatch(markCaskActions.markCask(e.target.name));
-  };
-
-  const handleMarkAllCasks: InputOnChangeType = () => {
-    if(markedCasks.length === allCasks.length) {
-      dispatch(markCaskActions.unmarkAllCasks());
-      return;
-    };
-    dispatch(markCaskActions.markAllCasks(allCasks.map(cask => cask.id)));
-  };
 
   const generateOutturn: ButtonOnClickType = () => {};
 
@@ -76,27 +76,7 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
           title={ activeOutturn.name }
           primaryAction={{
             text: '+ Create Cask',
-            onClick: () => dispatch(modalActions.setModal({
-              open: true,
-              heading: 'Creating New Cask',
-              state: {
-                heading: '',
-                subheading: '',
-                description: '',
-              },
-              primaryAction: {
-                text: 'Create Cask',
-                onClick: () => dispatch(allCasksThunks.addNewCask({
-                  activeOutturnId: activeOutturn.id,
-                  casks: activeOutturn.casks,
-                  caskPosition: activeOutturn.casks.length
-                }))
-              },
-              secondaryAction: {
-                text: 'Cancel',
-                onClick: () => dispatch(modalActions.resetModal())
-              }
-            })),
+            onClick: () => {}
           }}
         />
       }
@@ -123,7 +103,10 @@ const ActiveOutturnPage: React.FC<ComponentProps> = (props) => {
                 >
                   <GridCard
                     color={ cask.flavourProfile }
-                    cardAction={ () => dispatch(activeCaskThunks.getActiveCask(cask.id)) }                    
+                    cardAction={ () => dispatch(activeCaskThunks.getActiveCask(cask.id)) } 
+                    name={ cask.id }
+                    checked={ marked.includes(cask.id) }
+                    onChange={ handleMarkCask }
                     heading={ `Cask no. ${ cask.caskNumber }` }
                     subheading={ truncateText(cask.name, 20) }
                     primaryAction={{

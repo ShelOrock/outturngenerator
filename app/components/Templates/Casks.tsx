@@ -23,7 +23,7 @@ const ActiveOutturnTemplate: React.FC<ComponentProps> = ({
       <PageContainers.Sidebar>
           { sidebar }
           { action }
-        </PageContainers.Sidebar>
+      </PageContainers.Sidebar>
       <PageContainers.ActiveContent>{ activeContent }</PageContainers.ActiveContent>
     </PageContainers.Section>
   </PageContainers.Main>
