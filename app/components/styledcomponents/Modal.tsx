@@ -16,13 +16,14 @@ export const Modal = styled.div`
 
 export const Main = styled.div`
   position: fixed;
-  width: 50%;
+  width: 480px;
   background: ${ ({ theme }) => theme.colors.body };
-  border: 1px solid #ddd;
-  box-shadow: 1px 1px 1px black;
-  padding: 1rem;
-  left: 25%;
-  top: 30%;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px #666;
+  padding: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   box-sizing: border-box;
   z-index: 2;
   transition: all 0.3s ease-out;

@@ -14,6 +14,7 @@ const initialState: State<ModalTypes> = {
     subheading: '',
     description: '',
   },
+  onChange: null,
   primaryAction: {
     text: '',
     onClick: null
@@ -25,6 +26,7 @@ const initialState: State<ModalTypes> = {
 };
 
 export const modal: ReducerFunctionType<typeof initialState, ModalTypes> = (state = initialState, action) => {
+
   switch (action.type) {
     case SET_MODAL:
       return action.payload;

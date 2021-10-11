@@ -10,12 +10,15 @@ export const Header = styled.div`
 
 export const Section = styled.div`
   width: 100%;
-  margin: 1rem;
+  margin: 16px;
+  display: flex;
 `;
 
 export const Sidebar = styled.div`
-  width: 25%;
-  margin: 1rem;
+  width: 600px;
+  height: 500px;
+  margin: 16px;
+  overflow: scroll;
 `;
 
 export const ActiveContent = styled.div`

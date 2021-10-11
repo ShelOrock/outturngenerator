@@ -4,7 +4,6 @@ export const List = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  padding: 16px;
 `;
 
 export const ListItem = styled.li`

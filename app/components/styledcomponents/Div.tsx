@@ -16,9 +16,10 @@ interface PaddedDivProps {
 }
 
 export const MainDiv = styled.div`
-  box-shadow: 0px 8px 15px #D5D5D5;
+  width: 600px;
   background: white;
-  width: 75%;
+  margin: 32px 0;
+  box-shadow: 0px 8px 15px #D5D5D5;
 `;
 
 const RowsAndColumns = css<DivProps>`

@@ -13,27 +13,25 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 1rem;
+  margin-top: 20px;
 `;
 
 export const Information = styled.div`
   display: flex;
-  margin: 1rem;
+  margin: 16px;
 `;
 
 export const InputLabel = styled.label<InputPropTypes>`
   color: ${ ({ theme: { colors } }) => colors.darkgray };
-  padding: 0.5rem 0;
-  width: ${ ({ inputSize, theme: { input } }) => inputSize ? input.size[inputSize].width : input.size.default.width };
+  padding: 4px 0;
 `
 
 export const InputField = styled.input<InputPropTypes>`
-  padding: 0.5rem 1rem;
-  height: 1.7rem;
-  width: ${ ({ inputSize, theme: { input } }) => inputSize ? input.size[inputSize].width : input.size.default.width };
+  padding: 8px 16px;
+  height: 24px;
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
 
   &focus: {
     border: 1px solid #204468;
@@ -43,11 +41,10 @@ export const InputField = styled.input<InputPropTypes>`
 export const TextArea = styled.textarea`
   background-color: ${ ({ theme: { colors } }) => colors.lightgray };
   border: none;
-  margin: 0.5rem 1rem 0.5rem 0;
-  padding: 0.5rem;
+  padding: 8px 16px;
   font-family: Roboto;
-  height: 6rem;
-  width: 80%;
+  height: 48px;
+  width: 100%;
   resize: none;
  
 

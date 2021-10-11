@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { AppThunk } from '../index';
 import { ActionTypes } from '../index';
-import { ButtonOnClickType } from './form';
+import { InputOnChangeType } from './form';
 
 export interface ModalStateType {
   heading: string;
@@ -29,7 +29,8 @@ export interface ModalButton {
 export interface ModalTypes {
   open: boolean;
   heading: string;
-  state?: ModalStateType;
+  state: ModalStateType;
+  onChange: InputOnChangeType;
   primaryAction: ModalActionType;
   secondaryAction: ModalActionType;
 };

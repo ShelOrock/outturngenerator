@@ -51,7 +51,6 @@ export default () => {
           <Route exact path='/users' component={ UserList } />
         </Switch>
       </Router>
-      { modal.open && <Modal modal={ modal }/> }
       <Toast />
     </>
   )

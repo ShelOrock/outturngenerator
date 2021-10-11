@@ -2,9 +2,9 @@ import { SET_MODAL, RESET_MODAL } from './constants';
 
 import { ModalTypes, ActionFunctionType } from '../../types';
 
-export const setModal: ActionFunctionType<ModalTypes> = modal => ({
+export const setModal: ActionFunctionType<ModalTypes> = payload => ({
   type: SET_MODAL,
-  payload: modal
+  payload
 });
 
 export const resetModal: ActionFunctionType<ModalTypes> = () => ({ type: RESET_MODAL });
