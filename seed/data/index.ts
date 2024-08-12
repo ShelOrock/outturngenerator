@@ -1,9 +1,3 @@
-import casks from './cask';
-import outturns from './outturn';
-import users from './user';
-
-export {
-  casks,
-  outturns,
-  users
-};
+export { default as createCask } from "./createCask";
+export { default as createOutturn } from "./createOutturn";
+export { default as createUser } from "./createUser";

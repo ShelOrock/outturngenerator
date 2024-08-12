@@ -1,21 +1,24 @@
-import { SET_ACTIVE_USER, RESET_ACTIVE_USER } from './constants';
+import activeUserActionTypes from './constants';
 
 import {
   User,
   ReducerFunctionType,
-  State
+  StateType
 } from '../../types/index';
 
-const initialState: State<User> = {} as User;
+const initialState: StateType<User> = {} as User;
 
-export const activeUser: ReducerFunctionType<typeof initialState, User> = (state = initialState, action) => {
-
+const activeUser: ReducerFunctionType<typeof initialState, User, User> = (state = initialState, action) => {
   switch (action.type) {
-    case SET_ACTIVE_USER:
+    case activeUserActionTypes.SET_ACTIVE_USER:
       return action.payload;
-    case RESET_ACTIVE_USER: 
-      return {} as User;
+
+    case activeUserActionTypes.RESET_ACTIVE_USER: 
+      return initialState;
+
     default:
       return state;
   }
 };
+
+export default activeUser;

@@ -4,14 +4,14 @@ export interface Cask {
   caskNumber?: string;
   name?: string;
   price?: string;
-  flavourProfile?: string;
+  flavorProfile?: string;
   age?: number | null;
   date?: string;
   region?: string;
   caskType?: string;
   grapeVariety?: string;
   abv?: string;
-  bottleOutturn?: number;
+  bottleCount?: number;
   allocation?: number;
   description?: string;
   image?: number[];

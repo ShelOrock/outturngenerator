@@ -1,21 +1,27 @@
-import {
-  SET_FILTERS,
-  REMOVE_FILTER,
-  RESET_FILTERS
-} from './constants';
+import filtersActionTypes from "./constants";
 
 import { ActionFunctionType } from '../../types/index';
 
-export const setFilters: ActionFunctionType<string[]> = payload => ({
-  type: SET_FILTERS,
+const setFilters: ActionFunctionType<string[]> = payload => ({
+  type: filtersActionTypes.SET_FILTERS,
   payload
 });
 
-export const removeFilter: ActionFunctionType<string> = payload => ({
-  type: REMOVE_FILTER,
-  payload
-})
+const resetFilters: ActionFunctionType = () => ({ type: filtersActionTypes.RESET_FILTERS });
 
-export const resetFilters: ActionFunctionType = () => ({
-  type: RESET_FILTERS,
+const addFilter: ActionFunctionType<string> = payload => ({
+  type: filtersActionTypes.ADD_FILTER,
+  payload
 });
+
+const deleteFilter: ActionFunctionType<string> = payload => ({
+  type: filtersActionTypes.DELETE_FILTER,
+  payload
+});
+
+export {
+  setFilters,
+  resetFilters,
+  addFilter,
+  deleteFilter,
+};

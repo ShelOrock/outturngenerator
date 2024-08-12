@@ -1,14 +1,14 @@
-import { RESET_STORE } from './constants';
-import appReducer from '../index';
+import storeActionTypes from './constants';
+import rootReducer from '../index';
 
 import { ReducerFunctionType, RootState } from '../../types/index';
 
-export const rootReducer: ReducerFunctionType<RootState, RootState> = (state, action) => {
+const appReducer: ReducerFunctionType<RootState, RootState> = (state = undefined, action) => {
   switch (action.type) {
-    case RESET_STORE:
-      state = undefined;
-      return appReducer(state, action);
-
-    default: return appReducer(state, action);
-  }
+    case storeActionTypes.RESET_STORE:
+    default:
+      return rootReducer(state, action);
+  };
 };
+
+export default appReducer;

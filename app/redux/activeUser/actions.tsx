@@ -1,11 +1,15 @@
-import { SET_ACTIVE_USER, RESET_ACTIVE_USER } from './constants';
+import activeUserActionTypes from './constants';
 
 import { User, ActionFunctionType } from '../../types/index';
 
-export const setActiveUser: ActionFunctionType<User> = user => ({
-  type: SET_ACTIVE_USER,
-  payload: user
-})
+const setActiveUser: ActionFunctionType<User> = payload => ({
+  type: activeUserActionTypes.SET_ACTIVE_USER,
+  payload
+});
 
+const resetActiveUser: ActionFunctionType<User> = () => ({ type: activeUserActionTypes.RESET_ACTIVE_USER })
 
-export const resetActiveUser: ActionFunctionType<User> = () => ({ type: RESET_ACTIVE_USER })
+export {
+  setActiveUser,
+  resetActiveUser 
+};

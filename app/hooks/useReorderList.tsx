@@ -1,58 +1,40 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
+import { arrayMove } from "@dnd-kit/sortable";
 
-import { DropResult } from 'react-beautiful-dnd';
-import { Cask } from '../types';
+const useReorderList = (initialList = []) => {
 
-interface useReorderCasksReturnType {
-  currentCaskOrder: Cask[];
-  isEdited: boolean;
-  onDragEnd: (DropResult) => void;
-};
-
-const useReorderCasks = (casks: Cask[] = []): useReorderCasksReturnType => {
-
-  const [ currentCaskOrder, setCurrentCaskOrder ] = useState(casks);
-  const [ isEdited, setIsEdited ] = useState(false);
-
-  const reorderCasks = (
-    list: Cask[],
-    startIndex: number,
-    endIndex: number
-  ): Cask[] => {
-    let listCopy = [ ...list ];
-    const element = list[startIndex];
-    listCopy.splice(startIndex, 1);
-    listCopy.splice(endIndex, 0 , element);
-    return listCopy;
-  };
-
-  const onDragEnd = ({ destination, source }: DropResult): void => {
-    if(!destination || destination.index === source.index) {
-      return;
-    };
-    const reorderedCasks = reorderCasks(
-      currentCaskOrder,
-      source.index,
-      destination.index
-    );
-
-    setCurrentCaskOrder(reorderedCasks)
-  };
+  const [ listOrder, setListOrder ] = useState(initialList);
+  const [ isListReordered, setIsListReordered ] = useState(false);
 
   useEffect(() => {
-    setIsEdited(false);
-    currentCaskOrder.forEach(item => {
-      if(casks.indexOf(item) !== currentCaskOrder.indexOf(item)) {
-        setIsEdited(true);
-      };
-    })
-  }, [casks, currentCaskOrder]);
+    console.log(initialList)
+    setListOrder(initialList);
+  }, [ JSON.stringify(initialList) ]);
+
+  const handleOnDragEnd = ({ active, over }) => {
+    if(!active || !over) {
+      return;
+    };
+
+    if(active.id !== over.id) {
+      setListOrder(prev => {
+        const activeId = prev.findIndex(item => item.id === active.id);
+        const overId = prev.findIndex(item => item.id === over.id);
+
+        return arrayMove(prev, activeId, overId);
+      });
+
+      setIsListReordered(true);
+    };
+  };
 
   return {
-    currentCaskOrder,
-    isEdited,
-    onDragEnd
-  }
+    listOrder,
+    setListOrder,
+    isListReordered,
+    setIsListReordered,
+    handleOnDragEnd
+  };
 };
 
-export default useReorderCasks;
+export default useReorderList;

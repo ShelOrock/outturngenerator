@@ -1,19 +1,21 @@
-import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunkMiddleware from 'redux-thunk';
-import axios from 'axios';
+import { configureStore } from "@reduxjs/toolkit";
+import { Store } from "redux";
+import { createLogger } from "redux-logger";
+import thunkMiddleware from "redux-thunk";
+import axios from "axios";
 
-import { rootReducer } from './reducers';
+import appReducer from "./reducers";
+import { DispatchFunctionType } from "../../types/redux/store";
 
-let middleware = [
-  thunkMiddleware.withExtraArgument({ axios }),
-];
-if(process.env.NODE_ENV !== 'production') {
-  middleware = [ ...middleware, createLogger({ collapsed: true }) ]
-}
+let middleware = [ thunkMiddleware.withExtraArgument({ axios }) ];
 
-export default createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(...middleware))
-);
+if(process.env.NODE_ENV === "development") {
+  middleware.push(createLogger({ collapsed: true }));
+};
+
+const store: Store & { dispatch: DispatchFunctionType } = configureStore({
+  reducer: appReducer,
+  middleware
+});
+
+export default store;

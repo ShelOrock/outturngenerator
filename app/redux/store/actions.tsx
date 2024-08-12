@@ -1,5 +1,7 @@
-import { RESET_STORE } from './constants';
+import storeActionTypes from './constants';
 
 import { ActionFunctionType } from '../../types/index';
 
-export const resetStore: ActionFunctionType = () => ({ type: RESET_STORE });
+const resetStore: ActionFunctionType = () => ({ type: storeActionTypes.RESET_STORE });
+
+export { resetStore };

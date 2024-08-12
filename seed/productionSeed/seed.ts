@@ -15,82 +15,77 @@ import {
   users,
 } from '.';
   
-import {
-  Cask,
-  Outturn,
-  User,
-  db
-} from '../../server/db'
+import { connection, Models } from '../../server/database'
 
 const productionSeed = async () => {
-  const allOutturns = await Promise.all(outturns.map(outturn => Outturn.create(outturn)));
+  const allOutturns = await Promise.all(outturns.map(outturn => Models.Outturn.create(outturn)));
 
   const outturnIds = allOutturns.map(outturn => outturn.id);
 
-  await Promise.all(marchCasks.map((cask, idx) => Cask.create({
+  await Promise.all(marchCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[0]
   })));
 
-  await Promise.all(marchMidMonthCasks.map((cask, idx) => Cask.create({
+  await Promise.all(marchMidMonthCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[1]
   })));
 
-  await Promise.all(aprilCasks.map((cask, idx) => Cask.create({
+  await Promise.all(aprilCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[2]
   })));
 
-  await Promise.all(aprilMidMonthCasks.map((cask, idx) => Cask.create({
+  await Promise.all(aprilMidMonthCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[3]
   })));
 
-  await Promise.all(mayCasks.map((cask, idx) => Cask.create({
+  await Promise.all(mayCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[4]
   })));
 
-  await Promise.all(speysideFestivalCasks.map((cask, idx) => Cask.create({
+  await Promise.all(speysideFestivalCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[5]
   })));
 
-  await Promise.all(campbeltownFestivalCasks.map((cask, idx) => Cask.create({
+  await Promise.all(campbeltownFestivalCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[6]
   })));
 
-  await Promise.all(highlandFestivalCasks.map((cask, idx) => Cask.create({
+  await Promise.all(highlandFestivalCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[7]
   })));
 
-  await Promise.all(islayFestivalCasks.map((cask, idx) => Cask.create({
+  await Promise.all(islayFestivalCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[8]
   })));
 
-  await Promise.all(juneOutturnCasks.map((cask, idx) => Cask.create({
+  await Promise.all(juneOutturnCasks.map((cask, idx) => Models.Cask.create({
     ...cask,
     caskPosition: idx,
     outturnId: outturnIds[9]
   })));
 
-  await Promise.all(users.map(user => User.create(user)));
+  await Promise.all(users.map(user => Models.User.create(user)));
 };
 
-db.sync({ force: true })
+connection.sync({ force: true })
  .then(() => productionSeed())
  .then(() => {
    console.log(chalk.blue('new seed created successfully'));

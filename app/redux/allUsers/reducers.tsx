@@ -1,16 +1,25 @@
-import { SET_ALL_USERS } from './constants';
+import usersActionTypes from './constants';
 
 import { 
   ReducerFunctionType,
-  State,
+  StateType,
   Users,
+  User
 } from '../../types';
 
-const initialState: State<Users> = [];
+const initialState: StateType<Users> = [];
 
-export const allUsers: ReducerFunctionType<typeof initialState, Users> = (state = initialState, action) => {
+const users: ReducerFunctionType<typeof initialState, Users, User[]> = (state = initialState, action) => {
   switch(action.type) {
-    case SET_ALL_USERS: return action.payload;
-    default: return state;
+    case usersActionTypes.SET_USERS:
+      return action.payload;
+
+    case usersActionTypes.RESET_USERS:
+      return initialState;
+
+    default:
+      return state;
   };
 };
+
+export default users;

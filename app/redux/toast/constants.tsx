@@ -1,5 +1,7 @@
-export const ADD_TOAST = Symbol('ADD_TOAST');
+enum toastActionTypes {
+  ADD_TOAST = "ADD_TOAST",
+  REMOVE_TOAST = "REMOVE_TOAST",
+  RESET_TOASTS = "RESET_TOASTS"
+};
 
-export const REMOVE_TOAST = Symbol('REMOVE_TOAST');
-
-export const RESET_TOAST = Symbol('RESET_TOAST');
+export default toastActionTypes;

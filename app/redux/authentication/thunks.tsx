@@ -1,48 +1,62 @@
 import axios from 'axios';
 
-import * as actions from '../actions';
-const {
-  activeUserActions: { setActiveUser, resetActiveUser },
-  loadingActions: { setLoading }
-} = actions;
+import apiEndpoints from "../../api";
+
+import { activeUserActions, loadingActions } from '../actions';
 
 import { ThunkFunctionType } from '../../types/index';
 
-const API_URL = '/api/authentication'
+const attemptUserLogin: ThunkFunctionType = credentials => (
+  async dispatch => {
+    try {
+      dispatch(loadingActions.setLoading(true));
+      const response = await axios.post(`${ apiEndpoints.BASE_URL }/${ apiEndpoints.AUTHENTICATION_ENDPOINTS }/login`, credentials)
+      dispatch(activeUserActions.setActiveUser(response.data));
 
-export const attemptUserLogin: ThunkFunctionType = credentials => {
-  return dispatch => {
-    setLoading(true);
-    axios
-      .post(`${ API_URL }/login`, credentials)
-      .then(res => dispatch(setActiveUser(res.data)))
-      .catch(e => {
-        dispatch(resetActiveUser());
-        console.error(e);
-      })
-      .finally(() => dispatch(setLoading(false)))
-  };
-};
+    } catch(e) {
+      dispatch(activeUserActions.resetActiveUser());
+      console.error(e);
 
-export const attemptUserSignUp: ThunkFunctionType = credentials => {
-  console.log(credentials)
-  return dispatch => {
-    setLoading(true);
-    axios
-      .post(`${ API_URL }/signup`, credentials)
-      .then(res => dispatch(setActiveUser(res.data)))
-      .catch(e => console.log(e))
-      .finally(() => dispatch(setLoading(false)))
+    } finally {
+      dispatch(loadingActions.setLoading(false));
+    };
   }
-}
+);
 
-export const attemptUserLogout: ThunkFunctionType = userId => {
-  return dispatch => {
-    setLoading(true);
-    axios
-      .post(`${ API_URL }/logout`, { userId })
-      .then(() => dispatch(resetActiveUser()))
-      .catch(e => console.error(e))
-      .finally(() => dispatch(setLoading(false)));
-  };
+const attemptUserLogout: ThunkFunctionType = userId => (
+  async dispatch => {
+    try {
+      dispatch(loadingActions.setLoading(true));
+      await axios.post(`${ apiEndpoints.BASE_URL }/${ apiEndpoints.AUTHENTICATION_ENDPOINTS }/logout`, userId)
+      dispatch(activeUserActions.resetActiveUser());
+
+    } catch(e) {
+      console.error(e);
+
+    } finally {
+      dispatch(loadingActions.setLoading(false))
+    };
+  }
+);
+
+const attemptUserSignUp: ThunkFunctionType = credentials => (
+  async dispatch => {
+    try {
+      dispatch(loadingActions.setLoading(true));
+      const response = await axios.post(`${ apiEndpoints.BASE_URL }/${ apiEndpoints.AUTHENTICATION_ENDPOINTS }/signup`, credentials)
+      dispatch(activeUserActions.setActiveUser(response.data));
+
+    } catch(e) {
+      console.error(e);
+
+    } finally {
+      dispatch(loadingActions.setLoading(false))
+    };
+  }
+);
+
+export { 
+  attemptUserLogin,
+  attemptUserLogout,
+  attemptUserSignUp
 };

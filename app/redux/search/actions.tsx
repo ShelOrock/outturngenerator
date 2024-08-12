@@ -1,10 +1,15 @@
-import { SET_SEARCH, RESET_SEARCH } from './constants';
+import searchActionTypes from './constants';
 
 import { Search, ActionFunctionType } from '../../types';
 
-export const setSearch: ActionFunctionType<Search> = search => ({
-  type: SET_SEARCH,
-  payload: search
+const setSearch: ActionFunctionType<Search> = payload => ({
+  type: searchActionTypes.SET_SEARCH,
+  payload
 })
 
-export const resetSearch: ActionFunctionType<Search> = () => ({ type: RESET_SEARCH });
+const resetSearch: ActionFunctionType<Search> = () => ({ type: searchActionTypes.RESET_SEARCH });
+
+export {
+  setSearch,
+  resetSearch
+};

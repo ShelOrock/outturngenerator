@@ -4,7 +4,7 @@ import express, {
   NextFunction
 } from 'express';
 
-import { Outturn, Cask } from '../db/index';
+import { Models } from '../database';
 
 const router: express.Router = express.Router();
 
@@ -25,12 +25,12 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
       sortMethod = 'DESC'
       break;
   }
-  Outturn.findAll({
+  Models.Outturn.findAll({
     order: [
       [ sortByProperty, sortMethod ]
     ],
     include: [{
-      model: Cask
+      model: Models.Cask
     }],
   })
   .then(outturnsOrNull => {
@@ -53,13 +53,13 @@ router.get('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.get('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
-  Outturn.findByPk(req.params.outturnId, 
+  Models.Outturn.findByPk(req.params.outturnId, 
     {
       include: [{
-        model: Cask,
+        model: Models.Cask,
       }],
       order: [
-        [ Cask, 'caskPosition', 'ASC' ],
+        [ Models.Cask, 'caskPosition', 'ASC' ],
       ]
     })
   .then(outturnOrNull => {
@@ -82,8 +82,7 @@ router.get('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.post('/', (req: Request, res: Response, next: NextFunction) => {
-  console.log({ body: req.body })
-  Outturn.create({
+  Models.Outturn.create({
     ...req.body
   })
   .then(createdOutturn => {
@@ -100,7 +99,7 @@ router.post('/', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.put('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
-  Outturn.findByPk(req.params.outturnId)
+  Models.Outturn.findByPk(req.params.outturnId)
   .then(outturnOrNull => {
     if(!outturnOrNull) {
       res
@@ -126,7 +125,7 @@ router.put('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.delete('/:outturnId', (req: Request, res: Response, next: NextFunction) => {
-  Cask.findAll({
+  Models.Cask.findAll({
     where: {
       outturnId: req.params.outturnId
     }
@@ -137,7 +136,7 @@ router.delete('/:outturnId', (req: Request, res: Response, next: NextFunction) =
     }
   })
   .then(() => {
-    Outturn.findByPk(req.params.outturnId)
+    Models.Outturn.findByPk(req.params.outturnId)
     .then(outturnOrNull => {
       if(!outturnOrNull) {
         res
@@ -162,7 +161,7 @@ router.delete('/:outturnId', (req: Request, res: Response, next: NextFunction) =
 })
 
 router.post('/delete-many', (req: Request, res: Response, next: NextFunction) => {
-  Cask.findAll({
+  Models.Cask.findAll({
     where: {
       outturnId: [ ...req.body.markedOutturns ]
     }
@@ -173,7 +172,7 @@ router.post('/delete-many', (req: Request, res: Response, next: NextFunction) =>
     }
   })
   .then(() => {
-    Outturn.destroy({
+    Models.Outturn.destroy({
       where: {
         id: [ ...req.body.markedOutturns ]
       }

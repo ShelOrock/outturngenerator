@@ -1,5 +1,7 @@
-import { Action } from 'redux';
-import { ThunkAction } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { ThunkAction, ThunkDispatch } from 'redux-thunk';
+
+import { StateType } from "."
 
 import AppReducer from '../../redux';
 import store from '../../redux/store';
@@ -10,7 +12,15 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   ReturnType,
   RootState,
   unknown,
-  Action<Symbol>
+  AnyAction
 >;
 
-export type AppDispatch = typeof store.dispatch;
+export type ThunkFunctionType<ReturnType = void> = (...args: Parameters<any>) => AppThunk<ReturnType>;
+
+export type AppDispatchType = typeof store.dispatch;
+
+export type DispatchFunctionType = ThunkDispatch<
+  StateType<any>,
+  undefined,
+  AnyAction
+>;

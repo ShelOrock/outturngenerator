@@ -1,23 +1,13 @@
-import {
-  ActionTypes,
-  ActionFunctionType,
-  State,
-  ReducerFunctionType,
-} from './actions';
-import {
-  RootState,
-  AppThunk,
-  AppDispatch
-} from './store';
-import { ThunkFunctionType } from './thunks';
-
 export {
   ActionTypes,
   ActionFunctionType,
-  State,
+  StateType,
   ReducerFunctionType,
+} from "./actions";
+
+export {
   RootState,
   AppThunk,
-  AppDispatch,
-  ThunkFunctionType,
-};
+  AppDispatchType,
+  ThunkFunctionType
+} from "./store";

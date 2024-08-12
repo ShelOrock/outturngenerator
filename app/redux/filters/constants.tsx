@@ -1,5 +1,8 @@
-export const SET_FILTERS = Symbol('SET_FILTERS');
+enum filtersActionTypes {
+  SET_FILTERS = "SET_FILTERS",
+  RESET_FILTERS = "RESET_FILTERS",
+  ADD_FILTER = "ADD_FILTER",
+  DELETE_FILTER = "DELETE_FILTER",
+};
 
-export const REMOVE_FILTER = Symbol('REMOVE_FILTER');
-
-export const RESET_FILTERS = Symbol('RESET_FILTERS');
+export default filtersActionTypes;

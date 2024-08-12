@@ -1,1 +1,6 @@
-export const SET_LOADING = Symbol('SET_LOADING');
+enum loadingActionTypes {
+  SET_LOADING = "SET_LOADING",
+  RESET_LOADING = "RESET_LOADING"
+};
+
+export default loadingActionTypes;

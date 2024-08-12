@@ -1,10 +1,10 @@
 export interface ActionTypes<PayloadType = {}> {
-  type: symbol;
+  type: string | symbol;
   payload?: PayloadType;
 }
 
 export type ActionFunctionType<PayloadType = {}> = (payload?: PayloadType) => ActionTypes<PayloadType>
 
-export type State<StateTypes> = StateTypes
+export type StateType<InitialStateType> = InitialStateType;
 
-export type ReducerFunctionType<StateTypes, PayloadType = {}> = (state: State<StateTypes>, action: ActionTypes<PayloadType>) => State<StateTypes>
+export type ReducerFunctionType<InitialStateType, ReturnType, PayloadType = {}> = (state: StateType<InitialStateType>, action: ActionTypes<PayloadType>) => ReturnType;

@@ -6,14 +6,14 @@ export interface CaskAttributes {
   caskNumber?: string;
   name?: string;
   price?: string;
-  flavourProfile?: string;
-  age?: string | null;
+  flavorProfile?: string;
+  age?: string;
   date?: string;
   region?: string;
   caskType?: string;
   abv?: string;
-  bottleOutturn?: string | null;
-  allocation?: string | null;
+  bottleCount?: string;
+  allocation?: string;
   description?: string;
   outturnId?: string | number;
 
@@ -24,7 +24,7 @@ export interface CaskAttributes {
 export interface CaskModel extends Model<CaskAttributes>, CaskAttributes {};
 
 export type CaskModelStatic = typeof Model & {
-  new(
+  new (
     values?: object,
     options?: BuildOptions,
   ): CaskModel

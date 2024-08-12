@@ -1,60 +1,63 @@
-//Depedency Libraries
-import * as React from 'react';
-//Dependency Functions
-import { useTypedSelector, createButton} from '../../utils';
+import React from "react";
+import { useLocation } from "react-router-dom";
 
-//Components
-// import ButtonManager from '../Button/ButtonManager';
-//StyledComponents
-import * as StyledComponents from '../styledcomponents/index';
-const {
-  StyledNavigation: { NavBar, NavLink },
-  StyledDiv: { Row },
-} = StyledComponents;
+import Column from "../LayoutComponents/Column";
+import Assets from "../../assets";
+import Link from "../Link";
+import IconButton from "../IconButton";
 
-//Redux Thunks
-import * as thunks from '../../redux/thunks';
-const { authenticationThunks: { attemptUserLogout } } = thunks;
+import { ComponentProps } from "./types";
 
-//Types
-import { AttemptUserLogoutButtonPropTypes } from '../../types';
+import { AppPaths, Styles } from "../../enums";
 
-export default () => {
 
-  const { activeUser } = useTypedSelector(state => state);
-  
-  const attemptUserLogoutButtonProps: AttemptUserLogoutButtonPropTypes = {
-    size: 'small',
-    dispatchToStore: true,
-    onClick: createButton(
-      attemptUserLogout,
-      'Logout',
-      activeUser.id
-    )
-  }
+const Navigation: React.FC<ComponentProps> = () => {
 
-  const evaluateUserAccess = activeUser.loggedIn == 'Online'
-  ? activeUser.userType == 'Admin' 
-    ? <NavLink to='/users'>Users</NavLink>
-    : null
-  : <NavLink to='signup'>Sign up</NavLink>
-
-  const evaluateLoginLogout = activeUser.loggedIn == 'Online'
-  ? <></>//<ButtonManager { ...attemptUserLogoutButtonProps } />
-  : <NavLink to='/login'>Login</NavLink>
+  const { pathname } = useLocation();
 
   return (
-    <NavBar>
-      <Row justifyContent='space-between' alignItems='center'>
-        <Row>
-          <NavLink to='/'>Projects</NavLink>
-          <NavLink to='/casks'>Casks</NavLink>
-        </Row>
-        <Row alignItems='center'>
-          { evaluateUserAccess }
-          { evaluateLoginLogout }
-        </Row>
-      </Row>
-    </NavBar>
+    <Column>
+      <Link
+        to={ AppPaths.home }
+        width="full"
+        mt={ Styles.Spacing.small }
+      >
+        <IconButton
+          path={ Assets.homeIcon }
+          selected={ pathname === AppPaths.home }
+          variant={ pathname === AppPaths.home ? Styles.ButtonVariants.primary : Styles.ButtonVariants.tertiary }
+          color={ Styles.Colors.primary }
+          width="full"
+        >Home</IconButton>
+      </Link>
+      <Link
+        to={ AppPaths.outturns }
+        width="full"
+        mt={ Styles.Spacing.small }
+      >
+        <IconButton
+          path={ Assets.homeIcon }
+          selected={ pathname.includes(AppPaths.outturns) }
+          variant={ pathname.includes(AppPaths.outturns) ? Styles.ButtonVariants.primary : Styles.ButtonVariants.tertiary }
+          color={ Styles.Colors.primary }
+          width="full"
+        >Outturns</IconButton>
+      </Link>
+      <Link
+        to={ AppPaths.casks }
+        width="full"
+        mt={ Styles.Spacing.small }
+      >
+        <IconButton
+          path={ Assets.homeIcon }
+          selected={ pathname.includes(AppPaths.casks) }
+          variant={ pathname.includes(AppPaths.casks) ? Styles.ButtonVariants.primary : Styles.ButtonVariants.tertiary }
+          color={ Styles.Colors.primary }
+          width="full"
+        >Casks</IconButton>
+      </Link>
+    </Column>
   )
 };
+
+export default Navigation;

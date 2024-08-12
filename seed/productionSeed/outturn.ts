@@ -3,15 +3,15 @@ import { OutturnAttributes } from '../../server/types/models'
 export const outturns: OutturnAttributes[] = [
   {
     name: 'March Outturn: Spring is in the air',
-    description: 'Spring is in the air and we are preparing for the season with a marvelous medley of Society whisky! As winter darkness turns to springtime light, embrace the longer days and warmer weather with a new dram in hand! Ten (10) newly released Society casks offer enchanting aromas and flavours that will entice your senses during the coming weeks. March may come in like a lion but we’re going out with some drams! And what drams: All five whisky-producing regions are represented in this vernal variety show of cask strength character!'
+    description: 'Spring is in the air and we are preparing for the season with a marvelous medley of Society whisky! As winter darkness turns to springtime light, embrace the longer days and warmer weather with a new dram in hand! Ten (10) newly released Society casks offer enchanting aromas and flavors that will entice your senses during the coming weeks. March may come in like a lion but we’re going out with some drams! And what drams: All five whisky-producing regions are represented in this vernal variety show of cask strength character!'
   },
   {
     name: 'March Mid-Month Outturn: Up Your Whisky Game',
-    description: "A new season is upon us and it’s a perfect time to up your whisky game! We’ve all experienced some form of epiphany or game-changing moment when it comes to developing a wider appreciation of whisky. Most of us start with a particular style that suits our taste at the time and eventually discover a counterpoint in style which reveals a whole world of possibilities. All you need to explore whiskies across the spectrum is an open mind, and a suitable guide. That is the Society’s goal, not only to offer you the world’s widest selection of single malt whisky, but also to help you navigate through it. Perhaps it’s time to create a new game-changing moment for yourself…. here is an incredible outturn to help with that! Up Your Whisky Game features fourteen (14) newly released Society casks from the Speyside, Highlands, Campbeltown and Islay, making it arguably our most exciting Mid-month Outturn ever released in the U.S. So, if you’re ready to explore new flavours, let’s dive in!"
+    description: "A new season is upon us and it’s a perfect time to up your whisky game! We’ve all experienced some form of epiphany or game-changing moment when it comes to developing a wider appreciation of whisky. Most of us start with a particular style that suits our taste at the time and eventually discover a counterpoint in style which reveals a whole world of possibilities. All you need to explore whiskies across the spectrum is an open mind, and a suitable guide. That is the Society’s goal, not only to offer you the world’s widest selection of single malt whisky, but also to help you navigate through it. Perhaps it’s time to create a new game-changing moment for yourself…. here is an incredible outturn to help with that! Up Your Whisky Game features fourteen (14) newly released Society casks from the Speyside, Highlands, Campbeltown and Islay, making it arguably our most exciting Mid-month Outturn ever released in the U.S. So, if you’re ready to explore new flavors, let’s dive in!"
   },
   {
-    name: 'April Outturn: Elevate Your Flavour Frontier',
-    description: 'Spring has officially sprung! With the weather warming, it’s about time to venture out and embark on an adventure or two. When your endeavors conclude, the fun is just beginning as you settle in with a brand new dram of Society whisky! Fresh Air Flavours invites you to explore fourteen (14) newly released Society casks that will make a happy ending to any outdoor excursion, as well as a suitable hip flask favourite if the activity suits. Whether you’re tackling a high peak or exploring your local surroundings, pick the perfect dram from our colourful collection to take your experience to new heights!'
+    name: 'April Outturn: Elevate Your flavor Frontier',
+    description: 'Spring has officially sprung! With the weather warming, it’s about time to venture out and embark on an adventure or two. When your endeavors conclude, the fun is just beginning as you settle in with a brand new dram of Society whisky! Fresh Air flavors invites you to explore fourteen (14) newly released Society casks that will make a happy ending to any outdoor excursion, as well as a suitable hip flask favourite if the activity suits. Whether you’re tackling a high peak or exploring your local surroundings, pick the perfect dram from our colourful collection to take your experience to new heights!'
   },
   {
     name: 'April Mid-Month Outturn: Hip Flask Favourites',
@@ -19,7 +19,7 @@ export const outturns: OutturnAttributes[] = [
   },
   {
     name: 'May Outturn: Find Your Whisky Rythm',
-    description: 'Pour a dram and turn the volume up to eleven! We’re exploring whisky and music this month, drawing inspiration from each artistic medium for a festive May! Describing whiskies in musical terms can bring to life the sensory and evocative nature of our Society casks. The associations of taste, aroma, flavour and mouthfeel characteristics can be compared to different styles of music – both are forms of art that stir the emotions, transport us places and invite discussion and debate. Of course, when paired together, they bring a lot of fun to your tasting experience! Find Your Whisky Rhythm with eighteen (18) newly released Society casks from the Speyside, Highlands and Islay that will have your palate singing!'
+    description: 'Pour a dram and turn the volume up to eleven! We’re exploring whisky and music this month, drawing inspiration from each artistic medium for a festive May! Describing whiskies in musical terms can bring to life the sensory and evocative nature of our Society casks. The associations of taste, aroma, flavor and mouthfeel characteristics can be compared to different styles of music – both are forms of art that stir the emotions, transport us places and invite discussion and debate. Of course, when paired together, they bring a lot of fun to your tasting experience! Find Your Whisky Rhythm with eighteen (18) newly released Society casks from the Speyside, Highlands and Islay that will have your palate singing!'
   },
   {
     name: 'Speyside Festival 2021',
@@ -31,7 +31,7 @@ export const outturns: OutturnAttributes[] = [
   },
   {
     name: 'Highland Festival 2021',
-    description: 'Our hearts are in the Highlands today with six (6) newly released casks! We are celebrating this storied region with brilliant casks from this breathtaking part of the world. Our liquid journey through Scotland’s most awe-inspiring landscape will transport us to each cardinal direction of the Highlands with a wee bit of island hopping thrown in for good measure. Along the way, a vast spectrum of aromas and flavours will be revealed on our next festival adventure!'
+    description: 'Our hearts are in the Highlands today with six (6) newly released casks! We are celebrating this storied region with brilliant casks from this breathtaking part of the world. Our liquid journey through Scotland’s most awe-inspiring landscape will transport us to each cardinal direction of the Highlands with a wee bit of island hopping thrown in for good measure. Along the way, a vast spectrum of aromas and flavors will be revealed on our next festival adventure!'
   },
   {
     name: 'Islay Festival 2021',
@@ -39,6 +39,6 @@ export const outturns: OutturnAttributes[] = [
   },
   {
     name: 'June Outturn: Dram Decadence',
-    description: 'As Father’s Day approaches, we are proud to celebrate all the dads and dear friends in our lives with a truly impressive assortment of Society whiskies! Dram Decadence offers eighteen (18) casks from the Speyside, Highlands and Islay for Society members to explore. This month’s robust outturn is chock-full of amazing whisky with an epic variety of flavour profiles, distilleries, cask protocols and age statements!',
+    description: 'As Father’s Day approaches, we are proud to celebrate all the dads and dear friends in our lives with a truly impressive assortment of Society whiskies! Dram Decadence offers eighteen (18) casks from the Speyside, Highlands and Islay for Society members to explore. This month’s robust outturn is chock-full of amazing whisky with an epic variety of flavor profiles, distilleries, cask protocols and age statements!',
   }
 ];

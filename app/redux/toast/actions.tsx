@@ -1,20 +1,22 @@
-import {
-  ADD_TOAST,
-  REMOVE_TOAST,
-  RESET_TOAST
-} from './constants';
+import toastActionTypes from "./constants";
 
 import { Toast, ActionFunctionType } from '../../types/index';
 
-export const addToast: ActionFunctionType<Toast> = toast => ({
-  type: ADD_TOAST,
-  payload: toast
+const addToast: ActionFunctionType<Toast> = payload => ({
+  type: toastActionTypes.ADD_TOAST,
+  payload
 });
 
 
-export const removeToast: ActionFunctionType<Toast> = toast => ({
-  type: REMOVE_TOAST,
-  payload: toast
+const removeToast: ActionFunctionType<Toast> = payload => ({
+  type: toastActionTypes.REMOVE_TOAST,
+  payload
 });
 
-export const resetToast: ActionFunctionType<Toast> = () => ({ type: RESET_TOAST });
+const resetToasts: ActionFunctionType<Toast> = () => ({ type: toastActionTypes.RESET_TOASTS });
+
+export {
+  addToast,
+  removeToast,
+  resetToasts
+};

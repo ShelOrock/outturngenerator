@@ -1,29 +1,34 @@
-import {
-  ADD_TOAST,
-  REMOVE_TOAST,
-  RESET_TOAST
-} from './constants';
+import toastActionTypes from "./constants";
 
 import {
   Toast,
   ReducerFunctionType,
-  State
+  StateType
 } from '../../types/index';
 
-const initialState: State<Toast[]> = [];
+const initialState: StateType<Toast[]> = [];
 
-export const toast: ReducerFunctionType<typeof initialState, Toast> = (state = initialState, action) => {
+const toasts: ReducerFunctionType<typeof initialState, Toast[], Toast> = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TOAST:
-      return [ ...state, action.payload ];
+    case toastActionTypes.ADD_TOAST:
+      const lastIndex = state[state.length - 1];
+      return [
+        ...state,
+        {
+          id: !!lastIndex ? lastIndex.id + 1 : 1,
+          ...action.payload
+        }
+      ];
 
-    case REMOVE_TOAST:
-      return state.filter(_toast => _toast !== action.payload);
+    case toastActionTypes.REMOVE_TOAST:
+      return state.filter(toast => toast.id !== action.payload.id);
 
-    case RESET_TOAST:
-      return [];
+    case toastActionTypes.RESET_TOASTS:
+      return initialState;
 
     default:
       return state;
-  }
+  };
 };
+
+export default toasts;

@@ -1,17 +1,23 @@
-import { SET_SEARCH, RESET_SEARCH } from './constants';
+import searchActionTypes from './constants';
 
 import {
   Search,
   ReducerFunctionType,
-  State
+  StateType
 } from '../../types';
 
-const initialState: State<Search> = [];
+const initialState: StateType<Search[]> = [];
 
-export const search: ReducerFunctionType<typeof initialState, Search> = (state = initialState, action) => {
+const search: ReducerFunctionType<typeof initialState, Search[], Search[]> = (state = initialState, action) => {
   switch(action.type) {
-    case SET_SEARCH: return action.payload;
-    case RESET_SEARCH: return [] as Search;
+    case searchActionTypes.SET_SEARCH:
+      return action.payload;
+
+    case searchActionTypes.RESET_SEARCH:
+      return initialState;
+
     default: return state;
   };
 };
+
+export default search;

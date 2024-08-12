@@ -1,27 +1,32 @@
 import axios from 'axios';
 
-import * as actions from '../actions';
-const {
-  activeUserActions: { setActiveUser },
-  toastActions: { addToast },
-  loadingActions: { setLoading }
-} = actions;
+import apiEndpoints from "../../api";
+
+import {
+  activeUserActions,
+  toastActions,
+  loadingActions
+} from '../actions';
 
 import { ThunkFunctionType } from '../../types/index';
 
-const API_URL = '/api/user'
+export const getActiveUser: ThunkFunctionType = userId => (
+  async dispatch => {
+    try {
+      dispatch(loadingActions.setLoading(true))
+      const response = await axios.get(`${ apiEndpoints.BASE_URL }/${ apiEndpoints.USERS_ENDPOINT }/${ userId }`);
+      dispatch(activeUserActions.setActiveUser(response.data));
 
-export const getActiveUser: ThunkFunctionType = userId => {
-  return dispatch => {
-    dispatch(setLoading(true))
-    return axios
-      .get(`${ API_URL }/${ userId }`)
-      .then(res => dispatch(setActiveUser(res.data)))
-      .catch(e => dispatch(addToast({
+    } catch(e) {
+      console.error(e);
+      dispatch(toastActions.addToast({
         id: 0,
-        status: 'FAIL',
+        status: "FAIL",
         message: e
-      })))
-      .finally(() => dispatch(setLoading(false)));
-  };
-};
+      }));
+
+    } finally {
+      dispatch(loadingActions.setLoading(false))
+    };
+  }
+);

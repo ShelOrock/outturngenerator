@@ -1,8 +1,15 @@
-import { SET_LOADING } from './constants';
+import loadingActionTypes from './constants';
 
 import { ActionFunctionType } from '../../types/index';
 
-export const setLoading: ActionFunctionType<Boolean> = boolean => ({
-  type: SET_LOADING,
-  payload: boolean
+const setLoading: ActionFunctionType<Boolean> = payload => ({
+  type: loadingActionTypes.SET_LOADING,
+  payload
 });
+
+const resetLoading: ActionFunctionType = () => ({ type: loadingActionTypes.RESET_LOADING });
+
+export {
+  setLoading,
+  resetLoading
+};

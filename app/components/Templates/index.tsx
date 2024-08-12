@@ -1,7 +1,2 @@
-import OutturnsTemplate from './Outturns';
-import ActiveOutturnTemplate from './Casks';
-
-export {
-  OutturnsTemplate,
-  ActiveOutturnTemplate
-};
+export { default as DefaultTemplate } from "./Default";
+export { default as TwoColumnTemplate } from "./TwoColumn";

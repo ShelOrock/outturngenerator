@@ -1,1 +1,6 @@
-export const SET_ALL_USERS = Symbol('SET_ALL_USERS');
+enum usersActionTypes {
+  SET_USERS = "SET_USERS",
+  RESET_USERS = "RESET_USERS"
+};
+
+export default usersActionTypes;

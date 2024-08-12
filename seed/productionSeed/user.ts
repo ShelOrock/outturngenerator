@@ -9,7 +9,6 @@ export const users: UserAttributes[] = [
     username: 'Shel',
     email: 'orockshel@gmail.com',
     password: bcrypt.hashSync('1234', SALT_ROUNDS),
-    userType: 'Admin',
-    loggedIn: 'Offline',
+    userType: 'admin',
   }
 ];

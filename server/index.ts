@@ -1,20 +1,17 @@
-import chalk from 'chalk';
-
 import app from './express';
-import db from './db/database';
+import chalk from 'chalk';
 
 const PORT = process.env.PORT || 3000;
 
-db.sync()
-  .then(() => {
-    console.log(chalk.cyan('db synced'))
-  })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(chalk.magentaBright(`App is listening on localhost:${ PORT }`))
-    });
-  })
-  .catch(e => {
-    console.error(chalk.red('Error syncing database', e));
+const startServer = async (): Promise<void> => {
+  try {
+    await app.listen(PORT);
+    console.log(chalk.blueBright(`App is listening on localhost:${ PORT }`));
+
+  } catch(e) {
+    console.log(chalk.red("Error starting server", e));
     process.exit(1);
-  })
+  };
+};
+
+startServer();

@@ -1,27 +1,47 @@
-import * as React from 'react';
-const { useEffect } = React;
-import { useDispatch } from 'react-redux';
-import { useTypedSelector } from '../../utils';
+import React, { useEffect } from 'react';
+import { useAppDispatch } from '../../hooks';
 
-import * as actions from '../../redux/actions';
-const { toastActions: { resetToast } } = actions;
+import Paper from "../Paper";
+import { Row } from "../LayoutComponents";
+import IconButton from "../IconButton";
+import ASSETS from "../../assets";
 
-export default () => {
+import { toastActions } from '../../redux/actions';
 
-  const toast = useTypedSelector(state => state.toast);
+import { ComponentProps } from "./types";
 
-  const dispatch = useDispatch();
+import { Styles } from "../../enums";
+
+
+const Toast: React.FC<ComponentProps> = ({ toast }) => {
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const interval = setTimeout(() => {
-      if(toast.length) dispatch(resetToast());
-    }, 5000)
-    return () => {
-      clearInterval(interval);
-    }
-  }, [toast.length])
+      if(toast.id) {
+        dispatch(toastActions.removeToast({ id: toast.id }));
+      }
+    }, 10000);
+    return () => clearInterval(interval);
+  }, [toast]);
 
   return (
-    <div></div>
-  )
-}
+    <Paper
+      padding={ Styles.Spacing.small }
+      mt={ Styles.Spacing.extraSmall }
+    >
+      <Row alignItems={ Styles.Layout.AlignItems.center}>
+        <IconButton
+          path={ ASSETS.closeIcon }
+          onClick={ () => dispatch(toastActions.removeToast({ id: toast.id })) }
+          variant={ Styles.ButtonVariants.tertiary }
+          color={ Styles.Colors.danger }
+        />
+        { toast.message }
+      </Row>
+    </Paper>
+  );
+};
+
+export default Toast;

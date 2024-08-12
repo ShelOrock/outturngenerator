@@ -1,3 +1,6 @@
-export const SET_SEARCH = Symbol('SET_SEARCH');
+enum searchActionTypes {
+  SET_SEARCH = "SET_SEARCH",
+  RESET_SEARCH = "RESET_SEARCH"
+};
 
-export const RESET_SEARCH = Symbol('RESET_SEARCH');
+export default searchActionTypes;

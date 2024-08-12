@@ -1,18 +1,20 @@
-import * as React from 'react';
-import { render } from 'react-dom'
-import { Provider } from 'react-redux';
+import React from "react";
+import { createRoot } from "react-dom/client"
+import { Provider } from "react-redux";
+import { ThemeProvider } from "styled-components";
 
-import store from './redux/store/index';
-import Root from './components/Root';
-import Theme from './theme';
-import { GlobalStyle } from './components/styledcomponents/index';
+import store from "./redux/store/index";
+import Root from "./Root";
+import theme from "./theme";
 
-render(
+const APP = "app";
+
+const root = createRoot(document.getElementById(APP));
+
+root.render(
   <Provider store={ store }>
-    <Theme>
-      <GlobalStyle />
+    <ThemeProvider theme={ theme }>
       <Root />
-    </Theme>
+    </ThemeProvider>
   </Provider>,
-  document.getElementById('app')
 );

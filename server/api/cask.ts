@@ -4,7 +4,7 @@ import express, {
   NextFunction
 } from 'express';
 
-import { Cask } from '../db/index';
+import { Models } from '../database';
 
 import { Op } from 'sequelize';
 
@@ -43,9 +43,9 @@ router.post('/get-casks', (req: Request, res: Response, next: NextFunction): voi
       break;
   }
 
-  Cask.findAll({
+  Models.Cask.findAll({
     where: {
-      flavourProfile: {
+      flavorProfile: {
         [Op.or]: req.body.filters || []
       }
     },
@@ -73,7 +73,7 @@ router.post('/get-casks', (req: Request, res: Response, next: NextFunction): voi
 });
 
 router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void => {
-  Cask.findByPk(req.params.caskId)
+  Models.Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {
       res
@@ -94,8 +94,7 @@ router.get('/:caskId', (req: Request, res: Response, next: NextFunction): void =
 });
 
 router.post('/create-new-cask', (req: Request, res: Response, next: NextFunction) => {
-  console.log(req.body);
-  Cask.create({ ...req.body })
+  Models.Cask.create({ ...req.body })
   .then(createdCask => {
     res
       .status(201)
@@ -115,7 +114,7 @@ router.post('/create-new-cask', (req: Request, res: Response, next: NextFunction
 router.put('/:caskId', (req: Request, res: Response, next: NextFunction) => {
   if(!req.body.outturnId) req.body.outturnId = null;
 
-  Cask.findByPk(req.params.caskId)
+  Models.Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {
       res
@@ -142,7 +141,7 @@ router.put('/:caskId', (req: Request, res: Response, next: NextFunction) => {
 
 router.post('/edit-many', (req: Request, res: Response, next: NextFunction) => {
   const reorderedCaskIds = req.body.casks.map(cask => cask.id);
-  Cask.findAll({
+  Models.Cask.findAll({
     where: {
       id: [ ...reorderedCaskIds ]
     }
@@ -172,7 +171,7 @@ router.post('/edit-many', (req: Request, res: Response, next: NextFunction) => {
 })
 
 router.delete('/:caskId', (req: Request, res: Response, next: NextFunction) => {
-  Cask.findByPk(req.params.caskId)
+  Models.Cask.findByPk(req.params.caskId)
   .then(caskOrNull => {
     if(!caskOrNull) {
       res
@@ -196,7 +195,7 @@ router.delete('/:caskId', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.post('/delete-many', (req: Request, res: Response, next: NextFunction) => {
-  Cask.destroy({
+  Models.Cask.destroy({
     where: {
       id: [ ...req.body.markedCasks ]
     }

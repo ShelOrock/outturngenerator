@@ -1,18 +1,45 @@
-import {
-  SET_FILTERS,
-  REMOVE_FILTER,
-  RESET_FILTERS
-} from './constants';
+import filtersActionTypes from "./constants";
 
-import { ReducerFunctionType, State } from '../../types/index';
+import { ReducerFunctionType, StateType } from '../../types/index';
 
-const initialState: State<string[]> = [];
+const initialState: StateType<{}> = {};
 
-export const filters: ReducerFunctionType<typeof initialState, any> = (state = initialState, action) => {
+const filters: ReducerFunctionType<typeof initialState, { [key: string]: string[] }, any> = (state = initialState, action) => {
   switch(action.type) {
-    case SET_FILTERS: return action.payload;
-    case REMOVE_FILTER: return state.filter(filter => filter !== action.payload)
-    case RESET_FILTERS: return [];
-    default: return state;
+    case filtersActionTypes.SET_FILTERS:
+      return action.payload;
+
+    case filtersActionTypes.RESET_FILTERS: 
+      return initialState;
+
+    case filtersActionTypes.ADD_FILTER:
+      if(!state[action.payload.type]) {
+        return {
+          ...state,
+          [action.payload.type]: [
+            action.payload.filter
+          ]
+        };
+      };
+
+      return {
+        ...state,
+        [action.payload.type]: [
+          ...state[action.payload.type], action.payload.filter
+        ]
+      };
+
+    case filtersActionTypes.DELETE_FILTER:
+      return {
+        ...state,
+        [action.payload.type]: [
+          ...state[action.payload.type].filter(filter => filter !== action.payload.filter)
+        ]
+      };
+
+    default:
+      return state;
   };
 };
+
+export default filters;

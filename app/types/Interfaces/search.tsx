@@ -1,7 +1,7 @@
 import {
-  Casks,
-  Users,
-  Outturns
+  Cask,
+  User,
+  Outturn
 } from '.';
 
-export type Search = Casks | Users | Outturns;
+export type Search = Cask | User | Outturn;

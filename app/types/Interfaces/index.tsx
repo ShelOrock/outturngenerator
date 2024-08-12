@@ -5,9 +5,9 @@ import { UserCredentials } from './authentication';
 import { Search } from './search';
 import { InputOnChangeType, ButtonOnClickType } from './form';
 import {
-  ModalTypes,
-  ModalFunctionType,
-} from './modal';
+  DialogTypes,
+  DialogFunctionType,
+} from './dialog';
 import { Toast } from './toast';
 import { Loading } from './loading';
 
@@ -22,8 +22,8 @@ export {
   Search,
   InputOnChangeType,
   ButtonOnClickType,
-  ModalTypes,
-  ModalFunctionType,
+  DialogTypes,
+  DialogFunctionType,
   Loading,
   Toast
 };

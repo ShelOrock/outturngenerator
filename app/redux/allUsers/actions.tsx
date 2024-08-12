@@ -1,8 +1,15 @@
-import { SET_ALL_USERS } from './constants';
+import usersActionTypes from './constants';
 
 import { ActionFunctionType, Users } from '../../types'
 
-export const setAllUsers: ActionFunctionType<Users> = users => ({
-  type: SET_ALL_USERS,
-  payload: users
+const setUsers: ActionFunctionType<Users> = payload => ({
+  type: usersActionTypes.SET_USERS,
+  payload
 });
+
+const resetUsers: ActionFunctionType = () => ({ type: usersActionTypes.RESET_USERS });
+
+export {
+  setUsers,
+  resetUsers
+};

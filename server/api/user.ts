@@ -4,12 +4,12 @@ import express, {
   NextFunction
 } from 'express';
 
-import { User } from '../db/index';
+import { Models } from '../database';
 
 const router: express.Router = express.Router();
 
 router.get('/:userId', (req: Request, res: Response, next: NextFunction) => {
-  User.findOne({
+  Models.User.findOne({
     where: {
       sessionId: req.params.userId
     }
@@ -65,9 +65,8 @@ router.post('/get-users', (req: Request, res: Response, next: NextFunction) => {
       break;
   }
 
-  User.findAll({
+  Models.User.findAll({
     where: {
-      loggedIn: filterLoggedIn ? req.body.filters : loggedInTypes,
       userType: filteruserType ? req.body.filters : userTypes,
     },
     order: [
@@ -88,7 +87,7 @@ router.post('/get-users', (req: Request, res: Response, next: NextFunction) => {
 });
 
 router.post('/edit/:userId', (req: Request, res: Response, next: NextFunction) => {
-  User.findByPk(req.params.userId)
+  Models.User.findByPk(req.params.userId)
   .then(userOrNull => {
     if(!userOrNull) {
       res
@@ -114,7 +113,7 @@ router.post('/edit/:userId', (req: Request, res: Response, next: NextFunction) =
 });
 
 router.delete('/:userId', (req: Request, res: Response, next: NextFunction) => {
-  User.findByPk(req.params.userId)
+  Models.User.findByPk(req.params.userId)
   .then(userOrNull => {
     if(!userOrNull) {
       res
